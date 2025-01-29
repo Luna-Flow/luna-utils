@@ -5,6 +5,6 @@
 	"repository": "https://github.com/KCN-judu/luna-utils",
 	"license": "MIT",
 	"keywords": ["utils", "math"],
-	"description": "A utils library, a project of LunaFlow.",
+	"description": "A utils library, a part of LunaFlow.",
 	"source": "src"
 }
