@@ -3,6 +3,8 @@ package KCN-judu/luna-utils
 // Values
 fn arr_sum_dbl(Array[Double]) -> Double
 
+fn arr_sum_int(Array[Int]) -> Int
+
 fn clamp[T : Compare](T, T, T) -> T
 
 fn find[T : Eq](Array[T], T) -> Int?
@@ -18,6 +20,8 @@ fn reverse[T](Array[T]) -> Array[T]
 fn reverse_inplace[T](Array[T]) -> Unit
 
 fn zero_arr_dbl(Int) -> Array[Double]
+
+fn zero_arr_int(Int) -> Array[Int]
 
 // Types and methods
 
