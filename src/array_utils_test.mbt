@@ -5,9 +5,21 @@ test "arr_sum_dbl" {
   inspect!(arr_sum_dbl([]), content=0.0.to_string())
 }
 
+test "arr_sum_int" {
+  let arr = [1, 2, 3, 4]
+  inspect!(arr_sum_int(arr), content="10")
+  inspect!(arr_sum_int([]), content="0")
+}
+
 ///|
 test "zero_arr_dbl" {
   let arr = zero_arr_dbl(3)
+  inspect!(arr, content="[0, 0, 0]")
+  inspect!(arr.length(), content="3")
+}
+
+test "zero_arr_int" {
+  let arr = zero_arr_int(3)
   inspect!(arr, content="[0, 0, 0]")
   inspect!(arr.length(), content="3")
 }

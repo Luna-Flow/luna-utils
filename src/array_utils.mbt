@@ -56,6 +56,60 @@ pub fn zero_arr_dbl(n : Int) -> Array[Double] {
 }
 
 ///|
+/// Calculates the sum of all elements in an array of integers.
+///
+/// Parameters:
+///
+/// * `array` : An array of integers (`Array[Int]`) to be summed.
+///
+/// Returns the sum of all elements in the array. Returns 0 if the array is
+/// empty.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "arr_sum_int" {
+///   let arr = [1, 2, 3, 4]
+///   inspect!(arr_sum_int(arr), content="10")
+///   inspect!(arr_sum_int([]), content="0")
+/// }
+/// ```
+pub fn arr_sum_int(arr : Array[Int]) -> Int {
+  let mut sum = 0
+  for x in arr {
+    sum = sum + x
+  }
+  sum
+}
+
+///|
+/// Creates a new array of integers initialized with zeros.
+///
+/// Parameters:
+///
+/// * `length` : The desired length of the array. Must be a non-negative integer.
+///
+/// Returns an array of type `Array[Int]` with the specified length, where all
+/// elements are initialized to 0.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "zero_arr_int" {
+///   let arr = zero_arr_int(3)
+///   inspect!(arr, content="[0, 0, 0]")
+///   inspect!(arr.length(), content="3")
+/// }
+/// ```
+pub fn zero_arr_int(n : Int) -> Array[Int] {
+  let arr = []
+  for i = 0; i < n; i = i + 1 {
+    arr.push(0)
+  }
+  arr
+}
+
+///|
 /// Reverses the order of elements in an array.
 ///
 /// Parameters:
