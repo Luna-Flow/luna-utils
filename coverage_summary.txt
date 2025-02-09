@@ -1,3 +1,0 @@
-src/array_utils.mbt: 22/22
-src/comparison.mbt: 12/12
-Total: 34/34

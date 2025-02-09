@@ -1,30 +1,24 @@
-///|
-test "arr_sum_dbl" {
-  let arr = [1.0, 2.0, 3.0, 4.0]
-  inspect!(arr_sum_dbl(arr), content=10.0.to_string())
-  inspect!(arr_sum_dbl([]), content=0.0.to_string())
-}
-
-test "arr_sum_int" {
+test "sum" {
   let arr = [1, 2, 3, 4]
-  inspect!(arr_sum_int(arr), content="10")
-  inspect!(arr_sum_int([]), content="0")
+  assert_eq!(arr_sum(arr), 10)
+  assert_eq!(arr_sum([]), 0)
+  let arr_double = [1.0, 2.0, 3.0, 4.0]
+  assert_eq!(arr_sum(arr_double), 10.0)
+  assert_eq!(arr_sum([]), 0.0)
+  let arr_bool = [true, false, true]
+  assert_eq!(arr_sum(arr_bool), true)
+  assert_eq!(arr_sum([]), false)
 }
 
-///|
-test "zero_arr_dbl" {
-  let arr = zero_arr_dbl(3)
-  inspect!(arr, content="[0, 0, 0]")
-  inspect!(arr.length(), content="3")
+test "zero_arr" {
+  let arr : Array[Int] = zero_arr(5)
+  assert_eq!(arr, [0, 0, 0, 0, 0])
+  let arr : Array[Double] = zero_arr(5)
+  assert_eq!(arr, [0.0, 0.0, 0.0, 0.0, 0.0])
+  let arr : Array[Bool] = zero_arr(5)
+  assert_eq!(arr, [false, false, false, false, false])
 }
 
-test "zero_arr_int" {
-  let arr = zero_arr_int(3)
-  inspect!(arr, content="[0, 0, 0]")
-  inspect!(arr.length(), content="3")
-}
-
-///|
 test "reverse" {
   let arr = [1, 2, 3, 4]
   inspect!(reverse(arr), content="[4, 3, 2, 1]")

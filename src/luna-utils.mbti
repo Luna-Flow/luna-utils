@@ -1,9 +1,7 @@
 package KCN-judu/luna-utils
 
 // Values
-fn arr_sum_dbl(Array[Double]) -> Double
-
-fn arr_sum_int(Array[Int]) -> Int
+fn arr_sum[R : MonoidAdd](Array[R]) -> R
 
 fn clamp[T : Compare](T, T, T) -> T
 
@@ -11,21 +9,33 @@ fn find[T : Eq](Array[T], T) -> Int?
 
 fn is_between[T : Compare](T, T, T) -> Bool
 
-fn max[T : Compare](T, T) -> T
-
-fn min[T : Compare](T, T) -> T
-
 fn reverse[T](Array[T]) -> Array[T]
 
 fn reverse_inplace[T](Array[T]) -> Unit
 
-fn zero_arr_dbl(Int) -> Array[Double]
-
-fn zero_arr_int(Int) -> Array[Int]
+fn zero_arr[R : MonoidAdd](Int) -> Array[R]
 
 // Types and methods
 
 // Type aliases
 
 // Traits
+pub(open) trait MonoidAdd {
+  op_add(Self, Self) -> Self
+  zero() -> Self
+}
+impl MonoidAdd for Bool
+impl MonoidAdd for Int
+impl MonoidAdd for Double
+
+pub(open) trait MonoidMul {
+  op_mul(Self, Self) -> Self
+  one() -> Self
+}
+impl MonoidMul for Bool
+impl MonoidMul for Int
+impl MonoidMul for Double
+
+pub(open) trait Semiring : MonoidAdd + MonoidMul {
+}
 
