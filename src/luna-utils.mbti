@@ -1,7 +1,11 @@
 package KCN-judu/luna-utils
 
 // Values
-fn arr_sum[R : MonoidAdd](Array[R]) -> R
+fn abs[A : AbelianGroup + Compare](A) -> A
+
+fn arr_abs_sum[A : AbelianGroup + Compare](Array[A]) -> A
+
+fn arr_sum[A : MonoidAdd](Array[A]) -> A
 
 fn clamp[T : Compare](T, T, T) -> T
 
@@ -13,13 +17,17 @@ fn reverse[T](Array[T]) -> Array[T]
 
 fn reverse_inplace[T](Array[T]) -> Unit
 
-fn zero_arr[R : MonoidAdd](Int) -> Array[R]
+fn zero_arr[A : MonoidAdd](Int) -> Array[A]
 
 // Types and methods
 
 // Type aliases
 
 // Traits
+pub(open) trait AbelianGroup : MonoidAdd {
+  op_neg(Self) -> Self
+}
+
 pub(open) trait MonoidAdd {
   op_add(Self, Self) -> Self
   zero() -> Self
