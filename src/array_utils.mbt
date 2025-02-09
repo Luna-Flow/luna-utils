@@ -4,7 +4,7 @@
 ///
 /// Parameters:
 ///
-/// * `array` : An array of type `R` where `R` implements the `MonoidAdd` trait.
+/// * `array` : An array of type `A` where `A` implements the `MonoidAdd` trait.
 /// The array can be empty.
 ///
 /// Returns the sum of all elements in the array. If the array is empty, returns
@@ -20,10 +20,38 @@
 ///   inspect!(arr_sum(bools), content="true")
 /// }
 /// ```
-pub fn arr_sum[R : MonoidAdd](arr : Array[R]) -> R {
-  let mut sum = R::zero()
+pub fn arr_sum[A : MonoidAdd](arr : Array[A]) -> A {
+  let mut sum = A::zero()
   for x in arr {
-    sum = R::op_add(sum, x)
+    sum = A::op_add(sum, x)
+  }
+  sum
+}
+
+///|
+/// Calculates the sum of the absolute values of all elements in an array using
+/// the monoid addition operation.
+///
+/// Parameters:
+///
+/// * `array` : An array of type `A` where `A` implements both the `AbelianGroup`
+/// and `Compare` traits. The array can be empty.
+///
+/// Returns the sum of the absolute values of all elements in the array. If the
+/// array is empty, returns the zero element of the monoid.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "arr_abs_sum" {
+///   let nums = [-1, 2, -3, 4]
+///   inspect!(arr_abs_sum(nums), content="10")
+/// }
+/// ```
+pub fn arr_abs_sum[A : AbelianGroup + Compare](arr : Array[A]) -> A {
+  let mut sum = A::zero()
+  for x in arr {
+    sum = A::op_add(sum, abs(x))
   }
   sum
 }
@@ -35,11 +63,11 @@ pub fn arr_sum[R : MonoidAdd](arr : Array[R]) -> R {
 /// Parameters:
 ///
 /// * `length` : The desired length of the array. Must be non-negative.
-/// * `R` : A type parameter that implements the `MonoidAdd` trait, which
+/// * `A` : A type parameter that implements the `MonoidAdd` trait, which
 /// provides the zero element.
 ///
-/// Returns a new array of type `Array[R]` with `length` elements, where each
-/// element is the zero element of type `R`.
+/// Returns a new array of type `Array[A]` with `length` elements, where each
+/// element is the zero element of type `A`.
 ///
 /// Example:
 ///
@@ -51,10 +79,10 @@ pub fn arr_sum[R : MonoidAdd](arr : Array[R]) -> R {
 ///   inspect!(bool_zeros, content="[false, false]")
 /// }
 /// ```
-pub fn zero_arr[R : MonoidAdd](n : Int) -> Array[R] {
+pub fn zero_arr[A : MonoidAdd](n : Int) -> Array[A] {
   let arr = []
   for i = 0; i < n; i = i + 1 {
-    arr.push(R::zero())
+    arr.push(A::zero())
   }
   arr
 }
