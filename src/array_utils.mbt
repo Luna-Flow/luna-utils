@@ -1,110 +1,60 @@
 ///|
-/// Calculates the sum of all elements in an array of double-precision
-/// floating-point numbers.
+/// Calculates the sum of all elements in an array using the monoid addition
+/// operation.
 ///
 /// Parameters:
 ///
-/// * `array` : An array of double-precision floating-point numbers
-/// (`Array[Double]`) to be summed.
+/// * `array` : An array of type `R` where `R` implements the `MonoidAdd` trait.
+/// The array can be empty.
 ///
-/// Returns the sum of all elements in the array. Returns 0.0 if the array is
-/// empty.
+/// Returns the sum of all elements in the array. If the array is empty, returns
+/// the zero element of the monoid.
 ///
 /// Example:
 ///
 /// ```moonbit
-/// test "arr_sum_dbl" {
-///   let arr = [1.5, 2.5, 3.0]
-///   inspect!(arr_sum_dbl(arr), content="7.0")
-///   inspect!(arr_sum_dbl([]), content="0.0")
+/// test "arr_sum" {
+///   let nums = [1, 2, 3, 4]
+///   let bools = [true, false, true]
+///   inspect!(arr_sum(nums), content="10")
+///   inspect!(arr_sum(bools), content="true")
 /// }
 /// ```
-pub fn arr_sum_dbl(arr : Array[Double]) -> Double {
-  let mut sum = 0.0
+pub fn arr_sum[R : MonoidAdd](arr : Array[R]) -> R {
+  let mut sum = R::zero()
   for x in arr {
-    sum = sum + x
+    sum = R::op_add(sum, x)
   }
   sum
 }
 
 ///|
-/// Creates a new array of double-precision floating-point numbers initialized
-/// with zeros.
+/// Creates a new array of specified length filled with the zero element of a
+/// monoid.
 ///
 /// Parameters:
 ///
-/// * `length` : The desired length of the array. Must be a non-negative integer.
+/// * `length` : The desired length of the array. Must be non-negative.
+/// * `R` : A type parameter that implements the `MonoidAdd` trait, which
+/// provides the zero element.
 ///
-/// Returns an array of type `Array[Double]` with the specified length, where all
-/// elements are initialized to 0.0.
+/// Returns a new array of type `Array[R]` with `length` elements, where each
+/// element is the zero element of type `R`.
 ///
 /// Example:
 ///
 /// ```moonbit
-/// test "zero_arr_dbl" {
-///   let arr = zero_arr_dbl(3)
-///   inspect!(arr, content="[0.0, 0.0, 0.0]")
-///   inspect!(arr.length(), content="3")
+/// test "zero_arr" {
+///   let int_zeros = zero_arr[Int](3)
+///   let bool_zeros = zero_arr[Bool](2)
+///   inspect!(int_zeros, content="[0, 0, 0]")
+///   inspect!(bool_zeros, content="[false, false]")
 /// }
 /// ```
-pub fn zero_arr_dbl(n : Int) -> Array[Double] {
+pub fn zero_arr[R : MonoidAdd](n : Int) -> Array[R] {
   let arr = []
   for i = 0; i < n; i = i + 1 {
-    arr.push(0.0)
-  }
-  arr
-}
-
-///|
-/// Calculates the sum of all elements in an array of integers.
-///
-/// Parameters:
-///
-/// * `array` : An array of integers (`Array[Int]`) to be summed.
-///
-/// Returns the sum of all elements in the array. Returns 0 if the array is
-/// empty.
-///
-/// Example:
-///
-/// ```moonbit
-/// test "arr_sum_int" {
-///   let arr = [1, 2, 3, 4]
-///   inspect!(arr_sum_int(arr), content="10")
-///   inspect!(arr_sum_int([]), content="0")
-/// }
-/// ```
-pub fn arr_sum_int(arr : Array[Int]) -> Int {
-  let mut sum = 0
-  for x in arr {
-    sum = sum + x
-  }
-  sum
-}
-
-///|
-/// Creates a new array of integers initialized with zeros.
-///
-/// Parameters:
-///
-/// * `length` : The desired length of the array. Must be a non-negative integer.
-///
-/// Returns an array of type `Array[Int]` with the specified length, where all
-/// elements are initialized to 0.
-///
-/// Example:
-///
-/// ```moonbit
-/// test "zero_arr_int" {
-///   let arr = zero_arr_int(3)
-///   inspect!(arr, content="[0, 0, 0]")
-///   inspect!(arr.length(), content="3")
-/// }
-/// ```
-pub fn zero_arr_int(n : Int) -> Array[Int] {
-  let arr = []
-  for i = 0; i < n; i = i + 1 {
-    arr.push(0)
+    arr.push(R::zero())
   }
   arr
 }
