@@ -1,11 +1,13 @@
-package KCN-judu/luna-utils
+package Luna-Flow/luna-utils
+
+alias @Luna-Flow/luna-generic as @luna-generic
 
 // Values
 fn abs[A : AbelianGroup + Compare](A) -> A
 
-fn arr_abs_sum[A : AbelianGroup + Compare](Array[A]) -> A
+fn arr_abs_sum[A : @luna-generic.Num + Compare](Array[A]) -> A
 
-fn arr_sum[A : MonoidAdd](Array[A]) -> A
+fn arr_sum[A : @luna-generic.AddMonoid](Array[A]) -> A
 
 fn clamp[T : Compare](T, T, T) -> T
 
@@ -17,7 +19,7 @@ fn reverse[T](Array[T]) -> Array[T]
 
 fn reverse_inplace[T](Array[T]) -> Unit
 
-fn zero_arr[A : MonoidAdd](Int) -> Array[A]
+fn zero_arr[A : @luna-generic.AddMonoid](Int) -> Array[A]
 
 // Types and methods
 

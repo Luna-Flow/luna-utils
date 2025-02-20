@@ -1,3 +1,4 @@
+///|
 test "sum" {
   let arr = [1, 2, 3, 4]
   assert_eq!(arr_sum(arr), 10)
@@ -10,6 +11,7 @@ test "sum" {
   assert_eq!(arr_sum([]), false)
 }
 
+///|
 test "zero_arr" {
   let arr : Array[Int] = zero_arr(5)
   assert_eq!(arr, [0, 0, 0, 0, 0])
@@ -19,6 +21,7 @@ test "zero_arr" {
   assert_eq!(arr, [false, false, false, false, false])
 }
 
+///|
 test "reverse" {
   let arr = [1, 2, 3, 4]
   inspect!(reverse(arr), content="[4, 3, 2, 1]")

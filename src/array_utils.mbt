@@ -4,7 +4,7 @@
 ///
 /// Parameters:
 ///
-/// * `array` : An array of type `A` where `A` implements the `MonoidAdd` trait.
+/// * `array` : An array of type `A` where `A` implements the `@luna_generic.AddMonoid` trait.
 /// The array can be empty.
 ///
 /// Returns the sum of all elements in the array. If the array is empty, returns
@@ -20,7 +20,7 @@
 ///   inspect!(arr_sum(bools), content="true")
 /// }
 /// ```
-pub fn arr_sum[A : MonoidAdd](arr : Array[A]) -> A {
+pub fn arr_sum[A : @luna_generic.AddMonoid](arr : Array[A]) -> A {
   let mut sum = A::zero()
   for x in arr {
     sum = A::op_add(sum, x)
@@ -34,7 +34,7 @@ pub fn arr_sum[A : MonoidAdd](arr : Array[A]) -> A {
 ///
 /// Parameters:
 ///
-/// * `array` : An array of type `A` where `A` implements both the `AbelianGroup`
+/// * `array` : An array of type `A` where `A` implements both the `@luna_generic.Num`
 /// and `Compare` traits. The array can be empty.
 ///
 /// Returns the sum of the absolute values of all elements in the array. If the
@@ -48,8 +48,9 @@ pub fn arr_sum[A : MonoidAdd](arr : Array[A]) -> A {
 ///   inspect!(arr_abs_sum(nums), content="10")
 /// }
 /// ```
-pub fn arr_abs_sum[A : AbelianGroup + Compare](arr : Array[A]) -> A {
+pub fn arr_abs_sum[A : @luna_generic.Num + Compare](arr : Array[A]) -> A {
   let mut sum = A::zero()
+  let abs = fn { x => if x < A::zero() { -x } else { x } }
   for x in arr {
     sum = A::op_add(sum, abs(x))
   }
@@ -63,7 +64,7 @@ pub fn arr_abs_sum[A : AbelianGroup + Compare](arr : Array[A]) -> A {
 /// Parameters:
 ///
 /// * `length` : The desired length of the array. Must be non-negative.
-/// * `A` : A type parameter that implements the `MonoidAdd` trait, which
+/// * `A` : A type parameter that implements the `@luna_generic.AddMonoid` trait, which
 /// provides the zero element.
 ///
 /// Returns a new array of type `Array[A]` with `length` elements, where each
@@ -79,7 +80,7 @@ pub fn arr_abs_sum[A : AbelianGroup + Compare](arr : Array[A]) -> A {
 ///   inspect!(bool_zeros, content="[false, false]")
 /// }
 /// ```
-pub fn zero_arr[A : MonoidAdd](n : Int) -> Array[A] {
+pub fn zero_arr[A : @luna_generic.AddMonoid](n : Int) -> Array[A] {
   let arr = []
   for i = 0; i < n; i = i + 1 {
     arr.push(A::zero())
