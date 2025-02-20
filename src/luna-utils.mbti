@@ -3,8 +3,6 @@ package Luna-Flow/luna-utils
 alias @Luna-Flow/luna-generic as @luna-generic
 
 // Values
-fn abs[A : AbelianGroup + Compare](A) -> A
-
 fn arr_abs_sum[A : @luna-generic.Num + Compare](Array[A]) -> A
 
 fn arr_sum[A : @luna-generic.AddMonoid](Array[A]) -> A
@@ -26,26 +24,4 @@ fn zero_arr[A : @luna-generic.AddMonoid](Int) -> Array[A]
 // Type aliases
 
 // Traits
-pub(open) trait AbelianGroup : MonoidAdd {
-  op_neg(Self) -> Self
-}
-
-pub(open) trait MonoidAdd {
-  op_add(Self, Self) -> Self
-  zero() -> Self
-}
-impl MonoidAdd for Bool
-impl MonoidAdd for Int
-impl MonoidAdd for Double
-
-pub(open) trait MonoidMul {
-  op_mul(Self, Self) -> Self
-  one() -> Self
-}
-impl MonoidMul for Bool
-impl MonoidMul for Int
-impl MonoidMul for Double
-
-pub(open) trait Semiring : MonoidAdd + MonoidMul {
-}
 
