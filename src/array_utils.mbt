@@ -21,11 +21,7 @@
 /// }
 /// ```
 pub fn arr_sum[A : @luna_generic.AddMonoid](arr : Array[A]) -> A {
-  let mut sum = A::zero()
-  for x in arr {
-    sum = A::op_add(sum, x)
-  }
-  sum
+  arr.fold(A::op_add, init=A::zero())
 }
 
 ///|
@@ -49,12 +45,8 @@ pub fn arr_sum[A : @luna_generic.AddMonoid](arr : Array[A]) -> A {
 /// }
 /// ```
 pub fn arr_abs_sum[A : @luna_generic.Num + Compare](arr : Array[A]) -> A {
-  let mut sum = A::zero()
   let abs = fn { x => if x < A::zero() { -x } else { x } }
-  for x in arr {
-    sum = A::op_add(sum, abs(x))
-  }
-  sum
+  arr.fold(fn(acc, x) { A::op_add(acc, abs(x)) }, init=A::zero())
 }
 
 ///|
@@ -81,11 +73,7 @@ pub fn arr_abs_sum[A : @luna_generic.Num + Compare](arr : Array[A]) -> A {
 /// }
 /// ```
 pub fn zero_arr[A : @luna_generic.AddMonoid](n : Int) -> Array[A] {
-  let arr = []
-  for i = 0; i < n; i = i + 1 {
-    arr.push(A::zero())
-  }
-  arr
+  Array::make(n, A::zero())
 }
 
 ///|
@@ -105,11 +93,7 @@ pub fn zero_arr[A : @luna_generic.AddMonoid](n : Int) -> Array[A] {
 /// }
 /// ```
 pub fn reverse[T](array : Array[T]) -> Array[T] {
-  let result = []
-  for i = array.length() - 1; i >= 0; i = i - 1 {
-    result.push(array[i])
-  }
-  result
+  array.rev_iter().collect()
 }
 
 ///|
@@ -132,12 +116,8 @@ pub fn reverse[T](array : Array[T]) -> Array[T] {
 /// }
 /// ```
 pub fn reverse_inplace[T](arr : Array[T]) -> Unit {
-  let mut left = 0
-  let mut right = arr.length() - 1
-  while left < right {
-    arr.swap(left, right)
-    left = left + 1
-    right = right - 1
+  for i = 0; i < arr.length() / 2; i = i + 1 {
+    arr.swap(i, arr.length() - i - 1)
   }
 }
 
@@ -159,10 +139,5 @@ pub fn reverse_inplace[T](arr : Array[T]) -> Unit {
 /// }
 /// ```
 pub fn find[T : Eq](array : Array[T], value : T) -> Int? {
-  for i = 0; i < array.length(); i = i + 1 {
-    if array[i] == value {
-      return Some(i)
-    }
-  }
-  None
+  array.search_by(fn(x) { x == value })
 }
