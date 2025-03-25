@@ -4,7 +4,7 @@
 ///
 /// Parameters:
 ///
-/// * `array` : An array of type `A` where `A` implements the `@luna_generic.AddMonoid` trait.
+/// * `array` : An array of type `A` where `A` implements the `AddMonoid` trait.
 /// The array can be empty.
 ///
 /// Returns the sum of all elements in the array. If the array is empty, returns
@@ -20,7 +20,7 @@
 ///   inspect!(arr_sum(bools), content="true")
 /// }
 /// ```
-pub fn arr_sum[A : @luna_generic.AddMonoid](arr : Array[A]) -> A {
+pub fn arr_sum[A : AddMonoid](arr : Array[A]) -> A {
   arr.fold(A::op_add, init=A::zero())
 }
 
@@ -30,7 +30,7 @@ pub fn arr_sum[A : @luna_generic.AddMonoid](arr : Array[A]) -> A {
 ///
 /// Parameters:
 ///
-/// * `array` : An array of type `A` where `A` implements both the `@luna_generic.Num`
+/// * `array` : An array of type `A` where `A` implements both the `Num`
 /// and `Compare` traits. The array can be empty.
 ///
 /// Returns the sum of the absolute values of all elements in the array. If the
@@ -44,7 +44,7 @@ pub fn arr_sum[A : @luna_generic.AddMonoid](arr : Array[A]) -> A {
 ///   inspect!(arr_abs_sum(nums), content="10")
 /// }
 /// ```
-pub fn arr_abs_sum[A : @luna_generic.Num + Compare](arr : Array[A]) -> A {
+pub fn arr_abs_sum[A : Num + Compare](arr : Array[A]) -> A {
   let abs = fn { x => if x < A::zero() { -x } else { x } }
   arr.fold(fn(acc, x) { A::op_add(acc, abs(x)) }, init=A::zero())
 }
@@ -56,7 +56,7 @@ pub fn arr_abs_sum[A : @luna_generic.Num + Compare](arr : Array[A]) -> A {
 /// Parameters:
 ///
 /// * `length` : The desired length of the array. Must be non-negative.
-/// * `A` : A type parameter that implements the `@luna_generic.AddMonoid` trait, which
+/// * `A` : A type parameter that implements the `AddMonoid` trait, which
 /// provides the zero element.
 ///
 /// Returns a new array of type `Array[A]` with `length` elements, where each
@@ -72,7 +72,7 @@ pub fn arr_abs_sum[A : @luna_generic.Num + Compare](arr : Array[A]) -> A {
 ///   inspect!(bool_zeros, content="[false, false]")
 /// }
 /// ```
-pub fn zero_arr[A : @luna_generic.AddMonoid](n : Int) -> Array[A] {
+pub fn zero_arr[A : AddMonoid](n : Int) -> Array[A] {
   Array::make(n, A::zero())
 }
 

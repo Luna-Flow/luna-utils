@@ -6,9 +6,6 @@ test "sum" {
   let arr_double = [1.0, 2.0, 3.0, 4.0]
   assert_eq!(arr_sum(arr_double), 10.0)
   assert_eq!(arr_sum([]), 0.0)
-  let arr_bool = [true, false, true]
-  assert_eq!(arr_sum(arr_bool), true)
-  assert_eq!(arr_sum([]), false)
 }
 
 ///|
@@ -17,8 +14,6 @@ test "zero_arr" {
   assert_eq!(arr, [0, 0, 0, 0, 0])
   let arr : Array[Double] = zero_arr(5)
   assert_eq!(arr, [0.0, 0.0, 0.0, 0.0, 0.0])
-  let arr : Array[Bool] = zero_arr(5)
-  assert_eq!(arr, [false, false, false, false, false])
 }
 
 ///|
