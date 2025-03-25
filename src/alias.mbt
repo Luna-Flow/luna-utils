@@ -1,0 +1,1 @@
+traitalias @lg.(AddMonoid, Num)
