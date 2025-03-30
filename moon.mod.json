@@ -1,6 +1,6 @@
 {
   "name": "Luna-Flow/luna-utils",
-  "version": "0.1.0-alpha-1",
+  "version": "0.1.0-alpha-2",
   "deps": {
     "Luna-Flow/luna-generic": "0.2.0-alpha-1"
   },

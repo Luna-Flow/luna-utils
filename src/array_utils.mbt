@@ -141,3 +141,62 @@ pub fn reverse_inplace[T](arr : Array[T]) -> Unit {
 pub fn find[T : Eq](array : Array[T], value : T) -> Int? {
   array.search_by(fn(x) { x == value })
 }
+
+///|
+/// Checks if all elements in an array are equal.
+///
+/// Parameters:
+///
+/// * `array` : An array of type `T` where `T` implements the `Eq` trait. Must be
+/// non-empty.
+///
+/// Returns `true` if all elements in the array are equal to each other, `false`
+/// otherwise.
+///
+/// Example:
+///
+/// ```moonbit
+/// ///|
+/// test "same" {
+/// inspect!(same([1, 1, 1]), content="true")
+/// inspect!(same([1, 2, 1]), content="false")
+/// }
+/// ```
+pub fn same[T : Eq](array : Array[T]) -> Bool {
+  let sample = array[0]
+  for a in array {
+    if a != sample {
+      return false
+    }
+  }
+  true
+}
+
+///|
+/// Checks if applying a function to all elements in an array produces equal
+/// results.
+///
+/// Parameters:
+///
+/// * `array` : An array of elements of type `U`.
+/// * `f` : A function that takes a value of type `U` and returns a value of type
+/// `V`, where `V` implements the `Eq` trait.
+///
+/// Returns `true` if all elements in the array, after applying function `f`, are
+/// equal to each other, `false` otherwise.
+///
+/// Example:
+///
+/// ```moonbit
+/// ///|
+/// test "map_same" {
+/// let arr = ["a", "ab", "abc"]
+/// inspect!(map_same(arr, fn(s) { s.length() }), content="false")
+/// let arr2 = ["aa", "bb", "cc"]
+/// inspect!(map_same(arr2, fn(s) { s.length() }), content="true")
+/// }
+/// ```
+pub fn map_same[U, V : Eq](array : Array[U], f : (U) -> V) -> Bool {
+  let mapped = array.map(f)
+  same(mapped)
+}
