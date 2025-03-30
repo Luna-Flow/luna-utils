@@ -200,3 +200,67 @@ pub fn map_same[U, V : Eq](array : Array[U], f : (U) -> V) -> Bool {
   let mapped = array.map(f)
   same(mapped)
 }
+
+///|
+/// Checks if all elements in an array are equal to a given sample value.
+///
+/// Parameters:
+///
+/// * `array` : An array of type `T` where `T` implements the `Eq` trait.
+/// * `sample` : A value of type `T` to compare against each element in the
+/// array.
+///
+/// Returns `true` if all elements in the array are equal to the sample value,
+/// `false` otherwise.
+///
+/// Example:
+///
+/// ```moonbit
+/// ///|
+/// test "same_to" {
+///   let arr = [1, 1, 1]
+///   inspect!(same_to(arr, 1), content="true")
+///   inspect!(same_to(arr, 2), content="false")
+/// }
+/// ```
+pub fn same_to[T : Eq](array : Array[T], sample : T) -> Bool {
+  for a in array {
+    if a != sample {
+      return false
+    }
+  }
+  true
+}
+
+///|
+/// Checks if applying a function to all elements in an array produces results
+/// equal to a given sample value.
+///
+/// Parameters:
+///
+/// * `array` : An array of elements of type `U`.
+/// * `sample` : A value of type `V` to compare against.
+/// * `f` : A function that takes a value of type `U` and returns a value of type
+/// `V`, where `V` implements the `Eq` trait.
+///
+/// Returns `true` if all elements in the array, after applying function `f`, are
+/// equal to the sample value, `false` otherwise.
+///
+/// Example:
+///
+/// ```moonbit
+/// ///|
+/// test "map_same_to" {
+///   let nums = ["one", "two", "six"]
+///   inspect!(map_same_to(nums, 3, fn(s) { s.length() }), content="true")
+///   inspect!(map_same_to(nums, 4, fn(s) { s.length() }), content="false")
+/// }
+/// ```
+pub fn map_same_to[U, V : Eq](
+  array : Array[U],
+  sample : V,
+  f : (U) -> V
+) -> Bool {
+  let mapped = array.map(f)
+  same_to(mapped, sample)
+}
