@@ -13,9 +13,13 @@ fn find[T : Eq](Array[T], T) -> Int?
 
 fn is_between[T : Compare](T, T, T) -> Bool
 
+fn map_same[U, V : Eq](Array[U], (U) -> V) -> Bool
+
 fn reverse[T](Array[T]) -> Array[T]
 
 fn reverse_inplace[T](Array[T]) -> Unit
+
+fn same[T : Eq](Array[T]) -> Bool
 
 fn zero_arr[A : @luna-generic.AddMonoid](Int) -> Array[A]
 
