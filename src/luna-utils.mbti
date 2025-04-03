@@ -1,9 +1,15 @@
-package Luna-Flow/luna-utils
+package "Luna-Flow/luna-utils"
 
-alias @Luna-Flow/luna-generic as @luna-generic
+import(
+  "Luna-Flow/luna-generic"
+)
 
 // Values
 fn arr_abs_sum[A : @luna-generic.Num + Compare](Array[A]) -> A
+
+fn arr_max[T : Compare](Array[T]) -> T
+
+fn arr_min[T : Compare](Array[T]) -> T
 
 fn arr_sum[A : @luna-generic.AddMonoid](Array[A]) -> A
 
@@ -15,11 +21,15 @@ fn is_between[T : Compare](T, T, T) -> Bool
 
 fn map_same[U, V : Eq](Array[U], (U) -> V) -> Bool
 
+fn map_same_to[U, V : Eq](Array[U], V, (U) -> V) -> Bool
+
 fn reverse[T](Array[T]) -> Array[T]
 
 fn reverse_inplace[T](Array[T]) -> Unit
 
 fn same[T : Eq](Array[T]) -> Bool
+
+fn same_to[T : Eq](Array[T], T) -> Bool
 
 fn zero_arr[A : @luna-generic.AddMonoid](Int) -> Array[A]
 
