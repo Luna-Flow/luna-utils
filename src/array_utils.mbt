@@ -264,3 +264,61 @@ pub fn map_same_to[U, V : Eq](
   let mapped = array.map(f)
   same_to(mapped, sample)
 }
+
+///|
+/// Finds the maximum element in an array of comparable values.
+///
+/// Parameters:
+///
+/// * `array` : A non-empty array of elements that can be compared with each
+/// other. The type of elements must implement the `Compare` trait.
+///
+/// Returns the largest element in the array.
+///
+/// Example:
+///
+/// ```moonbit
+/// ///|
+/// test "arr_max" {
+///   let nums = [1, 4, 2, 5, 3]
+///   inspect!(arr_max(nums), content="5")
+/// }
+/// ```
+pub fn arr_max[T : Compare](array : Array[T]) -> T {
+  let mut max = array[0]
+  for a in array {
+    if a > max {
+      max = a
+    }
+  }
+  max
+}
+
+///|
+/// Finds the minimum element in an array of comparable values.
+///
+/// Parameters:
+///
+/// * `array` : A non-empty array of elements that can be compared with each
+/// other. The type of elements must implement the `Compare` trait.
+///
+/// Returns the smallest element in the array.
+///
+/// Example:
+///
+/// ```moonbit
+/// ///|
+/// test "arr_min" {
+///   let nums = [1, 4, 2, 5, 3]
+///   inspect!(arr_min(nums), content="1")
+/// }
+/// ```
+pub fn arr_min[T : Compare](array : Array[T]) -> T {
+  let mut min = array[0]
+  for a in array {
+    if a < min {
+      min = a
+    }
+  }
+  min
+}
