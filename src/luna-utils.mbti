@@ -7,10 +7,6 @@ import(
 // Values
 fn arr_abs_sum[A : @luna-generic.Num + Compare](Array[A]) -> A
 
-fn arr_max[T : Compare](Array[T]) -> T
-
-fn arr_min[T : Compare](Array[T]) -> T
-
 fn arr_sum[A : @luna-generic.AddMonoid](Array[A]) -> A
 
 fn clamp[T : Compare](T, T, T) -> T
