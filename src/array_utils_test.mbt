@@ -39,3 +39,18 @@ test "find" {
   inspect!(find(arr, 3), content="Some(2)")
   inspect!(find(arr, 5), content="None")
 }
+
+///|
+test "same_to" {
+  let arr_not_same = [1, 2, 3, 4]
+  let arr_same_one = [1, 1, 1, 1]
+  let arr_same_two = [2, 2, 2, 2]
+  assert_eq!(same(arr_not_same), false)
+  assert_eq!(same(arr_same_one), true)
+  assert_eq!(same(arr_same_two), true)
+  assert_eq!(same_to(arr_not_same, 1), false)
+  assert_eq!(same_to(arr_same_one, 1), true)
+  assert_eq!(same_to(arr_same_two, 2), true)
+  assert_eq!(map_same(arr_not_same, fn(x) { x - x }), true)
+  assert_eq!(map_same_to(arr_same_one, 2, fn(x) { x * 2 }), true)
+}
