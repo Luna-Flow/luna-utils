@@ -1,0 +1,44 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Luna-Flow/luna-utils"
+
+import(
+  "Luna-Flow/luna-generic"
+)
+
+// Values
+fn[A : @luna-generic.Num + Compare] arr_abs_sum(Array[A]) -> A
+
+fn[T : Compare] arr_max(Array[T]) -> T
+
+fn[T : Compare] arr_min(Array[T]) -> T
+
+fn[A : @luna-generic.AddMonoid] arr_sum(Array[A]) -> A
+
+fn[T : Compare] clamp(T, T, T) -> T
+
+fn[T : Eq] find(Array[T], T) -> Int?
+
+fn[T : Compare] is_between(T, T, T) -> Bool
+
+fn[U, V : Eq] map_same(Array[U], (U) -> V) -> Bool
+
+fn[U, V : Eq] map_same_to(Array[U], V, (U) -> V) -> Bool
+
+fn[T] reverse(Array[T]) -> Array[T]
+
+fn[T] reverse_inplace(Array[T]) -> Unit
+
+fn[T : Eq] same(Array[T]) -> Bool
+
+fn[T : Eq] same_to(Array[T], T) -> Bool
+
+fn[A : @luna-generic.AddMonoid] zero_arr(Int) -> Array[A]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
