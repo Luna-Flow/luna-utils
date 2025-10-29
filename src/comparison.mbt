@@ -1,29 +1,25 @@
 ///|
-/// Constrains a value of any comparable type within a specified range \[minimum,
-/// maximum].
+/// Constrains a value to lie within a specified range by returning the closest
+/// value within the bounds.
 ///
 /// Parameters:
 ///
 /// * `value` : The value to be clamped.
-/// * `minimum` : The lower bound of the range (inclusive).
-/// * `maximum` : The upper bound of the range (inclusive).
+/// * `min` : The minimum bound of the range.
+/// * `max` : The maximum bound of the range.
 ///
-/// Returns the clamped value:
-///
-/// * If `value` is less than `minimum`, returns `minimum`.
-/// * If `value` is greater than `maximum`, returns `maximum`.
-/// * Otherwise, returns `value` unchanged.
+/// Returns the clamped value: `min` if `value` is less than `min`, `max` if
+/// `value` is greater than `max`, otherwise `value` itself.
 ///
 /// Example:
 ///
 /// ```moonbit
-/// test "clamp" {
-///   inspect!(clamp(5, 0, 10), content="5")
-///   inspect!(clamp(-1, 0, 10), content="0")
-///   inspect!(clamp(15, 0, 10), content="10")
-/// }
+/// inspect(clamp(5, 1, 10), content="5")
+/// inspect(clamp(-3, 1, 10), content="1")
+/// inspect(clamp(15, 1, 10), content="10")
 /// ```
-pub fn clamp[T : Compare](value : T, min : T, max : T) -> T {
+///
+pub fn[T : Compare] clamp(value : T, min : T, max : T) -> T {
   if value < min {
     min
   } else if value > max {
@@ -34,26 +30,26 @@ pub fn clamp[T : Compare](value : T, min : T, max : T) -> T {
 }
 
 ///|
-/// Checks if a value is within a closed interval \[minimum, maximum].
+/// Checks if a value falls within the inclusive range defined by minimum and
+/// maximum bounds.
 ///
 /// Parameters:
 ///
 /// * `value` : The value to check.
-/// * `minimum` : The lower bound of the interval (inclusive).
-/// * `maximum` : The upper bound of the interval (inclusive).
+/// * `min` : The minimum bound of the range (inclusive).
+/// * `max` : The maximum bound of the range (inclusive).
 ///
-/// Returns `true` if the value is greater than or equal to `minimum` and less
-/// than or equal to `maximum`, `false` otherwise.
+/// Returns `true` if the value is within the range \[min, max], `false`
+/// otherwise.
 ///
 /// Example:
 ///
 /// ```moonbit
-/// test "is_between" {
-///   inspect!(is_between(5, 0, 10), content="true")
-///   inspect!(is_between(0, 1, 10), content="false")
-///   inspect!(is_between(1.5, 1.0, 2.0), content="true")
-/// }
+/// inspect(is_between(5, 1, 10), content="true")
+/// inspect(is_between(0, 1, 10), content="false")
+/// inspect(is_between(10, 1, 10), content="true")
 /// ```
-pub fn is_between[T : Compare](value : T, min : T, max : T) -> Bool {
+///
+pub fn[T : Compare] is_between(value : T, min : T, max : T) -> Bool {
   value >= min && value <= max
 }
