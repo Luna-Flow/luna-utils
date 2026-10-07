@@ -1,0 +1,8 @@
+{
+  "title": "luna-utils",
+  "summary": "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits.",
+  "locales": [
+    "zh_CN",
+    "ja_JP"
+  ]
+}

@@ -1,1 +1,3 @@
-View Contribution Guidelines in [zh_CN](https://github.com/Luna-Flow/luna-utils/tree/main/doc/zh_CN/CONTRIBUTING.md) | [en_US](https://github.com/Luna-Flow/luna-utils/tree/main/doc/en_US/CONTRIBUTING.md) | [ja_JP](https://github.com/Luna-Flow/luna-utils/tree/main/doc/ja_JP/CONTRIBUTING.md) 
+# Contributing
+
+The contribution guidelines are in [doc/manual/contributing.md](./doc/manual/contributing.md) and on the [documentation site](https://luna-flow.github.io/en/luna-utils/), which also offers Simplified Chinese and Japanese translations.

@@ -1,0 +1,321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
+msgstr "面向 Luna-Flow 项目的泛型数组与比较辅助函数，以 luna-generic 的 trait 作为约束。"
+
+#: manual/contributing.md:1
+msgid "Contribution guidelines"
+msgstr "贡献规范"
+
+#: manual/contributing.md:3
+msgid "Code style"
+msgstr "代码风格"
+
+#: manual/contributing.md:5
+msgid "The project follows the formatting style enforced by the MoonBit toolchain. Format your code automatically with the following command:"
+msgstr "统一采用 MoonBit Toolchain 的格式化风格，通过运行以下命令来自动格式化代码。"
+
+#: manual/contributing.md:11
+msgid "Run `moon fmt` before committing your code to keep the style consistent."
+msgstr "请确保在提交代码之前，使用 `moon fmt` 格式化代码，以保持一致的代码风格。"
+
+#: manual/contributing.md:13
+msgid "Alternatively, you can use the `ready_to_pr.sh` script to format the code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "或者，可以使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查、生成测试覆盖率文件和 `.mbti` 文件。"
+
+#: manual/contributing.md:15
+msgid "Naming conventions"
+msgstr "命名约定"
+
+#: manual/contributing.md:17
+msgid "Variable naming"
+msgstr "变量命名"
+
+#: manual/contributing.md:19
+msgid "Use **lowercase letters with underscores** as separators (e.g., `my_var`)."
+msgstr "采用 **小写字母和下划线** 分隔（例如：`my_var`）。"
+
+#: manual/contributing.md:20
+msgid "Variable names should be descriptive and clearly indicate their purpose."
+msgstr "变量名应具有描述性，能够准确反映其用途。"
+
+#: manual/contributing.md:22
+msgid "Function naming"
+msgstr "函数命名"
+
+#: manual/contributing.md:24
+msgid "Use **lowercase letters with underscores** as separators (e.g., `calc_total_price()`)."
+msgstr "使用 **小写字母和下划线** 分隔（例如：`calc_total_price()`）。"
+
+#: manual/contributing.md:25
+msgid "Function names should be concise and descriptive, clearly expressing their functionality."
+msgstr "函数名应简洁且具有描述性，能够清晰表达函数的功能。"
+
+#: manual/contributing.md:27
+msgid "Struct and trait naming"
+msgstr "Struct 和 Trait 命名"
+
+#: manual/contributing.md:29
+msgid "Use **PascalCase** (e.g., `MyStruct`, `MyTrait`)."
+msgstr "使用 **首字母大写的驼峰式命名**（例如：`MyStruct`、`MyTrait`）。"
+
+#: manual/contributing.md:30
+msgid "Names should intuitively reflect the function or role of the struct or trait, avoiding overly abstract or non-descriptive names."
+msgstr "命名应直观地反映该结构体或特征的功能或角色，避免使用过于抽象或不具描述性的名称。"
+
+#: manual/contributing.md:32
+msgid "Constant naming"
+msgstr "常量命名"
+
+#: manual/contributing.md:34
+msgid "**Note:** In MoonBit, \"variables\" are usually called \"bindings\" and are immutable by default unless marked with `mut`. Thus, there is no strict distinction between constant and variable naming."
+msgstr "**注意：** 由于在 MoonBit 的语境下，“变量”通常称为“binding”，且默认是不可变的，只有添加 `mut` 关键字才能使其可变。因此，常量和“变量”之间没有严格的命名差异，保持一致性。"
+
+#: manual/contributing.md:35
+msgid "Use **lowercase letters with underscores** as separators (e.g., `machine_dbl_epsilon`)."
+msgstr "常量名采用 **全小写字母和下划线** 分隔（例如：`machine_dbl_epsilon`）。"
+
+#: manual/contributing.md:36
+msgid "Prefix constants with a descriptive category where applicable (e.g., `machine_dbl_epsilon`, where `machine` indicates a machine-related constant)."
+msgstr "常量名通常以第一个单词作为前缀，表示常量的用途或分类。例如，`machine_dbl_epsilon` 中的 `machine` 表示与机器相关的常量。"
+
+#: manual/contributing.md:37
+msgid "Constant names should be concise and descriptive to facilitate understanding."
+msgstr "常量名应简洁且具有描述性，便于其他开发者理解。"
+
+#: manual/contributing.md:39
+msgid "Result error constructors and error codes"
+msgstr "Result的Err构造内容和Err Code"
+
+#: manual/contributing.md:41
+msgid "Use **uppercase letters with underscores** as separators (e.g., `E_MAX_ITER`)."
+msgstr "采用 **全大写字母和下划线** 分隔（例如：`E_MAX_ITER`）。"
+
+#: manual/contributing.md:42
+msgid "Error codes should be prefixed with `E` to indicate an error-related construct."
+msgstr "构造内容通常以字符`E`作为前缀，表示其用于Err构造或者错误代码。"
+
+#: manual/contributing.md:43
+msgid "Error codes should be concise and descriptive for easy comprehension."
+msgstr "构造内容应简洁且具有描述性，便于其他开发者理解。"
+
+#: manual/contributing.md:45
+msgid "Comments"
+msgstr "注释"
+
+#: manual/contributing.md:47
+msgid "**Conciseness**: Comments should be clear and to the point, avoiding unnecessary verbosity."
+msgstr "**简洁性**：注释应简洁明了，只包含必要的信息，避免冗长和不相关的内容。"
+
+#: manual/contributing.md:48
+msgid "**Consistency**: Use uniform terminology and style across the codebase."
+msgstr "**一致性**：使用一致的术语和风格，避免在不同地方使用不同的方式描述相同的概念。"
+
+#: manual/contributing.md:49
+msgid "**Clarity**: Ensure comments are easy to understand, avoiding complex jargon or ambiguous wording."
+msgstr "**清晰性**：确保注释易于理解，避免复杂的术语或模糊的表述。应使任何阅读代码的人能够快速理解注释的意图。"
+
+#: manual/contributing.md:50
+msgid "**Accuracy**: Comments must accurately reflect the functionality and purpose of the code."
+msgstr "**准确性**：注释必须准确反映代码的功能和目的，避免与代码行为不符的描述。"
+
+#: manual/contributing.md:51
+msgid "**Up-to-date**: Comments should be updated alongside code changes to maintain relevance."
+msgstr "**更新性**：随着代码的变更，注释也应随时更新，确保注释与代码同步。"
+
+#: manual/contributing.md:53
+msgid "Developers are encouraged to use the AI-generated code comments of the MoonBit LSP to improve efficiency, but AI-generated comments should be reviewed to ensure correctness."
+msgstr "我们鼓励开发者采用MoonBit LSP提供的AI代码注释生成来提升注释的编写效率，但需要开发者对AI生成的内容进行审核，以确保其对方法、结构体和特征的解释是正确无误的。"
+
+#: manual/contributing.md:55
+msgid "File standards"
+msgstr "文件规范"
+
+#: manual/contributing.md:57
+msgid "Folder naming"
+msgstr "文件夹命名"
+
+#: manual/contributing.md:59
+msgid "Use **lowercase letters** for folder names."
+msgstr "对于大的功能模块，请使用小写字母命名的文件夹（包）。"
+
+#: manual/contributing.md:60
+msgid "Folder names should be concise, descriptive, and separated using underscores (`_`). Avoid numbers and special characters. For example, use `diff` for differentiation-related functionality and `deriv` for derivative-related functionality."
+msgstr "命名应简洁、描述性强，且仅使用小写字母和下划线（`_`）来分隔单词。请避免使用数字和特殊字符。例如，微分相关功能使用 `diff`，导数相关功能使用 `deriv`。"
+
+#: manual/contributing.md:62
+msgid "File organization"
+msgstr "文件划分"
+
+#: manual/contributing.md:64
+msgid "Files should be organized based on functionality, with each file focusing on a specific feature. Use **lowercase letters with underscores** for file names."
+msgstr "文件应该按功能划分，每个文件专注于特定的功能。文件名使用**小写字母和下划线**。"
+
+#: manual/contributing.md:65
+msgid "File names should be descriptive and clearly indicate the core functionality they implement. For example, `gauss_kronrod.mbt` implements Gaussian quadrature with Kronrod extension, and `adaptive_quadrature_gk.mbt` implements adaptive quadrature using Gaussian quadrature with Kronrod extension."
+msgstr "文件名应具备描述性，清楚反映该文件所实现的核心功能。例如，`gauss_kronrod.mbt` 实现带克龙罗德扩展的高斯求积，`adaptive_quadrature_gk.mbt` 实现基于带克龙罗德扩展的高斯求积的自适应积分。"
+
+#: manual/contributing.md:66
+msgid "**Note:** Avoid overly generic or vague file names such as `utils.mbt`. Instead, ensure file names correspond to their function or module."
+msgstr "**注意**：在文件命名中（除了在@internal中不可避免的情况），请避免使用过于通用或模糊的名称，如 `utils.mbt`，请尽量使文件名与其功能或模块相关联。"
+
+#: manual/contributing.md:68
+msgid "Commit guidelines"
+msgstr "提交规范"
+
+#: manual/contributing.md:70
+msgid "Commit messages"
+msgstr "提交信息"
+
+#: manual/contributing.md:72
+msgid "Use the `ready_to_pr.sh` script before committing to format code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "在提交前请使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查、生成测试覆盖率文件和 `.mbti` 文件。"
+
+#: manual/contributing.md:73
+msgid "Each commit should have a clear description of the changes made."
+msgstr "每个提交应具有清晰的描述，说明此次提交所做的变更。"
+
+#: manual/contributing.md:74
+msgid "Commit messages should be in **English**, concise, and precise."
+msgstr "提交信息应使用**英文**，并遵循**简短、精炼**的原则。"
+
+#: manual/contributing.md:75
+msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
+msgstr "使用 `fix:`，`feat:`，`refactor:` 和 `doc:` 等前缀来区分提交的类型"
+
+#: manual/contributing.md:84
+msgid "Commit frequency"
+msgstr "提交频率"
+
+#: manual/contributing.md:86
+msgid "Keep commits small and focused on a single feature or fix."
+msgstr "尽量保持每次提交都很小且聚焦于一个功能或修复。"
+
+#: manual/contributing.md:87
+msgid "Avoid large, monolithic commits that include multiple unrelated changes."
+msgstr "不要一次性提交大规模的更改。"
+
+#: manual/contributing.md:89
+msgid "Code review"
+msgstr "代码审查"
+
+#: manual/contributing.md:91
+msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
+msgstr "非项目维护者和合作者在修改`moon.mod.json`内的依赖和版本号前，请先联系维护者或者合作者。"
+
+#: manual/contributing.md:92
+msgid "All code submissions must undergo **code review**."
+msgstr "所有的代码提交都必须经过**代码审查**。"
+
+#: manual/contributing.md:93
+msgid "Code reviews should focus on code quality, style, performance, and security."
+msgstr "在审查过程中，关注代码质量、风格、性能和安全性。"
+
+#: manual/contributing.md:94
+msgid "Reviewers should provide constructive feedback to improve the code."
+msgstr "审查者应提供建设性的反馈，帮助改进代码。"
+
+#: manual/index.md:1
+msgid "luna-utils"
+msgstr "luna-utils"
+
+#: manual/index.md:3
+msgid "`luna-utils` is a small utility package for Luna-Flow projects. It provides array helpers and comparison helpers whose numeric constraints come from the traits of [luna-generic](https://luna-flow.github.io/en/luna-generic/), so they work for any type that implements the required structure."
+msgstr "`luna-utils` 是面向 Luna-Flow 项目的小型工具包。它提供数组辅助函数和比较辅助函数，其数值约束来自 [luna-generic](https://luna-flow.github.io/en/luna-generic/) 的 trait，因此适用于任何实现了所需结构的类型。"
+
+#: manual/index.md:5
+msgid "Public functions"
+msgstr "公开函数"
+
+#: manual/index.md:7
+msgid "The package exports only functions; it defines no types or traits of its own."
+msgstr "本包只导出函数，不定义自己的类型或 trait。"
+
+#: manual/index.md:9
+msgid "Function"
+msgstr "函数"
+
+#: manual/index.md:9
+msgid "Constraint"
+msgstr "约束"
+
+#: manual/index.md:9
+msgid "Behaviour"
+msgstr "行为"
+
+#: manual/index.md:11
+msgid "Sum of the elements; `zero()` for an empty array."
+msgstr "元素之和；空数组返回 `zero()`。"
+
+#: manual/index.md:12
+msgid "Sum of the absolute values of the elements."
+msgstr "元素绝对值之和。"
+
+#: manual/index.md:13
+msgid "Array of length `n` filled with `zero()`."
+msgstr "长度为 `n`、以 `zero()` 填充的数组。"
+
+#: manual/index.md:14
+msgid "Largest or smallest element; panics on an empty array."
+msgstr "最大或最小元素；空数组时 panic。"
+
+#: manual/index.md:15
+msgid "Index of the first occurrence of a value, or `None`."
+msgstr "某个值首次出现的下标，未找到时为 `None`。"
+
+#: manual/index.md:16
+#: manual/index.md:17
+msgid "none"
+msgstr "无"
+
+#: manual/index.md:16
+msgid "New array with the elements in reverse order."
+msgstr "元素逆序排列的新数组。"
+
+#: manual/index.md:17
+msgid "Reverses an array in place."
+msgstr "原地反转数组。"
+
+#: manual/index.md:18
+msgid "Whether all elements equal the first; panics on an empty array."
+msgstr "所有元素是否都等于第一个元素；空数组时 panic。"
+
+#: manual/index.md:19
+msgid "Whether all elements equal a given sample."
+msgstr "所有元素是否都等于给定的样本值。"
+
+#: manual/index.md:20
+msgid "`Eq` on the result"
+msgstr "结果类型满足 `Eq`"
+
+#: manual/index.md:20
+msgid "`same` and `same_to` applied to the mapped array."
+msgstr "对映射后的数组应用 `same` 与 `same_to`。"
+
+#: manual/index.md:21
+msgid "Restricts a value to the closed range from `min` to `max`."
+msgstr "将值限制在从 `min` 到 `max` 的闭区间内。"
+
+#: manual/index.md:22
+msgid "Whether a value lies in the closed range from `min` to `max`."
+msgstr "值是否位于从 `min` 到 `max` 的闭区间内。"
+
+#: manual/index.md:24
+msgid "The interface file [pkg.generated.mbti](../../src/pkg.generated.mbti) is the authoritative list of signatures, and the generated API documentation is on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)."
+msgstr "接口文件 [pkg.generated.mbti](../../src/pkg.generated.mbti) 是签名的权威清单，自动生成的 API 文档见 [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)。"
+
+#: manual/index.md:26
+msgid "Contributing"
+msgstr "参与贡献"
+
+#: manual/index.md:28
+msgid "Code style, naming, commit and review rules are in the [contribution guidelines](contributing.md)."
+msgstr "代码风格、命名、提交与审查规则见[贡献规范](contributing.md)。"

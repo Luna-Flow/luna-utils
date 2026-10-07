@@ -1,0 +1,321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
+msgstr ""
+
+#: manual/contributing.md:1
+msgid "Contribution guidelines"
+msgstr ""
+
+#: manual/contributing.md:3
+msgid "Code style"
+msgstr ""
+
+#: manual/contributing.md:5
+msgid "The project follows the formatting style enforced by the MoonBit toolchain. Format your code automatically with the following command:"
+msgstr ""
+
+#: manual/contributing.md:11
+msgid "Run `moon fmt` before committing your code to keep the style consistent."
+msgstr ""
+
+#: manual/contributing.md:13
+msgid "Alternatively, you can use the `ready_to_pr.sh` script to format the code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr ""
+
+#: manual/contributing.md:15
+msgid "Naming conventions"
+msgstr ""
+
+#: manual/contributing.md:17
+msgid "Variable naming"
+msgstr ""
+
+#: manual/contributing.md:19
+msgid "Use **lowercase letters with underscores** as separators (e.g., `my_var`)."
+msgstr ""
+
+#: manual/contributing.md:20
+msgid "Variable names should be descriptive and clearly indicate their purpose."
+msgstr ""
+
+#: manual/contributing.md:22
+msgid "Function naming"
+msgstr ""
+
+#: manual/contributing.md:24
+msgid "Use **lowercase letters with underscores** as separators (e.g., `calc_total_price()`)."
+msgstr ""
+
+#: manual/contributing.md:25
+msgid "Function names should be concise and descriptive, clearly expressing their functionality."
+msgstr ""
+
+#: manual/contributing.md:27
+msgid "Struct and trait naming"
+msgstr ""
+
+#: manual/contributing.md:29
+msgid "Use **PascalCase** (e.g., `MyStruct`, `MyTrait`)."
+msgstr ""
+
+#: manual/contributing.md:30
+msgid "Names should intuitively reflect the function or role of the struct or trait, avoiding overly abstract or non-descriptive names."
+msgstr ""
+
+#: manual/contributing.md:32
+msgid "Constant naming"
+msgstr ""
+
+#: manual/contributing.md:34
+msgid "**Note:** In MoonBit, \"variables\" are usually called \"bindings\" and are immutable by default unless marked with `mut`. Thus, there is no strict distinction between constant and variable naming."
+msgstr ""
+
+#: manual/contributing.md:35
+msgid "Use **lowercase letters with underscores** as separators (e.g., `machine_dbl_epsilon`)."
+msgstr ""
+
+#: manual/contributing.md:36
+msgid "Prefix constants with a descriptive category where applicable (e.g., `machine_dbl_epsilon`, where `machine` indicates a machine-related constant)."
+msgstr ""
+
+#: manual/contributing.md:37
+msgid "Constant names should be concise and descriptive to facilitate understanding."
+msgstr ""
+
+#: manual/contributing.md:39
+msgid "Result error constructors and error codes"
+msgstr ""
+
+#: manual/contributing.md:41
+msgid "Use **uppercase letters with underscores** as separators (e.g., `E_MAX_ITER`)."
+msgstr ""
+
+#: manual/contributing.md:42
+msgid "Error codes should be prefixed with `E` to indicate an error-related construct."
+msgstr ""
+
+#: manual/contributing.md:43
+msgid "Error codes should be concise and descriptive for easy comprehension."
+msgstr ""
+
+#: manual/contributing.md:45
+msgid "Comments"
+msgstr ""
+
+#: manual/contributing.md:47
+msgid "**Conciseness**: Comments should be clear and to the point, avoiding unnecessary verbosity."
+msgstr ""
+
+#: manual/contributing.md:48
+msgid "**Consistency**: Use uniform terminology and style across the codebase."
+msgstr ""
+
+#: manual/contributing.md:49
+msgid "**Clarity**: Ensure comments are easy to understand, avoiding complex jargon or ambiguous wording."
+msgstr ""
+
+#: manual/contributing.md:50
+msgid "**Accuracy**: Comments must accurately reflect the functionality and purpose of the code."
+msgstr ""
+
+#: manual/contributing.md:51
+msgid "**Up-to-date**: Comments should be updated alongside code changes to maintain relevance."
+msgstr ""
+
+#: manual/contributing.md:53
+msgid "Developers are encouraged to use the AI-generated code comments of the MoonBit LSP to improve efficiency, but AI-generated comments should be reviewed to ensure correctness."
+msgstr ""
+
+#: manual/contributing.md:55
+msgid "File standards"
+msgstr ""
+
+#: manual/contributing.md:57
+msgid "Folder naming"
+msgstr ""
+
+#: manual/contributing.md:59
+msgid "Use **lowercase letters** for folder names."
+msgstr ""
+
+#: manual/contributing.md:60
+msgid "Folder names should be concise, descriptive, and separated using underscores (`_`). Avoid numbers and special characters. For example, use `diff` for differentiation-related functionality and `deriv` for derivative-related functionality."
+msgstr ""
+
+#: manual/contributing.md:62
+msgid "File organization"
+msgstr ""
+
+#: manual/contributing.md:64
+msgid "Files should be organized based on functionality, with each file focusing on a specific feature. Use **lowercase letters with underscores** for file names."
+msgstr ""
+
+#: manual/contributing.md:65
+msgid "File names should be descriptive and clearly indicate the core functionality they implement. For example, `gauss_kronrod.mbt` implements Gaussian quadrature with Kronrod extension, and `adaptive_quadrature_gk.mbt` implements adaptive quadrature using Gaussian quadrature with Kronrod extension."
+msgstr ""
+
+#: manual/contributing.md:66
+msgid "**Note:** Avoid overly generic or vague file names such as `utils.mbt`. Instead, ensure file names correspond to their function or module."
+msgstr ""
+
+#: manual/contributing.md:68
+msgid "Commit guidelines"
+msgstr ""
+
+#: manual/contributing.md:70
+msgid "Commit messages"
+msgstr ""
+
+#: manual/contributing.md:72
+msgid "Use the `ready_to_pr.sh` script before committing to format code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr ""
+
+#: manual/contributing.md:73
+msgid "Each commit should have a clear description of the changes made."
+msgstr ""
+
+#: manual/contributing.md:74
+msgid "Commit messages should be in **English**, concise, and precise."
+msgstr ""
+
+#: manual/contributing.md:75
+msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
+msgstr ""
+
+#: manual/contributing.md:84
+msgid "Commit frequency"
+msgstr ""
+
+#: manual/contributing.md:86
+msgid "Keep commits small and focused on a single feature or fix."
+msgstr ""
+
+#: manual/contributing.md:87
+msgid "Avoid large, monolithic commits that include multiple unrelated changes."
+msgstr ""
+
+#: manual/contributing.md:89
+msgid "Code review"
+msgstr ""
+
+#: manual/contributing.md:91
+msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
+msgstr ""
+
+#: manual/contributing.md:92
+msgid "All code submissions must undergo **code review**."
+msgstr ""
+
+#: manual/contributing.md:93
+msgid "Code reviews should focus on code quality, style, performance, and security."
+msgstr ""
+
+#: manual/contributing.md:94
+msgid "Reviewers should provide constructive feedback to improve the code."
+msgstr ""
+
+#: manual/index.md:1
+msgid "luna-utils"
+msgstr ""
+
+#: manual/index.md:3
+msgid "`luna-utils` is a small utility package for Luna-Flow projects. It provides array helpers and comparison helpers whose numeric constraints come from the traits of [luna-generic](https://luna-flow.github.io/en/luna-generic/), so they work for any type that implements the required structure."
+msgstr ""
+
+#: manual/index.md:5
+msgid "Public functions"
+msgstr ""
+
+#: manual/index.md:7
+msgid "The package exports only functions; it defines no types or traits of its own."
+msgstr ""
+
+#: manual/index.md:9
+msgid "Function"
+msgstr ""
+
+#: manual/index.md:9
+msgid "Constraint"
+msgstr ""
+
+#: manual/index.md:9
+msgid "Behaviour"
+msgstr ""
+
+#: manual/index.md:11
+msgid "Sum of the elements; `zero()` for an empty array."
+msgstr ""
+
+#: manual/index.md:12
+msgid "Sum of the absolute values of the elements."
+msgstr ""
+
+#: manual/index.md:13
+msgid "Array of length `n` filled with `zero()`."
+msgstr ""
+
+#: manual/index.md:14
+msgid "Largest or smallest element; panics on an empty array."
+msgstr ""
+
+#: manual/index.md:15
+msgid "Index of the first occurrence of a value, or `None`."
+msgstr ""
+
+#: manual/index.md:16
+#: manual/index.md:17
+msgid "none"
+msgstr ""
+
+#: manual/index.md:16
+msgid "New array with the elements in reverse order."
+msgstr ""
+
+#: manual/index.md:17
+msgid "Reverses an array in place."
+msgstr ""
+
+#: manual/index.md:18
+msgid "Whether all elements equal the first; panics on an empty array."
+msgstr ""
+
+#: manual/index.md:19
+msgid "Whether all elements equal a given sample."
+msgstr ""
+
+#: manual/index.md:20
+msgid "`Eq` on the result"
+msgstr ""
+
+#: manual/index.md:20
+msgid "`same` and `same_to` applied to the mapped array."
+msgstr ""
+
+#: manual/index.md:21
+msgid "Restricts a value to the closed range from `min` to `max`."
+msgstr ""
+
+#: manual/index.md:22
+msgid "Whether a value lies in the closed range from `min` to `max`."
+msgstr ""
+
+#: manual/index.md:24
+msgid "The interface file [pkg.generated.mbti](../../src/pkg.generated.mbti) is the authoritative list of signatures, and the generated API documentation is on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)."
+msgstr ""
+
+#: manual/index.md:26
+msgid "Contributing"
+msgstr ""
+
+#: manual/index.md:28
+msgid "Code style, naming, commit and review rules are in the [contribution guidelines](contributing.md)."
+msgstr ""

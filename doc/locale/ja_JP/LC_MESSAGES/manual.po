@@ -1,0 +1,321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
+msgstr "luna-generic の trait を制約に用いる、Luna-Flow プロジェクト向けの汎用的な配列・比較ヘルパー。"
+
+#: manual/contributing.md:1
+msgid "Contribution guidelines"
+msgstr "貢献ガイドライン"
+
+#: manual/contributing.md:3
+msgid "Code style"
+msgstr "コードスタイル"
+
+#: manual/contributing.md:5
+msgid "The project follows the formatting style enforced by the MoonBit toolchain. Format your code automatically with the following command:"
+msgstr "本プロジェクトは MoonBit ツールチェインが採用するフォーマット規則に従う。以下のコマンドを実行してコードを自動でフォーマットすること。"
+
+#: manual/contributing.md:11
+msgid "Run `moon fmt` before committing your code to keep the style consistent."
+msgstr "コードの一貫性を保つために、コミット前に `moon fmt` を実行すること。"
+
+#: manual/contributing.md:13
+msgid "Alternatively, you can use the `ready_to_pr.sh` script to format the code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "また、`ready_to_pr.sh` スクリプトを実行してコードのフォーマット、チェック、テストカバレッジファイルの生成、`.mbti` ファイルの生成を行うことも可能。"
+
+#: manual/contributing.md:15
+msgid "Naming conventions"
+msgstr "名前の命名規則"
+
+#: manual/contributing.md:17
+msgid "Variable naming"
+msgstr "変数の命名"
+
+#: manual/contributing.md:19
+msgid "Use **lowercase letters with underscores** as separators (e.g., `my_var`)."
+msgstr "小文字とアンダースコア（ `_` ）を使用（例: `my_var`）。"
+
+#: manual/contributing.md:20
+msgid "Variable names should be descriptive and clearly indicate their purpose."
+msgstr "変数名は意味が明確で、用途が直感的に理解できるものにする。"
+
+#: manual/contributing.md:22
+msgid "Function naming"
+msgstr "関数の命名"
+
+#: manual/contributing.md:24
+msgid "Use **lowercase letters with underscores** as separators (e.g., `calc_total_price()`)."
+msgstr "小文字とアンダースコア（ `_` ）を使用（例: `calc_total_price()`）。"
+
+#: manual/contributing.md:25
+msgid "Function names should be concise and descriptive, clearly expressing their functionality."
+msgstr "関数名は簡潔かつ説明的にし、機能が明確に分かるようにする。"
+
+#: manual/contributing.md:27
+msgid "Struct and trait naming"
+msgstr "ストラクトとトレイトの命名"
+
+#: manual/contributing.md:29
+msgid "Use **PascalCase** (e.g., `MyStruct`, `MyTrait`)."
+msgstr "パスカルケース（PascalCase）を使用（例: `MyStruct`, `MyTrait`）。"
+
+#: manual/contributing.md:30
+msgid "Names should intuitively reflect the function or role of the struct or trait, avoiding overly abstract or non-descriptive names."
+msgstr "機能や役割を直感的に表す名前を使用し、抽象的すぎる名前は避ける。"
+
+#: manual/contributing.md:32
+msgid "Constant naming"
+msgstr "定数の命名"
+
+#: manual/contributing.md:34
+msgid "**Note:** In MoonBit, \"variables\" are usually called \"bindings\" and are immutable by default unless marked with `mut`. Thus, there is no strict distinction between constant and variable naming."
+msgstr "**注意：** MoonBit では「変数」は通常「binding」と呼ばれ、`mut` を付けない限り既定で不変です。そのため、定数と変数の命名に厳密な区別はありません。"
+
+#: manual/contributing.md:35
+msgid "Use **lowercase letters with underscores** as separators (e.g., `machine_dbl_epsilon`)."
+msgstr "小文字とアンダースコア（ `_` ）を使用（例: `machine_dbl_epsilon`）。"
+
+#: manual/contributing.md:36
+msgid "Prefix constants with a descriptive category where applicable (e.g., `machine_dbl_epsilon`, where `machine` indicates a machine-related constant)."
+msgstr "必要に応じてカテゴリーをプレフィックスとして付与（例: `machine_dbl_epsilon` は機械関連の定数）。"
+
+#: manual/contributing.md:37
+msgid "Constant names should be concise and descriptive to facilitate understanding."
+msgstr "分かりやすく、簡潔な名前を付ける。"
+
+#: manual/contributing.md:39
+msgid "Result error constructors and error codes"
+msgstr "結果エラーのエラーコードの設計"
+
+#: manual/contributing.md:41
+msgid "Use **uppercase letters with underscores** as separators (e.g., `E_MAX_ITER`)."
+msgstr "大文字とアンダースコア（ `_` ）を使用（例: `E_MAX_ITER`）。"
+
+#: manual/contributing.md:42
+msgid "Error codes should be prefixed with `E` to indicate an error-related construct."
+msgstr "エラーコードには `E` をプレフィックスとして付与。"
+
+#: manual/contributing.md:43
+msgid "Error codes should be concise and descriptive for easy comprehension."
+msgstr "短く分かりやすいエラーコードを心掛ける。"
+
+#: manual/contributing.md:45
+msgid "Comments"
+msgstr "コメント"
+
+#: manual/contributing.md:47
+msgid "**Conciseness**: Comments should be clear and to the point, avoiding unnecessary verbosity."
+msgstr "簡潔さ：冗長にならず、明確に記述する。"
+
+#: manual/contributing.md:48
+msgid "**Consistency**: Use uniform terminology and style across the codebase."
+msgstr "一貫性：コード全体で統一された用語とスタイルを使用する。"
+
+#: manual/contributing.md:49
+msgid "**Clarity**: Ensure comments are easy to understand, avoiding complex jargon or ambiguous wording."
+msgstr "明確さ：分かりやすい表現を用い、曖昧な表現や専門用語の多用を避ける。"
+
+#: manual/contributing.md:50
+msgid "**Accuracy**: Comments must accurately reflect the functionality and purpose of the code."
+msgstr "正確さ：コードの動作や目的を正しく反映する。"
+
+#: manual/contributing.md:51
+msgid "**Up-to-date**: Comments should be updated alongside code changes to maintain relevance."
+msgstr "最新状態の維持：コードの変更に応じてコメントを更新する。"
+
+#: manual/contributing.md:53
+msgid "Developers are encouraged to use the AI-generated code comments of the MoonBit LSP to improve efficiency, but AI-generated comments should be reviewed to ensure correctness."
+msgstr "開発者は MoonBit LSP の AI によるコードコメント生成機能を活用できるが、AI が生成したコメントは必ずレビューし、正確性を確認すること。"
+
+#: manual/contributing.md:55
+msgid "File standards"
+msgstr "ファイルの規格"
+
+#: manual/contributing.md:57
+msgid "Folder naming"
+msgstr "フォルダ名の命名"
+
+#: manual/contributing.md:59
+msgid "Use **lowercase letters** for folder names."
+msgstr "小文字のみを使用。"
+
+#: manual/contributing.md:60
+msgid "Folder names should be concise, descriptive, and separated using underscores (`_`). Avoid numbers and special characters. For example, use `diff` for differentiation-related functionality and `deriv` for derivative-related functionality."
+msgstr "フォルダ名は簡潔かつ説明的にし、アンダースコア（ `_` ）で区切る。数字や特殊文字は避ける。例えば、微分関連の機能には `diff`、導関数関連の機能には `deriv` を使う。"
+
+#: manual/contributing.md:62
+msgid "File organization"
+msgstr "ファイルの構成"
+
+#: manual/contributing.md:64
+msgid "Files should be organized based on functionality, with each file focusing on a specific feature. Use **lowercase letters with underscores** for file names."
+msgstr "ファイルは機能ごとに整理し、それぞれ特定の機能に焦点を当てる。ファイル名には**小文字とアンダースコア**を使用する。"
+
+#: manual/contributing.md:65
+msgid "File names should be descriptive and clearly indicate the core functionality they implement. For example, `gauss_kronrod.mbt` implements Gaussian quadrature with Kronrod extension, and `adaptive_quadrature_gk.mbt` implements adaptive quadrature using Gaussian quadrature with Kronrod extension."
+msgstr "ファイル名は、実装する中心的な機能が明確に分かるものにする。例えば、`gauss_kronrod.mbt` はガウス・クロンロッド求積法を、`adaptive_quadrature_gk.mbt` はガウス・クロンロッド求積法による適応型求積法を実装する。"
+
+#: manual/contributing.md:66
+msgid "**Note:** Avoid overly generic or vague file names such as `utils.mbt`. Instead, ensure file names correspond to their function or module."
+msgstr "注意：`utils.mbt` のような汎用的すぎる名前は避け、機能を明確に表す名前を使用すること。"
+
+#: manual/contributing.md:68
+msgid "Commit guidelines"
+msgstr "コミット規則"
+
+#: manual/contributing.md:70
+msgid "Commit messages"
+msgstr "コミットメッセージ"
+
+#: manual/contributing.md:72
+msgid "Use the `ready_to_pr.sh` script before committing to format code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "`ready_to_pr.sh` スクリプトを実行し、コードフォーマット、チェック、テストカバレッジ生成、`.mbti` ファイル生成を行うこと。"
+
+#: manual/contributing.md:73
+msgid "Each commit should have a clear description of the changes made."
+msgstr "コミットごとに変更内容を明確に記述する。"
+
+#: manual/contributing.md:74
+msgid "Commit messages should be in **English**, concise, and precise."
+msgstr "コミットメッセージは英語で、簡潔かつ明確に記述する。"
+
+#: manual/contributing.md:75
+msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
+msgstr "`fix:`, `feat:`, `refactor:`, `doc:` などのプレフィックスを使用。"
+
+#: manual/contributing.md:84
+msgid "Commit frequency"
+msgstr "コミットの頻度"
+
+#: manual/contributing.md:86
+msgid "Keep commits small and focused on a single feature or fix."
+msgstr "コミットは小さく、一つの機能や修正に集中させる。"
+
+#: manual/contributing.md:87
+msgid "Avoid large, monolithic commits that include multiple unrelated changes."
+msgstr "複数の変更を一つの大きなコミットにまとめないこと。"
+
+#: manual/contributing.md:89
+msgid "Code review"
+msgstr "コードレビュー"
+
+#: manual/contributing.md:91
+msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
+msgstr "`moon.mod.json` の依存関係やバージョンを変更する前に、メンテナーまたはコラボレーターに確認すること。"
+
+#: manual/contributing.md:92
+msgid "All code submissions must undergo **code review**."
+msgstr "すべてのコードはコードレビューを受ける必要がある。"
+
+#: manual/contributing.md:93
+msgid "Code reviews should focus on code quality, style, performance, and security."
+msgstr "コードレビューでは、コードの品質、スタイル、パフォーマンス、セキュリティを重視する。"
+
+#: manual/contributing.md:94
+msgid "Reviewers should provide constructive feedback to improve the code."
+msgstr "レビュアーは建設的なフィードバックを提供し、コードの改善に努める。"
+
+#: manual/index.md:1
+msgid "luna-utils"
+msgstr "luna-utils"
+
+#: manual/index.md:3
+msgid "`luna-utils` is a small utility package for Luna-Flow projects. It provides array helpers and comparison helpers whose numeric constraints come from the traits of [luna-generic](https://luna-flow.github.io/en/luna-generic/), so they work for any type that implements the required structure."
+msgstr "`luna-utils` は Luna-Flow プロジェクト向けの小さなユーティリティパッケージです。配列ヘルパーと比較ヘルパーを提供し、その数値的な制約は [luna-generic](https://luna-flow.github.io/en/luna-generic/) の trait に由来するため、必要な構造を実装した任意の型で使えます。"
+
+#: manual/index.md:5
+msgid "Public functions"
+msgstr "公開関数"
+
+#: manual/index.md:7
+msgid "The package exports only functions; it defines no types or traits of its own."
+msgstr "このパッケージは関数のみをエクスポートし、独自の型や trait は定義しません。"
+
+#: manual/index.md:9
+msgid "Function"
+msgstr "関数"
+
+#: manual/index.md:9
+msgid "Constraint"
+msgstr "制約"
+
+#: manual/index.md:9
+msgid "Behaviour"
+msgstr "動作"
+
+#: manual/index.md:11
+msgid "Sum of the elements; `zero()` for an empty array."
+msgstr "要素の総和。空配列では `zero()`。"
+
+#: manual/index.md:12
+msgid "Sum of the absolute values of the elements."
+msgstr "要素の絶対値の総和。"
+
+#: manual/index.md:13
+msgid "Array of length `n` filled with `zero()`."
+msgstr "`zero()` で埋めた長さ `n` の配列。"
+
+#: manual/index.md:14
+msgid "Largest or smallest element; panics on an empty array."
+msgstr "最大または最小の要素。空配列では panic します。"
+
+#: manual/index.md:15
+msgid "Index of the first occurrence of a value, or `None`."
+msgstr "値が最初に現れる位置のインデックス。見つからなければ `None`。"
+
+#: manual/index.md:16
+#: manual/index.md:17
+msgid "none"
+msgstr "なし"
+
+#: manual/index.md:16
+msgid "New array with the elements in reverse order."
+msgstr "要素を逆順に並べた新しい配列。"
+
+#: manual/index.md:17
+msgid "Reverses an array in place."
+msgstr "配列をその場で反転します。"
+
+#: manual/index.md:18
+msgid "Whether all elements equal the first; panics on an empty array."
+msgstr "すべての要素が先頭の要素と等しいか。空配列では panic します。"
+
+#: manual/index.md:19
+msgid "Whether all elements equal a given sample."
+msgstr "すべての要素が指定したサンプル値と等しいか。"
+
+#: manual/index.md:20
+msgid "`Eq` on the result"
+msgstr "結果の型に `Eq`"
+
+#: manual/index.md:20
+msgid "`same` and `same_to` applied to the mapped array."
+msgstr "写像した配列に `same` と `same_to` を適用します。"
+
+#: manual/index.md:21
+msgid "Restricts a value to the closed range from `min` to `max`."
+msgstr "値を `min` から `max` までの閉区間に制限します。"
+
+#: manual/index.md:22
+msgid "Whether a value lies in the closed range from `min` to `max`."
+msgstr "値が `min` から `max` までの閉区間にあるか。"
+
+#: manual/index.md:24
+msgid "The interface file [pkg.generated.mbti](../../src/pkg.generated.mbti) is the authoritative list of signatures, and the generated API documentation is on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)."
+msgstr "インターフェースファイル [pkg.generated.mbti](../../src/pkg.generated.mbti) がシグネチャの正式な一覧で、生成された API ドキュメントは [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils) にあります。"
+
+#: manual/index.md:26
+msgid "Contributing"
+msgstr "コントリビュート"
+
+#: manual/index.md:28
+msgid "Code style, naming, commit and review rules are in the [contribution guidelines](contributing.md)."
+msgstr "コードスタイル、命名、コミット、レビューの規則は[貢献ガイドライン](contributing.md)にあります。"
