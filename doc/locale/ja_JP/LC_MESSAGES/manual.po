@@ -1,0 +1,627 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
+msgstr "luna-generic の trait を制約に用いる、Luna-Flow プロジェクト向けの汎用的な配列・比較ヘルパー。"
+
+#: manual/api/array_utils.md:1
+msgid "array_utils API"
+msgstr "array_utils API"
+
+#: manual/api/array_utils.md:3
+msgid "`array_utils` is the part of the package `Luna-Flow/luna-utils` defined in [`src/array_utils.mbt`](../../../src/array_utils.mbt): twelve functions on `Array[T]`. They are package-level functions, not methods, so another package calls them as `@luna-utils.arr_sum(xs)`. The traits `AddMonoid` and `Num` come from [luna-generic](https://luna-flow.github.io/en/luna-generic/)."
+msgstr "`array_utils` は、パッケージ `Luna-Flow/luna-utils` のうち [`src/array_utils.mbt`](../../../src/array_utils.mbt) で定義される部分で、`Array[T]` に対する 12 個の関数からなります。これらはメソッドではなくパッケージレベルの関数なので、他のパッケージからは `@luna-utils.arr_sum(xs)` のように呼び出します。trait `AddMonoid` と `Num` は [luna-generic](https://luna-flow.github.io/en/luna-generic/) のものです。"
+
+#: manual/api/array_utils.md:5
+#: manual/tutorial/array_utils.md:5
+msgid "Sums"
+msgstr "総和"
+
+#: manual/api/array_utils.md:13
+msgid "`arr_sum(arr)` adds the elements from left to right, starting from `zero()`. The sum of an empty array is `zero()`."
+msgstr "`arr_sum(arr)` は `zero()` から始めて、要素を左から右へ足し合わせます。空配列の総和は `zero()` です。"
+
+#: manual/api/array_utils.md:15
+msgid "`arr_abs_sum(arr)` adds the absolute values of the elements in the same way. The absolute value of `x` is `-x` when `x < zero()` and `x` otherwise."
+msgstr "`arr_abs_sum(arr)` は同じ方法で要素の絶対値を足し合わせます。`x` の絶対値は、`x < zero()` のとき `-x`、それ以外のとき `x` です。"
+
+#: manual/api/array_utils.md:17
+msgid "`zero_arr(n)` returns a new array of length `n` whose elements are all `zero()`. The element type is chosen by the expected type, for example `let zeros : Array[Double] = zero_arr(3)`."
+msgstr "`zero_arr(n)` は、長さ `n` で要素がすべて `zero()` の新しい配列を返します。要素の型は期待される型で決まります。たとえば `let zeros : Array[Double] = zero_arr(3)` です。"
+
+#: manual/api/array_utils.md:19
+msgid "Extremes"
+msgstr "最大値と最小値"
+
+#: manual/api/array_utils.md:26
+msgid "`arr_max(arr)` and `arr_min(arr)` return the largest and the smallest element; when several elements compare equal, the first of them is returned. Both panic on an empty array."
+msgstr "`arr_max(arr)` と `arr_min(arr)` は最大の要素と最小の要素を返します。比較して等しい要素が複数ある場合は、そのうち最初のものを返します。どちらも空配列では panic します。"
+
+#: manual/api/array_utils.md:28
+msgid "Order and search"
+msgstr "順序と検索"
+
+#: manual/api/array_utils.md:36
+msgid "`reverse(arr)` returns a new array with the elements in reverse order and leaves `arr` unchanged. `reverse_inplace(arr)` reverses `arr` itself by swapping elements from both ends toward the middle; an empty array is left as it is."
+msgstr "`reverse(arr)` は要素を逆順に並べた新しい配列を返し、`arr` は変更しません。`reverse_inplace(arr)` は両端から中央へ向かって要素を入れ替え、`arr` 自体を反転します。空配列はそのまま残ります。"
+
+#: manual/api/array_utils.md:38
+msgid "`find(arr, value)` returns `Some(i)` for the first index `i` with `arr[i] == value`, or `None` when no element equals `value`."
+msgstr "`find(arr, value)` は `arr[i] == value` を満たす最初の添字 `i` を `Some(i)` として返し、`value` に等しい要素がなければ `None` を返します。"
+
+#: manual/api/array_utils.md:40
+msgid "Uniformity"
+msgstr "一様性の判定"
+
+#: manual/api/array_utils.md:49
+#: manual/index.md:9
+msgid "Function"
+msgstr "関数"
+
+#: manual/api/array_utils.md:49
+msgid "Returns `true` when"
+msgstr "`true` を返す条件"
+
+#: manual/api/array_utils.md:49
+msgid "On an empty array"
+msgstr "空配列の場合"
+
+#: manual/api/array_utils.md:51
+msgid "every element equals `arr[0]`"
+msgstr "すべての要素が `arr[0]` に等しい"
+
+#: manual/api/array_utils.md:51
+#: manual/api/array_utils.md:53
+msgid "panics"
+msgstr "panic する"
+
+#: manual/api/array_utils.md:52
+msgid "every element equals `sample`"
+msgstr "すべての要素が `sample` に等しい"
+
+#: manual/api/array_utils.md:52
+#: manual/api/array_utils.md:54
+msgid "returns `true`"
+msgstr "`true` を返す"
+
+#: manual/api/array_utils.md:53
+msgid "every `f(x)` equals `f(arr[0])`"
+msgstr "すべての `f(x)` が `f(arr[0])` に等しい"
+
+#: manual/api/array_utils.md:54
+msgid "every `f(x)` equals `sample`"
+msgstr "すべての `f(x)` が `sample` に等しい"
+
+#: manual/api/array_utils.md:56
+msgid "The checks stop at the first element that differs. `map_same` and `map_same_to` build the mapped array first, so `f` is called once for every element."
+msgstr "判定は最初に異なる要素が見つかった時点で止まります。`map_same` と `map_same_to` は先に写像後の配列を作るので、`f` はすべての要素に対して 1 回ずつ呼ばれます。"
+
+#: manual/api/comparison.md:1
+msgid "comparison API"
+msgstr "comparison API"
+
+#: manual/api/comparison.md:3
+msgid "`comparison` is the part of the package `Luna-Flow/luna-utils` defined in [`src/comparison.mbt`](../../../src/comparison.mbt): two functions that compare a value with a closed range. Both need only `Compare`, so they work for numbers, strings and any other ordered type."
+msgstr "`comparison` は、パッケージ `Luna-Flow/luna-utils` のうち [`src/comparison.mbt`](../../../src/comparison.mbt) で定義される部分で、値を閉区間と比較する二つの関数からなります。どちらも `Compare` だけを要求するので、数値、文字列、その他の順序付きの型で使えます。"
+
+#: manual/api/comparison.md:12
+msgid "`clamp(value, min, max)` returns `min` when `value < min`, `max` when `value > max`, and `value` otherwise."
+msgstr "`clamp(value, min, max)` は、`value < min` のとき `min`、`value > max` のとき `max`、それ以外のとき `value` を返します。"
+
+#: manual/api/comparison.md:14
+msgid "The bounds are not checked. When `min > max`, the result is `min` for a value below `min` and `max` for every other value."
+msgstr "境界は検査されません。`min > max` のとき、`min` より小さい値に対しては `min` を、それ以外のすべての値に対しては `max` を返します。"
+
+#: manual/api/comparison.md:18
+msgid "`is_between(value, min, max)` returns `true` when `min <= value` and `value <= max`; both bounds belong to the range. When `min > max`, it returns `false` for every value."
+msgstr "`is_between(value, min, max)` は、`min <= value` かつ `value <= max` のとき `true` を返します。両端の境界も区間に含まれます。`min > max` のときは、どの値に対しても `false` を返します。"
+
+#: manual/contributing.md:1
+msgid "Contribution guidelines"
+msgstr "貢献ガイドライン"
+
+#: manual/contributing.md:3
+msgid "Code style"
+msgstr "コードスタイル"
+
+#: manual/contributing.md:5
+msgid "The project follows the formatting style enforced by the MoonBit toolchain. Format your code automatically with the following command:"
+msgstr "本プロジェクトは MoonBit ツールチェインが採用するフォーマット規則に従う。以下のコマンドを実行してコードを自動でフォーマットすること。"
+
+#: manual/contributing.md:11
+msgid "Run `moon fmt` before committing your code to keep the style consistent."
+msgstr "コードの一貫性を保つために、コミット前に `moon fmt` を実行すること。"
+
+#: manual/contributing.md:13
+msgid "Alternatively, you can use the `ready_to_pr.sh` script to format the code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "また、`ready_to_pr.sh` スクリプトを実行してコードのフォーマット、チェック、テストカバレッジファイルの生成、`.mbti` ファイルの生成を行うことも可能。"
+
+#: manual/contributing.md:15
+msgid "Naming conventions"
+msgstr "名前の命名規則"
+
+#: manual/contributing.md:17
+msgid "Variable naming"
+msgstr "変数の命名"
+
+#: manual/contributing.md:19
+msgid "Use **lowercase letters with underscores** as separators (e.g., `my_var`)."
+msgstr "小文字とアンダースコア（ `_` ）を使用（例: `my_var`）。"
+
+#: manual/contributing.md:20
+msgid "Variable names should be descriptive and clearly indicate their purpose."
+msgstr "変数名は意味が明確で、用途が直感的に理解できるものにする。"
+
+#: manual/contributing.md:22
+msgid "Function naming"
+msgstr "関数の命名"
+
+#: manual/contributing.md:24
+msgid "Use **lowercase letters with underscores** as separators (e.g., `calc_total_price()`)."
+msgstr "小文字とアンダースコア（ `_` ）を使用（例: `calc_total_price()`）。"
+
+#: manual/contributing.md:25
+msgid "Function names should be concise and descriptive, clearly expressing their functionality."
+msgstr "関数名は簡潔かつ説明的にし、機能が明確に分かるようにする。"
+
+#: manual/contributing.md:27
+msgid "Struct and trait naming"
+msgstr "ストラクトとトレイトの命名"
+
+#: manual/contributing.md:29
+msgid "Use **PascalCase** (e.g., `MyStruct`, `MyTrait`)."
+msgstr "パスカルケース（PascalCase）を使用（例: `MyStruct`, `MyTrait`）。"
+
+#: manual/contributing.md:30
+msgid "Names should intuitively reflect the function or role of the struct or trait, avoiding overly abstract or non-descriptive names."
+msgstr "機能や役割を直感的に表す名前を使用し、抽象的すぎる名前は避ける。"
+
+#: manual/contributing.md:32
+msgid "Constant naming"
+msgstr "定数の命名"
+
+#: manual/contributing.md:34
+msgid "**Note:** In MoonBit, \"variables\" are usually called \"bindings\" and are immutable by default unless marked with `mut`. Thus, there is no strict distinction between constant and variable naming."
+msgstr "**注意：** MoonBit では「変数」は通常「binding」と呼ばれ、`mut` を付けない限り既定で不変です。そのため、定数と変数の命名に厳密な区別はありません。"
+
+#: manual/contributing.md:35
+msgid "Use **lowercase letters with underscores** as separators (e.g., `machine_dbl_epsilon`)."
+msgstr "小文字とアンダースコア（ `_` ）を使用（例: `machine_dbl_epsilon`）。"
+
+#: manual/contributing.md:36
+msgid "Prefix constants with a descriptive category where applicable (e.g., `machine_dbl_epsilon`, where `machine` indicates a machine-related constant)."
+msgstr "必要に応じてカテゴリーをプレフィックスとして付与（例: `machine_dbl_epsilon` は機械関連の定数）。"
+
+#: manual/contributing.md:37
+msgid "Constant names should be concise and descriptive to facilitate understanding."
+msgstr "分かりやすく、簡潔な名前を付ける。"
+
+#: manual/contributing.md:39
+msgid "Result error constructors and error codes"
+msgstr "結果エラーのエラーコードの設計"
+
+#: manual/contributing.md:41
+msgid "Use **uppercase letters with underscores** as separators (e.g., `E_MAX_ITER`)."
+msgstr "大文字とアンダースコア（ `_` ）を使用（例: `E_MAX_ITER`）。"
+
+#: manual/contributing.md:42
+msgid "Error codes should be prefixed with `E` to indicate an error-related construct."
+msgstr "エラーコードには `E` をプレフィックスとして付与。"
+
+#: manual/contributing.md:43
+msgid "Error codes should be concise and descriptive for easy comprehension."
+msgstr "短く分かりやすいエラーコードを心掛ける。"
+
+#: manual/contributing.md:45
+msgid "Comments"
+msgstr "コメント"
+
+#: manual/contributing.md:47
+msgid "**Conciseness**: Comments should be clear and to the point, avoiding unnecessary verbosity."
+msgstr "簡潔さ：冗長にならず、明確に記述する。"
+
+#: manual/contributing.md:48
+msgid "**Consistency**: Use uniform terminology and style across the codebase."
+msgstr "一貫性：コード全体で統一された用語とスタイルを使用する。"
+
+#: manual/contributing.md:49
+msgid "**Clarity**: Ensure comments are easy to understand, avoiding complex jargon or ambiguous wording."
+msgstr "明確さ：分かりやすい表現を用い、曖昧な表現や専門用語の多用を避ける。"
+
+#: manual/contributing.md:50
+msgid "**Accuracy**: Comments must accurately reflect the functionality and purpose of the code."
+msgstr "正確さ：コードの動作や目的を正しく反映する。"
+
+#: manual/contributing.md:51
+msgid "**Up-to-date**: Comments should be updated alongside code changes to maintain relevance."
+msgstr "最新状態の維持：コードの変更に応じてコメントを更新する。"
+
+#: manual/contributing.md:53
+msgid "Developers are encouraged to use the AI-generated code comments of the MoonBit LSP to improve efficiency, but AI-generated comments should be reviewed to ensure correctness."
+msgstr "開発者は MoonBit LSP の AI によるコードコメント生成機能を活用できるが、AI が生成したコメントは必ずレビューし、正確性を確認すること。"
+
+#: manual/contributing.md:55
+msgid "File standards"
+msgstr "ファイルの規格"
+
+#: manual/contributing.md:57
+msgid "Folder naming"
+msgstr "フォルダ名の命名"
+
+#: manual/contributing.md:59
+msgid "Use **lowercase letters** for folder names."
+msgstr "小文字のみを使用。"
+
+#: manual/contributing.md:60
+msgid "Folder names should be concise, descriptive, and separated using underscores (`_`). Avoid numbers and special characters. For example, use `diff` for differentiation-related functionality and `deriv` for derivative-related functionality."
+msgstr "フォルダ名は簡潔かつ説明的にし、アンダースコア（ `_` ）で区切る。数字や特殊文字は避ける。例えば、微分関連の機能には `diff`、導関数関連の機能には `deriv` を使う。"
+
+#: manual/contributing.md:62
+msgid "File organization"
+msgstr "ファイルの構成"
+
+#: manual/contributing.md:64
+msgid "Files should be organized based on functionality, with each file focusing on a specific feature. Use **lowercase letters with underscores** for file names."
+msgstr "ファイルは機能ごとに整理し、それぞれ特定の機能に焦点を当てる。ファイル名には**小文字とアンダースコア**を使用する。"
+
+#: manual/contributing.md:65
+msgid "File names should be descriptive and clearly indicate the core functionality they implement. For example, `gauss_kronrod.mbt` implements Gaussian quadrature with Kronrod extension, and `adaptive_quadrature_gk.mbt` implements adaptive quadrature using Gaussian quadrature with Kronrod extension."
+msgstr "ファイル名は、実装する中心的な機能が明確に分かるものにする。例えば、`gauss_kronrod.mbt` はガウス・クロンロッド求積法を、`adaptive_quadrature_gk.mbt` はガウス・クロンロッド求積法による適応型求積法を実装する。"
+
+#: manual/contributing.md:66
+msgid "**Note:** Avoid overly generic or vague file names such as `utils.mbt`. Instead, ensure file names correspond to their function or module."
+msgstr "注意：`utils.mbt` のような汎用的すぎる名前は避け、機能を明確に表す名前を使用すること。"
+
+#: manual/contributing.md:68
+msgid "Commit guidelines"
+msgstr "コミット規則"
+
+#: manual/contributing.md:70
+msgid "Commit messages"
+msgstr "コミットメッセージ"
+
+#: manual/contributing.md:72
+msgid "Use the `ready_to_pr.sh` script before committing to format code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "`ready_to_pr.sh` スクリプトを実行し、コードフォーマット、チェック、テストカバレッジ生成、`.mbti` ファイル生成を行うこと。"
+
+#: manual/contributing.md:73
+msgid "Each commit should have a clear description of the changes made."
+msgstr "コミットごとに変更内容を明確に記述する。"
+
+#: manual/contributing.md:74
+msgid "Commit messages should be in **English**, concise, and precise."
+msgstr "コミットメッセージは英語で、簡潔かつ明確に記述する。"
+
+#: manual/contributing.md:75
+msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
+msgstr "`fix:`, `feat:`, `refactor:`, `doc:` などのプレフィックスを使用。"
+
+#: manual/contributing.md:84
+msgid "Commit frequency"
+msgstr "コミットの頻度"
+
+#: manual/contributing.md:86
+msgid "Keep commits small and focused on a single feature or fix."
+msgstr "コミットは小さく、一つの機能や修正に集中させる。"
+
+#: manual/contributing.md:87
+msgid "Avoid large, monolithic commits that include multiple unrelated changes."
+msgstr "複数の変更を一つの大きなコミットにまとめないこと。"
+
+#: manual/contributing.md:89
+msgid "Code review"
+msgstr "コードレビュー"
+
+#: manual/contributing.md:91
+msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
+msgstr "`moon.mod.json` の依存関係やバージョンを変更する前に、メンテナーまたはコラボレーターに確認すること。"
+
+#: manual/contributing.md:92
+msgid "All code submissions must undergo **code review**."
+msgstr "すべてのコードはコードレビューを受ける必要がある。"
+
+#: manual/contributing.md:93
+msgid "Code reviews should focus on code quality, style, performance, and security."
+msgstr "コードレビューでは、コードの品質、スタイル、パフォーマンス、セキュリティを重視する。"
+
+#: manual/contributing.md:94
+msgid "Reviewers should provide constructive feedback to improve the code."
+msgstr "レビュアーは建設的なフィードバックを提供し、コードの改善に努める。"
+
+#: manual/design/array_utils.md:1
+msgid "array_utils design"
+msgstr "array_utils 設計"
+
+#: manual/design/array_utils.md:3
+msgid "`array_utils` collects small generic helpers on `Array[T]` in [`src/array_utils.mbt`](../../../src/array_utils.mbt). This page explains the choices behind them and the behaviour that maintainers must keep stable."
+msgstr "`array_utils` は、[`src/array_utils.mbt`](../../../src/array_utils.mbt) にある `Array[T]` 向けの小さな汎用ヘルパーをまとめたものです。このページでは、その背後にある選択と、保守者が安定に保つべき挙動を説明します。"
+
+#: manual/design/array_utils.md:5
+msgid "Constraints from luna-generic"
+msgstr "luna-generic に由来する制約"
+
+#: manual/design/array_utils.md:7
+msgid "Each function asks for the weakest constraint it needs. `reverse` and `reverse_inplace` need none, `find` and the uniformity checks need `Eq`, and `arr_max` and `arr_min` need `Compare`. `arr_sum` and `zero_arr` need only `AddMonoid` from luna-generic, that is `zero()` and `+`, so they work for every type with an additive monoid and not only for numbers. `arr_abs_sum` needs `Num` for negation and `Compare` to find the sign."
+msgstr "各関数は必要な最も弱い制約だけを要求します。`reverse` と `reverse_inplace` は制約なし、`find` と一様性の判定は `Eq`、`arr_max` と `arr_min` は `Compare` を要求します。`arr_sum` と `zero_arr` は luna-generic の `AddMonoid`、つまり `zero()` と `+` だけを要求するので、数値に限らず加法モノイドを持つすべての型で使えます。`arr_abs_sum` は符号反転のために `Num` を、符号の判定のために `Compare` を要求します。"
+
+#: manual/design/array_utils.md:9
+msgid "The package imports luna-generic under the alias `lg`, and [`src/alias.mbt`](../../../src/alias.mbt) makes `AddMonoid` and `Num` usable without the prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`."
+msgstr "このパッケージは luna-generic を別名 `lg` でインポートしており、[`src/alias.mbt`](../../../src/alias.mbt) によってパッケージ内では `AddMonoid` と `Num` を接頭辞なしで使えます。公開シグネチャではこれらは `@luna-generic.AddMonoid` と `@luna-generic.Num` と表記されます。"
+
+#: manual/design/array_utils.md:11
+msgid "Functions instead of methods"
+msgstr "メソッドではなく関数"
+
+#: manual/design/array_utils.md:13
+msgid "MoonBit does not let a package define methods on `Array`, which belongs to the core library, so the helpers are package-level functions."
+msgstr "MoonBit では、コアライブラリに属する `Array` にパッケージがメソッドを定義することはできないため、ヘルパーはパッケージレベルの関数になっています。"
+
+#: manual/design/array_utils.md:15
+msgid "Empty arrays"
+msgstr "空配列"
+
+#: manual/design/array_utils.md:17
+msgid "The functions that need an element to start from read `arr[0]` and therefore panic on an empty array: `arr_max`, `arr_min`, `same` and `map_same`. They do not return an `Option`. The other functions have a natural answer for an empty array and return it: `zero()` for the sums, `true` for `same_to` and `map_same_to`, `None` for `find`, and an empty array for `reverse`. Keep this split when adding functions, or document the exception."
+msgstr "起点となる要素を必要とする関数は `arr[0]` を読むため、空配列では panic します。`arr_max`、`arr_min`、`same`、`map_same` がこれにあたり、`Option` は返しません。その他の関数は空配列に対する自然な答えを持ち、それを返します。総和は `zero()`、`same_to` と `map_same_to` は `true`、`find` は `None`、`reverse` は空配列です。関数を追加するときはこの区別を保つか、例外を文書化すること。"
+
+#: manual/design/array_utils.md:19
+msgid "Allocation"
+msgstr "メモリ確保"
+
+#: manual/design/array_utils.md:21
+msgid "`reverse`, `zero_arr`, `map_same` and `map_same_to` allocate a new array. `reverse_inplace` mutates its argument, and the other functions only read."
+msgstr "`reverse`、`zero_arr`、`map_same`、`map_same_to` は新しい配列を確保します。`reverse_inplace` は引数を書き換え、その他の関数は読み取るだけです。"
+
+#: manual/design/array_utils.md:23
+#: manual/design/comparison.md:16
+msgid "Maintenance notes"
+msgstr "保守メモ"
+
+#: manual/design/array_utils.md:25
+msgid "Update this page and the [API reference](../api/array_utils.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`."
+msgstr "関数を追加・削除したとき、あるいは制約や境界的な場合の挙動が変わったときは、このページと [API リファレンス](../api/array_utils.md) を更新し、`moon info` で `src/pkg.generated.mbti` を再生成する。"
+
+#: manual/design/array_utils.md:26
+msgid "The doc comment of `reverse_inplace` in the source says that it panics on an empty array. It does not: the loop does not run, and the array is left unchanged."
+msgstr "ソース中の `reverse_inplace` のドキュメントコメントには、空配列で panic すると書かれています。実際には panic しません。ループが実行されず、配列はそのまま残ります。"
+
+#: manual/design/comparison.md:1
+msgid "comparison design"
+msgstr "comparison 設計"
+
+#: manual/design/comparison.md:3
+msgid "`comparison` holds the range helpers `clamp` and `is_between` in [`src/comparison.mbt`](../../../src/comparison.mbt). This page records the conventions they share and the behaviour that maintainers must keep stable."
+msgstr "`comparison` は [`src/comparison.mbt`](../../../src/comparison.mbt) にある区間ヘルパー `clamp` と `is_between` を保持します。このページでは、両者が共有する約束と、保守者が安定に保つべき挙動を記録します。"
+
+#: manual/design/comparison.md:5
+msgid "Conventions"
+msgstr "約束"
+
+#: manual/design/comparison.md:7
+msgid "Both functions take the value first and the bounds after it, in the order `min`, `max`."
+msgstr "どちらの関数も値を最初に受け取り、その後に境界を `min`、`max` の順で受け取る。"
+
+#: manual/design/comparison.md:8
+msgid "Ranges are closed: a value equal to a bound is inside the range."
+msgstr "区間は閉区間であり、境界に等しい値は区間に含まれる。"
+
+#: manual/design/comparison.md:9
+msgid "The only constraint is `Compare`, so the functions do not depend on luna-generic and apply to any ordered type, including `String`."
+msgstr "制約は `Compare` だけなので、これらの関数は luna-generic に依存せず、`String` を含む任意の順序付きの型に使える。"
+
+#: manual/design/comparison.md:10
+msgid "The bounds are not validated. Neither function aborts when `min > max`; the [API reference](../api/comparison.md) states what they return in that case."
+msgstr "境界は検証しない。`min > max` のときもどちらの関数も中断せず、その場合の戻り値は [API リファレンス](../api/comparison.md)に記載している。"
+
+#: manual/design/comparison.md:12
+msgid "Consistency"
+msgstr "整合性"
+
+#: manual/design/comparison.md:14
+msgid "For `min <= max`, `is_between(v, min, max)` is `true` exactly when `clamp(v, min, max)` returns `v`. Changes to one function must keep this relation."
+msgstr "`min <= max` のとき、`is_between(v, min, max)` が `true` になるのは、`clamp(v, min, max)` が `v` を返すときに限られる。どちらかの関数を変更するときは、この関係を保たなければならない。"
+
+#: manual/design/comparison.md:18
+msgid "Update this page and the [API reference](../api/comparison.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`."
+msgstr "関数を追加・削除したとき、あるいは制約や境界的な場合の挙動が変わったときは、このページと [API リファレンス](../api/comparison.md) を更新し、`moon info` で `src/pkg.generated.mbti` を再生成する。"
+
+#: manual/design/comparison.md:19
+msgid "Validating the bounds would change the behaviour described above; document it here if it is ever introduced."
+msgstr "境界の検証を導入すると上記の挙動が変わるため、導入する場合はここに記載する。"
+
+#: manual/index.md:1
+msgid "luna-utils"
+msgstr "luna-utils"
+
+#: manual/index.md:3
+msgid "`luna-utils` is a small utility package for Luna-Flow projects. It provides array helpers and comparison helpers whose numeric constraints come from the traits of [luna-generic](https://luna-flow.github.io/en/luna-generic/), so they work for any type that implements the required structure."
+msgstr "`luna-utils` は Luna-Flow プロジェクト向けの小さなユーティリティパッケージです。配列ヘルパーと比較ヘルパーを提供し、その数値的な制約は [luna-generic](https://luna-flow.github.io/en/luna-generic/) の trait に由来するため、必要な構造を実装した任意の型で使えます。"
+
+#: manual/index.md:5
+msgid "Public functions"
+msgstr "公開関数"
+
+#: manual/index.md:7
+msgid "The package exports only functions; it defines no types or traits of its own."
+msgstr "このパッケージは関数のみをエクスポートし、独自の型や trait は定義しません。"
+
+#: manual/index.md:9
+msgid "Constraint"
+msgstr "制約"
+
+#: manual/index.md:9
+msgid "Behaviour"
+msgstr "動作"
+
+#: manual/index.md:11
+msgid "Sum of the elements; `zero()` for an empty array."
+msgstr "要素の総和。空配列では `zero()`。"
+
+#: manual/index.md:12
+msgid "Sum of the absolute values of the elements."
+msgstr "要素の絶対値の総和。"
+
+#: manual/index.md:13
+msgid "Array of length `n` filled with `zero()`."
+msgstr "`zero()` で埋めた長さ `n` の配列。"
+
+#: manual/index.md:14
+msgid "Largest or smallest element; panics on an empty array."
+msgstr "最大または最小の要素。空配列では panic します。"
+
+#: manual/index.md:15
+msgid "Index of the first occurrence of a value, or `None`."
+msgstr "値が最初に現れる位置のインデックス。見つからなければ `None`。"
+
+#: manual/index.md:16
+#: manual/index.md:17
+msgid "none"
+msgstr "なし"
+
+#: manual/index.md:16
+msgid "New array with the elements in reverse order."
+msgstr "要素を逆順に並べた新しい配列。"
+
+#: manual/index.md:17
+msgid "Reverses an array in place."
+msgstr "配列をその場で反転します。"
+
+#: manual/index.md:18
+msgid "Whether all elements equal the first; panics on an empty array."
+msgstr "すべての要素が先頭の要素と等しいか。空配列では panic します。"
+
+#: manual/index.md:19
+msgid "Whether all elements equal a given sample."
+msgstr "すべての要素が指定したサンプル値と等しいか。"
+
+#: manual/index.md:20
+msgid "`Eq` on the result"
+msgstr "結果の型に `Eq`"
+
+#: manual/index.md:20
+msgid "`same` and `same_to` applied to the mapped array."
+msgstr "写像した配列に `same` と `same_to` を適用します。"
+
+#: manual/index.md:21
+msgid "Restricts a value to the closed range from `min` to `max`."
+msgstr "値を `min` から `max` までの閉区間に制限します。"
+
+#: manual/index.md:22
+msgid "Whether a value lies in the closed range from `min` to `max`."
+msgstr "値が `min` から `max` までの閉区間にあるか。"
+
+#: manual/index.md:24
+msgid "The interface file [pkg.generated.mbti](../../src/pkg.generated.mbti) is the authoritative list of signatures, and the generated API documentation is on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)."
+msgstr "インターフェースファイル [pkg.generated.mbti](../../src/pkg.generated.mbti) がシグネチャの正式な一覧で、生成された API ドキュメントは [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils) にあります。"
+
+#: manual/index.md:26
+msgid "Modules"
+msgstr "モジュール"
+
+#: manual/index.md:28
+msgid "The package `Luna-Flow/luna-utils` has two source files, which the manual documents as two modules:"
+msgstr "パッケージ `Luna-Flow/luna-utils` には二つのソースファイルがあり、このマニュアルではそれぞれを一つのモジュールとして説明します。"
+
+#: manual/index.md:30
+msgid "`array_utils`, in [`src/array_utils.mbt`](../../src/array_utils.mbt), holds the functions on arrays: sums, extremes, search, reversal and uniformity checks. See its [API reference](api/array_utils.md), [design notes](design/array_utils.md) and [tutorial](tutorial/array_utils.md)."
+msgstr "`array_utils` は [`src/array_utils.mbt`](../../src/array_utils.mbt) にあり、配列に対する関数（総和、最大値と最小値、検索、反転、一様性の判定）を収めています。[API リファレンス](api/array_utils.md)、[設計ノート](design/array_utils.md)、[チュートリアル](tutorial/array_utils.md)を参照してください。"
+
+#: manual/index.md:31
+msgid "`comparison`, in [`src/comparison.mbt`](../../src/comparison.mbt), holds `clamp` and `is_between`, which compare a value with a closed range. See its [API reference](api/comparison.md), [design notes](design/comparison.md) and [tutorial](tutorial/comparison.md)."
+msgstr "`comparison` は [`src/comparison.mbt`](../../src/comparison.mbt) にあり、値を閉区間と比較する `clamp` と `is_between` を収めています。[API リファレンス](api/comparison.md)、[設計ノート](design/comparison.md)、[チュートリアル](tutorial/comparison.md)を参照してください。"
+
+#: manual/index.md:33
+msgid "Contributing"
+msgstr "コントリビュート"
+
+#: manual/index.md:35
+msgid "Code style, naming, commit and review rules are in the [contribution guidelines](contributing.md)."
+msgstr "コードスタイル、命名、コミット、レビューの規則は[貢献ガイドライン](contributing.md)にあります。"
+
+#: manual/tutorial/array_utils.md:1
+msgid "array_utils tutorial"
+msgstr "array_utils チュートリアル"
+
+#: manual/tutorial/array_utils.md:3
+msgid "This tutorial walks through the array helpers with small examples taken from the doc comments and tests in `src`. To use them in your own module, add the dependency with `moon add Luna-Flow/luna-utils` and import the package `Luna-Flow/luna-utils`; the functions are then available as `@luna-utils.arr_sum` and so on. The examples below run inside the package and omit the prefix."
+msgstr "このチュートリアルでは、`src` のドキュメントコメントとテストから取った小さな例で配列ヘルパーを順に紹介します。自分のモジュールで使うには、`moon add Luna-Flow/luna-utils` で依存関係を追加し、パッケージ `Luna-Flow/luna-utils` をインポートします。すると `@luna-utils.arr_sum` などの名前で関数を使えます。以下の例はパッケージ内で実行するため、接頭辞を省略しています。"
+
+#: manual/tutorial/array_utils.md:7
+msgid "`arr_sum` works for any element type with an additive monoid, and `zero_arr` creates an array of zeros of the expected type:"
+msgstr "`arr_sum` は加法モノイドを持つ任意の要素型で使え、`zero_arr` は期待される型のゼロを並べた配列を作ります。"
+
+#: manual/tutorial/array_utils.md:18
+msgid "Extremes and search"
+msgstr "最大値・最小値と検索"
+
+#: manual/tutorial/array_utils.md:28
+msgid "`arr_max` and `arr_min` panic on an empty array, so check `xs.is_empty()` first when the array may be empty."
+msgstr "`arr_max` と `arr_min` は空配列で panic するので、配列が空になりうる場合は先に `xs.is_empty()` を確認してください。"
+
+#: manual/tutorial/array_utils.md:30
+msgid "Reversing"
+msgstr "反転"
+
+#: manual/tutorial/array_utils.md:32
+msgid "`reverse` returns a new array, while `reverse_inplace` changes its argument:"
+msgstr "`reverse` は新しい配列を返し、`reverse_inplace` は引数そのものを書き換えます。"
+
+#: manual/tutorial/array_utils.md:42
+msgid "Checking uniformity"
+msgstr "一様性を判定する"
+
+#: manual/tutorial/array_utils.md:44
+msgid "`same` and `same_to` compare the elements themselves; `map_same` and `map_same_to` compare their images under a function:"
+msgstr "`same` と `same_to` は要素そのものを比較し、`map_same` と `map_same_to` は関数による要素の像を比較します。"
+
+#: manual/tutorial/array_utils.md:53
+msgid "`same` and `map_same` panic on an empty array. When the array may be empty and you know the expected value, use `same_to` or `map_same_to`, which return `true` for an empty array."
+msgstr "`same` と `map_same` は空配列で panic します。配列が空になりうる場合で、期待する値がわかっているときは、空配列に対して `true` を返す `same_to` か `map_same_to` を使ってください。"
+
+#: manual/tutorial/array_utils.md:55
+#: manual/tutorial/comparison.md:32
+msgid "Next steps"
+msgstr "次のステップ"
+
+#: manual/tutorial/array_utils.md:57
+msgid "The [API reference](../api/array_utils.md) gives every signature, and the [design notes](../design/array_utils.md) explain the constraints and the treatment of empty arrays. Before relying on edge-case behaviour, check it against the tests in `src/array_utils_test.mbt`."
+msgstr "[API リファレンス](../api/array_utils.md)にはすべてのシグネチャがあり、[設計ノート](../design/array_utils.md)は制約と空配列の扱いを説明しています。境界的な挙動に依存する前に、`src/array_utils_test.mbt` のテストで確認してください。"
+
+#: manual/tutorial/comparison.md:1
+msgid "comparison tutorial"
+msgstr "comparison チュートリアル"
+
+#: manual/tutorial/comparison.md:3
+msgid "This tutorial shows the two range helpers with examples taken from the doc comments and tests in `src`. As in the [array_utils tutorial](array_utils.md), the examples run inside the package; from another package, call the functions as `@luna-utils.clamp` and `@luna-utils.is_between`."
+msgstr "このチュートリアルでは、`src` のドキュメントコメントとテストから取った例で二つの区間ヘルパーを紹介します。[array_utils チュートリアル](array_utils.md)と同じく例はパッケージ内で実行します。別のパッケージからは `@luna-utils.clamp` と `@luna-utils.is_between` として呼び出してください。"
+
+#: manual/tutorial/comparison.md:5
+msgid "Clamping a value"
+msgstr "値を区間に収める"
+
+#: manual/tutorial/comparison.md:7
+msgid "`clamp` moves a value into a range, and leaves it unchanged when it is already inside:"
+msgstr "`clamp` は値を区間内に移し、すでに区間内にあればそのままにします。"
+
+#: manual/tutorial/comparison.md:15
+msgid "Any type with `Compare` works, for example strings in lexicographic order:"
+msgstr "`Compare` を持つ型なら何でも使えます。たとえば辞書順の文字列です。"
+
+#: manual/tutorial/comparison.md:22
+msgid "Testing membership"
+msgstr "区間に含まれるかを判定する"
+
+#: manual/tutorial/comparison.md:24
+msgid "`is_between` tests whether a value lies in a range; both bounds are included:"
+msgstr "`is_between` は値が区間内にあるかを判定します。両端の境界も含まれます。"
+
+#: manual/tutorial/comparison.md:34
+msgid "Neither function checks that `min <= max`; pass the bounds in that order. The [API reference](../api/comparison.md) describes the result for reversed bounds, and the [design notes](../design/comparison.md) list the conventions the two functions share."
+msgstr "どちらの関数も `min <= max` を検査しないので、境界はこの順序で渡してください。境界が逆になった場合の結果は [API リファレンス](../api/comparison.md)に、二つの関数が共有する約束は[設計ノート](../design/comparison.md)にあります。"

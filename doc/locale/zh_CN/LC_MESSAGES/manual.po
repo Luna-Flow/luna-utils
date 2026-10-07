@@ -1,0 +1,627 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
+msgstr "面向 Luna-Flow 项目的泛型数组与比较辅助函数，以 luna-generic 的 trait 作为约束。"
+
+#: manual/api/array_utils.md:1
+msgid "array_utils API"
+msgstr "array_utils API"
+
+#: manual/api/array_utils.md:3
+msgid "`array_utils` is the part of the package `Luna-Flow/luna-utils` defined in [`src/array_utils.mbt`](../../../src/array_utils.mbt): twelve functions on `Array[T]`. They are package-level functions, not methods, so another package calls them as `@luna-utils.arr_sum(xs)`. The traits `AddMonoid` and `Num` come from [luna-generic](https://luna-flow.github.io/en/luna-generic/)."
+msgstr "`array_utils` 是包 `Luna-Flow/luna-utils` 中定义在 [`src/array_utils.mbt`](../../../src/array_utils.mbt) 的部分：十二个作用于 `Array[T]` 的函数。它们是包级函数而不是方法，因此其他包以 `@luna-utils.arr_sum(xs)` 的形式调用。trait `AddMonoid` 和 `Num` 来自 [luna-generic](https://luna-flow.github.io/en/luna-generic/)。"
+
+#: manual/api/array_utils.md:5
+#: manual/tutorial/array_utils.md:5
+msgid "Sums"
+msgstr "求和"
+
+#: manual/api/array_utils.md:13
+msgid "`arr_sum(arr)` adds the elements from left to right, starting from `zero()`. The sum of an empty array is `zero()`."
+msgstr "`arr_sum(arr)` 从 `zero()` 开始，从左到右累加各元素。空数组的和是 `zero()`。"
+
+#: manual/api/array_utils.md:15
+msgid "`arr_abs_sum(arr)` adds the absolute values of the elements in the same way. The absolute value of `x` is `-x` when `x < zero()` and `x` otherwise."
+msgstr "`arr_abs_sum(arr)` 以同样的方式累加各元素的绝对值。当 `x < zero()` 时 `x` 的绝对值为 `-x`，否则为 `x`。"
+
+#: manual/api/array_utils.md:17
+msgid "`zero_arr(n)` returns a new array of length `n` whose elements are all `zero()`. The element type is chosen by the expected type, for example `let zeros : Array[Double] = zero_arr(3)`."
+msgstr "`zero_arr(n)` 返回一个长度为 `n`、元素全为 `zero()` 的新数组。元素类型由期望类型决定，例如 `let zeros : Array[Double] = zero_arr(3)`。"
+
+#: manual/api/array_utils.md:19
+msgid "Extremes"
+msgstr "最值"
+
+#: manual/api/array_utils.md:26
+msgid "`arr_max(arr)` and `arr_min(arr)` return the largest and the smallest element; when several elements compare equal, the first of them is returned. Both panic on an empty array."
+msgstr "`arr_max(arr)` 和 `arr_min(arr)` 分别返回最大和最小的元素；若有多个元素比较相等，返回其中第一个。两者在数组为空时都会 panic。"
+
+#: manual/api/array_utils.md:28
+msgid "Order and search"
+msgstr "顺序与查找"
+
+#: manual/api/array_utils.md:36
+msgid "`reverse(arr)` returns a new array with the elements in reverse order and leaves `arr` unchanged. `reverse_inplace(arr)` reverses `arr` itself by swapping elements from both ends toward the middle; an empty array is left as it is."
+msgstr "`reverse(arr)` 返回元素逆序排列的新数组，`arr` 本身保持不变。`reverse_inplace(arr)` 从两端向中间交换元素，原地反转 `arr`；空数组保持原样。"
+
+#: manual/api/array_utils.md:38
+msgid "`find(arr, value)` returns `Some(i)` for the first index `i` with `arr[i] == value`, or `None` when no element equals `value`."
+msgstr "`find(arr, value)` 返回满足 `arr[i] == value` 的第一个下标 `i`，形式为 `Some(i)`；若没有元素等于 `value`，则返回 `None`。"
+
+#: manual/api/array_utils.md:40
+msgid "Uniformity"
+msgstr "一致性检查"
+
+#: manual/api/array_utils.md:49
+#: manual/index.md:9
+msgid "Function"
+msgstr "函数"
+
+#: manual/api/array_utils.md:49
+msgid "Returns `true` when"
+msgstr "返回 `true` 的条件"
+
+#: manual/api/array_utils.md:49
+msgid "On an empty array"
+msgstr "空数组时"
+
+#: manual/api/array_utils.md:51
+msgid "every element equals `arr[0]`"
+msgstr "每个元素都等于 `arr[0]`"
+
+#: manual/api/array_utils.md:51
+#: manual/api/array_utils.md:53
+msgid "panics"
+msgstr "panic"
+
+#: manual/api/array_utils.md:52
+msgid "every element equals `sample`"
+msgstr "每个元素都等于 `sample`"
+
+#: manual/api/array_utils.md:52
+#: manual/api/array_utils.md:54
+msgid "returns `true`"
+msgstr "返回 `true`"
+
+#: manual/api/array_utils.md:53
+msgid "every `f(x)` equals `f(arr[0])`"
+msgstr "每个 `f(x)` 都等于 `f(arr[0])`"
+
+#: manual/api/array_utils.md:54
+msgid "every `f(x)` equals `sample`"
+msgstr "每个 `f(x)` 都等于 `sample`"
+
+#: manual/api/array_utils.md:56
+msgid "The checks stop at the first element that differs. `map_same` and `map_same_to` build the mapped array first, so `f` is called once for every element."
+msgstr "检查在遇到第一个不同的元素时停止。`map_same` 和 `map_same_to` 会先构造映射后的数组，因此 `f` 对每个元素都会调用一次。"
+
+#: manual/api/comparison.md:1
+msgid "comparison API"
+msgstr "comparison API"
+
+#: manual/api/comparison.md:3
+msgid "`comparison` is the part of the package `Luna-Flow/luna-utils` defined in [`src/comparison.mbt`](../../../src/comparison.mbt): two functions that compare a value with a closed range. Both need only `Compare`, so they work for numbers, strings and any other ordered type."
+msgstr "`comparison` 是包 `Luna-Flow/luna-utils` 中定义在 [`src/comparison.mbt`](../../../src/comparison.mbt) 的部分：两个将值与闭区间进行比较的函数。两者都只需要 `Compare`，因此适用于数字、字符串以及任何其他有序类型。"
+
+#: manual/api/comparison.md:12
+msgid "`clamp(value, min, max)` returns `min` when `value < min`, `max` when `value > max`, and `value` otherwise."
+msgstr "当 `value < min` 时，`clamp(value, min, max)` 返回 `min`；当 `value > max` 时返回 `max`；否则返回 `value`。"
+
+#: manual/api/comparison.md:14
+msgid "The bounds are not checked. When `min > max`, the result is `min` for a value below `min` and `max` for every other value."
+msgstr "边界不受检查。当 `min > max` 时，低于 `min` 的值得到 `min`，其他所有值都得到 `max`。"
+
+#: manual/api/comparison.md:18
+msgid "`is_between(value, min, max)` returns `true` when `min <= value` and `value <= max`; both bounds belong to the range. When `min > max`, it returns `false` for every value."
+msgstr "当 `min <= value` 且 `value <= max` 时，`is_between(value, min, max)` 返回 `true`；两个边界都属于该区间。当 `min > max` 时，它对任何值都返回 `false`。"
+
+#: manual/contributing.md:1
+msgid "Contribution guidelines"
+msgstr "贡献规范"
+
+#: manual/contributing.md:3
+msgid "Code style"
+msgstr "代码风格"
+
+#: manual/contributing.md:5
+msgid "The project follows the formatting style enforced by the MoonBit toolchain. Format your code automatically with the following command:"
+msgstr "统一采用 MoonBit Toolchain 的格式化风格，通过运行以下命令来自动格式化代码。"
+
+#: manual/contributing.md:11
+msgid "Run `moon fmt` before committing your code to keep the style consistent."
+msgstr "请确保在提交代码之前，使用 `moon fmt` 格式化代码，以保持一致的代码风格。"
+
+#: manual/contributing.md:13
+msgid "Alternatively, you can use the `ready_to_pr.sh` script to format the code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "或者，可以使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查、生成测试覆盖率文件和 `.mbti` 文件。"
+
+#: manual/contributing.md:15
+msgid "Naming conventions"
+msgstr "命名约定"
+
+#: manual/contributing.md:17
+msgid "Variable naming"
+msgstr "变量命名"
+
+#: manual/contributing.md:19
+msgid "Use **lowercase letters with underscores** as separators (e.g., `my_var`)."
+msgstr "采用 **小写字母和下划线** 分隔（例如：`my_var`）。"
+
+#: manual/contributing.md:20
+msgid "Variable names should be descriptive and clearly indicate their purpose."
+msgstr "变量名应具有描述性，能够准确反映其用途。"
+
+#: manual/contributing.md:22
+msgid "Function naming"
+msgstr "函数命名"
+
+#: manual/contributing.md:24
+msgid "Use **lowercase letters with underscores** as separators (e.g., `calc_total_price()`)."
+msgstr "使用 **小写字母和下划线** 分隔（例如：`calc_total_price()`）。"
+
+#: manual/contributing.md:25
+msgid "Function names should be concise and descriptive, clearly expressing their functionality."
+msgstr "函数名应简洁且具有描述性，能够清晰表达函数的功能。"
+
+#: manual/contributing.md:27
+msgid "Struct and trait naming"
+msgstr "Struct 和 Trait 命名"
+
+#: manual/contributing.md:29
+msgid "Use **PascalCase** (e.g., `MyStruct`, `MyTrait`)."
+msgstr "使用 **首字母大写的驼峰式命名**（例如：`MyStruct`、`MyTrait`）。"
+
+#: manual/contributing.md:30
+msgid "Names should intuitively reflect the function or role of the struct or trait, avoiding overly abstract or non-descriptive names."
+msgstr "命名应直观地反映该结构体或特征的功能或角色，避免使用过于抽象或不具描述性的名称。"
+
+#: manual/contributing.md:32
+msgid "Constant naming"
+msgstr "常量命名"
+
+#: manual/contributing.md:34
+msgid "**Note:** In MoonBit, \"variables\" are usually called \"bindings\" and are immutable by default unless marked with `mut`. Thus, there is no strict distinction between constant and variable naming."
+msgstr "**注意：** 由于在 MoonBit 的语境下，“变量”通常称为“binding”，且默认是不可变的，只有添加 `mut` 关键字才能使其可变。因此，常量和“变量”之间没有严格的命名差异，保持一致性。"
+
+#: manual/contributing.md:35
+msgid "Use **lowercase letters with underscores** as separators (e.g., `machine_dbl_epsilon`)."
+msgstr "常量名采用 **全小写字母和下划线** 分隔（例如：`machine_dbl_epsilon`）。"
+
+#: manual/contributing.md:36
+msgid "Prefix constants with a descriptive category where applicable (e.g., `machine_dbl_epsilon`, where `machine` indicates a machine-related constant)."
+msgstr "常量名通常以第一个单词作为前缀，表示常量的用途或分类。例如，`machine_dbl_epsilon` 中的 `machine` 表示与机器相关的常量。"
+
+#: manual/contributing.md:37
+msgid "Constant names should be concise and descriptive to facilitate understanding."
+msgstr "常量名应简洁且具有描述性，便于其他开发者理解。"
+
+#: manual/contributing.md:39
+msgid "Result error constructors and error codes"
+msgstr "Result的Err构造内容和Err Code"
+
+#: manual/contributing.md:41
+msgid "Use **uppercase letters with underscores** as separators (e.g., `E_MAX_ITER`)."
+msgstr "采用 **全大写字母和下划线** 分隔（例如：`E_MAX_ITER`）。"
+
+#: manual/contributing.md:42
+msgid "Error codes should be prefixed with `E` to indicate an error-related construct."
+msgstr "构造内容通常以字符`E`作为前缀，表示其用于Err构造或者错误代码。"
+
+#: manual/contributing.md:43
+msgid "Error codes should be concise and descriptive for easy comprehension."
+msgstr "构造内容应简洁且具有描述性，便于其他开发者理解。"
+
+#: manual/contributing.md:45
+msgid "Comments"
+msgstr "注释"
+
+#: manual/contributing.md:47
+msgid "**Conciseness**: Comments should be clear and to the point, avoiding unnecessary verbosity."
+msgstr "**简洁性**：注释应简洁明了，只包含必要的信息，避免冗长和不相关的内容。"
+
+#: manual/contributing.md:48
+msgid "**Consistency**: Use uniform terminology and style across the codebase."
+msgstr "**一致性**：使用一致的术语和风格，避免在不同地方使用不同的方式描述相同的概念。"
+
+#: manual/contributing.md:49
+msgid "**Clarity**: Ensure comments are easy to understand, avoiding complex jargon or ambiguous wording."
+msgstr "**清晰性**：确保注释易于理解，避免复杂的术语或模糊的表述。应使任何阅读代码的人能够快速理解注释的意图。"
+
+#: manual/contributing.md:50
+msgid "**Accuracy**: Comments must accurately reflect the functionality and purpose of the code."
+msgstr "**准确性**：注释必须准确反映代码的功能和目的，避免与代码行为不符的描述。"
+
+#: manual/contributing.md:51
+msgid "**Up-to-date**: Comments should be updated alongside code changes to maintain relevance."
+msgstr "**更新性**：随着代码的变更，注释也应随时更新，确保注释与代码同步。"
+
+#: manual/contributing.md:53
+msgid "Developers are encouraged to use the AI-generated code comments of the MoonBit LSP to improve efficiency, but AI-generated comments should be reviewed to ensure correctness."
+msgstr "我们鼓励开发者采用MoonBit LSP提供的AI代码注释生成来提升注释的编写效率，但需要开发者对AI生成的内容进行审核，以确保其对方法、结构体和特征的解释是正确无误的。"
+
+#: manual/contributing.md:55
+msgid "File standards"
+msgstr "文件规范"
+
+#: manual/contributing.md:57
+msgid "Folder naming"
+msgstr "文件夹命名"
+
+#: manual/contributing.md:59
+msgid "Use **lowercase letters** for folder names."
+msgstr "对于大的功能模块，请使用小写字母命名的文件夹（包）。"
+
+#: manual/contributing.md:60
+msgid "Folder names should be concise, descriptive, and separated using underscores (`_`). Avoid numbers and special characters. For example, use `diff` for differentiation-related functionality and `deriv` for derivative-related functionality."
+msgstr "命名应简洁、描述性强，且仅使用小写字母和下划线（`_`）来分隔单词。请避免使用数字和特殊字符。例如，微分相关功能使用 `diff`，导数相关功能使用 `deriv`。"
+
+#: manual/contributing.md:62
+msgid "File organization"
+msgstr "文件划分"
+
+#: manual/contributing.md:64
+msgid "Files should be organized based on functionality, with each file focusing on a specific feature. Use **lowercase letters with underscores** for file names."
+msgstr "文件应该按功能划分，每个文件专注于特定的功能。文件名使用**小写字母和下划线**。"
+
+#: manual/contributing.md:65
+msgid "File names should be descriptive and clearly indicate the core functionality they implement. For example, `gauss_kronrod.mbt` implements Gaussian quadrature with Kronrod extension, and `adaptive_quadrature_gk.mbt` implements adaptive quadrature using Gaussian quadrature with Kronrod extension."
+msgstr "文件名应具备描述性，清楚反映该文件所实现的核心功能。例如，`gauss_kronrod.mbt` 实现带克龙罗德扩展的高斯求积，`adaptive_quadrature_gk.mbt` 实现基于带克龙罗德扩展的高斯求积的自适应积分。"
+
+#: manual/contributing.md:66
+msgid "**Note:** Avoid overly generic or vague file names such as `utils.mbt`. Instead, ensure file names correspond to their function or module."
+msgstr "**注意**：在文件命名中（除了在@internal中不可避免的情况），请避免使用过于通用或模糊的名称，如 `utils.mbt`，请尽量使文件名与其功能或模块相关联。"
+
+#: manual/contributing.md:68
+msgid "Commit guidelines"
+msgstr "提交规范"
+
+#: manual/contributing.md:70
+msgid "Commit messages"
+msgstr "提交信息"
+
+#: manual/contributing.md:72
+msgid "Use the `ready_to_pr.sh` script before committing to format code, run checks, generate test coverage files, and create `.mbti` files."
+msgstr "在提交前请使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查、生成测试覆盖率文件和 `.mbti` 文件。"
+
+#: manual/contributing.md:73
+msgid "Each commit should have a clear description of the changes made."
+msgstr "每个提交应具有清晰的描述，说明此次提交所做的变更。"
+
+#: manual/contributing.md:74
+msgid "Commit messages should be in **English**, concise, and precise."
+msgstr "提交信息应使用**英文**，并遵循**简短、精炼**的原则。"
+
+#: manual/contributing.md:75
+msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
+msgstr "使用 `fix:`，`feat:`，`refactor:` 和 `doc:` 等前缀来区分提交的类型"
+
+#: manual/contributing.md:84
+msgid "Commit frequency"
+msgstr "提交频率"
+
+#: manual/contributing.md:86
+msgid "Keep commits small and focused on a single feature or fix."
+msgstr "尽量保持每次提交都很小且聚焦于一个功能或修复。"
+
+#: manual/contributing.md:87
+msgid "Avoid large, monolithic commits that include multiple unrelated changes."
+msgstr "不要一次性提交大规模的更改。"
+
+#: manual/contributing.md:89
+msgid "Code review"
+msgstr "代码审查"
+
+#: manual/contributing.md:91
+msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
+msgstr "非项目维护者和合作者在修改`moon.mod.json`内的依赖和版本号前，请先联系维护者或者合作者。"
+
+#: manual/contributing.md:92
+msgid "All code submissions must undergo **code review**."
+msgstr "所有的代码提交都必须经过**代码审查**。"
+
+#: manual/contributing.md:93
+msgid "Code reviews should focus on code quality, style, performance, and security."
+msgstr "在审查过程中，关注代码质量、风格、性能和安全性。"
+
+#: manual/contributing.md:94
+msgid "Reviewers should provide constructive feedback to improve the code."
+msgstr "审查者应提供建设性的反馈，帮助改进代码。"
+
+#: manual/design/array_utils.md:1
+msgid "array_utils design"
+msgstr "array_utils 设计"
+
+#: manual/design/array_utils.md:3
+msgid "`array_utils` collects small generic helpers on `Array[T]` in [`src/array_utils.mbt`](../../../src/array_utils.mbt). This page explains the choices behind them and the behaviour that maintainers must keep stable."
+msgstr "`array_utils` 汇集了 [`src/array_utils.mbt`](../../../src/array_utils.mbt) 中作用于 `Array[T]` 的小型泛型辅助函数。本页说明其背后的取舍，以及维护者必须保持稳定的行为。"
+
+#: manual/design/array_utils.md:5
+msgid "Constraints from luna-generic"
+msgstr "来自 luna-generic 的约束"
+
+#: manual/design/array_utils.md:7
+msgid "Each function asks for the weakest constraint it needs. `reverse` and `reverse_inplace` need none, `find` and the uniformity checks need `Eq`, and `arr_max` and `arr_min` need `Compare`. `arr_sum` and `zero_arr` need only `AddMonoid` from luna-generic, that is `zero()` and `+`, so they work for every type with an additive monoid and not only for numbers. `arr_abs_sum` needs `Num` for negation and `Compare` to find the sign."
+msgstr "每个函数只要求它所需的最弱约束。`reverse` 和 `reverse_inplace` 不需要任何约束，`find` 和各一致性检查需要 `Eq`，`arr_max` 和 `arr_min` 需要 `Compare`。`arr_sum` 和 `zero_arr` 只需要 luna-generic 中的 `AddMonoid`，即 `zero()` 和 `+`，因此适用于任何具有加法幺半群结构的类型，而不仅限于数字。`arr_abs_sum` 需要 `Num` 来取负，并需要 `Compare` 来判断符号。"
+
+#: manual/design/array_utils.md:9
+msgid "The package imports luna-generic under the alias `lg`, and [`src/alias.mbt`](../../../src/alias.mbt) makes `AddMonoid` and `Num` usable without the prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`."
+msgstr "本包以别名 `lg` 导入 luna-generic，[`src/alias.mbt`](../../../src/alias.mbt) 使得在包内可以不加前缀地使用 `AddMonoid` 和 `Num`。公开签名中它们写作 `@luna-generic.AddMonoid` 和 `@luna-generic.Num`。"
+
+#: manual/design/array_utils.md:11
+msgid "Functions instead of methods"
+msgstr "用函数而非方法"
+
+#: manual/design/array_utils.md:13
+msgid "MoonBit does not let a package define methods on `Array`, which belongs to the core library, so the helpers are package-level functions."
+msgstr "MoonBit 不允许一个包为属于核心库的 `Array` 定义方法，因此这些辅助函数都是包级函数。"
+
+#: manual/design/array_utils.md:15
+msgid "Empty arrays"
+msgstr "空数组"
+
+#: manual/design/array_utils.md:17
+msgid "The functions that need an element to start from read `arr[0]` and therefore panic on an empty array: `arr_max`, `arr_min`, `same` and `map_same`. They do not return an `Option`. The other functions have a natural answer for an empty array and return it: `zero()` for the sums, `true` for `same_to` and `map_same_to`, `None` for `find`, and an empty array for `reverse`. Keep this split when adding functions, or document the exception."
+msgstr "需要以某个元素为起点的函数会读取 `arr[0]`，因此在数组为空时会 panic：`arr_max`、`arr_min`、`same` 和 `map_same`。它们不返回 `Option`。其他函数对空数组有自然的结果并直接返回：求和返回 `zero()`，`same_to` 和 `map_same_to` 返回 `true`，`find` 返回 `None`，`reverse` 返回空数组。新增函数时请保持这一划分，或者在文档中写明例外。"
+
+#: manual/design/array_utils.md:19
+msgid "Allocation"
+msgstr "内存分配"
+
+#: manual/design/array_utils.md:21
+msgid "`reverse`, `zero_arr`, `map_same` and `map_same_to` allocate a new array. `reverse_inplace` mutates its argument, and the other functions only read."
+msgstr "`reverse`、`zero_arr`、`map_same` 和 `map_same_to` 会分配新数组。`reverse_inplace` 修改其参数，其余函数只读取数据。"
+
+#: manual/design/array_utils.md:23
+#: manual/design/comparison.md:16
+msgid "Maintenance notes"
+msgstr "维护说明"
+
+#: manual/design/array_utils.md:25
+msgid "Update this page and the [API reference](../api/array_utils.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`."
+msgstr "只要新增或删除函数，或者函数的约束或边界情况行为发生变化，就更新本页和 [API 参考](../api/array_utils.md)，并用 `moon info` 重新生成 `src/pkg.generated.mbti`。"
+
+#: manual/design/array_utils.md:26
+msgid "The doc comment of `reverse_inplace` in the source says that it panics on an empty array. It does not: the loop does not run, and the array is left unchanged."
+msgstr "源码中 `reverse_inplace` 的文档注释称它在数组为空时会 panic。实际上不会：循环不会执行，数组保持不变。"
+
+#: manual/design/comparison.md:1
+msgid "comparison design"
+msgstr "comparison 设计"
+
+#: manual/design/comparison.md:3
+msgid "`comparison` holds the range helpers `clamp` and `is_between` in [`src/comparison.mbt`](../../../src/comparison.mbt). This page records the conventions they share and the behaviour that maintainers must keep stable."
+msgstr "`comparison` 包含 [`src/comparison.mbt`](../../../src/comparison.mbt) 中的区间辅助函数 `clamp` 和 `is_between`。本页记录它们共同遵循的约定，以及维护者必须保持稳定的行为。"
+
+#: manual/design/comparison.md:5
+msgid "Conventions"
+msgstr "约定"
+
+#: manual/design/comparison.md:7
+msgid "Both functions take the value first and the bounds after it, in the order `min`, `max`."
+msgstr "两个函数都先接收值，再按 `min`、`max` 的顺序接收边界。"
+
+#: manual/design/comparison.md:8
+msgid "Ranges are closed: a value equal to a bound is inside the range."
+msgstr "区间是闭区间：等于边界的值位于区间之内。"
+
+#: manual/design/comparison.md:9
+msgid "The only constraint is `Compare`, so the functions do not depend on luna-generic and apply to any ordered type, including `String`."
+msgstr "唯一的约束是 `Compare`，因此这些函数不依赖 luna-generic，适用于包括 `String` 在内的任何有序类型。"
+
+#: manual/design/comparison.md:10
+msgid "The bounds are not validated. Neither function aborts when `min > max`; the [API reference](../api/comparison.md) states what they return in that case."
+msgstr "边界不做校验。`min > max` 时两个函数都不会中止；[API 参考](../api/comparison.md)说明了此时的返回值。"
+
+#: manual/design/comparison.md:12
+msgid "Consistency"
+msgstr "一致性"
+
+#: manual/design/comparison.md:14
+msgid "For `min <= max`, `is_between(v, min, max)` is `true` exactly when `clamp(v, min, max)` returns `v`. Changes to one function must keep this relation."
+msgstr "当 `min <= max` 时，`is_between(v, min, max)` 为 `true` 当且仅当 `clamp(v, min, max)` 返回 `v`。修改其中一个函数时必须保持这一关系。"
+
+#: manual/design/comparison.md:18
+msgid "Update this page and the [API reference](../api/comparison.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`."
+msgstr "只要新增或删除函数，或者函数的约束或边界情况行为发生变化，就更新本页和 [API 参考](../api/comparison.md)，并用 `moon info` 重新生成 `src/pkg.generated.mbti`。"
+
+#: manual/design/comparison.md:19
+msgid "Validating the bounds would change the behaviour described above; document it here if it is ever introduced."
+msgstr "对边界进行校验会改变上述行为；若将来引入，须在此处记录。"
+
+#: manual/index.md:1
+msgid "luna-utils"
+msgstr "luna-utils"
+
+#: manual/index.md:3
+msgid "`luna-utils` is a small utility package for Luna-Flow projects. It provides array helpers and comparison helpers whose numeric constraints come from the traits of [luna-generic](https://luna-flow.github.io/en/luna-generic/), so they work for any type that implements the required structure."
+msgstr "`luna-utils` 是面向 Luna-Flow 项目的小型工具包。它提供数组辅助函数和比较辅助函数，其数值约束来自 [luna-generic](https://luna-flow.github.io/en/luna-generic/) 的 trait，因此适用于任何实现了所需结构的类型。"
+
+#: manual/index.md:5
+msgid "Public functions"
+msgstr "公开函数"
+
+#: manual/index.md:7
+msgid "The package exports only functions; it defines no types or traits of its own."
+msgstr "本包只导出函数，不定义自己的类型或 trait。"
+
+#: manual/index.md:9
+msgid "Constraint"
+msgstr "约束"
+
+#: manual/index.md:9
+msgid "Behaviour"
+msgstr "行为"
+
+#: manual/index.md:11
+msgid "Sum of the elements; `zero()` for an empty array."
+msgstr "元素之和；空数组返回 `zero()`。"
+
+#: manual/index.md:12
+msgid "Sum of the absolute values of the elements."
+msgstr "元素绝对值之和。"
+
+#: manual/index.md:13
+msgid "Array of length `n` filled with `zero()`."
+msgstr "长度为 `n`、以 `zero()` 填充的数组。"
+
+#: manual/index.md:14
+msgid "Largest or smallest element; panics on an empty array."
+msgstr "最大或最小元素；空数组时 panic。"
+
+#: manual/index.md:15
+msgid "Index of the first occurrence of a value, or `None`."
+msgstr "某个值首次出现的下标，未找到时为 `None`。"
+
+#: manual/index.md:16
+#: manual/index.md:17
+msgid "none"
+msgstr "无"
+
+#: manual/index.md:16
+msgid "New array with the elements in reverse order."
+msgstr "元素逆序排列的新数组。"
+
+#: manual/index.md:17
+msgid "Reverses an array in place."
+msgstr "原地反转数组。"
+
+#: manual/index.md:18
+msgid "Whether all elements equal the first; panics on an empty array."
+msgstr "所有元素是否都等于第一个元素；空数组时 panic。"
+
+#: manual/index.md:19
+msgid "Whether all elements equal a given sample."
+msgstr "所有元素是否都等于给定的样本值。"
+
+#: manual/index.md:20
+msgid "`Eq` on the result"
+msgstr "结果类型满足 `Eq`"
+
+#: manual/index.md:20
+msgid "`same` and `same_to` applied to the mapped array."
+msgstr "对映射后的数组应用 `same` 与 `same_to`。"
+
+#: manual/index.md:21
+msgid "Restricts a value to the closed range from `min` to `max`."
+msgstr "将值限制在从 `min` 到 `max` 的闭区间内。"
+
+#: manual/index.md:22
+msgid "Whether a value lies in the closed range from `min` to `max`."
+msgstr "值是否位于从 `min` 到 `max` 的闭区间内。"
+
+#: manual/index.md:24
+msgid "The interface file [pkg.generated.mbti](../../src/pkg.generated.mbti) is the authoritative list of signatures, and the generated API documentation is on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)."
+msgstr "接口文件 [pkg.generated.mbti](../../src/pkg.generated.mbti) 是签名的权威清单，自动生成的 API 文档见 [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)。"
+
+#: manual/index.md:26
+msgid "Modules"
+msgstr "模块"
+
+#: manual/index.md:28
+msgid "The package `Luna-Flow/luna-utils` has two source files, which the manual documents as two modules:"
+msgstr "包 `Luna-Flow/luna-utils` 有两个源文件，本手册将它们作为两个模块来说明："
+
+#: manual/index.md:30
+msgid "`array_utils`, in [`src/array_utils.mbt`](../../src/array_utils.mbt), holds the functions on arrays: sums, extremes, search, reversal and uniformity checks. See its [API reference](api/array_utils.md), [design notes](design/array_utils.md) and [tutorial](tutorial/array_utils.md)."
+msgstr "`array_utils` 位于 [`src/array_utils.mbt`](../../src/array_utils.mbt)，包含作用于数组的函数：求和、最值、查找、反转和一致性检查。参见其 [API 参考](api/array_utils.md)、[设计说明](design/array_utils.md)和[教程](tutorial/array_utils.md)。"
+
+#: manual/index.md:31
+msgid "`comparison`, in [`src/comparison.mbt`](../../src/comparison.mbt), holds `clamp` and `is_between`, which compare a value with a closed range. See its [API reference](api/comparison.md), [design notes](design/comparison.md) and [tutorial](tutorial/comparison.md)."
+msgstr "`comparison` 位于 [`src/comparison.mbt`](../../src/comparison.mbt)，包含将值与闭区间比较的 `clamp` 和 `is_between`。参见其 [API 参考](api/comparison.md)、[设计说明](design/comparison.md)和[教程](tutorial/comparison.md)。"
+
+#: manual/index.md:33
+msgid "Contributing"
+msgstr "参与贡献"
+
+#: manual/index.md:35
+msgid "Code style, naming, commit and review rules are in the [contribution guidelines](contributing.md)."
+msgstr "代码风格、命名、提交与审查规则见[贡献规范](contributing.md)。"
+
+#: manual/tutorial/array_utils.md:1
+msgid "array_utils tutorial"
+msgstr "array_utils 教程"
+
+#: manual/tutorial/array_utils.md:3
+msgid "This tutorial walks through the array helpers with small examples taken from the doc comments and tests in `src`. To use them in your own module, add the dependency with `moon add Luna-Flow/luna-utils` and import the package `Luna-Flow/luna-utils`; the functions are then available as `@luna-utils.arr_sum` and so on. The examples below run inside the package and omit the prefix."
+msgstr "本教程通过取自 `src` 中文档注释和测试的小例子介绍这些数组辅助函数。要在自己的模块中使用它们，请用 `moon add Luna-Flow/luna-utils` 添加依赖并导入包 `Luna-Flow/luna-utils`，之后即可通过 `@luna-utils.arr_sum` 等名称调用。下面的示例在包内运行，因此省略了前缀。"
+
+#: manual/tutorial/array_utils.md:7
+msgid "`arr_sum` works for any element type with an additive monoid, and `zero_arr` creates an array of zeros of the expected type:"
+msgstr "`arr_sum` 适用于任何具有加法幺半群结构的元素类型，`zero_arr` 则按期望类型创建全零数组："
+
+#: manual/tutorial/array_utils.md:18
+msgid "Extremes and search"
+msgstr "最值与查找"
+
+#: manual/tutorial/array_utils.md:28
+msgid "`arr_max` and `arr_min` panic on an empty array, so check `xs.is_empty()` first when the array may be empty."
+msgstr "`arr_max` 和 `arr_min` 在数组为空时会 panic，因此当数组可能为空时，请先检查 `xs.is_empty()`。"
+
+#: manual/tutorial/array_utils.md:30
+msgid "Reversing"
+msgstr "反转"
+
+#: manual/tutorial/array_utils.md:32
+msgid "`reverse` returns a new array, while `reverse_inplace` changes its argument:"
+msgstr "`reverse` 返回新数组，而 `reverse_inplace` 会修改其参数："
+
+#: manual/tutorial/array_utils.md:42
+msgid "Checking uniformity"
+msgstr "检查一致性"
+
+#: manual/tutorial/array_utils.md:44
+msgid "`same` and `same_to` compare the elements themselves; `map_same` and `map_same_to` compare their images under a function:"
+msgstr "`same` 和 `same_to` 比较元素本身；`map_same` 和 `map_same_to` 比较元素在某个函数下的像："
+
+#: manual/tutorial/array_utils.md:53
+msgid "`same` and `map_same` panic on an empty array. When the array may be empty and you know the expected value, use `same_to` or `map_same_to`, which return `true` for an empty array."
+msgstr "`same` 和 `map_same` 在数组为空时会 panic。如果数组可能为空且你知道期望值，请使用 `same_to` 或 `map_same_to`，它们对空数组返回 `true`。"
+
+#: manual/tutorial/array_utils.md:55
+#: manual/tutorial/comparison.md:32
+msgid "Next steps"
+msgstr "后续阅读"
+
+#: manual/tutorial/array_utils.md:57
+msgid "The [API reference](../api/array_utils.md) gives every signature, and the [design notes](../design/array_utils.md) explain the constraints and the treatment of empty arrays. Before relying on edge-case behaviour, check it against the tests in `src/array_utils_test.mbt`."
+msgstr "[API 参考](../api/array_utils.md)给出了全部签名，[设计说明](../design/array_utils.md)解释了约束以及对空数组的处理。在依赖边界情况的行为之前，请对照 `src/array_utils_test.mbt` 中的测试加以确认。"
+
+#: manual/tutorial/comparison.md:1
+msgid "comparison tutorial"
+msgstr "comparison 教程"
+
+#: manual/tutorial/comparison.md:3
+msgid "This tutorial shows the two range helpers with examples taken from the doc comments and tests in `src`. As in the [array_utils tutorial](array_utils.md), the examples run inside the package; from another package, call the functions as `@luna-utils.clamp` and `@luna-utils.is_between`."
+msgstr "本教程通过取自 `src` 中文档注释和测试的示例介绍这两个区间辅助函数。与 [array_utils 教程](array_utils.md)一样，示例在包内运行；在其他包中，请以 `@luna-utils.clamp` 和 `@luna-utils.is_between` 的形式调用。"
+
+#: manual/tutorial/comparison.md:5
+msgid "Clamping a value"
+msgstr "将值限制在区间内"
+
+#: manual/tutorial/comparison.md:7
+msgid "`clamp` moves a value into a range, and leaves it unchanged when it is already inside:"
+msgstr "`clamp` 把值移入区间；若值已在区间内，则保持不变："
+
+#: manual/tutorial/comparison.md:15
+msgid "Any type with `Compare` works, for example strings in lexicographic order:"
+msgstr "任何实现了 `Compare` 的类型都可以使用，例如按字典序比较的字符串："
+
+#: manual/tutorial/comparison.md:22
+msgid "Testing membership"
+msgstr "判断是否属于区间"
+
+#: manual/tutorial/comparison.md:24
+msgid "`is_between` tests whether a value lies in a range; both bounds are included:"
+msgstr "`is_between` 判断值是否位于区间内；两个边界都包含在内："
+
+#: manual/tutorial/comparison.md:34
+msgid "Neither function checks that `min <= max`; pass the bounds in that order. The [API reference](../api/comparison.md) describes the result for reversed bounds, and the [design notes](../design/comparison.md) list the conventions the two functions share."
+msgstr "两个函数都不检查 `min <= max`；请按这个顺序传入边界。[API 参考](../api/comparison.md)说明了边界颠倒时的结果，[设计说明](../design/comparison.md)列出了两个函数共同遵循的约定。"
