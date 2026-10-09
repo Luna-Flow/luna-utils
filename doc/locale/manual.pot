@@ -28,7 +28,7 @@ msgid "Core migration"
 msgstr ""
 
 #: manual/api/array_utils.md:16
-msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(Int::min_value)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
+msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(-2147483648)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
 msgstr ""
 
 #: manual/api/array_utils.md:18
