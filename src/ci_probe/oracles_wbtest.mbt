@@ -124,3 +124,7901 @@ test "ci bit patterns" {
   let padded = "0".repeat(16 - hex.length()) + hex
   println("LUNA_BITS separate_mul_add " + padded)
 }
+
+///|
+fn class_id(value : @float.Classification) -> UInt64 {
+  match value {
+    @float.PositiveZero => 0UL
+    @float.NegativeZero => 1UL
+    @float.PositiveSubnormal => 2UL
+    @float.NegativeSubnormal => 3UL
+    @float.PositiveNormal => 4UL
+    @float.NegativeNormal => 5UL
+    @float.PositiveInfinity => 6UL
+    @float.NegativeInfinity => 7UL
+    @float.SignalingNaN => 8UL
+    @float.QuietNaN => 9UL
+  }
+}
+
+///|
+fn emit_float_record(
+  id : String,
+  value : UInt64,
+  expected : UInt64,
+) -> Unit raise {
+  assert_eq(value, expected)
+  let hex = value.to_string(radix=16)
+  let padded = "0".repeat(16 - hex.length()) + hex
+  println("LUNA_BITS " + id + " " + padded)
+}
+
+///|
+test "float offline oracles 0" {
+  emit_float_record(
+    "b64_zero_plus_class",
+    class_id(@float.classify_bits(0x0000000000000000UL)),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x0000000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_nan_bits",
+    if @float.is_nan_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_finite_bits",
+    if @float.is_finite_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_is_zero_bits",
+    if @float.is_zero_bits(0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_negate_bits",
+    @float.negate_bits(0x0000000000000000UL),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_abs_bits",
+    @float.abs_bits(0x0000000000000000UL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x0000000000000000UL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_get_payload",
+    match @float.get_payload_bits(0x0000000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_zero_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x0000000000000000UL.reinterpret_as_double()),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x0000000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x0000000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_raw_0",
+    @float.copy_sign_bits(0x0000000000000000UL, 0x0000000000000000UL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x0000000000000000UL, 0x8000000000000000UL),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x0000000000000000UL, 0x7fffffffffffffffUL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x0000000000000000UL, 0xffffffffffffffffUL),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_class",
+    class_id(@float.classify_bits(0x0000000000000001UL)),
+    0x0000000000000002UL,
+  )
+}
+
+///|
+test "float offline oracles 1" {
+  emit_float_record(
+    "b64_min_subnormal_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x0000000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000002UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_nan_bits",
+    if @float.is_nan_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_finite_bits",
+    if @float.is_finite_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_is_zero_bits",
+    if @float.is_zero_bits(0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_negate_bits",
+    @float.negate_bits(0x0000000000000001UL),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_abs_bits",
+    @float.abs_bits(0x0000000000000001UL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x0000000000000001UL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_get_payload",
+    match @float.get_payload_bits(0x0000000000000001UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x0000000000000001UL.reinterpret_as_double()),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x0000000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x0000000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_raw_0",
+    @float.copy_sign_bits(0x0000000000000001UL, 0x0000000000000000UL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x0000000000000001UL, 0x8000000000000000UL),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x0000000000000001UL, 0x7fffffffffffffffUL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x0000000000000001UL, 0xffffffffffffffffUL),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_class",
+    class_id(@float.classify_bits(0x000fffffffffffffUL)),
+    0x0000000000000002UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x000fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000002UL,
+  )
+}
+
+///|
+test "float offline oracles 2" {
+  emit_float_record(
+    "b64_max_subnormal_plus_is_nan_bits",
+    if @float.is_nan_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_is_finite_bits",
+    if @float.is_finite_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_is_zero_bits",
+    if @float.is_zero_bits(0x000fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_negate_bits",
+    @float.negate_bits(0x000fffffffffffffUL),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_abs_bits",
+    @float.abs_bits(0x000fffffffffffffUL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x000fffffffffffffUL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_get_payload",
+    match @float.get_payload_bits(0x000fffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x000fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x000fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x000fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_raw_0",
+    @float.copy_sign_bits(0x000fffffffffffffUL, 0x0000000000000000UL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x000fffffffffffffUL, 0x8000000000000000UL),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x000fffffffffffffUL, 0x7fffffffffffffffUL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x000fffffffffffffUL, 0xffffffffffffffffUL),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_class",
+    class_id(@float.classify_bits(0x0010000000000000UL)),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x0010000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_is_nan_bits",
+    if @float.is_nan_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 3" {
+  emit_float_record(
+    "b64_min_normal_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_is_finite_bits",
+    if @float.is_finite_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_is_zero_bits",
+    if @float.is_zero_bits(0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_negate_bits",
+    @float.negate_bits(0x0010000000000000UL),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_abs_bits",
+    @float.abs_bits(0x0010000000000000UL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x0010000000000000UL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_get_payload",
+    match @float.get_payload_bits(0x0010000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x0010000000000000UL.reinterpret_as_double()),
+    ),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x0010000000000000UL.reinterpret_as_double()),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x0010000000000000UL.reinterpret_as_double()),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_raw_0",
+    @float.copy_sign_bits(0x0010000000000000UL, 0x0000000000000000UL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x0010000000000000UL, 0x8000000000000000UL),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x0010000000000000UL, 0x7fffffffffffffffUL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x0010000000000000UL, 0xffffffffffffffffUL),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_class",
+    class_id(@float.classify_bits(0x7fefffffffffffffUL)),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x7fefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_is_nan_bits",
+    if @float.is_nan_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 4" {
+  emit_float_record(
+    "b64_max_normal_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_is_finite_bits",
+    if @float.is_finite_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_is_zero_bits",
+    if @float.is_zero_bits(0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_negate_bits",
+    @float.negate_bits(0x7fefffffffffffffUL),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_abs_bits",
+    @float.abs_bits(0x7fefffffffffffffUL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x7fefffffffffffffUL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_get_payload",
+    match @float.get_payload_bits(0x7fefffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x7fefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x7fefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x7fefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_raw_0",
+    @float.copy_sign_bits(0x7fefffffffffffffUL, 0x0000000000000000UL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x7fefffffffffffffUL, 0x8000000000000000UL),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x7fefffffffffffffUL, 0x7fffffffffffffffUL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x7fefffffffffffffUL, 0xffffffffffffffffUL),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_class",
+    class_id(@float.classify_bits(0x7ff0000000000000UL)),
+    0x0000000000000006UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x7ff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000006UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_is_nan_bits",
+    if @float.is_nan_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 5" {
+  emit_float_record(
+    "b64_infinity_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_is_finite_bits",
+    if @float.is_finite_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_is_zero_bits",
+    if @float.is_zero_bits(0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_negate_bits",
+    @float.negate_bits(0x7ff0000000000000UL),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_abs_bits",
+    @float.abs_bits(0x7ff0000000000000UL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x7ff0000000000000UL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_get_payload",
+    match @float.get_payload_bits(0x7ff0000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x7ff0000000000000UL.reinterpret_as_double()),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x7ff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x7ff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_raw_0",
+    @float.copy_sign_bits(0x7ff0000000000000UL, 0x0000000000000000UL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x7ff0000000000000UL, 0x8000000000000000UL),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x7ff0000000000000UL, 0x7fffffffffffffffUL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x7ff0000000000000UL, 0xffffffffffffffffUL),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_class",
+    class_id(@float.classify_bits(0x7ff0000000000001UL)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x7ff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_is_nan_bits",
+    if @float.is_nan_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 6" {
+  emit_float_record(
+    "b64_snan_min_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_is_finite_bits",
+    if @float.is_finite_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_is_zero_bits",
+    if @float.is_zero_bits(0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_negate_bits",
+    @float.negate_bits(0x7ff0000000000001UL),
+    0xfff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_abs_bits",
+    @float.abs_bits(0x7ff0000000000001UL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x7ff0000000000001UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_get_payload",
+    match @float.get_payload_bits(0x7ff0000000000001UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x7ff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x7ff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x7ff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_raw_0",
+    @float.copy_sign_bits(0x7ff0000000000001UL, 0x0000000000000000UL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x7ff0000000000001UL, 0x8000000000000000UL),
+    0xfff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x7ff0000000000001UL, 0x7fffffffffffffffUL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x7ff0000000000001UL, 0xffffffffffffffffUL),
+    0xfff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_class",
+    class_id(@float.classify_bits(0x7ff7ffffffffffffUL)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x7ff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_is_nan_bits",
+    if @float.is_nan_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 7" {
+  emit_float_record(
+    "b64_snan_max_plus_is_finite_bits",
+    if @float.is_finite_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_is_zero_bits",
+    if @float.is_zero_bits(0x7ff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_negate_bits",
+    @float.negate_bits(0x7ff7ffffffffffffUL),
+    0xfff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_abs_bits",
+    @float.abs_bits(0x7ff7ffffffffffffUL),
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x7ff7ffffffffffffUL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_get_payload",
+    match @float.get_payload_bits(0x7ff7ffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0007ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x7ff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x7ff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x7ff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_raw_0",
+    @float.copy_sign_bits(0x7ff7ffffffffffffUL, 0x0000000000000000UL),
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff7ffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x7ff7ffffffffffffUL, 0x8000000000000000UL),
+    0xfff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff7ffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x7ff7ffffffffffffUL, 0x7fffffffffffffffUL),
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff7ffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x7ff7ffffffffffffUL, 0xffffffffffffffffUL),
+    0xfff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff7ffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_class",
+    class_id(@float.classify_bits(0x7ff8000000000000UL)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x7ff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_is_nan_bits",
+    if @float.is_nan_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_is_finite_bits",
+    if @float.is_finite_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 8" {
+  emit_float_record(
+    "b64_qnan_zero_plus_is_zero_bits",
+    if @float.is_zero_bits(0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_negate_bits",
+    @float.negate_bits(0x7ff8000000000000UL),
+    0xfff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_abs_bits",
+    @float.abs_bits(0x7ff8000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x7ff8000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_get_payload",
+    match @float.get_payload_bits(0x7ff8000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x7ff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x7ff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x7ff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_raw_0",
+    @float.copy_sign_bits(0x7ff8000000000000UL, 0x0000000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x7ff8000000000000UL, 0x8000000000000000UL),
+    0xfff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x7ff8000000000000UL, 0x7fffffffffffffffUL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x7ff8000000000000UL, 0xffffffffffffffffUL),
+    0xfff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_class",
+    class_id(@float.classify_bits(0x7fffffffffffffffUL)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_portable_class",
+    class_id(
+      @float.portable_classify(0x7fffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_nan_bits",
+    if @float.is_nan_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_signaling_bits",
+    if @float.is_signaling_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_canonical_bits",
+    if @float.is_canonical_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_finite_bits",
+    if @float.is_finite_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_is_zero_bits",
+    if @float.is_zero_bits(0x7fffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 9" {
+  emit_float_record(
+    "b64_qnan_max_plus_negate_bits",
+    @float.negate_bits(0x7fffffffffffffffUL),
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_abs_bits",
+    @float.abs_bits(0x7fffffffffffffffUL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x7fffffffffffffffUL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_get_payload",
+    match @float.get_payload_bits(0x7fffffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0007ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x7fffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x7fffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x7fffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_raw_0",
+    @float.copy_sign_bits(0x7fffffffffffffffUL, 0x0000000000000000UL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x7fffffffffffffffUL, 0x8000000000000000UL),
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x7fffffffffffffffUL, 0x7fffffffffffffffUL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x7fffffffffffffffUL, 0xffffffffffffffffUL),
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_plus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_class",
+    class_id(@float.classify_bits(0x8000000000000000UL)),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_portable_class",
+    class_id(
+      @float.portable_classify(0x8000000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_nan_bits",
+    if @float.is_nan_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_finite_bits",
+    if @float.is_finite_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_is_zero_bits",
+    if @float.is_zero_bits(0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_negate_bits",
+    @float.negate_bits(0x8000000000000000UL),
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 10" {
+  emit_float_record(
+    "b64_zero_minus_abs_bits",
+    @float.abs_bits(0x8000000000000000UL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x8000000000000000UL),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_get_payload",
+    match @float.get_payload_bits(0x8000000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_zero_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x8000000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x8000000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x8000000000000000UL.reinterpret_as_double()),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_raw_0",
+    @float.copy_sign_bits(0x8000000000000000UL, 0x0000000000000000UL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x8000000000000000UL, 0x8000000000000000UL),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x8000000000000000UL, 0x7fffffffffffffffUL),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x8000000000000000UL, 0xffffffffffffffffUL),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_zero_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_class",
+    class_id(@float.classify_bits(0x8000000000000001UL)),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_portable_class",
+    class_id(
+      @float.portable_classify(0x8000000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_nan_bits",
+    if @float.is_nan_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_finite_bits",
+    if @float.is_finite_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_is_zero_bits",
+    if @float.is_zero_bits(0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_negate_bits",
+    @float.negate_bits(0x8000000000000001UL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_abs_bits",
+    @float.abs_bits(0x8000000000000001UL),
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 11" {
+  emit_float_record(
+    "b64_min_subnormal_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x8000000000000001UL),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_get_payload",
+    match @float.get_payload_bits(0x8000000000000001UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x8000000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x8000000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x8000000000000001UL.reinterpret_as_double()),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_raw_0",
+    @float.copy_sign_bits(0x8000000000000001UL, 0x0000000000000000UL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x8000000000000001UL, 0x8000000000000000UL),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x8000000000000001UL, 0x7fffffffffffffffUL),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x8000000000000001UL, 0xffffffffffffffffUL),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_subnormal_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_class",
+    class_id(@float.classify_bits(0x800fffffffffffffUL)),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_portable_class",
+    class_id(
+      @float.portable_classify(0x800fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_nan_bits",
+    if @float.is_nan_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_finite_bits",
+    if @float.is_finite_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_is_zero_bits",
+    if @float.is_zero_bits(0x800fffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_negate_bits",
+    @float.negate_bits(0x800fffffffffffffUL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_abs_bits",
+    @float.abs_bits(0x800fffffffffffffUL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x800fffffffffffffUL),
+    0x800fffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 12" {
+  emit_float_record(
+    "b64_max_subnormal_minus_get_payload",
+    match @float.get_payload_bits(0x800fffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x800fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x800fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x800fffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_raw_0",
+    @float.copy_sign_bits(0x800fffffffffffffUL, 0x0000000000000000UL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x800fffffffffffffUL, 0x8000000000000000UL),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x800fffffffffffffUL, 0x7fffffffffffffffUL),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x800fffffffffffffUL, 0xffffffffffffffffUL),
+    0x800fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_subnormal_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x000fffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_class",
+    class_id(@float.classify_bits(0x8010000000000000UL)),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_portable_class",
+    class_id(
+      @float.portable_classify(0x8010000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_nan_bits",
+    if @float.is_nan_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_finite_bits",
+    if @float.is_finite_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_is_zero_bits",
+    if @float.is_zero_bits(0x8010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_negate_bits",
+    @float.negate_bits(0x8010000000000000UL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_abs_bits",
+    @float.abs_bits(0x8010000000000000UL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0x8010000000000000UL),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_get_payload",
+    match @float.get_payload_bits(0x8010000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 13" {
+  emit_float_record(
+    "b64_min_normal_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0x8010000000000000UL.reinterpret_as_double()),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0x8010000000000000UL.reinterpret_as_double()),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0x8010000000000000UL.reinterpret_as_double()),
+    ),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_raw_0",
+    @float.copy_sign_bits(0x8010000000000000UL, 0x0000000000000000UL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8010000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0x8010000000000000UL, 0x8000000000000000UL),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8010000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0x8010000000000000UL, 0x7fffffffffffffffUL),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8010000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0x8010000000000000UL, 0xffffffffffffffffUL),
+    0x8010000000000000UL,
+  )
+  emit_float_record(
+    "b64_min_normal_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0x8010000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_class",
+    class_id(@float.classify_bits(0xffefffffffffffffUL)),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_portable_class",
+    class_id(
+      @float.portable_classify(0xffefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_nan_bits",
+    if @float.is_nan_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_finite_bits",
+    if @float.is_finite_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_is_zero_bits",
+    if @float.is_zero_bits(0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_negate_bits",
+    @float.negate_bits(0xffefffffffffffffUL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_abs_bits",
+    @float.abs_bits(0xffefffffffffffffUL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0xffefffffffffffffUL),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_get_payload",
+    match @float.get_payload_bits(0xffefffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0xffefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7fefffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 14" {
+  emit_float_record(
+    "b64_max_normal_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0xffefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0xffefffffffffffffUL.reinterpret_as_double()),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_raw_0",
+    @float.copy_sign_bits(0xffefffffffffffffUL, 0x0000000000000000UL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0xffefffffffffffffUL, 0x8000000000000000UL),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0xffefffffffffffffUL, 0x7fffffffffffffffUL),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0xffefffffffffffffUL, 0xffffffffffffffffUL),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_max_normal_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_class",
+    class_id(@float.classify_bits(0xfff0000000000000UL)),
+    0x0000000000000007UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_portable_class",
+    class_id(
+      @float.portable_classify(0xfff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000007UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_nan_bits",
+    if @float.is_nan_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_finite_bits",
+    if @float.is_finite_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_is_zero_bits",
+    if @float.is_zero_bits(0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_negate_bits",
+    @float.negate_bits(0xfff0000000000000UL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_abs_bits",
+    @float.abs_bits(0xfff0000000000000UL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0xfff0000000000000UL),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_get_payload",
+    match @float.get_payload_bits(0xfff0000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0xfff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0xfff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff0000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 15" {
+  emit_float_record(
+    "b64_infinity_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0xfff0000000000000UL.reinterpret_as_double()),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_raw_0",
+    @float.copy_sign_bits(0xfff0000000000000UL, 0x0000000000000000UL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0xfff0000000000000UL, 0x8000000000000000UL),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0xfff0000000000000UL, 0x7fffffffffffffffUL),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0xfff0000000000000UL, 0xffffffffffffffffUL),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_infinity_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_class",
+    class_id(@float.classify_bits(0xfff0000000000001UL)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_portable_class",
+    class_id(
+      @float.portable_classify(0xfff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_nan_bits",
+    if @float.is_nan_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_finite_bits",
+    if @float.is_finite_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_is_zero_bits",
+    if @float.is_zero_bits(0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_negate_bits",
+    @float.negate_bits(0xfff0000000000001UL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_abs_bits",
+    @float.abs_bits(0xfff0000000000001UL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0xfff0000000000001UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_get_payload",
+    match @float.get_payload_bits(0xfff0000000000001UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0xfff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0xfff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0xfff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 16" {
+  emit_float_record(
+    "b64_snan_min_minus_copy_raw_0",
+    @float.copy_sign_bits(0xfff0000000000001UL, 0x0000000000000000UL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0xfff0000000000001UL, 0x8000000000000000UL),
+    0xfff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0xfff0000000000001UL, 0x7fffffffffffffffUL),
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0xfff0000000000001UL, 0xffffffffffffffffUL),
+    0xfff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_min_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_class",
+    class_id(@float.classify_bits(0xfff7ffffffffffffUL)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_portable_class",
+    class_id(
+      @float.portable_classify(0xfff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_nan_bits",
+    if @float.is_nan_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_finite_bits",
+    if @float.is_finite_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_is_zero_bits",
+    if @float.is_zero_bits(0xfff7ffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_negate_bits",
+    @float.negate_bits(0xfff7ffffffffffffUL),
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_abs_bits",
+    @float.abs_bits(0xfff7ffffffffffffUL),
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0xfff7ffffffffffffUL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_get_payload",
+    match @float.get_payload_bits(0xfff7ffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0007ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0xfff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0xfff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0xfff7ffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_raw_0",
+    @float.copy_sign_bits(0xfff7ffffffffffffUL, 0x0000000000000000UL),
+    0x7ff7ffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 17" {
+  emit_float_record(
+    "b64_snan_max_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff7ffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0xfff7ffffffffffffUL, 0x8000000000000000UL),
+    0xfff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff7ffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0xfff7ffffffffffffUL, 0x7fffffffffffffffUL),
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff7ffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0xfff7ffffffffffffUL, 0xffffffffffffffffUL),
+    0xfff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_snan_max_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff7ffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_class",
+    class_id(@float.classify_bits(0xfff8000000000000UL)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_portable_class",
+    class_id(
+      @float.portable_classify(0xfff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_nan_bits",
+    if @float.is_nan_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_finite_bits",
+    if @float.is_finite_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_is_zero_bits",
+    if @float.is_zero_bits(0xfff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_negate_bits",
+    @float.negate_bits(0xfff8000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_abs_bits",
+    @float.abs_bits(0xfff8000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0xfff8000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_get_payload",
+    match @float.get_payload_bits(0xfff8000000000000UL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0xfff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0xfff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0xfff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_raw_0",
+    @float.copy_sign_bits(0xfff8000000000000UL, 0x0000000000000000UL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 18" {
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0xfff8000000000000UL, 0x8000000000000000UL),
+    0xfff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0xfff8000000000000UL, 0x7fffffffffffffffUL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0xfff8000000000000UL, 0xffffffffffffffffUL),
+    0xfff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_zero_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_class",
+    class_id(@float.classify_bits(0xffffffffffffffffUL)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_portable_class",
+    class_id(
+      @float.portable_classify(0xffffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_nan_bits",
+    if @float.is_nan_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_signaling_bits",
+    if @float.is_signaling_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_canonical_bits",
+    if @float.is_canonical_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_sign_minus_bits",
+    if @float.is_sign_minus_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_subnormal_bits",
+    if @float.is_subnormal_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_finite_bits",
+    if @float.is_finite_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_is_zero_bits",
+    if @float.is_zero_bits(0xffffffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_negate_bits",
+    @float.negate_bits(0xffffffffffffffffUL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_abs_bits",
+    @float.abs_bits(0xffffffffffffffffUL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_canonicalize_nan_bits",
+    @float.canonicalize_nan_bits(0xffffffffffffffffUL),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_get_payload",
+    match @float.get_payload_bits(0xffffffffffffffffUL) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x0007ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_portable_negate",
+    @float.to_bits_canonical(
+      @float.portable_negate(0xffffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_portable_abs",
+    @float.to_bits_canonical(
+      @float.portable_abs(0xffffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_canonicalize_nan",
+    @float.to_bits_canonical(
+      @float.canonicalize_nan(0xffffffffffffffffUL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_raw_0",
+    @float.copy_sign_bits(0xffffffffffffffffUL, 0x0000000000000000UL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_portable_0",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffffffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_raw_8000000000000000",
+    @float.copy_sign_bits(0xffffffffffffffffUL, 0x8000000000000000UL),
+    0xffffffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 19" {
+  emit_float_record(
+    "b64_qnan_max_minus_copy_portable_8000000000000000",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffffffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_raw_7fffffffffffffff",
+    @float.copy_sign_bits(0xffffffffffffffffUL, 0x7fffffffffffffffUL),
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_portable_7fffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffffffffffffffffUL.reinterpret_as_double(),
+        0x7fffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_raw_ffffffffffffffff",
+    @float.copy_sign_bits(0xffffffffffffffffUL, 0xffffffffffffffffUL),
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_qnan_max_minus_copy_portable_ffffffffffffffff",
+    @float.to_bits_canonical(
+      @float.portable_copy_sign(
+        0xffffffffffffffffUL.reinterpret_as_double(),
+        0xffffffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_0_0",
+    match @float.set_payload_bits(0x0000000000000000UL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_0_0",
+    match
+      @float.set_payload_signaling_bits(0x0000000000000000UL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_0_1",
+    match @float.set_payload_bits(0x0000000000000001UL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x7ff8000000000001UL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_0_1",
+    match
+      @float.set_payload_signaling_bits(0x0000000000000001UL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x7ff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_0_7ffffffffffff",
+    match @float.set_payload_bits(0x0007ffffffffffffUL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x7fffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_0_7ffffffffffff",
+    match
+      @float.set_payload_signaling_bits(0x0007ffffffffffffUL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0x7ff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_0_8000000000000",
+    match @float.set_payload_bits(0x0008000000000000UL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_0_8000000000000",
+    match
+      @float.set_payload_signaling_bits(0x0008000000000000UL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_0_ffffffffffffffff",
+    match @float.set_payload_bits(0xffffffffffffffffUL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_0_ffffffffffffffff",
+    match
+      @float.set_payload_signaling_bits(0xffffffffffffffffUL, sign_minus=false) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_1_0",
+    match @float.set_payload_bits(0x0000000000000000UL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xfff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_1_0",
+    match
+      @float.set_payload_signaling_bits(0x0000000000000000UL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_1_1",
+    match @float.set_payload_bits(0x0000000000000001UL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xfff8000000000001UL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_1_1",
+    match
+      @float.set_payload_signaling_bits(0x0000000000000001UL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xfff0000000000001UL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_1_7ffffffffffff",
+    match @float.set_payload_bits(0x0007ffffffffffffUL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_1_7ffffffffffff",
+    match
+      @float.set_payload_signaling_bits(0x0007ffffffffffffUL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xfff7ffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_1_8000000000000",
+    match @float.set_payload_bits(0x0008000000000000UL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_1_8000000000000",
+    match
+      @float.set_payload_signaling_bits(0x0008000000000000UL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_bits_1_ffffffffffffffff",
+    match @float.set_payload_bits(0xffffffffffffffffUL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_set_payload_signaling_bits_1_ffffffffffffffff",
+    match
+      @float.set_payload_signaling_bits(0xffffffffffffffffUL, sign_minus=true) {
+      Some(p) => p
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 20" {
+  emit_float_record(
+    "b32_zero_plus_class",
+    class_id(@binary32.classify_bits(0x00000000U)),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x00000000U)),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_negate_bits",
+    @binary32.negate_bits(0x00000000U).to_uint64() & 0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_abs_bits",
+    @binary32.abs_bits(0x00000000U).to_uint64() & 0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x00000000U).to_uint64() & 0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_get_payload",
+    match @binary32.get_payload_bits(0x00000000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_zero_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x00000000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x00000000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x00000000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x00000000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x00000000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x00000000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x00000000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_class",
+    class_id(@binary32.classify_bits(0x00000001U)),
+    0x0000000000000002UL,
+  )
+}
+
+///|
+test "float offline oracles 21" {
+  emit_float_record(
+    "b32_min_subnormal_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x00000001U)),
+    ),
+    0x0000000000000002UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_negate_bits",
+    @binary32.negate_bits(0x00000001U).to_uint64() & 0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_abs_bits",
+    @binary32.abs_bits(0x00000001U).to_uint64() & 0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x00000001U).to_uint64() & 0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_get_payload",
+    match @binary32.get_payload_bits(0x00000001U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x00000001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x00000001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x00000001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x00000001U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x00000001U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x00000001U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x00000001U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_class",
+    class_id(@binary32.classify_bits(0x007fffffU)),
+    0x0000000000000002UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x007fffffU)),
+    ),
+    0x0000000000000002UL,
+  )
+}
+
+///|
+test "float offline oracles 22" {
+  emit_float_record(
+    "b32_max_subnormal_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x007fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_negate_bits",
+    @binary32.negate_bits(0x007fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_abs_bits",
+    @binary32.abs_bits(0x007fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x007fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_get_payload",
+    match @binary32.get_payload_bits(0x007fffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x007fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x007fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x007fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x007fffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x007fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x007fffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x007fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x007fffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x007fffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x007fffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x007fffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_class",
+    class_id(@binary32.classify_bits(0x00800000U)),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x00800000U)),
+    ),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 23" {
+  emit_float_record(
+    "b32_min_normal_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_negate_bits",
+    @binary32.negate_bits(0x00800000U).to_uint64() & 0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_abs_bits",
+    @binary32.abs_bits(0x00800000U).to_uint64() & 0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x00800000U).to_uint64() & 0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_get_payload",
+    match @binary32.get_payload_bits(0x00800000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x00800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x00800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x00800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x00800000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x00800000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x00800000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x00800000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_class",
+    class_id(@binary32.classify_bits(0x7f7fffffU)),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x7f7fffffU)),
+    ),
+    0x0000000000000004UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 24" {
+  emit_float_record(
+    "b32_max_normal_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_negate_bits",
+    @binary32.negate_bits(0x7f7fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_abs_bits",
+    @binary32.abs_bits(0x7f7fffffU).to_uint64() & 0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x7f7fffffU).to_uint64() & 0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_get_payload",
+    match @binary32.get_payload_bits(0x7f7fffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x7f7fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x7f7fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x7f7fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x7f7fffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x7f7fffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x7f7fffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x7f7fffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_class",
+    class_id(@binary32.classify_bits(0x7f800000U)),
+    0x0000000000000006UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x7f800000U)),
+    ),
+    0x0000000000000006UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 25" {
+  emit_float_record(
+    "b32_infinity_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_negate_bits",
+    @binary32.negate_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_abs_bits",
+    @binary32.abs_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_get_payload",
+    match @binary32.get_payload_bits(0x7f800000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x7f800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x7f800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x7f800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x7f800000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x7f800000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x7f800000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x7f800000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_class",
+    class_id(@binary32.classify_bits(0x7f800001U)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x7f800001U)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 26" {
+  emit_float_record(
+    "b32_snan_min_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_negate_bits",
+    @binary32.negate_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
+    0x00000000ff800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_abs_bits",
+    @binary32.abs_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_get_payload",
+    match @binary32.get_payload_bits(0x7f800001U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x7f800001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x7f800001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x7f800001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x7f800001U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x7f800001U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x7f800001U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x7f800001U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_class",
+    class_id(@binary32.classify_bits(0x7fbfffffU)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x7fbfffffU)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 27" {
+  emit_float_record(
+    "b32_snan_max_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x7fbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_negate_bits",
+    @binary32.negate_bits(0x7fbfffffU).to_uint64() & 0xffffffffUL,
+    0x00000000ffbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_abs_bits",
+    @binary32.abs_bits(0x7fbfffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x7fbfffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_get_payload",
+    match @binary32.get_payload_bits(0x7fbfffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000003fffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x7fbfffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x7fbfffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x7fbfffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x7fbfffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fbfffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x7fbfffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fbfffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x7fbfffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fbfffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x7fbfffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fbfffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_class",
+    class_id(@binary32.classify_bits(0x7fc00000U)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x7fc00000U)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 28" {
+  emit_float_record(
+    "b32_qnan_zero_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_negate_bits",
+    @binary32.negate_bits(0x7fc00000U).to_uint64() & 0xffffffffUL,
+    0x00000000ffc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_abs_bits",
+    @binary32.abs_bits(0x7fc00000U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x7fc00000U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_get_payload",
+    match @binary32.get_payload_bits(0x7fc00000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x7fc00000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x7fc00000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x7fc00000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x7fc00000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x7fc00000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x7fc00000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x7fc00000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_class",
+    class_id(@binary32.classify_bits(0x7fffffffU)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x7fffffffU)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_nan_bits",
+    if @binary32.is_nan_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_finite_bits",
+    if @binary32.is_finite_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_is_zero_bits",
+    if @binary32.is_zero_bits(0x7fffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 29" {
+  emit_float_record(
+    "b32_qnan_max_plus_negate_bits",
+    @binary32.negate_bits(0x7fffffffU).to_uint64() & 0xffffffffUL,
+    0x00000000ffffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_abs_bits",
+    @binary32.abs_bits(0x7fffffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x7fffffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_get_payload",
+    match @binary32.get_payload_bits(0x7fffffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000003fffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x7fffffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x7fffffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x7fffffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_raw_0",
+    @binary32.copy_sign_bits(0x7fffffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fffffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x7fffffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fffffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x7fffffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fffffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x7fffffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_plus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x7fffffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_class",
+    class_id(@binary32.classify_bits(0x80000000U)),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x80000000U)),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_negate_bits",
+    @binary32.negate_bits(0x80000000U).to_uint64() & 0xffffffffUL,
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 30" {
+  emit_float_record(
+    "b32_zero_minus_abs_bits",
+    @binary32.abs_bits(0x80000000U).to_uint64() & 0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x80000000U).to_uint64() & 0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_get_payload",
+    match @binary32.get_payload_bits(0x80000000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_zero_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x80000000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x80000000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x80000000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0x80000000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x80000000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x80000000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x80000000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_zero_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_class",
+    class_id(@binary32.classify_bits(0x80000001U)),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x80000001U)),
+    ),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_negate_bits",
+    @binary32.negate_bits(0x80000001U).to_uint64() & 0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_abs_bits",
+    @binary32.abs_bits(0x80000001U).to_uint64() & 0xffffffffUL,
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 31" {
+  emit_float_record(
+    "b32_min_subnormal_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x80000001U).to_uint64() & 0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_get_payload",
+    match @binary32.get_payload_bits(0x80000001U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x80000001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x80000001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x80000001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0x80000001U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x80000001U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x80000001U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x80000001U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_min_subnormal_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_class",
+    class_id(@binary32.classify_bits(0x807fffffU)),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x807fffffU)),
+    ),
+    0x0000000000000003UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0x807fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_negate_bits",
+    @binary32.negate_bits(0x807fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_abs_bits",
+    @binary32.abs_bits(0x807fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x807fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+}
+
+///|
+test "float offline oracles 32" {
+  emit_float_record(
+    "b32_max_subnormal_minus_get_payload",
+    match @binary32.get_payload_bits(0x807fffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x807fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x807fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x807fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0x807fffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x807fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x807fffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x807fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x807fffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x807fffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x807fffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000807fffffUL,
+  )
+  emit_float_record(
+    "b32_max_subnormal_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x807fffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000007fffffUL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_class",
+    class_id(@binary32.classify_bits(0x80800000U)),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0x80800000U)),
+    ),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0x80800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_negate_bits",
+    @binary32.negate_bits(0x80800000U).to_uint64() & 0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_abs_bits",
+    @binary32.abs_bits(0x80800000U).to_uint64() & 0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0x80800000U).to_uint64() & 0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_get_payload",
+    match @binary32.get_payload_bits(0x80800000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 33" {
+  emit_float_record(
+    "b32_min_normal_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0x80800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0x80800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0x80800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0x80800000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0x80800000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0x80800000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80800000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0x80800000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x0000000080800000UL,
+  )
+  emit_float_record(
+    "b32_min_normal_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0x80800000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_class",
+    class_id(@binary32.classify_bits(0xff7fffffU)),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0xff7fffffU)),
+    ),
+    0x0000000000000005UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_negate_bits",
+    @binary32.negate_bits(0xff7fffffU).to_uint64() & 0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_abs_bits",
+    @binary32.abs_bits(0xff7fffffU).to_uint64() & 0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0xff7fffffU).to_uint64() & 0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_get_payload",
+    match @binary32.get_payload_bits(0xff7fffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0xff7fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+}
+
+///|
+test "float offline oracles 34" {
+  emit_float_record(
+    "b32_max_normal_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0xff7fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0xff7fffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0xff7fffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0xff7fffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0xff7fffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0xff7fffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_max_normal_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_class",
+    class_id(@binary32.classify_bits(0xff800000U)),
+    0x0000000000000007UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0xff800000U)),
+    ),
+    0x0000000000000007UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_negate_bits",
+    @binary32.negate_bits(0xff800000U).to_uint64() & 0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_abs_bits",
+    @binary32.abs_bits(0xff800000U).to_uint64() & 0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0xff800000U).to_uint64() & 0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_get_payload",
+    match @binary32.get_payload_bits(0xff800000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0xff800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0xff800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+}
+
+///|
+test "float offline oracles 35" {
+  emit_float_record(
+    "b32_infinity_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0xff800000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0xff800000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0xff800000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0xff800000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0xff800000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_infinity_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_class",
+    class_id(@binary32.classify_bits(0xff800001U)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0xff800001U)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_negate_bits",
+    @binary32.negate_bits(0xff800001U).to_uint64() & 0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_abs_bits",
+    @binary32.abs_bits(0xff800001U).to_uint64() & 0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0xff800001U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_get_payload",
+    match @binary32.get_payload_bits(0xff800001U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0xff800001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0xff800001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0xff800001U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 36" {
+  emit_float_record(
+    "b32_snan_min_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0xff800001U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0xff800001U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0xff800001U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0xff800001U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800001UL,
+  )
+  emit_float_record(
+    "b32_snan_min_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_class",
+    class_id(@binary32.classify_bits(0xffbfffffU)),
+    0x0000000000000008UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0xffbfffffU)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0xffbfffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_negate_bits",
+    @binary32.negate_bits(0xffbfffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_abs_bits",
+    @binary32.abs_bits(0xffbfffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0xffbfffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_get_payload",
+    match @binary32.get_payload_bits(0xffbfffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000003fffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0xffbfffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0xffbfffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0xffbfffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0xffbfffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+}
+
+///|
+test "float offline oracles 37" {
+  emit_float_record(
+    "b32_snan_max_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffbfffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0xffbfffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffbfffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0xffbfffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffbfffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0xffbfffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffbfffffUL,
+  )
+  emit_float_record(
+    "b32_snan_max_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffbfffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_class",
+    class_id(@binary32.classify_bits(0xffc00000U)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0xffc00000U)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0xffc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_negate_bits",
+    @binary32.negate_bits(0xffc00000U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_abs_bits",
+    @binary32.abs_bits(0xffc00000U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0xffc00000U).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_get_payload",
+    match @binary32.get_payload_bits(0xffc00000U) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0xffc00000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0xffc00000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0xffc00000U)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0xffc00000U, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffc00000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 38" {
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0xffc00000U, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffc00000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0xffc00000U, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffc00000U),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0xffc00000U, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_zero_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffc00000U),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_class",
+    class_id(@binary32.classify_bits(0xffffffffU)),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_portable_class",
+    class_id(
+      @binary32.portable_classify(Float::reinterpret_from_uint(0xffffffffU)),
+    ),
+    0x0000000000000009UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_nan_bits",
+    if @binary32.is_nan_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_signaling_bits",
+    if @binary32.is_signaling_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_canonical_bits",
+    if @binary32.is_canonical_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_sign_minus_bits",
+    if @binary32.is_sign_minus_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_subnormal_bits",
+    if @binary32.is_subnormal_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_finite_bits",
+    if @binary32.is_finite_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_is_zero_bits",
+    if @binary32.is_zero_bits(0xffffffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_negate_bits",
+    @binary32.negate_bits(0xffffffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_abs_bits",
+    @binary32.abs_bits(0xffffffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_canonicalize_nan_bits",
+    @binary32.canonicalize_nan_bits(0xffffffffU).to_uint64() & 0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_get_payload",
+    match @binary32.get_payload_bits(0xffffffffU) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000003fffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_portable_negate",
+    @binary32.to_bits_canonical(
+      @binary32.portable_negate(Float::reinterpret_from_uint(0xffffffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_portable_abs",
+    @binary32.to_bits_canonical(
+      @binary32.portable_abs(Float::reinterpret_from_uint(0xffffffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_canonicalize_nan",
+    @binary32.to_bits_canonical(
+      @binary32.canonicalize_nan(Float::reinterpret_from_uint(0xffffffffU)),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_raw_0",
+    @binary32.copy_sign_bits(0xffffffffU, 0x00000000U).to_uint64() &
+    0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_portable_0",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffffffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_raw_80000000",
+    @binary32.copy_sign_bits(0xffffffffU, 0x80000000U).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 39" {
+  emit_float_record(
+    "b32_qnan_max_minus_copy_portable_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffffffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_raw_7fffffff",
+    @binary32.copy_sign_bits(0xffffffffU, 0x7fffffffU).to_uint64() &
+    0xffffffffUL,
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_portable_7fffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffffffffU),
+        Float::reinterpret_from_uint(0x7fffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_raw_ffffffff",
+    @binary32.copy_sign_bits(0xffffffffU, 0xffffffffU).to_uint64() &
+    0xffffffffUL,
+    0x00000000ffffffffUL,
+  )
+  emit_float_record(
+    "b32_qnan_max_minus_copy_portable_ffffffff",
+    @binary32.to_bits_canonical(
+      @binary32.portable_copy_sign(
+        Float::reinterpret_from_uint(0xffffffffU),
+        Float::reinterpret_from_uint(0xffffffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_0_0",
+    match @binary32.set_payload_bits(0x00000000U, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_0_0",
+    match @binary32.set_payload_signaling_bits(0x00000000U, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_0_1",
+    match @binary32.set_payload_bits(0x00000001U, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x000000007fc00001UL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_0_1",
+    match @binary32.set_payload_signaling_bits(0x00000001U, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x000000007f800001UL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_0_3fffff",
+    match @binary32.set_payload_bits(0x003fffffU, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x000000007fffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_0_3fffff",
+    match @binary32.set_payload_signaling_bits(0x003fffffU, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x000000007fbfffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_0_400000",
+    match @binary32.set_payload_bits(0x00400000U, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_0_400000",
+    match @binary32.set_payload_signaling_bits(0x00400000U, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_0_ffffffff",
+    match @binary32.set_payload_bits(0xffffffffU, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_0_ffffffff",
+    match @binary32.set_payload_signaling_bits(0xffffffffU, sign_minus=false) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_1_0",
+    match @binary32.set_payload_bits(0x00000000U, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000ffc00000UL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_1_0",
+    match @binary32.set_payload_signaling_bits(0x00000000U, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_1_1",
+    match @binary32.set_payload_bits(0x00000001U, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000ffc00001UL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_1_1",
+    match @binary32.set_payload_signaling_bits(0x00000001U, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000ff800001UL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_1_3fffff",
+    match @binary32.set_payload_bits(0x003fffffU, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000ffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_1_3fffff",
+    match @binary32.set_payload_signaling_bits(0x003fffffU, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0x00000000ffbfffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_1_400000",
+    match @binary32.set_payload_bits(0x00400000U, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_1_400000",
+    match @binary32.set_payload_signaling_bits(0x00400000U, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_bits_1_ffffffff",
+    match @binary32.set_payload_bits(0xffffffffU, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_set_payload_signaling_bits_1_ffffffff",
+    match @binary32.set_payload_signaling_bits(0xffffffffU, sign_minus=true) {
+      Some(p) => p.to_uint64() & 0xffffffffUL
+      None => 0xffffffffffffffffUL
+    },
+    0xffffffffffffffffUL,
+  )
+}

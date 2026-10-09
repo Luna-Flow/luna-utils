@@ -49,9 +49,10 @@ pub fn is_signaling_bits(bits : UInt64) -> Bool {
 }
 
 ///|
-/// All non-NaN binary encodings are canonical; NaN uses one positive quiet encoding.
+/// Every binary interchange encoding is canonical (IEEE 754-2019 §5.7.2).
 pub fn is_canonical_bits(bits : UInt64) -> Bool {
-  !is_nan_bits(bits) || bits == 0x7ff8000000000000UL
+  ignore(bits)
+  true
 }
 
 ///|
@@ -171,27 +172,28 @@ pub fn canonicalize_nan(x : Double) -> Double {
 
 ///|
 /// Classify the portable numeric view. Use classify_bits for signaling/payload-sensitive input.
-pub fn classify(x : Double) -> Classification {
+pub fn portable_classify(x : Double) -> Classification {
   classify_bits(to_bits_canonical(x))
 }
 
 ///|
 /// Read sign from the portable numeric view (NaN has positive canonical sign).
-pub fn is_sign_minus(x : Double) -> Bool {
+pub fn portable_is_sign_minus(x : Double) -> Bool {
   is_sign_minus_bits(to_bits_canonical(x))
 }
 
 ///|
 /// Numeric signaling state is intentionally not observable across backends.
-pub fn is_signaling(x : Double) -> Bool {
+pub fn portable_is_signaling(x : Double) -> Bool {
   ignore(x)
   false
 }
 
 ///|
-/// The numeric view is canonicalized before this predicate is evaluated.
-pub fn is_canonical(x : Double) -> Bool {
-  is_canonical_bits(to_bits_canonical(x))
+/// Every value of a binary interchange format is canonical, including NaNs.
+pub fn portable_is_canonical(x : Double) -> Bool {
+  ignore(x)
+  true
 }
 
 ///|
@@ -215,7 +217,7 @@ pub fn is_zero(x : Double) -> Bool {
 ///|
 /// Copy a numeric sign without arithmetic. NaN inputs use positive canonical sign;
 /// a NaN magnitude returns canonical NaN. Use copy_sign_bits for full encodings.
-pub fn copy_sign(magnitude : Double, sign : Double) -> Double {
+pub fn portable_copy_sign(magnitude : Double, sign : Double) -> Double {
   canonicalize_nan_bits(
     copy_sign_bits(to_bits_canonical(magnitude), to_bits_canonical(sign)),
   ).reinterpret_as_double()
@@ -223,13 +225,13 @@ pub fn copy_sign(magnitude : Double, sign : Double) -> Double {
 
 ///|
 /// Toggle numeric sign by bits; NaN results are canonicalized.
-pub fn negate(x : Double) -> Double {
+pub fn portable_negate(x : Double) -> Double {
   canonicalize_nan_bits(negate_bits(to_bits_canonical(x))).reinterpret_as_double()
 }
 
 ///|
 /// Clear numeric sign by bits; NaN results are canonicalized.
-pub fn abs(x : Double) -> Double {
+pub fn portable_abs(x : Double) -> Double {
   abs_bits(to_bits_canonical(x)).reinterpret_as_double()
 }
 

@@ -3,7 +3,7 @@
 
 Python float(int) and float(Fraction) use nearest, ties-to-even on supported
 CPython IEEE binary64 hosts. Exact rational values model each rounding point.
-This bootstrap corpus tests core primitives, not future luna-utils algorithms.
+The core bootstrap corpus is extended by float_oracles for luna-utils representation APIs.
 """
 import argparse
 from fractions import Fraction
@@ -56,9 +56,24 @@ def generate():
         lines.extend([f"  let value = ({expr}).reinterpret_as_uint64()", f"  assert_eq(value, 0x{case['bits']}UL)",
                       '  let hex = value.to_string(radix=16)', '  let padded = "0".repeat(16 - hex.length()) + hex',
                       f'  println("LUNA_BITS {case["id"]} " + padded)'])
+    # Representation oracles use a separate offline integer model; no library calls.
+    from float_oracles import generate_float_cases, class_encoder
+    float_cases = generate_float_cases()
     lines.append('}')
+    lines.extend(class_encoder())
+    lines.extend(['///|', 'fn emit_float_record(id : String, value : UInt64, expected : UInt64) -> Unit raise {',
+                  '  assert_eq(value, expected)', '  let hex = value.to_string(radix=16)',
+                  '  let padded = "0".repeat(16 - hex.length()) + hex',
+                  '  println("LUNA_BITS " + id + " " + padded)', '}'])
+    # Keep each test small enough for optimizers; no runtime dependency on Python.
+    for start in range(0, len(float_cases), 25):
+        lines.extend(['///|', f'test "float offline oracles {start // 25}" {{'])
+        for case in float_cases[start:start + 25]:
+            lines.append(f'  emit_float_record("{case["id"]}", {case["expression"]}, 0x{case["bits"]}UL)')
+        lines.append('}')
     return {ROOT/'testdata/oracles.json': json.dumps(dict(format="binary64", rounding="nearest_ties_even", cases=cases), indent=2)+'\n',
-            ROOT/'testdata/expected.bits': ''.join(f"LUNA_BITS {case['id']} {case['bits']}\n" for case in cases),
+            ROOT/'testdata/float_oracles.json': json.dumps(dict(model="IEEE binary interchange integer fields; portable NaN policy", cases=float_cases), indent=2)+'\n',
+            ROOT/'testdata/expected.bits': ''.join(f"LUNA_BITS {case['id']} {case['bits']}\n" for case in cases + float_cases),
             ROOT/'src/ci_probe/oracles_wbtest.mbt': subprocess.run(['moonfmt', '-'], input='\n'.join(lines)+'\n', text=True, capture_output=True, check=True).stdout}
 
 def main():

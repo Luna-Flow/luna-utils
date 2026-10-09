@@ -6,25 +6,17 @@ import {
 }
 
 // Values
-pub fn abs(Double) -> Double
-
 pub fn abs_bits(UInt64) -> UInt64
 
 pub fn canonicalize_nan(Double) -> Double
 
 pub fn canonicalize_nan_bits(UInt64) -> UInt64
 
-pub fn classify(Double) -> Classification
-
 pub fn classify_bits(UInt64) -> Classification
-
-pub fn copy_sign(Double, Double) -> Double
 
 pub fn copy_sign_bits(UInt64, UInt64) -> UInt64
 
 pub fn get_payload_bits(UInt64) -> UInt64?
-
-pub fn is_canonical(Double) -> Bool
 
 pub fn is_canonical_bits(UInt64) -> Bool
 
@@ -34,11 +26,7 @@ pub fn is_finite_bits(UInt64) -> Bool
 
 pub fn is_nan_bits(UInt64) -> Bool
 
-pub fn is_sign_minus(Double) -> Bool
-
 pub fn is_sign_minus_bits(UInt64) -> Bool
-
-pub fn is_signaling(Double) -> Bool
 
 pub fn is_signaling_bits(UInt64) -> Bool
 
@@ -50,9 +38,21 @@ pub fn is_zero(Double) -> Bool
 
 pub fn is_zero_bits(UInt64) -> Bool
 
-pub fn negate(Double) -> Double
-
 pub fn negate_bits(UInt64) -> UInt64
+
+pub fn portable_abs(Double) -> Double
+
+pub fn portable_classify(Double) -> Classification
+
+pub fn portable_copy_sign(Double, Double) -> Double
+
+pub fn portable_is_canonical(Double) -> Bool
+
+pub fn portable_is_sign_minus(Double) -> Bool
+
+pub fn portable_is_signaling(Double) -> Bool
+
+pub fn portable_negate(Double) -> Double
 
 pub fn radix() -> Int
 

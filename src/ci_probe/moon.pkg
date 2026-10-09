@@ -1,5 +1,7 @@
 import {
   "moonbitlang/core/env",
+  "Luna-Flow/luna-utils/float",
+  "Luna-Flow/luna-utils/float/binary32",
 } for "wbtest"
 
 options(
