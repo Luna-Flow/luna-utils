@@ -30,6 +30,10 @@ jobs:
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
       - name: Record toolchain
         run: moon version --all
+      - name: Resolve package dependencies
+        run: |
+          moon update
+          moon install
       - name: Verify committed oracle fixtures and gate
         run: |
           python3 tools/generate_oracles.py --check
