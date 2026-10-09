@@ -30,4 +30,5 @@ zh_CN/ja_JP translations are synchronized.
 
 CI: debug/release four-backend conformance gates, Linux GCC and macOS Clang
 native checks with FP contraction disabled, exact bit transcript comparison,
-offline binary64 oracle fixtures, and coverage artifacts (#20).
+offline binary64 oracle fixtures, a release-proof FP contraction probe, a pinned
+MoonBit toolchain, and coverage artifacts (#20).

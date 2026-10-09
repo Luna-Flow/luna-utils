@@ -1,9 +1,13 @@
 name: Numeric CI
 on:
   push:
+    branches: [main]
   pull_request:
 permissions:
   contents: read
+env:
+  # Pinned toolchain; bump deliberately together with any fixture changes.
+  MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
 jobs:
   test:
     strategy:
@@ -26,10 +30,12 @@ jobs:
           python-version: '3.12'
       - name: Install MoonBit
         run: |
-          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
-      - name: Record toolchain
-        run: moon version --all
+      - name: Record and verify toolchain
+        run: |
+          moon version --all
+          moon version --all | grep -F "moonc v$MOONBIT_INSTALL_VERSION"
       - name: Resolve package dependencies
         run: |
           moon update
