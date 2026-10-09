@@ -100,3 +100,5 @@ docs: add documentation
 - Run `moon check --target all` and `moon test --target all`; validate debug and release as required by the issue.
 - Synchronize README, CHANGELOG, API/design/tutorial pages and both gettext catalogs; run `lunadoc update` and `lunadoc check --compile`.
 - Use an English Conventional Commit and wait for explicit user review before merging.
+
+See [backend conformance testing](testing.md) for the CI contract, offline oracle corpus and local commands.

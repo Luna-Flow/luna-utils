@@ -20,3 +20,6 @@ The manual is published at
 with Simplified Chinese and Japanese translations. English source lives in
 [doc/manual](./doc/manual/index.md); translations are gettext catalogs in
 `doc/locale`. See the [contribution checklist](./doc/manual/contributing.md).
+
+See [backend conformance testing](doc/manual/testing.md) for the CI contract,
+offline oracle corpus and local commands.
