@@ -357,7 +357,7 @@ msgid "The Numeric CI workflow runs `moon check --target all --deny-warn` and de
 msgstr ""
 
 #: manual/testing.md:5
-msgid "Each backend prints ordered `LUNA_BITS <case> <16 lowercase hex digits>` records. The gate rejects missing, duplicate, malformed, reordered or changed records, checks every transcript against the committed oracle, and compares all ten backend, compiler and optimization-mode transcripts. Logs and bit transcripts are downloadable CI artifacts. The wasm-gc job also runs `moon test --enable-coverage` and publishes summary and Cobertura coverage reports."
+msgid "Each backend prints ordered `LUNA_BITS <case> <16 lowercase hex digits>` records. The gate rejects missing, duplicate, malformed, reordered or changed records, checks every transcript against the committed oracle, and compares all ten backend, compiler and optimization-mode transcripts. Logs and bit transcripts are downloadable CI artifacts. The wasm-gc job also runs `moon test --enable-coverage` and publishes summary and Cobertura coverage reports. While the module has no library source outside test files, as in the current empty root API, there is nothing to instrument; the job then records that the report was skipped instead of failing."
 msgstr ""
 
 #: manual/testing.md:7

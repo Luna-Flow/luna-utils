@@ -61,8 +61,13 @@ jobs:
         run: |
           moon coverage clean
           moon test --target wasm-gc --enable-coverage --deny-warn
-          moon coverage report -f summary > coverage_summary.txt
-          moon coverage report -f cobertura -o _build/ci/coverage.xml
+          # moon coverage report aborts when no library source is instrumented.
+          if git ls-files -- '*.mbt' | grep -Evq '_(wb)?test\.mbt$'; then
+            moon coverage report -f summary > coverage_summary.txt
+            moon coverage report -f cobertura -o _build/ci/coverage.xml
+          else
+            echo 'No library source to instrument; coverage report skipped.' > coverage_summary.txt
+          fi
           cat coverage_summary.txt
       - uses: actions/upload-artifact@v4
         if: always()
