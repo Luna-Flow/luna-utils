@@ -44,12 +44,13 @@ def generate():
         elif case['operation'] == 'int64_to_double':
             expr = f"({case['input']}L).to_double()"
         else:
-            # Array reads keep operands runtime values, preserving a meaningful
-            # generated C contraction check under optimization.
-            lines.extend(['  let operands : Array[UInt64] = [' + ', '.join('0x'+v+'UL' for v in case['inputs']) + ']',
-                          '  let a = operands[0].reinterpret_as_double()',
-                          '  let b = operands[1].reinterpret_as_double()',
-                          '  let c = operands[2].reinterpret_as_double()',
+            # Constant operands are folded by optimizing C compilers before
+            # -ffp-contract applies, hiding contraction in release builds. XOR
+            # each operand with a mask derived from the process argument count,
+            # which no compiler can see; it is zero for any real argument list.
+            lines.extend(['  let runtime_mask = (@env.args().length() >> 30).to_uint64()',
+                          '  assert_eq(runtime_mask, 0UL)',
+                          *[f'  let {n} = (0x{v}UL ^ runtime_mask).reinterpret_as_double()' for n, v in zip('abc', case['inputs'])],
                           '  let product = a * b'])
             expr = "product + c"
         lines.extend([f"  let value = ({expr}).reinterpret_as_uint64()", f"  assert_eq(value, 0x{case['bits']}UL)",

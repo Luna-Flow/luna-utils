@@ -1,3 +1,7 @@
+import {
+  "moonbitlang/core/env",
+} for "wbtest"
+
 options(
   link: {
     "native": {
