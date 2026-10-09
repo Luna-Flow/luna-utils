@@ -8,119 +8,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: conf.json:summary
-msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
+msgid "Backend-independent numeric base for Luna-Flow; 0.2.0 removes the legacy API, with numeric packages still planned."
 msgstr ""
 
 #: manual/api/array_utils.md:1
-msgid "array_utils API"
+msgid "Array API migration"
 msgstr ""
 
 #: manual/api/array_utils.md:3
-msgid "`array_utils` is the part of the package `Luna-Flow/luna-utils` defined in [`src/array_utils.mbt`](../../../src/array_utils.mbt): twelve functions on `Array[T]`. They are package-level functions, not methods, so another package calls them as `@luna-utils.arr_sum(xs)`. The traits `AddMonoid` and `Num` come from [luna-generic](https://luna-flow.github.io/en/luna-generic/)."
+msgid "All names below were exported by 0.1.x and are absent in 0.2.0. These core operations are migration candidates, not new luna-utils exports or a promise of identical numeric semantics."
 msgstr ""
 
 #: manual/api/array_utils.md:5
-#: manual/tutorial/array_utils.md:5
-msgid "Sums"
+msgid "Removed API"
 msgstr ""
 
-#: manual/api/array_utils.md:13
-msgid "`arr_sum(arr)` adds the elements from left to right, starting from `zero()`. The sum of an empty array is `zero()`."
+#: manual/api/array_utils.md:5
+msgid "Core migration"
 msgstr ""
 
-#: manual/api/array_utils.md:15
-msgid "`arr_abs_sum(arr)` adds the absolute values of the elements in the same way. The absolute value of `x` is `-x` when `x < zero()` and `x` otherwise."
+#: manual/api/array_utils.md:16
+msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(Int::min_value)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
 msgstr ""
 
-#: manual/api/array_utils.md:17
-msgid "`zero_arr(n)` returns a new array of length `n` whose elements are all `zero()`. The element type is chosen by the expected type, for example `let zeros : Array[Double] = zero_arr(3)`."
+#: manual/api/array_utils.md:18
+msgid "The legacy extrema and `same`/`map_same` panicked on empty arrays. Core iterator extrema return `None`; `all` returns `true`. For `same`, choose the first element only after handling the empty case. Mapping followed by `all` preserves eager mapping; putting `f` inside `all` short-circuits and may change effects or exceptions."
 msgstr ""
 
-#: manual/api/array_utils.md:19
-msgid "Extremes"
-msgstr ""
-
-#: manual/api/array_utils.md:26
-msgid "`arr_max(arr)` and `arr_min(arr)` return the largest and the smallest element; when several elements compare equal, the first of them is returned. Both panic on an empty array."
-msgstr ""
-
-#: manual/api/array_utils.md:28
-msgid "Order and search"
-msgstr ""
-
-#: manual/api/array_utils.md:36
-msgid "`reverse(arr)` returns a new array with the elements in reverse order and leaves `arr` unchanged. `reverse_inplace(arr)` reverses `arr` itself by swapping elements from both ends toward the middle; an empty array is left as it is."
-msgstr ""
-
-#: manual/api/array_utils.md:38
-msgid "`find(arr, value)` returns `Some(i)` for the first index `i` with `arr[i] == value`, or `None` when no element equals `value`."
-msgstr ""
-
-#: manual/api/array_utils.md:40
-msgid "Uniformity"
-msgstr ""
-
-#: manual/api/array_utils.md:49
-#: manual/index.md:9
-msgid "Function"
-msgstr ""
-
-#: manual/api/array_utils.md:49
-msgid "Returns `true` when"
-msgstr ""
-
-#: manual/api/array_utils.md:49
-msgid "On an empty array"
-msgstr ""
-
-#: manual/api/array_utils.md:51
-msgid "every element equals `arr[0]`"
-msgstr ""
-
-#: manual/api/array_utils.md:51
-#: manual/api/array_utils.md:53
-msgid "panics"
-msgstr ""
-
-#: manual/api/array_utils.md:52
-msgid "every element equals `sample`"
-msgstr ""
-
-#: manual/api/array_utils.md:52
-#: manual/api/array_utils.md:54
-msgid "returns `true`"
-msgstr ""
-
-#: manual/api/array_utils.md:53
-msgid "every `f(x)` equals `f(arr[0])`"
-msgstr ""
-
-#: manual/api/array_utils.md:54
-msgid "every `f(x)` equals `sample`"
-msgstr ""
-
-#: manual/api/array_utils.md:56
-msgid "The checks stop at the first element that differs. `map_same` and `map_same_to` build the mapped array first, so `f` is called once for every element."
+#: manual/api/array_utils.md:20
+msgid "Core extrema use `Compare`; they are not the planned IEEE 754 minimum/maximum of #23. Review NaN, signed zero and equal-element selection separately. `Double::abs` also clears the sign of negative zero, whereas the legacy comparison-based absolute value retained it."
 msgstr ""
 
 #: manual/api/comparison.md:1
-msgid "comparison API"
+msgid "Comparison API migration"
 msgstr ""
 
 #: manual/api/comparison.md:3
-msgid "`comparison` is the part of the package `Luna-Flow/luna-utils` defined in [`src/comparison.mbt`](../../../src/comparison.mbt): two functions that compare a value with a closed range. Both need only `Compare`, so they work for numbers, strings and any other ordered type."
+msgid "The 0.1.x functions `clamp` and `is_between` are removed. For ordered inputs use `value.clamp(min=lo, max=hi)` where the type provides it, or import `moonbitlang/core/cmp` and use `@cmp.maximum(lo, @cmp.minimum(value, hi))`. Membership can be written as `lo <= value && value <= hi`."
 msgstr ""
 
-#: manual/api/comparison.md:12
-msgid "`clamp(value, min, max)` returns `min` when `value < min`, `max` when `value > max`, and `value` otherwise."
-msgstr ""
-
-#: manual/api/comparison.md:14
-msgid "The bounds are not checked. When `min > max`, the result is `min` for a value below `min` and `max` for every other value."
-msgstr ""
-
-#: manual/api/comparison.md:18
-msgid "`is_between(value, min, max)` returns `true` when `min <= value` and `value <= max`; both bounds belong to the range. When `min > max`, it returns `false` for every value."
+#: manual/api/comparison.md:5
+msgid "Require `lo <= hi` and a consistent total order for the generic expression. Core numeric clamp aborts for reversed bounds; legacy clamp did not validate them. Floating-point NaN is unordered, so operator-based membership and Compare-based extrema need separate contracts. Do not infer IEEE 754 semantics, signed-zero selection or exception flags from this migration."
 msgstr ""
 
 #: manual/contributing.md:1
@@ -300,7 +228,7 @@ msgid "Commit messages should be in **English**, concise, and precise."
 msgstr ""
 
 #: manual/contributing.md:75
-msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
+msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `docs:` to indicate the type of change."
 msgstr ""
 
 #: manual/contributing.md:84
@@ -320,7 +248,7 @@ msgid "Code review"
 msgstr ""
 
 #: manual/contributing.md:91
-msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
+msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod`."
 msgstr ""
 
 #: manual/contributing.md:92
@@ -335,105 +263,60 @@ msgstr ""
 msgid "Reviewers should provide constructive feedback to improve the code."
 msgstr ""
 
+#: manual/contributing.md:96
+msgid "0.2.0 review checklist"
+msgstr ""
+
+#: manual/contributing.md:98
+msgid "Confirm core-only dependencies and regenerate the public interface with `moon info`."
+msgstr ""
+
+#: manual/contributing.md:99
+msgid "Record the old API boundary, downstream migration and deletion regression evidence."
+msgstr ""
+
+#: manual/contributing.md:100
+msgid "Run `moon check --target all` and `moon test --target all`; validate debug and release as required by the issue."
+msgstr ""
+
+#: manual/contributing.md:101
+msgid "Synchronize README, CHANGELOG, API/design/tutorial pages and both gettext catalogs; run `lunadoc update` and `lunadoc check --compile`."
+msgstr ""
+
+#: manual/contributing.md:102
+msgid "Use an English Conventional Commit and wait for explicit user review before merging."
+msgstr ""
+
 #: manual/design/array_utils.md:1
-msgid "array_utils design"
+msgid "Array migration design"
 msgstr ""
 
 #: manual/design/array_utils.md:3
-msgid "`array_utils` collects small generic helpers on `Array[T]` in [`src/array_utils.mbt`](../../../src/array_utils.mbt). This page explains the choices behind them and the behaviour that maintainers must keep stable."
+msgid "Removing the legacy helpers breaks the dependency from luna-utils to luna-generic, allowing luna-utils to become the bottom numeric layer. No compatibility wrapper or replacement trait is introduced. Applications own their folds, identities, overflow policy and empty-input policy."
 msgstr ""
 
 #: manual/design/array_utils.md:5
-msgid "Constraints from luna-generic"
+msgid "For a finite array of length n, core fold, all, search and iterator extrema visit at most n elements and terminate when their callbacks terminate. They take O(n) time and O(1) auxiliary space; all and search may stop early. Reversal takes O(n) time: rev allocates O(n) output, rev_in_place uses O(1) auxiliary space. Array construction requires a nonnegative representable length and available memory."
 msgstr ""
 
 #: manual/design/array_utils.md:7
-msgid "Each function asks for the weakest constraint it needs. `reverse` and `reverse_inplace` need none, `find` and the uniformity checks need `Eq`, and `arr_max` and `arr_min` need `Compare`. `arr_sum` and `zero_arr` need only `AddMonoid` from luna-generic, that is `zero()` and `+`, so they work for every type with an additive monoid and not only for numbers. `arr_abs_sum` needs `Num` for negation and `Compare` to find the sign."
+msgid "Known downstream: calculus-numerical <= 0.3.1 used the old helpers; its WIP has a local legacy copy. Audit import sites before upgrading. Issue #6 becomes obsolete when arr_abs_sum is removed, rather than being fixed by a new numeric algorithm."
 msgstr ""
 
 #: manual/design/array_utils.md:9
-msgid "The package imports luna-generic under the alias `lf_alg`, and [`src/alias.mbt`](../../../src/alias.mbt) uses MoonBit's `using` declaration to make `AddMonoid` and `Num` available without a prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`."
-msgstr ""
-
-#: manual/design/array_utils.md:11
-msgid "Functions instead of methods"
-msgstr ""
-
-#: manual/design/array_utils.md:13
-msgid "MoonBit does not let a package define methods on `Array`, which belongs to the core library, so the helpers are package-level functions."
-msgstr ""
-
-#: manual/design/array_utils.md:15
-msgid "Empty arrays"
-msgstr ""
-
-#: manual/design/array_utils.md:17
-msgid "The functions that need an element to start from read `arr[0]` and therefore panic on an empty array: `arr_max`, `arr_min`, `same` and `map_same`. They do not return an `Option`. The other functions have a natural answer for an empty array and return it: `zero()` for the sums, `true` for `same_to` and `map_same_to`, `None` for `find`, and an empty array for `reverse`. Keep this split when adding functions, or document the exception."
-msgstr ""
-
-#: manual/design/array_utils.md:19
-msgid "Allocation"
-msgstr ""
-
-#: manual/design/array_utils.md:21
-msgid "`reverse`, `zero_arr`, `map_same` and `map_same_to` allocate a new array. `reverse_inplace` mutates its argument, and the other functions only read."
-msgstr ""
-
-#: manual/design/array_utils.md:23
-#: manual/design/comparison.md:16
-msgid "Maintenance notes"
-msgstr ""
-
-#: manual/design/array_utils.md:25
-msgid "Update this page and the [API reference](../api/array_utils.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`."
-msgstr ""
-
-#: manual/design/array_utils.md:26
-msgid "The doc comment of `reverse_inplace` in the source says that it panics on an empty array. It does not: the loop does not run, and the array is left unchanged."
+msgid "Implementation evidence: migration examples were checked with moon 0.1.20260920, moonc v0.10.14 and bundled core 0.10.14+7d59c7ec9. The relevant core sources are builtin/array.mbt, builtin/iterator.mbt, builtin/int.mbt, builtin/double.mbt and cmp/cmp.mbt. See the [official MoonBit documentation](https://docs.moonbitlang.com/en/latest/) for language and package rules. These are version-specific implementation observations, not formal verification or a standards-conformance proof."
 msgstr ""
 
 #: manual/design/comparison.md:1
-msgid "comparison design"
+msgid "Numeric base design"
 msgstr ""
 
 #: manual/design/comparison.md:3
-msgid "`comparison` holds the range helpers `clamp` and `is_between` in [`src/comparison.mbt`](../../../src/comparison.mbt). This page records the conventions they share and the behaviour that maintainers must keep stable."
+msgid "Future floating-point operations must define IEEE 754-2019 semantics; future integer operations must define ISO/IEC 10967-1 semantics. Definitions must state domain, exceptional inputs, rounding, error bounds, complexity and termination. Tests support those contracts but do not prove them. No such numeric implementation is added by the legacy removal."
 msgstr ""
 
 #: manual/design/comparison.md:5
-msgid "Conventions"
-msgstr ""
-
-#: manual/design/comparison.md:7
-msgid "Both functions take the value first and the bounds after it, in the order `min`, `max`."
-msgstr ""
-
-#: manual/design/comparison.md:8
-msgid "Ranges are closed: a value equal to a bound is inside the range."
-msgstr ""
-
-#: manual/design/comparison.md:9
-msgid "The only constraint is `Compare`, so the functions do not depend on luna-generic and apply to any ordered type, including `String`."
-msgstr ""
-
-#: manual/design/comparison.md:10
-msgid "The bounds are not validated. Neither function aborts when `min > max`; the [API reference](../api/comparison.md) states what they return in that case."
-msgstr ""
-
-#: manual/design/comparison.md:12
-msgid "Consistency"
-msgstr ""
-
-#: manual/design/comparison.md:14
-msgid "For `min <= max`, `is_between(v, min, max)` is `true` exactly when `clamp(v, min, max)` returns `v`. Changes to one function must keep this relation."
-msgstr ""
-
-#: manual/design/comparison.md:18
-msgid "Update this page and the [API reference](../api/comparison.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`."
-msgstr ""
-
-#: manual/design/comparison.md:19
-msgid "Validating the bounds would change the behaviour described above; document it here if it is ever introduced."
+msgid "Keep pure numeric transformations separate from flags and other effects. Backend independence must be checked on wasm, wasm-gc, js and native in debug and release, with Linux gcc and macOS clang. Issue #20 supplies the CI foundation; it does not turn empty-package builds into numeric conformance evidence."
 msgstr ""
 
 #: manual/index.md:1
@@ -441,187 +324,45 @@ msgid "luna-utils"
 msgstr ""
 
 #: manual/index.md:3
-msgid "`luna-utils` is a small utility package for Luna-Flow projects. It provides array helpers and comparison helpers whose numeric constraints come from the traits of [luna-generic](https://luna-flow.github.io/en/luna-generic/), so they work for any type that implements the required structure."
+msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. The module depends only on `moonbitlang/core`; the legacy array and comparison API has been removed. At this migration stage the root package exports no functions, types or traits."
 msgstr ""
 
 #: manual/index.md:5
-msgid "Public functions"
+msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, classification, stable hash, text, bigint, software FMA and libm (#21–#30) are not implemented by this change. The placement of libm remains undecided."
 msgstr ""
 
 #: manual/index.md:7
-msgid "The package exports only functions; it defines no types or traits of its own."
+msgid "The generated interface [pkg.generated.mbti](../../src/pkg.generated.mbti) is the public-name authority for this checkout. Published Mooncakes documentation may still describe an older release. Source filenames are not MoonBit package boundaries."
 msgstr ""
 
 #: manual/index.md:9
-msgid "Constraint"
-msgstr ""
-
-#: manual/index.md:9
-msgid "Behaviour"
+msgid "Migration manual"
 msgstr ""
 
 #: manual/index.md:11
-msgid "Sum of the elements; `zero()` for an empty array."
-msgstr ""
-
-#: manual/index.md:12
-msgid "Sum of the absolute values of the elements."
-msgstr ""
-
-#: manual/index.md:13
-msgid "Array of length `n` filled with `zero()`."
-msgstr ""
-
-#: manual/index.md:14
-msgid "Largest or smallest element; panics on an empty array."
-msgstr ""
-
-#: manual/index.md:15
-msgid "Index of the first occurrence of a value, or `None`."
-msgstr ""
-
-#: manual/index.md:16
-#: manual/index.md:17
-msgid "none"
-msgstr ""
-
-#: manual/index.md:16
-msgid "New array with the elements in reverse order."
-msgstr ""
-
-#: manual/index.md:17
-msgid "Reverses an array in place."
-msgstr ""
-
-#: manual/index.md:18
-msgid "Whether all elements equal the first; panics on an empty array."
-msgstr ""
-
-#: manual/index.md:19
-msgid "Whether all elements equal a given sample."
-msgstr ""
-
-#: manual/index.md:20
-msgid "`Eq` on the result"
-msgstr ""
-
-#: manual/index.md:20
-msgid "`same` and `same_to` applied to the mapped array."
-msgstr ""
-
-#: manual/index.md:21
-msgid "Restricts a value to the closed range from `min` to `max`."
-msgstr ""
-
-#: manual/index.md:22
-msgid "Whether a value lies in the closed range from `min` to `max`."
-msgstr ""
-
-#: manual/index.md:24
-msgid "The interface file [pkg.generated.mbti](../../src/pkg.generated.mbti) is the authoritative list of signatures, and the generated API documentation is on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-utils)."
-msgstr ""
-
-#: manual/index.md:26
-msgid "Modules"
-msgstr ""
-
-#: manual/index.md:28
-msgid "The package `Luna-Flow/luna-utils` has two source files, which the manual documents as two modules:"
-msgstr ""
-
-#: manual/index.md:30
-msgid "`array_utils`, in [`src/array_utils.mbt`](../../src/array_utils.mbt), holds the functions on arrays: sums, extremes, search, reversal and uniformity checks. See its [API reference](api/array_utils.md), [design notes](design/array_utils.md) and [tutorial](tutorial/array_utils.md)."
-msgstr ""
-
-#: manual/index.md:31
-msgid "`comparison`, in [`src/comparison.mbt`](../../src/comparison.mbt), holds `clamp` and `is_between`, which compare a value with a closed range. See its [API reference](api/comparison.md), [design notes](design/comparison.md) and [tutorial](tutorial/comparison.md)."
-msgstr ""
-
-#: manual/index.md:33
-msgid "Contributing"
-msgstr ""
-
-#: manual/index.md:35
-msgid "Code style, naming, commit and review rules are in the [contribution guidelines](contributing.md)."
+msgid "Existing page paths remain available as migration guidance: array [API](api/array_utils.md), [design](design/array_utils.md), [tutorial](tutorial/array_utils.md); comparison [API](api/comparison.md), [design](design/comparison.md), [tutorial](tutorial/comparison.md). See the [contribution checklist](contributing.md) before opening a pull request."
 msgstr ""
 
 #: manual/tutorial/array_utils.md:1
-msgid "array_utils tutorial"
+msgid "Array migration tutorial"
 msgstr ""
 
 #: manual/tutorial/array_utils.md:3
-msgid "This tutorial walks through the array helpers with small examples taken from the doc comments and tests in `src`. To use them in your own module, add the dependency with `moon add Luna-Flow/luna-utils` and import the package `Luna-Flow/luna-utils`; the functions are then available as `@luna-utils.arr_sum` and so on. The examples below run inside the package and omit the prefix."
+msgid "These examples use core only; do not import luna-utils for the removed helpers. The chosen Int identity is zero."
 msgstr ""
 
-#: manual/tutorial/array_utils.md:7
-msgid "`arr_sum` works for any element type with an additive monoid, and `zero_arr` creates an array of zeros of the expected type:"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:18
-msgid "Extremes and search"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:28
-msgid "`arr_max` and `arr_min` panic on an empty array, so check `xs.is_empty()` first when the array may be empty."
-msgstr ""
-
-#: manual/tutorial/array_utils.md:30
-msgid "Reversing"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:32
-msgid "`reverse` returns a new array, while `reverse_inplace` changes its argument:"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:42
-msgid "Checking uniformity"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:44
-msgid "`same` and `same_to` compare the elements themselves; `map_same` and `map_same_to` compare their images under a function:"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:53
-msgid "`same` and `map_same` panic on an empty array. When the array may be empty and you know the expected value, use `same_to` or `map_same_to`, which return `true` for an empty array."
-msgstr ""
-
-#: manual/tutorial/array_utils.md:55
-#: manual/tutorial/comparison.md:32
-msgid "Next steps"
-msgstr ""
-
-#: manual/tutorial/array_utils.md:57
-msgid "The [API reference](../api/array_utils.md) gives every signature, and the [design notes](../design/array_utils.md) explain the constraints and the treatment of empty arrays. Before relying on edge-case behaviour, check it against the tests in `src/array_utils_test.mbt`."
+#: manual/tutorial/array_utils.md:25
+msgid "The examples cover ordinary representable integers. Read the [migration API](../api/array_utils.md) before handling overflow, NaN, empty input or effectful mapping."
 msgstr ""
 
 #: manual/tutorial/comparison.md:1
-msgid "comparison tutorial"
+msgid "Comparison migration tutorial"
 msgstr ""
 
 #: manual/tutorial/comparison.md:3
-msgid "This tutorial shows the two range helpers with examples taken from the doc comments and tests in `src`. As in the [array_utils tutorial](array_utils.md), the examples run inside the package; from another package, call the functions as `@luna-utils.clamp` and `@luna-utils.is_between`."
+msgid "Use a type-provided clamp for valid ordered bounds. This example requires no luna-utils import."
 msgstr ""
 
-#: manual/tutorial/comparison.md:5
-msgid "Clamping a value"
-msgstr ""
-
-#: manual/tutorial/comparison.md:7
-msgid "`clamp` moves a value into a range, and leaves it unchanged when it is already inside:"
-msgstr ""
-
-#: manual/tutorial/comparison.md:15
-msgid "Any type with `Compare` works, for example strings in lexicographic order:"
-msgstr ""
-
-#: manual/tutorial/comparison.md:22
-msgid "Testing membership"
-msgstr ""
-
-#: manual/tutorial/comparison.md:24
-msgid "`is_between` tests whether a value lies in a range; both bounds are included:"
-msgstr ""
-
-#: manual/tutorial/comparison.md:34
-msgid "Neither function checks that `min <= max`; pass the bounds in that order. The [API reference](../api/comparison.md) describes the result for reversed bounds, and the [design notes](../design/comparison.md) list the conventions the two functions share."
+#: manual/tutorial/comparison.md:13
+msgid "For a generic Compare-based expression, import `moonbitlang/core/cmp` as `cmp` in moon.pkg. Validate bounds yourself and consult the [comparison migration API](../api/comparison.md) for semantic differences."
 msgstr ""

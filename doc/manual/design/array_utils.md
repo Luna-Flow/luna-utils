@@ -1,26 +1,9 @@
-# array_utils design
+# Array migration design
 
-`array_utils` collects small generic helpers on `Array[T]` in [`src/array_utils.mbt`](../../../src/array_utils.mbt). This page explains the choices behind them and the behaviour that maintainers must keep stable.
+Removing the legacy helpers breaks the dependency from luna-utils to luna-generic, allowing luna-utils to become the bottom numeric layer. No compatibility wrapper or replacement trait is introduced. Applications own their folds, identities, overflow policy and empty-input policy.
 
-## Constraints from luna-generic
+For a finite array of length n, core fold, all, search and iterator extrema visit at most n elements and terminate when their callbacks terminate. They take O(n) time and O(1) auxiliary space; all and search may stop early. Reversal takes O(n) time: rev allocates O(n) output, rev_in_place uses O(1) auxiliary space. Array construction requires a nonnegative representable length and available memory.
 
-Each function asks for the weakest constraint it needs. `reverse` and `reverse_inplace` need none, `find` and the uniformity checks need `Eq`, and `arr_max` and `arr_min` need `Compare`. `arr_sum` and `zero_arr` need only `AddMonoid` from luna-generic, that is `zero()` and `+`, so they work for every type with an additive monoid and not only for numbers. `arr_abs_sum` needs `Num` for negation and `Compare` to find the sign.
+Known downstream: calculus-numerical <= 0.3.1 used the old helpers; its WIP has a local legacy copy. Audit import sites before upgrading. Issue #6 becomes obsolete when arr_abs_sum is removed, rather than being fixed by a new numeric algorithm.
 
-The package imports luna-generic under the alias `lf_alg`, and [`src/alias.mbt`](../../../src/alias.mbt) uses MoonBit's `using` declaration to make `AddMonoid` and `Num` available without a prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`.
-
-## Functions instead of methods
-
-MoonBit does not let a package define methods on `Array`, which belongs to the core library, so the helpers are package-level functions.
-
-## Empty arrays
-
-The functions that need an element to start from read `arr[0]` and therefore panic on an empty array: `arr_max`, `arr_min`, `same` and `map_same`. They do not return an `Option`. The other functions have a natural answer for an empty array and return it: `zero()` for the sums, `true` for `same_to` and `map_same_to`, `None` for `find`, and an empty array for `reverse`. Keep this split when adding functions, or document the exception.
-
-## Allocation
-
-`reverse`, `zero_arr`, `map_same` and `map_same_to` allocate a new array. `reverse_inplace` mutates its argument, and the other functions only read.
-
-## Maintenance notes
-
-- Update this page and the [API reference](../api/array_utils.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`.
-- The doc comment of `reverse_inplace` in the source says that it panics on an empty array. It does not: the loop does not run, and the array is left unchanged.
+Implementation evidence: migration examples were checked with moon 0.1.20260920, moonc v0.10.14 and bundled core 0.10.14+7d59c7ec9. The relevant core sources are builtin/array.mbt, builtin/iterator.mbt, builtin/int.mbt, builtin/double.mbt and cmp/cmp.mbt. See the [official MoonBit documentation](https://docs.moonbitlang.com/en/latest/) for language and package rules. These are version-specific implementation observations, not formal verification or a standards-conformance proof.

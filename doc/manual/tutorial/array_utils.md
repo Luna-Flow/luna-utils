@@ -1,57 +1,25 @@
-# array_utils tutorial
+# Array migration tutorial
 
-This tutorial walks through the array helpers with small examples taken from the doc comments and tests in `src`. To use them in your own module, add the dependency with `moon add Luna-Flow/luna-utils` and import the package `Luna-Flow/luna-utils`; the functions are then available as `@luna-utils.arr_sum` and so on. The examples below run inside the package and omit the prefix.
-
-## Sums
-
-`arr_sum` works for any element type with an additive monoid, and `zero_arr` creates an array of zeros of the expected type:
+These examples use core only; do not import luna-utils for the removed helpers. The chosen Int identity is zero.
 
 ```moonbit
-inspect(arr_sum([1, 2, 3, 4]), content="10")
+let xs = [1, -2, 3]
+assert_eq(xs.fold(init=0, (a, b) => a + b), 2)
+assert_eq(xs.fold(init=0, (a, b) => a + b.abs()), 6)
+assert_eq(Array::make(3, 0), [0, 0, 0])
+assert_eq(xs.search(-2), Some(1))
+assert_eq(xs.iter().maximum(), Some(3))
+assert_eq(xs.iter().minimum(), Some(-2))
+assert_eq(xs.rev(), [3, -2, 1])
+xs.rev_in_place()
+assert_eq(xs, [3, -2, 1])
 let empty : Array[Int] = []
-inspect(arr_sum(empty), content="0")
-inspect(arr_abs_sum([1, -2, 3, -4, 5]), content="15")
-let zeros : Array[Double] = zero_arr(3)
-assert_eq(zeros, [0.0, 0.0, 0.0])
+assert_eq(empty.iter().maximum(), None)
+assert_true(empty.all(x => x == 1))
+let ys = [2, 2, 2]
+let uniform = if ys.is_empty() { true } else { ys.all(x => x == ys[0]) }
+assert_true(uniform)
+assert_true(ys.all(x => x * 2 == 4))
 ```
 
-## Extremes and search
-
-```moonbit
-let xs = [5, 2, 8, 1, 9]
-inspect(arr_max(xs), content="9")
-inspect(arr_min(xs), content="1")
-inspect(find([1, 2, 3, 2, 4], 2), content="Some(1)")
-inspect(find([1, 2, 3, 2, 4], 5), content="None")
-```
-
-`arr_max` and `arr_min` panic on an empty array, so check `xs.is_empty()` first when the array may be empty.
-
-## Reversing
-
-`reverse` returns a new array, while `reverse_inplace` changes its argument:
-
-```moonbit
-let original = [1, 2, 3, 4, 5]
-inspect(reverse(original), content="[5, 4, 3, 2, 1]")
-inspect(original, content="[1, 2, 3, 4, 5]")
-reverse_inplace(original)
-inspect(original, content="[5, 4, 3, 2, 1]")
-```
-
-## Checking uniformity
-
-`same` and `same_to` compare the elements themselves; `map_same` and `map_same_to` compare their images under a function:
-
-```moonbit
-inspect(same([1, 1, 1, 1]), content="true")
-inspect(same_to([1, 2, 1, 1], 1), content="false")
-inspect(map_same([2, 4, 6, 8], x => x % 2), content="true")
-inspect(map_same_to([1, 1, 1], 2, x => x * 2), content="true")
-```
-
-`same` and `map_same` panic on an empty array. When the array may be empty and you know the expected value, use `same_to` or `map_same_to`, which return `true` for an empty array.
-
-## Next steps
-
-The [API reference](../api/array_utils.md) gives every signature, and the [design notes](../design/array_utils.md) explain the constraints and the treatment of empty arrays. Before relying on edge-case behaviour, check it against the tests in `src/array_utils_test.mbt`.
+The examples cover ordinary representable integers. Read the [migration API](../api/array_utils.md) before handling overflow, NaN, empty input or effectful mapping.

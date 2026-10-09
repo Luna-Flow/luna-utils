@@ -1,10 +1,6 @@
 name = "Luna-Flow/luna-utils"
 
-version = "0.1.1"
-
-import {
-  "Luna-Flow/luna-generic@0.4.0",
-}
+version = "0.2.0"
 
 readme = "README.md"
 
@@ -14,6 +10,6 @@ license = "Apache-2.0"
 
 keywords = [ "utils", "math" ]
 
-description = "A utils library, make operations more efficient and guarded by luna-generic."
+description = "Backend-independent numeric base for Luna-Flow; legacy API removed, numeric packages planned."
 
 source = "src"

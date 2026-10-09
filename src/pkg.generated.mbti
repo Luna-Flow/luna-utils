@@ -1,38 +1,7 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "Luna-Flow/luna-utils"
 
-import {
-  "Luna-Flow/luna-generic",
-}
-
 // Values
-pub fn[A : @luna-generic.Num + Compare] arr_abs_sum(Array[A]) -> A
-
-pub fn[T : Compare] arr_max(Array[T]) -> T
-
-pub fn[T : Compare] arr_min(Array[T]) -> T
-
-pub fn[A : @luna-generic.AddMonoid] arr_sum(Array[A]) -> A
-
-pub fn[T : Compare] clamp(T, T, T) -> T
-
-pub fn[T : Eq] find(Array[T], T) -> Int?
-
-pub fn[T : Compare] is_between(T, T, T) -> Bool
-
-pub fn[U, V : Eq] map_same(Array[U], (U) -> V) -> Bool
-
-pub fn[U, V : Eq] map_same_to(Array[U], V, (U) -> V) -> Bool
-
-pub fn[T] reverse(Array[T]) -> Array[T]
-
-pub fn[T] reverse_inplace(Array[T]) -> Unit
-
-pub fn[T : Eq] same(Array[T]) -> Bool
-
-pub fn[T : Eq] same_to(Array[T], T) -> Bool
-
-pub fn[A : @luna-generic.AddMonoid] zero_arr(Int) -> Array[A]
 
 // Errors
 

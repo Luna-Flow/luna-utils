@@ -1,18 +1,5 @@
-# comparison API
+# Comparison API migration
 
-`comparison` is the part of the package `Luna-Flow/luna-utils` defined in [`src/comparison.mbt`](../../../src/comparison.mbt): two functions that compare a value with a closed range. Both need only `Compare`, so they work for numbers, strings and any other ordered type.
+The 0.1.x functions `clamp` and `is_between` are removed. For ordered inputs use `value.clamp(min=lo, max=hi)` where the type provides it, or import `moonbitlang/core/cmp` and use `@cmp.maximum(lo, @cmp.minimum(value, hi))`. Membership can be written as `lo <= value && value <= hi`.
 
-```mbti
-fn[T : Compare] clamp(T, T, T) -> T
-fn[T : Compare] is_between(T, T, T) -> Bool
-```
-
-## `clamp`
-
-`clamp(value, min, max)` returns `min` when `value < min`, `max` when `value > max`, and `value` otherwise.
-
-The bounds are not checked. When `min > max`, the result is `min` for a value below `min` and `max` for every other value.
-
-## `is_between`
-
-`is_between(value, min, max)` returns `true` when `min <= value` and `value <= max`; both bounds belong to the range. When `min > max`, it returns `false` for every value.
+Require `lo <= hi` and a consistent total order for the generic expression. Core numeric clamp aborts for reversed bounds; legacy clamp did not validate them. Floating-point NaN is unordered, so operator-based membership and Compare-based extrema need separate contracts. Do not infer IEEE 754 semantics, signed-zero selection or exception flags from this migration.

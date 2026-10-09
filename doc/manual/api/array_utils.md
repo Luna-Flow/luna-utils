@@ -1,56 +1,20 @@
-# array_utils API
+# Array API migration
 
-`array_utils` is the part of the package `Luna-Flow/luna-utils` defined in [`src/array_utils.mbt`](../../../src/array_utils.mbt): twelve functions on `Array[T]`. They are package-level functions, not methods, so another package calls them as `@luna-utils.arr_sum(xs)`. The traits `AddMonoid` and `Num` come from [luna-generic](https://luna-flow.github.io/en/luna-generic/).
+All names below were exported by 0.1.x and are absent in 0.2.0. These core operations are migration candidates, not new luna-utils exports or a promise of identical numeric semantics.
 
-## Sums
+| Removed API | Core migration |
+| --- | --- |
+| `arr_sum` | `xs.fold(init=zero, (a, b) => a + b)` |
+| `zero_arr` | `Array::make(n, zero)` |
+| `arr_abs_sum` | `xs.fold(init=zero, (a, b) => a + b.abs())` |
+| `reverse` / `reverse_inplace` | `xs.rev()` / `xs.rev_in_place()` |
+| `find` | `xs.search(value)` |
+| `same` / `same_to` | `xs.all(x => x == sample)` |
+| `map_same` / `map_same_to` | `xs.all(x => f(x) == sample)` |
+| `arr_max` / `arr_min` | `xs.iter().maximum()` / `xs.iter().minimum()` |
 
-```mbti
-fn[A : @luna-generic.AddMonoid] arr_sum(Array[A]) -> A
-fn[A : @luna-generic.Num + Compare] arr_abs_sum(Array[A]) -> A
-fn[A : @luna-generic.AddMonoid] zero_arr(Int) -> Array[A]
-```
+Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(Int::min_value)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic.
 
-`arr_sum(arr)` adds the elements from left to right, starting from `zero()`. The sum of an empty array is `zero()`.
+The legacy extrema and `same`/`map_same` panicked on empty arrays. Core iterator extrema return `None`; `all` returns `true`. For `same`, choose the first element only after handling the empty case. Mapping followed by `all` preserves eager mapping; putting `f` inside `all` short-circuits and may change effects or exceptions.
 
-`arr_abs_sum(arr)` adds the absolute values of the elements in the same way. The absolute value of `x` is `-x` when `x < zero()` and `x` otherwise.
-
-`zero_arr(n)` returns a new array of length `n` whose elements are all `zero()`. The element type is chosen by the expected type, for example `let zeros : Array[Double] = zero_arr(3)`.
-
-## Extremes
-
-```mbti
-fn[T : Compare] arr_max(Array[T]) -> T
-fn[T : Compare] arr_min(Array[T]) -> T
-```
-
-`arr_max(arr)` and `arr_min(arr)` return the largest and the smallest element; when several elements compare equal, the first of them is returned. Both panic on an empty array.
-
-## Order and search
-
-```mbti
-fn[T] reverse(Array[T]) -> Array[T]
-fn[T] reverse_inplace(Array[T]) -> Unit
-fn[T : Eq] find(Array[T], T) -> Int?
-```
-
-`reverse(arr)` returns a new array with the elements in reverse order and leaves `arr` unchanged. `reverse_inplace(arr)` reverses `arr` itself by swapping elements from both ends toward the middle; an empty array is left as it is.
-
-`find(arr, value)` returns `Some(i)` for the first index `i` with `arr[i] == value`, or `None` when no element equals `value`.
-
-## Uniformity
-
-```mbti
-fn[T : Eq] same(Array[T]) -> Bool
-fn[T : Eq] same_to(Array[T], T) -> Bool
-fn[U, V : Eq] map_same(Array[U], (U) -> V) -> Bool
-fn[U, V : Eq] map_same_to(Array[U], V, (U) -> V) -> Bool
-```
-
-| Function | Returns `true` when | On an empty array |
-| --- | --- | --- |
-| `same(arr)` | every element equals `arr[0]` | panics |
-| `same_to(arr, sample)` | every element equals `sample` | returns `true` |
-| `map_same(arr, f)` | every `f(x)` equals `f(arr[0])` | panics |
-| `map_same_to(arr, sample, f)` | every `f(x)` equals `sample` | returns `true` |
-
-The checks stop at the first element that differs. `map_same` and `map_same_to` build the mapped array first, so `f` is called once for every element.
+Core extrema use `Compare`; they are not the planned IEEE 754 minimum/maximum of #23. Review NaN, signed zero and equal-element selection separately. `Double::abs` also clears the sign of negative zero, whereas the legacy comparison-based absolute value retained it.

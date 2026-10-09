@@ -1,13 +1,22 @@
 # luna-utils
 
-Generic array and comparison helpers for Luna-Flow projects, constrained by
-[luna-generic](https://github.com/Luna-Flow/luna-generic) traits.
+Version 0.2.0 rebuilds the backend-independent numeric base for Luna-Flow.
+It depends only on [moonbitlang/core](https://github.com/moonbitlang/core).
+This migration removes all 0.1.x array/comparison helpers: the root package
+currently exports no functions, types or traits. Numeric packages in
+[issues #21–#30](https://github.com/Luna-Flow/luna-utils/issues/19) remain planned;
+this release boundary does not claim implemented IEEE 754 or integer conformance.
 
-## Documentation
+## Migration and documentation
+
+See [CHANGELOG](./CHANGELOG.md), the [manual](./doc/manual/index.md),
+[array migration](./doc/manual/api/array_utils.md) and
+[comparison migration](./doc/manual/api/comparison.md) before upgrading.
+Core substitutions change empty-input, overflow, NaN and invalid-bound behavior;
+they are not blanket semantic equivalents.
 
 The manual is published at
 [luna-flow.github.io/en/luna-utils](https://luna-flow.github.io/en/luna-utils/)
-with Simplified Chinese and Japanese translations. Its English source lives in
+with Simplified Chinese and Japanese translations. English source lives in
 [doc/manual](./doc/manual/index.md); translations are gettext catalogs in
-`doc/locale`. See the [contribution guidelines](./doc/manual/contributing.md)
-before opening a pull request.
+`doc/locale`. See the [contribution checklist](./doc/manual/contributing.md).
