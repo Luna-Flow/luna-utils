@@ -28,8 +28,8 @@ msgid "Core migration"
 msgstr "core への移行"
 
 #: manual/api/array_utils.md:16
-msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(Int::min_value)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
-msgstr "加法単位元と使用可能な要素演算を明示的に選んでください。削除された luna-generic の trait 制約は core では提供されません。絶対値の和では `Int::abs(Int::min_value)` は正の大きさを表現できないため負の最小値を返し、加算もオーバーフローし得ます。浮動小数点の和は各加算で丸められ、通常の演算では NaN が伝播します。"
+msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(-2147483648)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
+msgstr "加法単位元と使用可能な要素演算を明示的に選んでください。削除された luna-generic の trait 制約は core では提供されません。絶対値の和では `Int::abs(-2147483648)` は正の大きさを表現できないため負の最小値を返し、加算もオーバーフローし得ます。浮動小数点の和は各加算で丸められ、通常の演算では NaN が伝播します。"
 
 #: manual/api/array_utils.md:18
 msgid "The legacy extrema and `same`/`map_same` panicked on empty arrays. Core iterator extrema return `None`; `all` returns `true`. For `same`, choose the first element only after handling the empty case. Mapping followed by `all` preserves eager mapping; putting `f` inside `all` short-circuits and may change effects or exceptions."

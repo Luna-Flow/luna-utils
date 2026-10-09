@@ -13,7 +13,7 @@ All names below were exported by 0.1.x and are absent in 0.2.0. These core opera
 | `map_same` / `map_same_to` | `xs.all(x => f(x) == sample)` |
 | `arr_max` / `arr_min` | `xs.iter().maximum()` / `xs.iter().minimum()` |
 
-Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(Int::min_value)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic.
+Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(-2147483648)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic.
 
 The legacy extrema and `same`/`map_same` panicked on empty arrays. Core iterator extrema return `None`; `all` returns `true`. For `same`, choose the first element only after handling the empty case. Mapping followed by `all` preserves eager mapping; putting `f` inside `all` short-circuits and may change effects or exceptions.
 

@@ -28,8 +28,8 @@ msgid "Core migration"
 msgstr "core 迁移方案"
 
 #: manual/api/array_utils.md:16
-msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(Int::min_value)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
-msgstr "需显式选择加法单位元及受支持的元素操作。core 不提供已移除的 luna-generic trait 约束。绝对值求和时，`Int::abs(Int::min_value)` 返回负的最小值，因为其正的大小不可表示；加法也可能溢出。浮点求和每次加法均发生舍入，NaN 会通过普通算术传播。"
+msgid "Choose an explicit additive identity and supported element operations. Core does not supply the removed luna-generic trait constraints. For absolute sums, `Int::abs(-2147483648)` returns the negative minimum because its positive magnitude is not representable; addition can overflow. Floating-point sums round at each addition, and NaN propagates through ordinary arithmetic."
+msgstr "需显式选择加法单位元及受支持的元素操作。core 不提供已移除的 luna-generic trait 约束。绝对值求和时，`Int::abs(-2147483648)` 返回负的最小值，因为其正的大小不可表示；加法也可能溢出。浮点求和每次加法均发生舍入，NaN 会通过普通算术传播。"
 
 #: manual/api/array_utils.md:18
 msgid "The legacy extrema and `same`/`map_same` panicked on empty arrays. Core iterator extrema return `None`; `all` returns `true`. For `same`, choose the first element only after handling the empty case. Mapping followed by `all` preserves eager mapping; putting `f` inside `all` short-circuits and may change effects or exceptions."
