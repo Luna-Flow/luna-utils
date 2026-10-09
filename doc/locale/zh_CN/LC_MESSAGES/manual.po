@@ -60,9 +60,8 @@ msgid "The package `Luna-Flow/luna-utils/float` operates on binary64 (`Double`, 
 msgstr ""
 
 #: manual/api/float.md:5
-#: manual/design/float.md:7
-msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
-msgstr "原始整数编码会精确保留 NaN 的符号、信令状态和 payload。数值本身无法跨后端可移植地保留这些信息，尤其是在 JavaScript 上。数值 NaN 通过 `x != x` 检测；数值分类不检查符号或 payload，而返回 `QuietNaN`。因此数值 `is_signaling` 始终为 false，数值 `is_canonical` 检查规范化视图。表示重要时，请将 signaling NaN 保留为整数。"
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Keep signaling NaNs as integers when their representation matters."
+msgstr ""
 
 #: manual/api/float.md:7
 msgid "Classification and predicates"
@@ -397,6 +396,10 @@ msgstr ""
 msgid "Raw operations use fixed-width integer masks. Classification cases are exhaustive and disjoint by the exponent/fraction partition. Sign operations preserve the magnitude mask by construction. Payload guards exclude fraction overflow and the signaling-zero infinity encoding. Every operation takes O(1) time and space with no loops or numeric rounding; termination follows from finite expressions."
 msgstr ""
 
+#: manual/design/float.md:7
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
+msgstr "原始整数编码会精确保留 NaN 的符号、信令状态和 payload。数值本身无法跨后端可移植地保留这些信息，尤其是在 JavaScript 上。数值 NaN 通过 `x != x` 检测；数值分类不检查符号或 payload，而返回 `QuietNaN`。因此数值 `is_signaling` 始终为 false，数值 `is_canonical` 检查规范化视图。表示重要时，请将 signaling NaN 保留为整数。"
+
 #: manual/design/float.md:9
 msgid "IEEE 754-2019 §§5.7.2, 5.5.1 and 9.7 motivate classification, sign and payload operations; §6.2 does not require identical NaN payload propagation across hosts. This package makes its canonical encoding policy explicit. It does not raise IEEE exception flags or preserve numeric signaling NaNs. Current MoonBit core 0.10.14+7d59c7ec9 and official [language documentation](https://docs.moonbitlang.com/en/latest/) provide implementation evidence, not a formal verification claim."
 msgstr ""
@@ -410,8 +413,6 @@ msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. Th
 msgstr "0.2.0 是 Luna-Flow 数值基础层的不兼容重建。模块仅依赖 `moonbitlang/core`，旧数组与比较 API 已删除。在此迁移阶段，根包不导出函数、类型或 trait。"
 
 #: manual/index.md:5
-#, fuzzy
-#| msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, classification, stable hash, text, bigint, software FMA and libm (#21–#30) are not implemented by this change. The placement of libm remains undecided."
 msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, stable hash, text, bigint, software FMA and libm remain planned; #25 adds float classification and representation operations. The placement of libm remains undecided."
 msgstr "后端无关数值包规划见[跟踪 issue #19](https://github.com/Luna-Flow/luna-utils/issues/19)。此次修改未实现整数算术、转换、IEEE 最值、舍入、分类、稳定哈希、文本、bigint、软件 FMA 与 libm（#21–#30）。libm 的仓库归属仍未决定。"
 

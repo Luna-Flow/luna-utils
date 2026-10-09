@@ -60,8 +60,7 @@ msgid "The package `Luna-Flow/luna-utils/float` operates on binary64 (`Double`, 
 msgstr ""
 
 #: manual/api/float.md:5
-#: manual/design/float.md:7
-msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Keep signaling NaNs as integers when their representation matters."
 msgstr ""
 
 #: manual/api/float.md:7
@@ -395,6 +394,10 @@ msgstr ""
 
 #: manual/design/float.md:5
 msgid "Raw operations use fixed-width integer masks. Classification cases are exhaustive and disjoint by the exponent/fraction partition. Sign operations preserve the magnitude mask by construction. Payload guards exclude fraction overflow and the signaling-zero infinity encoding. Every operation takes O(1) time and space with no loops or numeric rounding; termination follows from finite expressions."
+msgstr ""
+
+#: manual/design/float.md:7
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
 msgstr ""
 
 #: manual/design/float.md:9

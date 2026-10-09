@@ -60,9 +60,8 @@ msgid "The package `Luna-Flow/luna-utils/float` operates on binary64 (`Double`, 
 msgstr ""
 
 #: manual/api/float.md:5
-#: manual/design/float.md:7
-msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
-msgstr "生の整数エンコーディングは NaN の符号、シグナリング状態、ペイロードを正確に保持します。数値は、特に JavaScript では、この情報を移植可能には保持しません。数値 NaN は `x != x` で検出し、数値分類は符号やペイロードを調べず `QuietNaN` を返します。そのため数値 `is_signaling` は常に false で、数値 `is_canonical` は正規化ビューを判定します。表現が重要な場合は signaling NaN を整数として保持してください。"
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Keep signaling NaNs as integers when their representation matters."
+msgstr ""
 
 #: manual/api/float.md:7
 msgid "Classification and predicates"
@@ -397,6 +396,10 @@ msgstr ""
 msgid "Raw operations use fixed-width integer masks. Classification cases are exhaustive and disjoint by the exponent/fraction partition. Sign operations preserve the magnitude mask by construction. Payload guards exclude fraction overflow and the signaling-zero infinity encoding. Every operation takes O(1) time and space with no loops or numeric rounding; termination follows from finite expressions."
 msgstr ""
 
+#: manual/design/float.md:7
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
+msgstr "生の整数エンコーディングは NaN の符号、シグナリング状態、ペイロードを正確に保持します。数値は、特に JavaScript では、この情報を移植可能には保持しません。数値 NaN は `x != x` で検出し、数値分類は符号やペイロードを調べず `QuietNaN` を返します。そのため数値 `is_signaling` は常に false で、数値 `is_canonical` は正規化ビューを判定します。表現が重要な場合は signaling NaN を整数として保持してください。"
+
 #: manual/design/float.md:9
 msgid "IEEE 754-2019 §§5.7.2, 5.5.1 and 9.7 motivate classification, sign and payload operations; §6.2 does not require identical NaN payload propagation across hosts. This package makes its canonical encoding policy explicit. It does not raise IEEE exception flags or preserve numeric signaling NaNs. Current MoonBit core 0.10.14+7d59c7ec9 and official [language documentation](https://docs.moonbitlang.com/en/latest/) provide implementation evidence, not a formal verification claim."
 msgstr ""
@@ -410,8 +413,6 @@ msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. Th
 msgstr "0.2.0 は Luna-Flow の数値基盤を再構築する非互換変更です。モジュールは `moonbitlang/core` のみに依存し、従来の配列・比較 API は削除されました。この移行段階ではルートパッケージは関数、型、trait を公開しません。"
 
 #: manual/index.md:5
-#, fuzzy
-#| msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, classification, stable hash, text, bigint, software FMA and libm (#21–#30) are not implemented by this change. The placement of libm remains undecided."
 msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, stable hash, text, bigint, software FMA and libm remain planned; #25 adds float classification and representation operations. The placement of libm remains undecided."
 msgstr "バックエンド非依存の数値パッケージの計画は[追跡 issue #19](https://github.com/Luna-Flow/luna-utils/issues/19)を参照してください。整数演算、変換、IEEE 極値、丸め、分類、安定ハッシュ、テキスト、bigint、ソフトウェア FMA、libm（#21–#30）は今回実装されません。libm の配置先も未決定です。"
 
