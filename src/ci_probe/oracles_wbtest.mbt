@@ -112,12 +112,11 @@ test "ci bit patterns" {
   let hex = value.to_string(radix=16)
   let padded = "0".repeat(16 - hex.length()) + hex
   println("LUNA_BITS int64_-9223372036854775808 " + padded)
-  let operands : Array[UInt64] = [
-    0x3ff0000002000000UL, 0x3feffffffc000000UL, 0xbff0000000000000UL,
-  ]
-  let a = operands[0].reinterpret_as_double()
-  let b = operands[1].reinterpret_as_double()
-  let c = operands[2].reinterpret_as_double()
+  let runtime_mask = (@env.args().length() >> 30).to_uint64()
+  assert_eq(runtime_mask, 0UL)
+  let a = (0x3ff0000002000000UL ^ runtime_mask).reinterpret_as_double()
+  let b = (0x3feffffffc000000UL ^ runtime_mask).reinterpret_as_double()
+  let c = (0xbff0000000000000UL ^ runtime_mask).reinterpret_as_double()
   let product = a * b
   let value = (product + c).reinterpret_as_uint64()
   assert_eq(value, 0x0000000000000000UL)
