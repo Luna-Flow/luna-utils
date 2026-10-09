@@ -1,0 +1,137 @@
+{
+  "format": "binary64",
+  "rounding": "nearest_ties_even",
+  "cases": [
+    {
+      "id": "positive_zero",
+      "operation": "transport",
+      "input": "0",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "negative_zero",
+      "operation": "transport",
+      "input": "9223372036854775808",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "min_subnormal",
+      "operation": "transport",
+      "input": "1",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "max_subnormal",
+      "operation": "transport",
+      "input": "4503599627370495",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "min_normal",
+      "operation": "transport",
+      "input": "4503599627370496",
+      "bits": "0010000000000000"
+    },
+    {
+      "id": "one",
+      "operation": "transport",
+      "input": "4607182418800017408",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "max_finite",
+      "operation": "transport",
+      "input": "9218868437227405311",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "positive_infinity",
+      "operation": "transport",
+      "input": "9218868437227405312",
+      "bits": "7ff0000000000000"
+    },
+    {
+      "id": "negative_infinity",
+      "operation": "transport",
+      "input": "18442240474082181120",
+      "bits": "fff0000000000000"
+    },
+    {
+      "id": "int64_0",
+      "operation": "int64_to_double",
+      "input": "0",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "int64_1",
+      "operation": "int64_to_double",
+      "input": "1",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "int64_-1",
+      "operation": "int64_to_double",
+      "input": "-1",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "int64_9007199254740991",
+      "operation": "int64_to_double",
+      "input": "9007199254740991",
+      "bits": "433fffffffffffff"
+    },
+    {
+      "id": "int64_9007199254740992",
+      "operation": "int64_to_double",
+      "input": "9007199254740992",
+      "bits": "4340000000000000"
+    },
+    {
+      "id": "int64_9007199254740993",
+      "operation": "int64_to_double",
+      "input": "9007199254740993",
+      "bits": "4340000000000000"
+    },
+    {
+      "id": "int64_9007199254740994",
+      "operation": "int64_to_double",
+      "input": "9007199254740994",
+      "bits": "4340000000000001"
+    },
+    {
+      "id": "int64_9007199254740995",
+      "operation": "int64_to_double",
+      "input": "9007199254740995",
+      "bits": "4340000000000002"
+    },
+    {
+      "id": "int64_-9007199254740993",
+      "operation": "int64_to_double",
+      "input": "-9007199254740993",
+      "bits": "c340000000000000"
+    },
+    {
+      "id": "int64_9223372036854775807",
+      "operation": "int64_to_double",
+      "input": "9223372036854775807",
+      "bits": "43e0000000000000"
+    },
+    {
+      "id": "int64_-9223372036854775808",
+      "operation": "int64_to_double",
+      "input": "-9223372036854775808",
+      "bits": "c3e0000000000000"
+    },
+    {
+      "id": "separate_mul_add",
+      "operation": "mul_add",
+      "inputs": [
+        "3ff0000002000000",
+        "3feffffffc000000",
+        "bff0000000000000"
+      ],
+      "bits": "0000000000000000",
+      "fused_bits": "bc90000000000000"
+    }
+  ]
+}

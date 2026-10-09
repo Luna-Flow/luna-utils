@@ -9,3 +9,5 @@ The generated interface [pkg.generated.mbti](../../src/pkg.generated.mbti) is th
 ## Migration manual
 
 Existing page paths remain available as migration guidance: array [API](api/array_utils.md), [design](design/array_utils.md), [tutorial](tutorial/array_utils.md); comparison [API](api/comparison.md), [design](design/comparison.md), [tutorial](tutorial/comparison.md). See the [contribution checklist](contributing.md) before opening a pull request.
+
+See [backend conformance testing](testing.md) for the CI contract, offline oracle corpus and local commands.

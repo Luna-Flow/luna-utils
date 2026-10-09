@@ -1,0 +1,86 @@
+name: Numeric CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, backend: wasm, compiler: gcc}
+          - {os: ubuntu-latest, backend: wasm-gc, compiler: gcc}
+          - {os: ubuntu-latest, backend: js, compiler: gcc}
+          - {os: ubuntu-latest, backend: native, compiler: gcc}
+          - {os: macos-latest, backend: native, compiler: clang}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Record toolchain
+        run: moon version --all
+      - name: Verify committed oracle fixtures and gate
+        run: |
+          python3 tools/generate_oracles.py --check
+          python3 tools/test_ci_harness.py
+      - name: Select native compiler and FMA-capable host
+        if: matrix.backend == 'native'
+        run: python3 tools/configure_native_ci.py '${{ matrix.compiler }}'
+      - name: Check all four backends
+        run: moon check --target all --deny-warn
+      - name: Test debug and release with exact bit oracle
+        run: |
+          if [ '${{ matrix.backend }}' = native ]; then
+            python3 tools/run_backend_tests.py native --compiler "$(command -v '${{ matrix.compiler }}')"
+          else
+            python3 tools/run_backend_tests.py '${{ matrix.backend }}'
+          fi
+      - name: Generate coverage report
+        if: matrix.backend == 'wasm-gc'
+        run: |
+          moon coverage clean
+          moon test --target wasm-gc --enable-coverage --deny-warn
+          moon coverage report -f summary > coverage_summary.txt
+          moon coverage report -f cobertura -o _build/ci/coverage.xml
+          cat coverage_summary.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: results-${{ matrix.os }}-${{ matrix.backend }}
+          path: |
+            _build/ci/
+            coverage_summary.txt
+          if-no-files-found: error
+  bit-diff:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: results-*
+          path: transcripts
+      - name: Diff all backends, optimization modes and native compilers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          paths = sorted(Path('transcripts').rglob('*.bits'))
+          if len(paths) != 10:
+              raise SystemExit(f'expected 10 transcripts, found {len(paths)}')
+          subprocess.run(['python3', 'tools/compare_bits.py', *map(str, paths)], check=True)
+          PY

@@ -27,3 +27,7 @@ makes issue #6 obsolete once this change is merged.
 
 The existing manual URLs now explain migration; English gettext source and
 zh_CN/ja_JP translations are synchronized.
+
+CI: debug/release four-backend conformance gates, Linux GCC and macOS Clang
+native checks with FP contraction disabled, exact bit transcript comparison,
+offline binary64 oracle fixtures, and coverage artifacts (#20).

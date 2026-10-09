@@ -40,7 +40,6 @@ msgid "Core extrema use `Compare`; they are not the planned IEEE 754 minimum/max
 msgstr "core 最值使用 `Compare`，并非 #23 规划的 IEEE 754 minimum/maximum。需分别审查 NaN、有符号零与相等元素选择。`Double::abs` 还会清除负零的符号，而旧的基于比较的绝对值保留该符号。"
 
 #: manual/api/comparison.md:1
-#| msgid "comparison API"
 msgid "Comparison API migration"
 msgstr "比较 API 迁移"
 
@@ -229,7 +228,6 @@ msgid "Commit messages should be in **English**, concise, and precise."
 msgstr "提交信息应使用**英文**，并遵循**简短、精炼**的原则。"
 
 #: manual/contributing.md:75
-#| msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change."
 msgid "Use prefixes such as `fix:`, `feat:`, `refactor:`, and `docs:` to indicate the type of change."
 msgstr "使用 `fix:`、`feat:`、`refactor:` 和 `docs:` 等前缀标明变更类型。"
 
@@ -250,7 +248,6 @@ msgid "Code review"
 msgstr "代码审查"
 
 #: manual/contributing.md:91
-#| msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`."
 msgid "If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod`."
 msgstr "如果不是维护者或协作者，在修改 `moon.mod` 中的依赖或版本号前请先联系维护者。"
 
@@ -289,6 +286,11 @@ msgstr "同步 README、CHANGELOG、API/设计/教程页面及两个 gettext cat
 #: manual/contributing.md:102
 msgid "Use an English Conventional Commit and wait for explicit user review before merging."
 msgstr "使用英文 Conventional Commit，并在合并前等待用户明确审核。"
+
+#: manual/contributing.md:104
+#: manual/index.md:13
+msgid "See [backend conformance testing](testing.md) for the CI contract, offline oracle corpus and local commands."
+msgstr "有关 CI 契约、离线 oracle 数据集和本地命令，请参阅[后端一致性测试](testing.md)。"
 
 #: manual/design/array_utils.md:1
 msgid "Array migration design"
@@ -346,6 +348,34 @@ msgstr "迁移手册"
 msgid "Existing page paths remain available as migration guidance: array [API](api/array_utils.md), [design](design/array_utils.md), [tutorial](tutorial/array_utils.md); comparison [API](api/comparison.md), [design](design/comparison.md), [tutorial](tutorial/comparison.md). See the [contribution checklist](contributing.md) before opening a pull request."
 msgstr "现有页面路径保留为迁移指南：数组 [API](api/array_utils.md)、[设计](design/array_utils.md)、[教程](tutorial/array_utils.md)；比较 [API](api/comparison.md)、[设计](design/comparison.md)、[教程](tutorial/comparison.md)。提交 PR 前请参阅[贡献清单](contributing.md)。"
 
+#: manual/testing.md:1
+msgid "Backend conformance testing"
+msgstr "后端一致性测试"
+
+#: manual/testing.md:3
+msgid "The Numeric CI workflow runs `moon check --target all --deny-warn` and debug and release tests on wasm, wasm-gc, JavaScript and native. Native jobs use Linux GCC and macOS Clang with `-march=native -ffp-contract=off`; the build-plan gate checks the compiler path and contraction flag on every linked test artifact. Native package settings retain `-O2 -fwrapv -fno-strict-aliasing` because `cc-flags` overrides default optimization flags. Package settings apply at the native linking package, so downstream executable packages must repeat this policy; the library cannot enforce compiler flags on its consumers."
+msgstr "Numeric CI 工作流运行 `moon check --target all --deny-warn`，并在 wasm、wasm-gc、JavaScript 和 native 后端执行调试版与发布版测试。原生任务在 Linux 使用 GCC，在 macOS 使用 Clang，并启用 `-march=native -ffp-contract=off`；构建计划检查每个链接测试产物的编译器路径和禁用收缩标志。由于 `cc-flags` 覆盖默认优化参数，原生包设置保留 `-O2 -fwrapv -fno-strict-aliasing`。包设置作用于原生链接包，因此下游可执行包必须重复此策略；库无法强制消费者使用这些编译器参数。"
+
+#: manual/testing.md:5
+msgid "Each backend prints ordered `LUNA_BITS <case> <16 lowercase hex digits>` records. The gate rejects missing, duplicate, malformed, reordered or changed records, checks every transcript against the committed oracle, and compares all ten backend, compiler and optimization-mode transcripts. Logs and bit transcripts are downloadable CI artifacts. The wasm-gc job also runs `moon test --enable-coverage` and publishes summary and Cobertura coverage reports."
+msgstr "各后端输出有序的 `LUNA_BITS <case> <16 lowercase hex digits>` 记录。检查拒绝缺失、重复、格式错误、乱序或变化的记录，将每份输出与已提交的 oracle 比较，再比较后端、编译器和优化模式产生的全部十份输出。CI 产物提供日志和位记录下载。wasm-gc 任务还运行 `moon test --enable-coverage` 并发布摘要和 Cobertura 覆盖率报告。"
+
+#: manual/testing.md:7
+msgid "The bootstrap corpus checks core binary64 bit transport (signed zeros, subnormal and normal boundaries, finite extremes and infinities), signed 64-bit conversion around ties at 2^53 and at the integer endpoints, and a non-fused multiply-add. It does not implement or certify future luna-utils numerical APIs. Add operation-specific probes and independent oracle fixtures alongside each new API. NaN payload transport and canonicalization are deliberately excluded until the API and canonicalization policy in issue #25 are defined; raw NaN equality is not promised by this corpus."
+msgstr "初始数据集检查 core 的 binary64 位传输（带符号零、次正规与正规数边界、有限极值及无穷）、2^53 附近中点和整数端点的有符号 64 位转换，以及非融合乘加。它没有实现或认证未来的 luna-utils 数值 API。每个新 API 都应同时添加操作专用探针和独立 oracle fixture。在 issue #25 定义 API 和规范化策略之前，有意排除 NaN payload 传输和规范化；此数据集不保证原始 NaN 相等。"
+
+#: manual/testing.md:9
+msgid "The offline generator `tools/generate_oracles.py` uses CPython IEEE binary64 `float(int)` and exact `fractions.Fraction` operands. It rounds the product before the sum for the contraction probe: `(1 + 2^-27) * (1 - 2^-27)` rounds to 1, and subtracting 1 yields positive zero; a single rounding instead yields -2^-54. The relevant model is IEEE 754-2019 binary64, roundTiesToEven, separate multiplication and addition, and contraction control (§10.4). These finite samples establish regression evidence, not a universal proof or formal verification. ISO/IEC 10967-1 language-independent arithmetic does not override the specific IEEE representation and rounding model used here."
+msgstr "离线生成器 `tools/generate_oracles.py` 使用 CPython 的 IEEE binary64 `float(int)` 和精确的 `fractions.Fraction` 操作数。收缩探针先对乘积舍入，再求和：`(1 + 2^-27) * (1 - 2^-27)` 舍入为 1，减去 1 得到正零；仅舍入一次则得到 -2^-54。模型为 IEEE 754-2019 binary64、roundTiesToEven、独立乘法与加法，以及收缩控制（§10.4）。这些有限样本提供回归证据，不能替代普遍证明或形式验证。ISO/IEC 10967-1 的语言无关算术不会覆盖这里具体采用的 IEEE 表示和舍入模型。"
+
+#: manual/testing.md:11
+msgid "Run `python3 tools/generate_oracles.py --check`, `python3 tools/test_ci_harness.py` and `python3 tools/run_backend_tests.py <backend>` locally. Run `python3 tools/generate_oracles.py` only when intentionally updating the committed fixtures; MoonBit's formatter is required. The generator runs offline and introduces no package dependency. CI installs MoonBit from its official installer and records the actual toolchain version; fixture drift fails rather than updating expected values. Linux GCC and macOS Clang acceptance requires the hosted CI jobs, not a claim based solely on a local macOS run."
+msgstr "本地运行 `python3 tools/generate_oracles.py --check`、`python3 tools/test_ci_harness.py` 和 `python3 tools/run_backend_tests.py <backend>`。仅在有意更新已提交 fixture 时运行 `python3 tools/generate_oracles.py`；需要 MoonBit 格式化器。生成器离线运行，不引入包依赖。CI 通过官方安装器安装 MoonBit 并记录实际工具链版本；fixture 漂移导致检查失败，不会自动更新期望值。Linux GCC 和 macOS Clang 的验收需要托管 CI 任务，不能仅凭本地 macOS 运行声称完成。"
+
+#: manual/testing.md:13
+msgid "Sources: [official MoonBit native package options](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options), [MoonBit contraction report #2262](https://github.com/moonbitlang/moon/issues/2262), and [Python numeric conversion documentation](https://docs.python.org/3/library/functions.html#float)."
+msgstr "来源：[MoonBit 官方原生包选项](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options)、[MoonBit 收缩报告 #2262](https://github.com/moonbitlang/moon/issues/2262) 和 [Python 数值转换文档](https://docs.python.org/3/library/functions.html#float)。"
+
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
 msgstr "数组迁移教程"
@@ -359,7 +389,6 @@ msgid "The examples cover ordinary representable integers. Read the [migration A
 msgstr "示例覆盖普通可表示整数。处理溢出、NaN、空输入或有副作用映射前，请阅读[迁移 API](../api/array_utils.md)。"
 
 #: manual/tutorial/comparison.md:1
-#| msgid "comparison tutorial"
 msgid "Comparison migration tutorial"
 msgstr "比较迁移教程"
 
