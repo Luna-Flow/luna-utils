@@ -4,8 +4,8 @@
 
 Breaking rebuild: retain the luna-utils name, remove the 0.1.x public API and
 Luna-Flow/luna-generic dependency, and depend only on moonbitlang/core.
-The root public API is empty at this stage. Planned numeric packages (#21–#30)
-are not implemented; libm repository placement remains undecided.
+The root public API is empty at this stage. Float representation packages are implemented by #25; other numeric packages
+remain planned; libm repository placement remains undecided.
 
 | Removed API | Migration candidate |
 | --- | --- |
@@ -32,3 +32,9 @@ CI: debug/release four-backend conformance gates, Linux GCC and macOS Clang
 native checks with FP contraction disabled, exact bit transcript comparison,
 offline binary64 oracle fixtures, a release-proof FP contraction probe, a pinned
 MoonBit toolchain, and coverage artifacts (#20).
+
+Added `float` (binary64) and `float/binary32`: raw-bit classification and
+predicates, canonical NaN encodings, exact sign operations, checked integer
+payload adapters, numeric NaN normalization and radix. Numeric APIs discard
+NaN sign/payload/signaling metadata; integer APIs preserve it. No exception
+flags or host payload round-trip guarantee is introduced.

@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Luna-Flow/luna-utils/float/binary32"
+
+import {
+  "Luna-Flow/luna-utils/float",
+}
+
+// Values
+pub fn abs(Float) -> Float
+
+pub fn abs_bits(UInt) -> UInt
+
+pub fn canonicalize_nan(Float) -> Float
+
+pub fn canonicalize_nan_bits(UInt) -> UInt
+
+pub fn classify(Float) -> @float.Classification
+
+pub fn classify_bits(UInt) -> @float.Classification
+
+pub fn copy_sign(Float, Float) -> Float
+
+pub fn copy_sign_bits(UInt, UInt) -> UInt
+
+pub fn get_payload_bits(UInt) -> UInt?
+
+pub fn is_canonical(Float) -> Bool
+
+pub fn is_canonical_bits(UInt) -> Bool
+
+pub fn is_finite(Float) -> Bool
+
+pub fn is_finite_bits(UInt) -> Bool
+
+pub fn is_nan_bits(UInt) -> Bool
+
+pub fn is_sign_minus(Float) -> Bool
+
+pub fn is_sign_minus_bits(UInt) -> Bool
+
+pub fn is_signaling(Float) -> Bool
+
+pub fn is_signaling_bits(UInt) -> Bool
+
+pub fn is_subnormal(Float) -> Bool
+
+pub fn is_subnormal_bits(UInt) -> Bool
+
+pub fn is_zero(Float) -> Bool
+
+pub fn is_zero_bits(UInt) -> Bool
+
+pub fn negate(Float) -> Float
+
+pub fn negate_bits(UInt) -> UInt
+
+pub fn radix() -> Int
+
+pub fn set_payload_bits(UInt, sign_minus? : Bool) -> UInt?
+
+pub fn set_payload_signaling_bits(UInt, sign_minus? : Bool) -> UInt?
+
+pub fn to_bits_canonical(Float) -> UInt
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

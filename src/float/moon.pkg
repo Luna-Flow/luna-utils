@@ -1,0 +1,11 @@
+import {
+  "moonbitlang/core/debug",
+}
+
+options(
+  link: {
+    "native": {
+      "cc-flags": "-O2 -fwrapv -fno-strict-aliasing -ffp-contract=off",
+    },
+  },
+)
