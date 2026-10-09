@@ -1,2 +1,2 @@
 ///|
-traitalias @lg.(AddMonoid, Num)
+using @lf_alg {trait AddMonoid, trait Num}

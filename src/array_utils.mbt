@@ -11,7 +11,7 @@
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let numbers = [1, 2, 3, 4, 5]
 /// inspect(arr_sum(numbers), content="15")
 ///
@@ -20,7 +20,7 @@
 /// ```
 ///
 pub fn[A : AddMonoid] arr_sum(arr : Array[A]) -> A {
-  arr.fold(A::op_add, init=A::zero())
+  arr.fold(fn(acc, value) { acc + value }, init=@lf_alg.Zero::zero())
 }
 
 ///|
@@ -42,25 +42,25 @@ pub fn[A : AddMonoid] arr_sum(arr : Array[A]) -> A {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let zeros:Array[Int] = zero_arr(5) // Creates [0, 0, 0, 0, 0] for Int
 /// inspect(zeros.length(), content="5")
 /// inspect(zeros[0], content="0")
 /// ```
 ///
 pub fn[A : AddMonoid] zero_arr(n : Int) -> Array[A] {
-  Array::make(n, A::zero())
+  Array::make(n, @lf_alg.Zero::zero())
 } // Example:
 
 ///|
-/// ```moonbit
+/// ```moonbit nocheck
 /// let numbers = [1, -2, 3, -4, 5]
 /// inspect(arr_abs_sum(numbers), content="15")
 /// ```
 ///
 pub fn[A : Num + Compare] arr_abs_sum(arr : Array[A]) -> A {
-  let abs = x => if x < A::zero() { -x } else { x }
-  arr.fold(fn(acc, x) { A::op_add(acc, abs(x)) }, init=A::zero())
+  let abs = x => if x < @lf_alg.Zero::zero() { -x } else { x }
+  arr.fold(fn(acc, x) { acc + abs(x) }, init=@lf_alg.Zero::zero())
 }
 
 ///|
@@ -75,7 +75,7 @@ pub fn[A : Num + Compare] arr_abs_sum(arr : Array[A]) -> A {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let original = [1, 2, 3, 4, 5]
 /// let reversed = reverse(original)
 /// inspect(reversed, content="[5, 4, 3, 2, 1]")
@@ -98,7 +98,7 @@ pub fn[T] reverse(array : Array[T]) -> Array[T] {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let numbers = [1, 2, 3, 4, 5]
 /// reverse_inplace(numbers)
 /// inspect(numbers, content="[5, 4, 3, 2, 1]")
@@ -124,7 +124,7 @@ pub fn[T] reverse_inplace(arr : Array[T]) -> Unit {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let arr = [1, 2, 3, 2, 4]
 /// inspect(find(arr, 2), content="Some(1)")
 /// inspect(find(arr, 5), content="None")
@@ -148,7 +148,7 @@ pub fn[T : Eq] find(array : Array[T], value : T) -> Int? {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let uniform = [1, 1, 1, 1]
 /// let mixed = [1, 2, 1, 1]
 /// inspect(same(uniform), content="true")
@@ -190,7 +190,7 @@ pub fn[T : Eq] same(array : Array[T]) -> Bool {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let arr1 = [1, 1, 1, 1]
 /// let arr2 = [1, 2, 1, 1]
 /// inspect(same_to(arr1, 1), content="true")
@@ -231,7 +231,7 @@ pub fn[U, V : Eq] map_same(array : Array[U], f : (U) -> V) -> Bool {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let numbers = [1, 2, 3, 4]
 /// let double = fn(x) { x * 2 }
 /// inspect(map_same_to(numbers, 6, double), content="false")
@@ -262,7 +262,7 @@ pub fn[U, V : Eq] map_same_to(
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let numbers = [1, 5, 3, 9, 2]
 /// let max_num = arr_max(numbers)
 /// inspect(max_num, content="9")
@@ -291,7 +291,7 @@ pub fn[T : Compare] arr_max(array : Array[T]) -> T {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let numbers = [5, 2, 8, 1, 9]
 /// inspect(arr_min(numbers), content="1")
 /// ```

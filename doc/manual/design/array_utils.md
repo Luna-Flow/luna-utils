@@ -6,7 +6,7 @@
 
 Each function asks for the weakest constraint it needs. `reverse` and `reverse_inplace` need none, `find` and the uniformity checks need `Eq`, and `arr_max` and `arr_min` need `Compare`. `arr_sum` and `zero_arr` need only `AddMonoid` from luna-generic, that is `zero()` and `+`, so they work for every type with an additive monoid and not only for numbers. `arr_abs_sum` needs `Num` for negation and `Compare` to find the sign.
 
-The package imports luna-generic under the alias `lg`, and [`src/alias.mbt`](../../../src/alias.mbt) makes `AddMonoid` and `Num` usable without the prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`.
+The package imports luna-generic under the alias `lf_alg`, and [`src/alias.mbt`](../../../src/alias.mbt) uses MoonBit's `using` declaration to make `AddMonoid` and `Num` available without a prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`.
 
 ## Functions instead of methods
 

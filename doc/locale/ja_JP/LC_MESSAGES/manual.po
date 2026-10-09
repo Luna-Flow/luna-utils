@@ -352,8 +352,8 @@ msgid "Each function asks for the weakest constraint it needs. `reverse` and `re
 msgstr "各関数は必要な最も弱い制約だけを要求します。`reverse` と `reverse_inplace` は制約なし、`find` と一様性の判定は `Eq`、`arr_max` と `arr_min` は `Compare` を要求します。`arr_sum` と `zero_arr` は luna-generic の `AddMonoid`、つまり `zero()` と `+` だけを要求するので、数値に限らず加法モノイドを持つすべての型で使えます。`arr_abs_sum` は符号反転のために `Num` を、符号の判定のために `Compare` を要求します。"
 
 #: manual/design/array_utils.md:9
-msgid "The package imports luna-generic under the alias `lg`, and [`src/alias.mbt`](../../../src/alias.mbt) makes `AddMonoid` and `Num` usable without the prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`."
-msgstr "このパッケージは luna-generic を別名 `lg` でインポートしており、[`src/alias.mbt`](../../../src/alias.mbt) によってパッケージ内では `AddMonoid` と `Num` を接頭辞なしで使えます。公開シグネチャではこれらは `@luna-generic.AddMonoid` と `@luna-generic.Num` と表記されます。"
+msgid "The package imports luna-generic under the alias `lf_alg`, and [`src/alias.mbt`](../../../src/alias.mbt) uses MoonBit's `using` declaration to make `AddMonoid` and `Num` available without a prefix inside the package. Public signatures name them `@luna-generic.AddMonoid` and `@luna-generic.Num`."
+msgstr "このパッケージは luna-generic を別名 `lf_alg` でインポートし、[`src/alias.mbt`](../../../src/alias.mbt) の MoonBit `using` 宣言によって、パッケージ内では `AddMonoid` と `Num` を接頭辞なしで使用できます。公開シグネチャでは、これらを `@luna-generic.AddMonoid` と `@luna-generic.Num` と表記します。"
 
 #: manual/design/array_utils.md:11
 msgid "Functions instead of methods"
