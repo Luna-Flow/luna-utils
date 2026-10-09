@@ -3,8 +3,9 @@
 Version 0.2.0 rebuilds the backend-independent numeric base for Luna-Flow.
 It depends only on [moonbitlang/core](https://github.com/moonbitlang/core).
 This migration removes all 0.1.x array/comparison helpers: the root package
-currently exports no functions, types or traits. Numeric packages in
-[issues #21–#30](https://github.com/Luna-Flow/luna-utils/issues/19) remain planned;
+currently exports no functions, types or traits. The float and float/binary32 subpackages provide classification, NaN
+canonicalization and exact integer bit operations (#25). Other numeric packages
+in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19) remain planned;
 this release boundary does not claim implemented IEEE 754 or integer conformance.
 
 ## Migration and documentation
@@ -23,3 +24,7 @@ with Simplified Chinese and Japanese translations. English source lives in
 
 See [backend conformance testing](doc/manual/testing.md) for the CI contract,
 offline oracle corpus and local commands.
+
+See the [float API](doc/manual/api/float.md), [tutorial](doc/manual/tutorial/float.md)
+and [conformance limits](doc/manual/conformance/float.md). NaN metadata is
+preserved only by integer encoding APIs, not numeric host round trips.

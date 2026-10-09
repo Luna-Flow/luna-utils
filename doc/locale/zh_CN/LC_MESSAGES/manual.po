@@ -51,6 +51,67 @@ msgstr "0.1.x 函数 `clamp` 和 `is_between` 已删除。对有序输入可使�
 msgid "Require `lo <= hi` and a consistent total order for the generic expression. Core numeric clamp aborts for reversed bounds; legacy clamp did not validate them. Floating-point NaN is unordered, so operator-based membership and Compare-based extrema need separate contracts. Do not infer IEEE 754 semantics, signed-zero selection or exception flags from this migration."
 msgstr "泛型表达式要求 `lo <= hi` 且顺序为一致的全序。core 数值 clamp 对反向边界会 abort，旧 clamp 不验证边界。浮点 NaN 无序，基于运算符的区间归属与基于 Compare 的最值需要单独约定。不能由此次迁移推断 IEEE 754 语义、有符号零选择或异常标志。"
 
+#: manual/api/float.md:1
+msgid "Float classification and bit API"
+msgstr ""
+
+#: manual/api/float.md:3
+msgid "The package `Luna-Flow/luna-utils/float` operates on binary64 (`Double`, `UInt64` bits). `Luna-Flow/luna-utils/float/binary32` exposes the same function names for binary32 (`Float`, `UInt` bits) and shares the parent `Classification` enum. No host math or floating-point arithmetic is used by the raw-bit operations."
+msgstr ""
+
+#: manual/api/float.md:5
+#: manual/design/float.md:7
+msgid "A raw integer encoding preserves NaN sign, signaling state and payload exactly. A numeric value does not preserve that information portably, especially on JavaScript. Numeric NaN is detected by `x != x`; numeric classification returns `QuietNaN` without inspecting its sign or payload. Numeric `is_signaling` is therefore always false, while numeric `is_canonical` evaluates the canonicalized view. Keep signaling NaNs as integers when their representation matters."
+msgstr "原始整数编码会精确保留 NaN 的符号、信令状态和 payload。数值本身无法跨后端可移植地保留这些信息，尤其是在 JavaScript 上。数值 NaN 通过 `x != x` 检测；数值分类不检查符号或 payload，而返回 `QuietNaN`。因此数值 `is_signaling` 始终为 false，数值 `is_canonical` 检查规范化视图。表示重要时，请将 signaling NaN 保留为整数。"
+
+#: manual/api/float.md:7
+msgid "Classification and predicates"
+msgstr ""
+
+#: manual/api/float.md:9
+msgid "`classify_bits(bits)` distinguishes signaling NaN, quiet NaN, positive/negative infinity, normal, subnormal and zero. `classify(x)` uses the same classes for non-NaN numbers and returns `QuietNaN` for every numeric NaN. `radix()` returns 2. The generated interfaces define the exact constructor names."
+msgstr ""
+
+#: manual/api/float.md:11
+msgid "Predicates have raw `*_bits` and numeric forms. `is_signaling_bits` inspects the quiet bit; numeric `is_signaling` always returns `false` because signaling state is not portable. Numeric `is_canonical` checks the canonical numeric view, so every numeric NaN is canonical by this API. For numeric NaN, sign-sensitive predicates must not infer a host sign. Consult the generated interface and conformance tests for the conservative numeric observations."
+msgstr "谓词同时提供 raw `*_bits` 与数值形式。`is_signaling_bits` 检查 quiet 位；由于 signaling 状态不可移植，数值 `is_signaling` 始终返回 `false`。数值 `is_canonical` 检查规范化数值视图，因此本 API 中所有数值 NaN 都是规范的。对于数值 NaN，不应从主机符号推断符号相关谓词；请参考生成接口与一致性测试。"
+
+#: manual/api/float.md:13
+msgid "Canonicalization and sign"
+msgstr ""
+
+#: manual/api/float.md:15
+msgid "`canonicalize_nan_bits` maps every raw NaN to positive quiet NaN `0x7ff8000000000000` (binary64) or `0x7fc00000` (binary32), leaving non-NaNs unchanged. `to_bits_canonical(x)` guarantees that exact integer encoding for numeric NaN. `canonicalize_nan(x)` returns a numeric quiet NaN; subsequent host storage may change its representation, so use `to_bits_canonical` at serialization boundaries."
+msgstr ""
+
+#: manual/api/float.md:17
+msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, preserving every other bit, including NaN payload and signaling state. Numeric `copy_sign`, `negate` and `abs` canonicalize NaN; all non-NaN encodings, including infinities and signed zero, undergo exact sign transformations. A numeric NaN sign donor is treated conservatively rather than exposing its host sign."
+msgstr ""
+
+#: manual/api/float.md:19
+msgid "Payload encoding adapters"
+msgstr ""
+
+#: manual/api/float.md:21
+msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgstr ""
+
+#: manual/conformance/float.md:1
+msgid "Float conformance and limits"
+msgstr ""
+
+#: manual/conformance/float.md:3
+msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
+msgstr ""
+
+#: manual/conformance/float.md:5
+msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
+msgstr ""
+
+#: manual/conformance/float.md:7
+msgid "Exception flags, FMA, conversions, IEEE extrema, rounding, stable hashing, formatting, bigint and libm remain separate issues. Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgstr ""
+
 #: manual/contributing.md:1
 msgid "Contribution guidelines"
 msgstr "贡献规范"
@@ -324,6 +385,22 @@ msgstr "未来浮点操作须定义 IEEE 754-2019 语义，未来整数操作须
 msgid "Keep pure numeric transformations separate from flags and other effects. Backend independence must be checked on wasm, wasm-gc, js and native in debug and release, with Linux gcc and macOS clang. Issue #20 supplies the CI foundation; it does not turn empty-package builds into numeric conformance evidence."
 msgstr "保持纯数值转换与标志等副作用分离。后端无关性须在 wasm、wasm-gc、js、native 的 debug/release，以及 Linux gcc、macOS clang 上检查。#20 提供 CI 基础，但空包构建不能成为数值符合性证据。"
 
+#: manual/design/float.md:1
+msgid "Float representation design"
+msgstr ""
+
+#: manual/design/float.md:3
+msgid "For binary64, bit 63 is sign, bits 62–52 exponent and bits 51–0 fraction; bit 51 is the quiet bit. Binary32 uses sign bit 31, exponent bits 30–23, fraction bits 22–0 and quiet bit 22. An all-one exponent means infinity when the fraction is zero and NaN otherwise. An all-zero exponent means zero when the fraction is zero and subnormal otherwise; all remaining encodings are normal."
+msgstr ""
+
+#: manual/design/float.md:5
+msgid "Raw operations use fixed-width integer masks. Classification cases are exhaustive and disjoint by the exponent/fraction partition. Sign operations preserve the magnitude mask by construction. Payload guards exclude fraction overflow and the signaling-zero infinity encoding. Every operation takes O(1) time and space with no loops or numeric rounding; termination follows from finite expressions."
+msgstr ""
+
+#: manual/design/float.md:9
+msgid "IEEE 754-2019 §§5.7.2, 5.5.1 and 9.7 motivate classification, sign and payload operations; §6.2 does not require identical NaN payload propagation across hosts. This package makes its canonical encoding policy explicit. It does not raise IEEE exception flags or preserve numeric signaling NaNs. Current MoonBit core 0.10.14+7d59c7ec9 and official [language documentation](https://docs.moonbitlang.com/en/latest/) provide implementation evidence, not a formal verification claim."
+msgstr ""
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr "luna-utils"
@@ -333,7 +410,9 @@ msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. Th
 msgstr "0.2.0 是 Luna-Flow 数值基础层的不兼容重建。模块仅依赖 `moonbitlang/core`，旧数组与比较 API 已删除。在此迁移阶段，根包不导出函数、类型或 trait。"
 
 #: manual/index.md:5
-msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, classification, stable hash, text, bigint, software FMA and libm (#21–#30) are not implemented by this change. The placement of libm remains undecided."
+#, fuzzy
+#| msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, classification, stable hash, text, bigint, software FMA and libm (#21–#30) are not implemented by this change. The placement of libm remains undecided."
+msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, stable hash, text, bigint, software FMA and libm remain planned; #25 adds float classification and representation operations. The placement of libm remains undecided."
 msgstr "后端无关数值包规划见[跟踪 issue #19](https://github.com/Luna-Flow/luna-utils/issues/19)。此次修改未实现整数算术、转换、IEEE 最值、舍入、分类、稳定哈希、文本、bigint、软件 FMA 与 libm（#21–#30）。libm 的仓库归属仍未决定。"
 
 #: manual/index.md:7
@@ -347,6 +426,10 @@ msgstr "迁移手册"
 #: manual/index.md:11
 msgid "Existing page paths remain available as migration guidance: array [API](api/array_utils.md), [design](design/array_utils.md), [tutorial](tutorial/array_utils.md); comparison [API](api/comparison.md), [design](design/comparison.md), [tutorial](tutorial/comparison.md). See the [contribution checklist](contributing.md) before opening a pull request."
 msgstr "现有页面路径保留为迁移指南：数组 [API](api/array_utils.md)、[设计](design/array_utils.md)、[教程](tutorial/array_utils.md)；比较 [API](api/comparison.md)、[设计](design/comparison.md)、[教程](tutorial/comparison.md)。提交 PR 前请参阅[贡献清单](contributing.md)。"
+
+#: manual/index.md:15
+msgid "Float representation packages are available: [API](api/float.md), [design](design/float.md), [tutorial](tutorial/float.md) and [conformance](conformance/float.md). The root package remains empty; import the float subpackages explicitly."
+msgstr ""
 
 #: manual/testing.md:1
 msgid "Backend conformance testing"
@@ -399,6 +482,18 @@ msgstr "对合法有序边界使用类型提供的 clamp。此示例无需导入
 #: manual/tutorial/comparison.md:13
 msgid "For a generic Compare-based expression, import `moonbitlang/core/cmp` as `cmp` in moon.pkg. Validate bounds yourself and consult the [comparison migration API](../api/comparison.md) for semantic differences."
 msgstr "使用基于 Compare 的泛型表达式时，在 moon.pkg 中以 `cmp` 别名导入 `moonbitlang/core/cmp`。自行验证边界，并参阅[比较迁移 API](../api/comparison.md)了解语义差异。"
+
+#: manual/tutorial/float.md:1
+msgid "Float representation tutorial"
+msgstr ""
+
+#: manual/tutorial/float.md:3
+msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
+msgstr ""
+
+#: manual/tutorial/float.md:15
+msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
+msgstr ""
 
 #~ msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
 #~ msgstr "面向 Luna-Flow 项目的泛型数组与比较辅助函数，以 luna-generic 的 trait 作为约束。"

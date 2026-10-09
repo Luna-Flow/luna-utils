@@ -1,0 +1,86 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Luna-Flow/luna-utils/float"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn abs(Double) -> Double
+
+pub fn abs_bits(UInt64) -> UInt64
+
+pub fn canonicalize_nan(Double) -> Double
+
+pub fn canonicalize_nan_bits(UInt64) -> UInt64
+
+pub fn classify(Double) -> Classification
+
+pub fn classify_bits(UInt64) -> Classification
+
+pub fn copy_sign(Double, Double) -> Double
+
+pub fn copy_sign_bits(UInt64, UInt64) -> UInt64
+
+pub fn get_payload_bits(UInt64) -> UInt64?
+
+pub fn is_canonical(Double) -> Bool
+
+pub fn is_canonical_bits(UInt64) -> Bool
+
+pub fn is_finite(Double) -> Bool
+
+pub fn is_finite_bits(UInt64) -> Bool
+
+pub fn is_nan_bits(UInt64) -> Bool
+
+pub fn is_sign_minus(Double) -> Bool
+
+pub fn is_sign_minus_bits(UInt64) -> Bool
+
+pub fn is_signaling(Double) -> Bool
+
+pub fn is_signaling_bits(UInt64) -> Bool
+
+pub fn is_subnormal(Double) -> Bool
+
+pub fn is_subnormal_bits(UInt64) -> Bool
+
+pub fn is_zero(Double) -> Bool
+
+pub fn is_zero_bits(UInt64) -> Bool
+
+pub fn negate(Double) -> Double
+
+pub fn negate_bits(UInt64) -> UInt64
+
+pub fn radix() -> Int
+
+pub fn set_payload_bits(UInt64, sign_minus? : Bool) -> UInt64?
+
+pub fn set_payload_signaling_bits(UInt64, sign_minus? : Bool) -> UInt64?
+
+pub fn to_bits_canonical(Double) -> UInt64
+
+// Errors
+
+// Types and methods
+pub(all) enum Classification {
+  SignalingNaN
+  QuietNaN
+  PositiveInfinity
+  NegativeInfinity
+  PositiveNormal
+  NegativeNormal
+  PositiveSubnormal
+  NegativeSubnormal
+  PositiveZero
+  NegativeZero
+} derive(Eq, @debug.Debug)
+pub fn Classification::equal(Self, Self) -> Bool
+pub fn Classification::not_equal(Self, Self) -> Bool
+pub fn Classification::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits

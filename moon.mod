@@ -10,6 +10,6 @@ license = "Apache-2.0"
 
 keywords = [ "utils", "math" ]
 
-description = "Backend-independent numeric base for Luna-Flow; legacy API removed, numeric packages planned."
+description = "Backend-independent numeric base with floating-point classification, canonical NaN and bit operations."
 
 source = "src"

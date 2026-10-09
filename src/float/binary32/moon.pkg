@@ -1,0 +1,11 @@
+import {
+  "Luna-Flow/luna-utils/float" @binary64,
+}
+
+options(
+  link: {
+    "native": {
+      "cc-flags": "-O2 -fwrapv -fno-strict-aliasing -ffp-contract=off",
+    },
+  },
+)
