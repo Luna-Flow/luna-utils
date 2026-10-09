@@ -1,6 +1,6 @@
 {
   "title": "luna-utils",
-  "summary": "Backend-independent numeric base for Luna-Flow; 0.2.0 removes the legacy API, with numeric packages still planned.",
+  "summary": "Backend-independent numeric base for Luna-Flow; 0.2.0 provides float representation operations; other numeric packages remain planned.",
   "locales": [
     "zh_CN",
     "ja_JP"

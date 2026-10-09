@@ -38,3 +38,5 @@ predicates, canonical NaN encodings, exact sign operations, checked integer
 payload adapters, numeric NaN normalization and radix. Numeric APIs discard
 NaN sign/payload/signaling metadata; integer APIs preserve it. No exception
 flags or host payload round-trip guarantee is introduced.
+
+Review corrections for #25: every binary encoding is IEEE-canonical, including NaNs. NaN-normalized numeric sign and classification functions use `portable_*` names; raw integer operations retain IEEE encoding semantics. Independent offline integer oracles now cover both widths in the CI transcripts.
