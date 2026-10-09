@@ -1,0 +1,3 @@
+import {
+  "Luna-Flow/luna-generic" @lf_alg,
+}

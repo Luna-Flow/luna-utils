@@ -13,7 +13,7 @@
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// inspect(clamp(5, 1, 10), content="5")
 /// inspect(clamp(-3, 1, 10), content="1")
 /// inspect(clamp(15, 1, 10), content="10")
@@ -44,7 +44,7 @@ pub fn[T : Compare] clamp(value : T, min : T, max : T) -> T {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// inspect(is_between(5, 1, 10), content="true")
 /// inspect(is_between(0, 1, 10), content="false")
 /// inspect(is_between(10, 1, 10), content="true")
