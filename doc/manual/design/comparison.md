@@ -1,19 +1,5 @@
-# comparison design
+# Numeric base design
 
-`comparison` holds the range helpers `clamp` and `is_between` in [`src/comparison.mbt`](../../../src/comparison.mbt). This page records the conventions they share and the behaviour that maintainers must keep stable.
+Future floating-point operations must define IEEE 754-2019 semantics; future integer operations must define ISO/IEC 10967-1 semantics. Definitions must state domain, exceptional inputs, rounding, error bounds, complexity and termination. Tests support those contracts but do not prove them. No such numeric implementation is added by the legacy removal.
 
-## Conventions
-
-- Both functions take the value first and the bounds after it, in the order `min`, `max`.
-- Ranges are closed: a value equal to a bound is inside the range.
-- The only constraint is `Compare`, so the functions do not depend on luna-generic and apply to any ordered type, including `String`.
-- The bounds are not validated. Neither function aborts when `min > max`; the [API reference](../api/comparison.md) states what they return in that case.
-
-## Consistency
-
-For `min <= max`, `is_between(v, min, max)` is `true` exactly when `clamp(v, min, max)` returns `v`. Changes to one function must keep this relation.
-
-## Maintenance notes
-
-- Update this page and the [API reference](../api/comparison.md) whenever a function is added or removed, or its constraints or edge-case behaviour change, and regenerate `src/pkg.generated.mbti` with `moon info`.
-- Validating the bounds would change the behaviour described above; document it here if it is ever introduced.
+Keep pure numeric transformations separate from flags and other effects. Backend independence must be checked on wasm, wasm-gc, js and native in debug and release, with Linux gcc and macOS clang. Issue #20 supplies the CI foundation; it does not turn empty-package builds into numeric conformance evidence.

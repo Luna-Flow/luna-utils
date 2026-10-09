@@ -72,13 +72,13 @@ Developers are encouraged to use the AI-generated code comments of the MoonBit L
 - Use the `ready_to_pr.sh` script before committing to format code, run checks, generate test coverage files, and create `.mbti` files.
 - Each commit should have a clear description of the changes made.
 - Commit messages should be in **English**, concise, and precise.
-- Use prefixes such as `fix:`, `feat:`, `refactor:`, and `doc:` to indicate the type of change.
+- Use prefixes such as `fix:`, `feat:`, `refactor:`, and `docs:` to indicate the type of change.
 
 ```text
 fix: fix bug in something
 feat: add feature for something
 refactor: refactor something
-doc: add docs for something
+docs: add documentation
 ```
 
 ### Commit frequency
@@ -88,7 +88,15 @@ doc: add docs for something
 
 ## Code review
 
-- If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod.json`.
+- If you are not a maintainer or collaborator, contact them before modifying dependencies or version numbers in `moon.mod`.
 - All code submissions must undergo **code review**.
 - Code reviews should focus on code quality, style, performance, and security.
 - Reviewers should provide constructive feedback to improve the code.
+
+## 0.2.0 review checklist
+
+- Confirm core-only dependencies and regenerate the public interface with `moon info`.
+- Record the old API boundary, downstream migration and deletion regression evidence.
+- Run `moon check --target all` and `moon test --target all`; validate debug and release as required by the issue.
+- Synchronize README, CHANGELOG, API/design/tutorial pages and both gettext catalogs; run `lunadoc update` and `lunadoc check --compile`.
+- Use an English Conventional Commit and wait for explicit user review before merging.
