@@ -5456,6 +5456,12043 @@ test "float offline oracles 25" {
     0xfff0000000000000UL,
   )
   emit_float_record(
+    "b64_total_order_bits_fff8000000000002_fff8000000000002",
+    if @float.total_order_bits(0xfff8000000000002UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_fff8000000000002",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_fff8000000000001",
+    if @float.total_order_bits(0xfff8000000000002UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 26" {
+  emit_float_record(
+    "b64_total_order_fff8000000000002_fff8000000000001",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_fff0000000000002",
+    if @float.total_order_bits(0xfff8000000000002UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_fff0000000000002",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_fff0000000000001",
+    if @float.total_order_bits(0xfff8000000000002UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_fff0000000000001",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_fff0000000000000",
+    if @float.total_order_bits(0xfff8000000000002UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_fff0000000000000",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_ffefffffffffffff",
+    if @float.total_order_bits(0xfff8000000000002UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_ffefffffffffffff",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_8000000000000001",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_8000000000000001",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_8000000000000000",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_8000000000000000",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 27" {
+  emit_float_record(
+    "b64_minimum_fff8000000000002_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_0",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_0",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_1",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_1",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_10000000000000",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_10000000000000",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_7fefffffffffffff",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_7fefffffffffffff",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_7ff0000000000000",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_7ff0000000000000",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_7ff0000000000001",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_7ff0000000000001",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 28" {
+  emit_float_record(
+    "b64_maximum_fff8000000000002_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_7ff0000000000002",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_7ff0000000000002",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_7ff8000000000000",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_7ff8000000000000",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000002_7ff8000000000001",
+    if @float.total_order_bits(0xfff8000000000002UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000002_7ff8000000000001",
+    if @float.total_order(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000002_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000002_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_fff8000000000002",
+    if @float.total_order_bits(0xfff8000000000001UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_fff8000000000002",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_fff8000000000001",
+    if @float.total_order_bits(0xfff8000000000001UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_fff8000000000001",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_fff0000000000002",
+    if @float.total_order_bits(0xfff8000000000001UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_fff0000000000002",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 29" {
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_fff0000000000001",
+    if @float.total_order_bits(0xfff8000000000001UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_fff0000000000001",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_fff0000000000000",
+    if @float.total_order_bits(0xfff8000000000001UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_fff0000000000000",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_ffefffffffffffff",
+    if @float.total_order_bits(0xfff8000000000001UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_ffefffffffffffff",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_8000000000000001",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_8000000000000001",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_8000000000000000",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_8000000000000000",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_0",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_0",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_1",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 30" {
+  emit_float_record(
+    "b64_total_order_fff8000000000001_1",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_10000000000000",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_10000000000000",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_7fefffffffffffff",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_7fefffffffffffff",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_7ff0000000000000",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_7ff0000000000000",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_7ff0000000000001",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_7ff0000000000001",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_7ff0000000000002",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_7ff0000000000002",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_7ff8000000000000",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_7ff8000000000000",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 31" {
+  emit_float_record(
+    "b64_minimum_fff8000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff8000000000001_7ff8000000000001",
+    if @float.total_order_bits(0xfff8000000000001UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff8000000000001_7ff8000000000001",
+    if @float.total_order(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff8000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff8000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_fff8000000000002",
+    if @float.total_order_bits(0xfff0000000000002UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_fff8000000000002",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_fff8000000000001",
+    if @float.total_order_bits(0xfff0000000000002UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_fff8000000000001",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_fff0000000000002",
+    if @float.total_order_bits(0xfff0000000000002UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_fff0000000000002",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_fff0000000000001",
+    if @float.total_order_bits(0xfff0000000000002UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_fff0000000000001",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_fff0000000000000",
+    if @float.total_order_bits(0xfff0000000000002UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_fff0000000000000",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 32" {
+  emit_float_record(
+    "b64_maximum_fff0000000000002_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_ffefffffffffffff",
+    if @float.total_order_bits(0xfff0000000000002UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_ffefffffffffffff",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_8000000000000001",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_8000000000000001",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_8000000000000000",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_8000000000000000",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_0",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_0",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_1",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_1",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_10000000000000",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_10000000000000",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 33" {
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_7fefffffffffffff",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_7fefffffffffffff",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_7ff0000000000000",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_7ff0000000000000",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_7ff0000000000001",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_7ff0000000000001",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_7ff0000000000002",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_7ff0000000000002",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_7ff8000000000000",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_7ff8000000000000",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000002_7ff8000000000001",
+    if @float.total_order_bits(0xfff0000000000002UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000002_7ff8000000000001",
+    if @float.total_order(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000002_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000002_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_fff8000000000002",
+    if @float.total_order_bits(0xfff0000000000001UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 34" {
+  emit_float_record(
+    "b64_total_order_fff0000000000001_fff8000000000002",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_fff8000000000001",
+    if @float.total_order_bits(0xfff0000000000001UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_fff8000000000001",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_fff0000000000002",
+    if @float.total_order_bits(0xfff0000000000001UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_fff0000000000002",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_fff0000000000001",
+    if @float.total_order_bits(0xfff0000000000001UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_fff0000000000001",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_fff0000000000000",
+    if @float.total_order_bits(0xfff0000000000001UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_fff0000000000000",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_ffefffffffffffff",
+    if @float.total_order_bits(0xfff0000000000001UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_ffefffffffffffff",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_8000000000000001",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_8000000000000001",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 35" {
+  emit_float_record(
+    "b64_minimum_fff0000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_8000000000000000",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_8000000000000000",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_0",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_0",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_1",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_1",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_10000000000000",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_10000000000000",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_7fefffffffffffff",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_7fefffffffffffff",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_7ff0000000000000",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_7ff0000000000000",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 36" {
+  emit_float_record(
+    "b64_maximum_fff0000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_7ff0000000000001",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_7ff0000000000001",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_7ff0000000000002",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_7ff0000000000002",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_7ff8000000000000",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_7ff8000000000000",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000001_7ff8000000000001",
+    if @float.total_order_bits(0xfff0000000000001UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000001_7ff8000000000001",
+    if @float.total_order(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_fff8000000000002",
+    if @float.total_order_bits(0xfff0000000000000UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_fff8000000000002",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_fff8000000000001",
+    if @float.total_order_bits(0xfff0000000000000UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_fff8000000000001",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 37" {
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_fff0000000000002",
+    if @float.total_order_bits(0xfff0000000000000UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_fff0000000000002",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_fff0000000000001",
+    if @float.total_order_bits(0xfff0000000000000UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_fff0000000000001",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_fff0000000000000",
+    if @float.total_order_bits(0xfff0000000000000UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_fff0000000000000",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_ffefffffffffffff",
+    if @float.total_order_bits(0xfff0000000000000UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_ffefffffffffffff",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_8000000000000001",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_8000000000000001",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_8000000000000000",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_8000000000000000",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_0",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 38" {
+  emit_float_record(
+    "b64_total_order_fff0000000000000_0",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_1",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_1",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_10000000000000",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_10000000000000",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_7fefffffffffffff",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_7fefffffffffffff",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_7ff0000000000000",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_7ff0000000000000",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_7ff0000000000001",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_7ff0000000000001",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_7ff0000000000002",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_7ff0000000000002",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 39" {
+  emit_float_record(
+    "b64_minimum_fff0000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_7ff8000000000000",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_7ff8000000000000",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_fff0000000000000_7ff8000000000001",
+    if @float.total_order_bits(0xfff0000000000000UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_fff0000000000000_7ff8000000000001",
+    if @float.total_order(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_fff0000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_fff0000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_fff8000000000002",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_fff8000000000002",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_fff8000000000001",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_fff8000000000001",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_fff0000000000002",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_fff0000000000002",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_fff0000000000001",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_fff0000000000001",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 40" {
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_fff0000000000000",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_fff0000000000000",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_ffefffffffffffff",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_ffefffffffffffff",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_8000000000000001",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_8000000000000001",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_8000000000000000",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_8000000000000000",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_0",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_0",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_1",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_1",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 41" {
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_10000000000000",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_10000000000000",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_7fefffffffffffff",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_7fefffffffffffff",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_7ff0000000000000",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_7ff0000000000000",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_7ff0000000000001",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_7ff0000000000001",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_7ff0000000000002",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_7ff0000000000002",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_7ff8000000000000",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_7ff8000000000000",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_ffefffffffffffff_7ff8000000000001",
+    if @float.total_order_bits(0xffefffffffffffffUL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 42" {
+  emit_float_record(
+    "b64_total_order_ffefffffffffffff_7ff8000000000001",
+    if @float.total_order(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_ffefffffffffffff_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_ffefffffffffffff_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_fff8000000000002",
+    if @float.total_order_bits(0x8000000000000001UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_fff8000000000002",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_fff8000000000001",
+    if @float.total_order_bits(0x8000000000000001UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_fff8000000000001",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_fff0000000000002",
+    if @float.total_order_bits(0x8000000000000001UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_fff0000000000002",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_fff0000000000001",
+    if @float.total_order_bits(0x8000000000000001UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_fff0000000000001",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_fff0000000000000",
+    if @float.total_order_bits(0x8000000000000001UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_fff0000000000000",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_ffefffffffffffff",
+    if @float.total_order_bits(0x8000000000000001UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_ffefffffffffffff",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 43" {
+  emit_float_record(
+    "b64_minimum_8000000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_8000000000000001",
+    if @float.total_order_bits(0x8000000000000001UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_8000000000000001",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_8000000000000000",
+    if @float.total_order_bits(0x8000000000000001UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_8000000000000000",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_0",
+    if @float.total_order_bits(0x8000000000000001UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_0",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_1",
+    if @float.total_order_bits(0x8000000000000001UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_1",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_10000000000000",
+    if @float.total_order_bits(0x8000000000000001UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_10000000000000",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_7fefffffffffffff",
+    if @float.total_order_bits(0x8000000000000001UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_7fefffffffffffff",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 44" {
+  emit_float_record(
+    "b64_maximum_8000000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_7ff0000000000000",
+    if @float.total_order_bits(0x8000000000000001UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_7ff0000000000000",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_7ff0000000000001",
+    if @float.total_order_bits(0x8000000000000001UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_7ff0000000000001",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_7ff0000000000002",
+    if @float.total_order_bits(0x8000000000000001UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_7ff0000000000002",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_7ff8000000000000",
+    if @float.total_order_bits(0x8000000000000001UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_7ff8000000000000",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000001_7ff8000000000001",
+    if @float.total_order_bits(0x8000000000000001UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000001_7ff8000000000001",
+    if @float.total_order(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_fff8000000000002",
+    if @float.total_order_bits(0x8000000000000000UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_fff8000000000002",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 45" {
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_fff8000000000001",
+    if @float.total_order_bits(0x8000000000000000UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_fff8000000000001",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_fff0000000000002",
+    if @float.total_order_bits(0x8000000000000000UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_fff0000000000002",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_fff0000000000001",
+    if @float.total_order_bits(0x8000000000000000UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_fff0000000000001",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_fff0000000000000",
+    if @float.total_order_bits(0x8000000000000000UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_fff0000000000000",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_ffefffffffffffff",
+    if @float.total_order_bits(0x8000000000000000UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_ffefffffffffffff",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_8000000000000001",
+    if @float.total_order_bits(0x8000000000000000UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_8000000000000001",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_8000000000000000",
+    if @float.total_order_bits(0x8000000000000000UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 46" {
+  emit_float_record(
+    "b64_total_order_8000000000000000_8000000000000000",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_0",
+    if @float.total_order_bits(0x8000000000000000UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_0",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_1",
+    if @float.total_order_bits(0x8000000000000000UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_1",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_10000000000000",
+    if @float.total_order_bits(0x8000000000000000UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_10000000000000",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_7fefffffffffffff",
+    if @float.total_order_bits(0x8000000000000000UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_7fefffffffffffff",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_7ff0000000000000",
+    if @float.total_order_bits(0x8000000000000000UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_7ff0000000000000",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_7ff0000000000001",
+    if @float.total_order_bits(0x8000000000000000UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_7ff0000000000001",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 47" {
+  emit_float_record(
+    "b64_minimum_8000000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_7ff0000000000002",
+    if @float.total_order_bits(0x8000000000000000UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_7ff0000000000002",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_7ff8000000000000",
+    if @float.total_order_bits(0x8000000000000000UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_7ff8000000000000",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_8000000000000000_7ff8000000000001",
+    if @float.total_order_bits(0x8000000000000000UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_8000000000000000_7ff8000000000001",
+    if @float.total_order(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_8000000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_8000000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x8000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_fff8000000000002",
+    if @float.total_order_bits(0x0000000000000000UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_fff8000000000002",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_fff8000000000001",
+    if @float.total_order_bits(0x0000000000000000UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_fff8000000000001",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_fff0000000000002",
+    if @float.total_order_bits(0x0000000000000000UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_fff0000000000002",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 48" {
+  emit_float_record(
+    "b64_maximum_0_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_fff0000000000001",
+    if @float.total_order_bits(0x0000000000000000UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_fff0000000000001",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_fff0000000000000",
+    if @float.total_order_bits(0x0000000000000000UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_fff0000000000000",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_ffefffffffffffff",
+    if @float.total_order_bits(0x0000000000000000UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_ffefffffffffffff",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_0_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_8000000000000001",
+    if @float.total_order_bits(0x0000000000000000UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_8000000000000001",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_8000000000000000",
+    if @float.total_order_bits(0x0000000000000000UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_8000000000000000",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_0",
+    if @float.total_order_bits(0x0000000000000000UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_0",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 49" {
+  emit_float_record(
+    "b64_total_order_bits_0_1",
+    if @float.total_order_bits(0x0000000000000000UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_1",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_10000000000000",
+    if @float.total_order_bits(0x0000000000000000UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_10000000000000",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_7fefffffffffffff",
+    if @float.total_order_bits(0x0000000000000000UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_7fefffffffffffff",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_7ff0000000000000",
+    if @float.total_order_bits(0x0000000000000000UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_7ff0000000000000",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_7ff0000000000001",
+    if @float.total_order_bits(0x0000000000000000UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_7ff0000000000001",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_7ff0000000000002",
+    if @float.total_order_bits(0x0000000000000000UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_7ff0000000000002",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_7ff8000000000000",
+    if @float.total_order_bits(0x0000000000000000UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 50" {
+  emit_float_record(
+    "b64_total_order_0_7ff8000000000000",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_0_7ff8000000000001",
+    if @float.total_order_bits(0x0000000000000000UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_0_7ff8000000000001",
+    if @float.total_order(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_0_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_0_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_fff8000000000002",
+    if @float.total_order_bits(0x0000000000000001UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_fff8000000000002",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_fff8000000000001",
+    if @float.total_order_bits(0x0000000000000001UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_fff8000000000001",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_fff0000000000002",
+    if @float.total_order_bits(0x0000000000000001UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_fff0000000000002",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_fff0000000000001",
+    if @float.total_order_bits(0x0000000000000001UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_fff0000000000001",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_fff0000000000000",
+    if @float.total_order_bits(0x0000000000000001UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_fff0000000000000",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 51" {
+  emit_float_record(
+    "b64_minimum_1_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_ffefffffffffffff",
+    if @float.total_order_bits(0x0000000000000001UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_ffefffffffffffff",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_1_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_8000000000000001",
+    if @float.total_order_bits(0x0000000000000001UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_8000000000000001",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_8000000000000000",
+    if @float.total_order_bits(0x0000000000000001UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_8000000000000000",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_0",
+    if @float.total_order_bits(0x0000000000000001UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_0",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_1",
+    if @float.total_order_bits(0x0000000000000001UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_1",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_10000000000000",
+    if @float.total_order_bits(0x0000000000000001UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_10000000000000",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 52" {
+  emit_float_record(
+    "b64_maximum_1_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_7fefffffffffffff",
+    if @float.total_order_bits(0x0000000000000001UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_7fefffffffffffff",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_7ff0000000000000",
+    if @float.total_order_bits(0x0000000000000001UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_7ff0000000000000",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_7ff0000000000001",
+    if @float.total_order_bits(0x0000000000000001UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_7ff0000000000001",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_7ff0000000000002",
+    if @float.total_order_bits(0x0000000000000001UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_7ff0000000000002",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_7ff8000000000000",
+    if @float.total_order_bits(0x0000000000000001UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_7ff8000000000000",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_1_7ff8000000000001",
+    if @float.total_order_bits(0x0000000000000001UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_1_7ff8000000000001",
+    if @float.total_order(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_1_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_1_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0000000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 53" {
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_fff8000000000002",
+    if @float.total_order_bits(0x0010000000000000UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_fff8000000000002",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_fff8000000000001",
+    if @float.total_order_bits(0x0010000000000000UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_fff8000000000001",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_fff0000000000002",
+    if @float.total_order_bits(0x0010000000000000UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_fff0000000000002",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_fff0000000000001",
+    if @float.total_order_bits(0x0010000000000000UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_fff0000000000001",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_fff0000000000000",
+    if @float.total_order_bits(0x0010000000000000UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_fff0000000000000",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_ffefffffffffffff",
+    if @float.total_order_bits(0x0010000000000000UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_ffefffffffffffff",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_8000000000000001",
+    if @float.total_order_bits(0x0010000000000000UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 54" {
+  emit_float_record(
+    "b64_total_order_10000000000000_8000000000000001",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_8000000000000000",
+    if @float.total_order_bits(0x0010000000000000UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_8000000000000000",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_0",
+    if @float.total_order_bits(0x0010000000000000UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_0",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_1",
+    if @float.total_order_bits(0x0010000000000000UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_1",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_10000000000000",
+    if @float.total_order_bits(0x0010000000000000UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_10000000000000",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_7fefffffffffffff",
+    if @float.total_order_bits(0x0010000000000000UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_7fefffffffffffff",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_7ff0000000000000",
+    if @float.total_order_bits(0x0010000000000000UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_7ff0000000000000",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 55" {
+  emit_float_record(
+    "b64_minimum_10000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_7ff0000000000001",
+    if @float.total_order_bits(0x0010000000000000UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_7ff0000000000001",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_7ff0000000000002",
+    if @float.total_order_bits(0x0010000000000000UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_7ff0000000000002",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_7ff8000000000000",
+    if @float.total_order_bits(0x0010000000000000UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_7ff8000000000000",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_10000000000000_7ff8000000000001",
+    if @float.total_order_bits(0x0010000000000000UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_10000000000000_7ff8000000000001",
+    if @float.total_order(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_10000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_10000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x0010000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_fff8000000000002",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_fff8000000000002",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_fff8000000000001",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_fff8000000000001",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 56" {
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_fff0000000000002",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_fff0000000000002",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_fff0000000000001",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_fff0000000000001",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_fff0000000000000",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_fff0000000000000",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_ffefffffffffffff",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_ffefffffffffffff",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_8000000000000001",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_8000000000000001",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_8000000000000000",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_8000000000000000",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+}
+
+///|
+test "float offline oracles 57" {
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_0",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_0",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_1",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_1",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_10000000000000",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_10000000000000",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_7fefffffffffffff",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_7fefffffffffffff",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_7ff0000000000000",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_7ff0000000000000",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_7ff0000000000001",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_7ff0000000000001",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_7ff0000000000002",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 58" {
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_7ff0000000000002",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_7ff8000000000000",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_7ff8000000000000",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7fefffffffffffff_7ff8000000000001",
+    if @float.total_order_bits(0x7fefffffffffffffUL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7fefffffffffffff_7ff8000000000001",
+    if @float.total_order(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7fefffffffffffff_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7fefffffffffffff_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_fff8000000000002",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_fff8000000000002",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_fff8000000000001",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_fff8000000000001",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_fff0000000000002",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_fff0000000000002",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_fff0000000000001",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_fff0000000000001",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 59" {
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_fff0000000000000",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_fff0000000000000",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_ffefffffffffffff",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_ffefffffffffffff",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_8000000000000001",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_8000000000000001",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000001UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_8000000000000000",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_8000000000000000",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_0",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_0",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_1",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_1",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 60" {
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_10000000000000",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_10000000000000",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x0010000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_7fefffffffffffff",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_7fefffffffffffff",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_7ff0000000000000",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_7ff0000000000000",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_7ff0000000000001",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_7ff0000000000001",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_7ff0000000000002",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_7ff0000000000002",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_7ff8000000000000",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_7ff8000000000000",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 61" {
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000000_7ff8000000000001",
+    if @float.total_order_bits(0x7ff0000000000000UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000000_7ff8000000000001",
+    if @float.total_order(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_fff8000000000002",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_fff8000000000002",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_fff8000000000001",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_fff8000000000001",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_fff0000000000002",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_fff0000000000002",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_fff0000000000001",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_fff0000000000001",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_fff0000000000000",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_fff0000000000000",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_ffefffffffffffff",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 62" {
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_ffefffffffffffff",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_8000000000000001",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_8000000000000001",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_8000000000000000",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_8000000000000000",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_0",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_0",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_1",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_1",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_10000000000000",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_10000000000000",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_7fefffffffffffff",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_7fefffffffffffff",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 63" {
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_7ff0000000000000",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_7ff0000000000000",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_7ff0000000000001",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_7ff0000000000001",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_7ff0000000000002",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_7ff0000000000002",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_7ff8000000000000",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_7ff8000000000000",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000001_7ff8000000000001",
+    if @float.total_order_bits(0x7ff0000000000001UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000001_7ff8000000000001",
+    if @float.total_order(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_fff8000000000002",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_fff8000000000002",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 64" {
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_fff8000000000001",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_fff8000000000001",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_fff0000000000002",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_fff0000000000002",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_fff0000000000001",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_fff0000000000001",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_fff0000000000000",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_fff0000000000000",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_ffefffffffffffff",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_ffefffffffffffff",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_8000000000000001",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_8000000000000001",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 65" {
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_8000000000000000",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_8000000000000000",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_0",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_0",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_1",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_1",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_10000000000000",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_10000000000000",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_7fefffffffffffff",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_7fefffffffffffff",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_7ff0000000000000",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_7ff0000000000000",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_7ff0000000000001",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 66" {
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_7ff0000000000001",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_7ff0000000000002",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_7ff0000000000002",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_7ff8000000000000",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_7ff8000000000000",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff0000000000002_7ff8000000000001",
+    if @float.total_order_bits(0x7ff0000000000002UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff0000000000002_7ff8000000000001",
+    if @float.total_order(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff0000000000002_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff0000000000002_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff0000000000002UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_fff8000000000002",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_fff8000000000002",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_fff8000000000001",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_fff8000000000001",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_fff0000000000002",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_fff0000000000002",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 67" {
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_fff0000000000001",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_fff0000000000001",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_fff0000000000000",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_fff0000000000000",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_ffefffffffffffff",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_ffefffffffffffff",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_8000000000000001",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_8000000000000001",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_8000000000000000",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_8000000000000000",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_0",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_0",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 68" {
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_1",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_1",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_10000000000000",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_10000000000000",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_7fefffffffffffff",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_7fefffffffffffff",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_7ff0000000000000",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_7ff0000000000000",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_7ff0000000000001",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_7ff0000000000001",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_7ff0000000000002",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_7ff0000000000002",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 69" {
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_7ff8000000000000",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_7ff8000000000000",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000000_7ff8000000000001",
+    if @float.total_order_bits(0x7ff8000000000000UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000000_7ff8000000000001",
+    if @float.total_order(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000000_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_fff8000000000002",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0xfff8000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_fff8000000000002",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_fff8000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_fff8000000000001",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0xfff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_fff8000000000001",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_fff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_fff0000000000002",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0xfff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_fff0000000000002",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_fff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_fff0000000000001",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0xfff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_fff0000000000001",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_fff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_fff0000000000000",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0xfff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 70" {
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_fff0000000000000",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_fff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xfff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_ffefffffffffffff",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0xffefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_ffefffffffffffff",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_ffefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0xffefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_8000000000000001",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x8000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_8000000000000001",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_8000000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_8000000000000000",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x8000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_8000000000000000",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_8000000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x8000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_0",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x0000000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_0",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_0",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_0",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_1",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x0000000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_1",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_1",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_1",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0000000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_10000000000000",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x0010000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_10000000000000",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 71" {
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_10000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x0010000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_7fefffffffffffff",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x7fefffffffffffffUL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_7fefffffffffffff",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_7fefffffffffffff",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_7ff0000000000000",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x7ff0000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_7ff0000000000000",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_7ff0000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_7ff0000000000001",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x7ff0000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_7ff0000000000001",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_7ff0000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_7ff0000000000002",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x7ff0000000000002UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_7ff0000000000002",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_7ff0000000000002",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff0000000000002UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_7ff8000000000000",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x7ff8000000000000UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_7ff8000000000000",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_7ff8000000000000",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000000UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_total_order_bits_7ff8000000000001_7ff8000000000001",
+    if @float.total_order_bits(0x7ff8000000000001UL, 0x7ff8000000000001UL) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_total_order_7ff8000000000001_7ff8000000000001",
+    if @float.total_order(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b64_minimum_7ff8000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.minimum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 72" {
+  emit_float_record(
+    "b64_maximum_7ff8000000000001_7ff8000000000001",
+    @float.to_bits_canonical(
+      @float.maximum(
+        0x7ff8000000000001UL.reinterpret_as_double(),
+        0x7ff8000000000001UL.reinterpret_as_double(),
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
     "b32_zero_plus_class",
     class_id(@binary32.classify_bits(0x00000000U)),
     0x0000000000000000UL,
@@ -5494,10 +17531,6 @@ test "float offline oracles 25" {
     },
     0x0000000000000001UL,
   )
-}
-
-///|
-test "float offline oracles 26" {
   emit_float_record(
     "b32_zero_plus_is_sign_minus_bits",
     if @binary32.is_sign_minus_bits(0x00000000U) {
@@ -5649,6 +17682,10 @@ test "float offline oracles 26" {
     0xffffffffUL,
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 73" {
   emit_float_record(
     "b32_min_subnormal_plus_class",
     class_id(@binary32.classify_bits(0x00000001U)),
@@ -5697,10 +17734,6 @@ test "float offline oracles 26" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 27" {
   emit_float_record(
     "b32_min_subnormal_plus_is_subnormal_bits",
     if @binary32.is_subnormal_bits(0x00000001U) {
@@ -5848,6 +17881,10 @@ test "float offline oracles 27" {
     class_id(@binary32.classify_bits(0x007fffffU)),
     0x0000000000000002UL,
   )
+}
+
+///|
+test "float offline oracles 74" {
   emit_float_record(
     "b32_max_subnormal_plus_portable_class",
     class_id(
@@ -5900,10 +17937,6 @@ test "float offline oracles 27" {
     },
     0x0000000000000001UL,
   )
-}
-
-///|
-test "float offline oracles 28" {
   emit_float_record(
     "b32_max_subnormal_plus_is_finite_bits",
     if @binary32.is_finite_bits(0x007fffffU) {
@@ -6049,6 +18082,10 @@ test "float offline oracles 28" {
     ),
     0x0000000000000004UL,
   )
+}
+
+///|
+test "float offline oracles 75" {
   emit_float_record(
     "b32_min_normal_plus_is_nan_bits",
     if @binary32.is_nan_bits(0x00800000U) {
@@ -6103,10 +18140,6 @@ test "float offline oracles 28" {
     },
     0x0000000000000001UL,
   )
-}
-
-///|
-test "float offline oracles 29" {
   emit_float_record(
     "b32_min_normal_plus_is_zero_bits",
     if @binary32.is_zero_bits(0x00800000U) {
@@ -6252,6 +18285,10 @@ test "float offline oracles 29" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 76" {
   emit_float_record(
     "b32_max_normal_plus_is_signaling_bits",
     if @binary32.is_signaling_bits(0x7f7fffffU) {
@@ -6306,10 +18343,6 @@ test "float offline oracles 29" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 30" {
   emit_float_record(
     "b32_max_normal_plus_negate_bits",
     @binary32.negate_bits(0x7f7fffffU).to_uint64() & 0xffffffffUL,
@@ -6455,6 +18488,10 @@ test "float offline oracles 30" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 77" {
   emit_float_record(
     "b32_infinity_plus_is_canonical_bits",
     if @binary32.is_canonical_bits(0x7f800000U) {
@@ -6505,10 +18542,6 @@ test "float offline oracles 30" {
     @binary32.negate_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
     0x00000000ff800000UL,
   )
-}
-
-///|
-test "float offline oracles 31" {
   emit_float_record(
     "b32_infinity_plus_abs_bits",
     @binary32.abs_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
@@ -6658,6 +18691,10 @@ test "float offline oracles 31" {
     },
     0x0000000000000001UL,
   )
+}
+
+///|
+test "float offline oracles 78" {
   emit_float_record(
     "b32_snan_min_plus_is_sign_minus_bits",
     if @binary32.is_sign_minus_bits(0x7f800001U) {
@@ -6704,10 +18741,6 @@ test "float offline oracles 31" {
     @binary32.abs_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
     0x000000007f800001UL,
   )
-}
-
-///|
-test "float offline oracles 32" {
   emit_float_record(
     "b32_snan_min_plus_canonicalize_nan_bits",
     @binary32.canonicalize_nan_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
@@ -6861,6 +18894,10 @@ test "float offline oracles 32" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 79" {
   emit_float_record(
     "b32_snan_max_plus_is_subnormal_bits",
     if @binary32.is_subnormal_bits(0x7fbfffffU) {
@@ -6903,10 +18940,6 @@ test "float offline oracles 32" {
     @binary32.canonicalize_nan_bits(0x7fbfffffU).to_uint64() & 0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 33" {
   emit_float_record(
     "b32_snan_max_plus_get_payload",
     match @binary32.get_payload_bits(0x7fbfffffU) {
@@ -7064,6 +19097,10 @@ test "float offline oracles 33" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 80" {
   emit_float_record(
     "b32_qnan_zero_plus_is_finite_bits",
     if @binary32.is_finite_bits(0x7fc00000U) {
@@ -7105,10 +19142,6 @@ test "float offline oracles 33" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 34" {
   emit_float_record(
     "b32_qnan_zero_plus_portable_negate",
     @binary32.to_bits_canonical(
@@ -7267,6 +19300,10 @@ test "float offline oracles 34" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 81" {
   emit_float_record(
     "b32_qnan_max_plus_is_zero_bits",
     if @binary32.is_zero_bits(0x7fffffffU) {
@@ -7307,10 +19344,6 @@ test "float offline oracles 34" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 35" {
   emit_float_record(
     "b32_qnan_max_plus_portable_abs",
     @binary32.to_bits_canonical(
@@ -7470,6 +19503,10 @@ test "float offline oracles 35" {
     },
     0x0000000000000001UL,
   )
+}
+
+///|
+test "float offline oracles 82" {
   emit_float_record(
     "b32_zero_minus_negate_bits",
     @binary32.negate_bits(0x80000000U).to_uint64() & 0xffffffffUL,
@@ -7509,10 +19546,6 @@ test "float offline oracles 35" {
     0xffffffffUL,
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 36" {
   emit_float_record(
     "b32_zero_minus_canonicalize_nan",
     @binary32.to_bits_canonical(
@@ -7669,6 +19702,10 @@ test "float offline oracles 36" {
     @binary32.negate_bits(0x80000001U).to_uint64() & 0xffffffffUL,
     0x0000000000000001UL,
   )
+}
+
+///|
+test "float offline oracles 83" {
   emit_float_record(
     "b32_min_subnormal_minus_abs_bits",
     @binary32.abs_bits(0x80000001U).to_uint64() & 0xffffffffUL,
@@ -7711,10 +19748,6 @@ test "float offline oracles 36" {
     0xffffffffUL,
     0x0000000080000001UL,
   )
-}
-
-///|
-test "float offline oracles 37" {
   emit_float_record(
     "b32_min_subnormal_minus_copy_raw_0",
     @binary32.copy_sign_bits(0x80000001U, 0x00000000U).to_uint64() &
@@ -7868,6 +19901,10 @@ test "float offline oracles 37" {
     @binary32.abs_bits(0x807fffffU).to_uint64() & 0xffffffffUL,
     0x00000000007fffffUL,
   )
+}
+
+///|
+test "float offline oracles 84" {
   emit_float_record(
     "b32_max_subnormal_minus_canonicalize_nan_bits",
     @binary32.canonicalize_nan_bits(0x807fffffU).to_uint64() & 0xffffffffUL,
@@ -7911,10 +19948,6 @@ test "float offline oracles 37" {
     0xffffffffUL,
     0x00000000007fffffUL,
   )
-}
-
-///|
-test "float offline oracles 38" {
   emit_float_record(
     "b32_max_subnormal_minus_copy_portable_0",
     @binary32.to_bits_canonical(
@@ -8067,6 +20100,10 @@ test "float offline oracles 38" {
     @binary32.canonicalize_nan_bits(0x80800000U).to_uint64() & 0xffffffffUL,
     0x0000000080800000UL,
   )
+}
+
+///|
+test "float offline oracles 85" {
   emit_float_record(
     "b32_min_normal_minus_get_payload",
     match @binary32.get_payload_bits(0x80800000U) {
@@ -8116,10 +20153,6 @@ test "float offline oracles 38" {
     0xffffffffUL,
     0x0000000000800000UL,
   )
-}
-
-///|
-test "float offline oracles 39" {
   emit_float_record(
     "b32_min_normal_minus_copy_raw_80000000",
     @binary32.copy_sign_bits(0x80800000U, 0x80000000U).to_uint64() &
@@ -8269,6 +20302,10 @@ test "float offline oracles 39" {
     },
     0xffffffffffffffffUL,
   )
+}
+
+///|
+test "float offline oracles 86" {
   emit_float_record(
     "b32_max_normal_minus_portable_negate",
     @binary32.to_bits_canonical(
@@ -8316,10 +20353,6 @@ test "float offline oracles 39" {
     0xffffffffUL,
     0x00000000ff7fffffUL,
   )
-}
-
-///|
-test "float offline oracles 40" {
   emit_float_record(
     "b32_max_normal_minus_copy_portable_80000000",
     @binary32.to_bits_canonical(
@@ -8471,6 +20504,10 @@ test "float offline oracles 40" {
     0xffffffffUL,
     0x000000007f800000UL,
   )
+}
+
+///|
+test "float offline oracles 87" {
   emit_float_record(
     "b32_infinity_minus_portable_abs",
     @binary32.to_bits_canonical(
@@ -8521,10 +20558,6 @@ test "float offline oracles 40" {
     0xffffffffUL,
     0x00000000ff800000UL,
   )
-}
-
-///|
-test "float offline oracles 41" {
   emit_float_record(
     "b32_infinity_minus_copy_raw_7fffffff",
     @binary32.copy_sign_bits(0xff800000U, 0x7fffffffU).to_uint64() &
@@ -8673,6 +20706,10 @@ test "float offline oracles 41" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 88" {
   emit_float_record(
     "b32_snan_min_minus_canonicalize_nan",
     @binary32.to_bits_canonical(
@@ -8721,10 +20758,6 @@ test "float offline oracles 41" {
     0xffffffffUL,
     0x000000007f800001UL,
   )
-}
-
-///|
-test "float offline oracles 42" {
   emit_float_record(
     "b32_snan_min_minus_copy_portable_7fffffff",
     @binary32.to_bits_canonical(
@@ -8875,6 +20908,10 @@ test "float offline oracles 42" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 89" {
   emit_float_record(
     "b32_snan_max_minus_copy_raw_0",
     @binary32.copy_sign_bits(0xffbfffffU, 0x00000000U).to_uint64() &
@@ -8926,10 +20963,6 @@ test "float offline oracles 42" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 43" {
   emit_float_record(
     "b32_snan_max_minus_copy_raw_ffffffff",
     @binary32.copy_sign_bits(0xffbfffffU, 0xffffffffU).to_uint64() &
@@ -9075,6 +21108,10 @@ test "float offline oracles 43" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 90" {
   emit_float_record(
     "b32_qnan_zero_minus_copy_portable_0",
     @binary32.to_bits_canonical(
@@ -9126,10 +21163,6 @@ test "float offline oracles 43" {
     0xffffffffUL,
     0x00000000ffc00000UL,
   )
-}
-
-///|
-test "float offline oracles 44" {
   emit_float_record(
     "b32_qnan_zero_minus_copy_portable_ffffffff",
     @binary32.to_bits_canonical(
@@ -9280,6 +21313,10 @@ test "float offline oracles 44" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 91" {
   emit_float_record(
     "b32_qnan_max_minus_copy_raw_80000000",
     @binary32.copy_sign_bits(0xffffffffU, 0x80000000U).to_uint64() &
@@ -9331,10 +21368,6 @@ test "float offline oracles 44" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 45" {
   emit_float_record(
     "b32_set_payload_bits_0_0",
     match @binary32.set_payload_bits(0x00000000U, sign_minus=false) {
@@ -9487,6 +21520,10 @@ test "float offline oracles 45" {
     },
     0xffffffffffffffffUL,
   )
+}
+
+///|
+test "float offline oracles 92" {
   emit_float_record(
     "b32_set_payload_signaling_bits_1_ffffffff",
     match @binary32.set_payload_signaling_bits(0xffffffffU, sign_minus=true) {
@@ -9550,10 +21587,6 @@ test "float offline oracles 45" {
     0xffffffffUL,
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 46" {
   emit_float_record(
     "b32_round_ties_even_neg_zero",
     @binary32.to_bits_canonical(
@@ -9763,6 +21796,10 @@ test "float offline oracles 46" {
     0xffffffffUL,
     0x000000003f800000UL,
   )
+}
+
+///|
+test "float offline oracles 93" {
   emit_float_record(
     "b32_round_toward_negative_max_subnormal",
     @binary32.to_bits_canonical(
@@ -9829,10 +21866,6 @@ test "float offline oracles 46" {
     0xffffffffUL,
     0x00000000bf800000UL,
   )
-}
-
-///|
-test "float offline oracles 47" {
   emit_float_record(
     "b32_round_ties_even_max_finite",
     @binary32.to_bits_canonical(
@@ -10042,6 +22075,10 @@ test "float offline oracles 47" {
     0xffffffffUL,
     0x00000000c0000000UL,
   )
+}
+
+///|
+test "float offline oracles 94" {
   emit_float_record(
     "b32_round_toward_negative_neg2p5",
     @binary32.to_bits_canonical(
@@ -10108,10 +22145,6 @@ test "float offline oracles 47" {
     0xffffffffUL,
     0x000000003f800000UL,
   )
-}
-
-///|
-test "float offline oracles 48" {
   emit_float_record(
     "b32_round_ties_even_3p5",
     @binary32.to_bits_canonical(
@@ -10321,6 +22354,10 @@ test "float offline oracles 48" {
     0xffffffffUL,
     0x000000003f800000UL,
   )
+}
+
+///|
+test "float offline oracles 95" {
   emit_float_record(
     "b32_round_toward_negative_half",
     @binary32.to_bits_canonical(
@@ -10387,10 +22424,6 @@ test "float offline oracles 48" {
     0xffffffffUL,
     0x00000000bf800000UL,
   )
-}
-
-///|
-test "float offline oracles 49" {
   emit_float_record(
     "b32_round_ties_even_three_quarters",
     @binary32.to_bits_canonical(
@@ -10600,6 +22633,10 @@ test "float offline oracles 49" {
     0xffffffffUL,
     0x000000003f800000UL,
   )
+}
+
+///|
+test "float offline oracles 96" {
   emit_float_record(
     "b32_round_toward_negative_below_one",
     @binary32.to_bits_canonical(
@@ -10666,10 +22703,6 @@ test "float offline oracles 49" {
     0xffffffffUL,
     0x000000004a800000UL,
   )
-}
-
-///|
-test "float offline oracles 50" {
   emit_float_record(
     "b32_round_ties_even_boundary_tie",
     @binary32.to_bits_canonical(
@@ -10879,6 +22912,10 @@ test "float offline oracles 50" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 97" {
   emit_float_record(
     "b32_round_toward_negative_snan",
     @binary32.to_bits_canonical(
@@ -10945,10 +22982,6 @@ test "float offline oracles 50" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 51" {
   emit_float_record(
     "b32_round_ties_even_neg_qnan",
     @binary32.to_bits_canonical(
@@ -11113,5 +23146,12620 @@ test "float offline oracles 51" {
     ).to_uint64() &
     0xffffffffUL,
     0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_ffc00002",
+    if @binary32.total_order_bits(0xffc00002U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 98" {
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_ffc00001",
+    if @binary32.total_order_bits(0xffc00002U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_ff800002",
+    if @binary32.total_order_bits(0xffc00002U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_ff800001",
+    if @binary32.total_order_bits(0xffc00002U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_ff800000",
+    if @binary32.total_order_bits(0xffc00002U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_ff7fffff",
+    if @binary32.total_order_bits(0xffc00002U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_80000001",
+    if @binary32.total_order_bits(0xffc00002U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_80000000",
+    if @binary32.total_order_bits(0xffc00002U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 99" {
+  emit_float_record(
+    "b32_total_order_ffc00002_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_0",
+    if @binary32.total_order_bits(0xffc00002U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_1",
+    if @binary32.total_order_bits(0xffc00002U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_800000",
+    if @binary32.total_order_bits(0xffc00002U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_7f7fffff",
+    if @binary32.total_order_bits(0xffc00002U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_7f800000",
+    if @binary32.total_order_bits(0xffc00002U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_7f800001",
+    if @binary32.total_order_bits(0xffc00002U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 100" {
+  emit_float_record(
+    "b32_minimum_ffc00002_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_7f800002",
+    if @binary32.total_order_bits(0xffc00002U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_7fc00000",
+    if @binary32.total_order_bits(0xffc00002U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00002_7fc00001",
+    if @binary32.total_order_bits(0xffc00002U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00002_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00002_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00002_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_ffc00002",
+    if @binary32.total_order_bits(0xffc00001U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_ffc00001",
+    if @binary32.total_order_bits(0xffc00001U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_ff800002",
+    if @binary32.total_order_bits(0xffc00001U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 101" {
+  emit_float_record(
+    "b32_maximum_ffc00001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_ff800001",
+    if @binary32.total_order_bits(0xffc00001U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_ff800000",
+    if @binary32.total_order_bits(0xffc00001U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_ff7fffff",
+    if @binary32.total_order_bits(0xffc00001U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_80000001",
+    if @binary32.total_order_bits(0xffc00001U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_80000000",
+    if @binary32.total_order_bits(0xffc00001U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_0",
+    if @binary32.total_order_bits(0xffc00001U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 102" {
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_1",
+    if @binary32.total_order_bits(0xffc00001U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_800000",
+    if @binary32.total_order_bits(0xffc00001U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_7f7fffff",
+    if @binary32.total_order_bits(0xffc00001U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_7f800000",
+    if @binary32.total_order_bits(0xffc00001U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_7f800001",
+    if @binary32.total_order_bits(0xffc00001U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_7f800002",
+    if @binary32.total_order_bits(0xffc00001U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_7fc00000",
+    if @binary32.total_order_bits(0xffc00001U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 103" {
+  emit_float_record(
+    "b32_total_order_ffc00001_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ffc00001_7fc00001",
+    if @binary32.total_order_bits(0xffc00001U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ffc00001_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ffc00001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ffc00001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xffc00001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_ffc00002",
+    if @binary32.total_order_bits(0xff800002U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_ffc00001",
+    if @binary32.total_order_bits(0xff800002U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_ff800002",
+    if @binary32.total_order_bits(0xff800002U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_ff800001",
+    if @binary32.total_order_bits(0xff800002U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_ff800000",
+    if @binary32.total_order_bits(0xff800002U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 104" {
+  emit_float_record(
+    "b32_minimum_ff800002_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_ff7fffff",
+    if @binary32.total_order_bits(0xff800002U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_80000001",
+    if @binary32.total_order_bits(0xff800002U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_80000000",
+    if @binary32.total_order_bits(0xff800002U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_0",
+    if @binary32.total_order_bits(0xff800002U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_1",
+    if @binary32.total_order_bits(0xff800002U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_800000",
+    if @binary32.total_order_bits(0xff800002U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 105" {
+  emit_float_record(
+    "b32_maximum_ff800002_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_7f7fffff",
+    if @binary32.total_order_bits(0xff800002U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_7f800000",
+    if @binary32.total_order_bits(0xff800002U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_7f800001",
+    if @binary32.total_order_bits(0xff800002U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_7f800002",
+    if @binary32.total_order_bits(0xff800002U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_7fc00000",
+    if @binary32.total_order_bits(0xff800002U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800002_7fc00001",
+    if @binary32.total_order_bits(0xff800002U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800002_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800002_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800002_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 106" {
+  emit_float_record(
+    "b32_total_order_bits_ff800001_ffc00002",
+    if @binary32.total_order_bits(0xff800001U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_ffc00001",
+    if @binary32.total_order_bits(0xff800001U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_ff800002",
+    if @binary32.total_order_bits(0xff800001U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_ff800001",
+    if @binary32.total_order_bits(0xff800001U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_ff800000",
+    if @binary32.total_order_bits(0xff800001U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_ff7fffff",
+    if @binary32.total_order_bits(0xff800001U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_80000001",
+    if @binary32.total_order_bits(0xff800001U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 107" {
+  emit_float_record(
+    "b32_total_order_ff800001_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_80000000",
+    if @binary32.total_order_bits(0xff800001U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_0",
+    if @binary32.total_order_bits(0xff800001U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_1",
+    if @binary32.total_order_bits(0xff800001U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_800000",
+    if @binary32.total_order_bits(0xff800001U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_7f7fffff",
+    if @binary32.total_order_bits(0xff800001U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_7f800000",
+    if @binary32.total_order_bits(0xff800001U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 108" {
+  emit_float_record(
+    "b32_minimum_ff800001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_7f800001",
+    if @binary32.total_order_bits(0xff800001U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_7f800002",
+    if @binary32.total_order_bits(0xff800001U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_7fc00000",
+    if @binary32.total_order_bits(0xff800001U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800001_7fc00001",
+    if @binary32.total_order_bits(0xff800001U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800001_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_ffc00002",
+    if @binary32.total_order_bits(0xff800000U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_ffc00001",
+    if @binary32.total_order_bits(0xff800000U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 109" {
+  emit_float_record(
+    "b32_maximum_ff800000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_ff800002",
+    if @binary32.total_order_bits(0xff800000U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_ff800001",
+    if @binary32.total_order_bits(0xff800000U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_ff800000",
+    if @binary32.total_order_bits(0xff800000U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_ff7fffff",
+    if @binary32.total_order_bits(0xff800000U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_80000001",
+    if @binary32.total_order_bits(0xff800000U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_80000000",
+    if @binary32.total_order_bits(0xff800000U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+}
+
+///|
+test "float offline oracles 110" {
+  emit_float_record(
+    "b32_total_order_bits_ff800000_0",
+    if @binary32.total_order_bits(0xff800000U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_1",
+    if @binary32.total_order_bits(0xff800000U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_800000",
+    if @binary32.total_order_bits(0xff800000U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_7f7fffff",
+    if @binary32.total_order_bits(0xff800000U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_7f800000",
+    if @binary32.total_order_bits(0xff800000U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_7f800001",
+    if @binary32.total_order_bits(0xff800000U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_7f800002",
+    if @binary32.total_order_bits(0xff800000U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 111" {
+  emit_float_record(
+    "b32_total_order_ff800000_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_7fc00000",
+    if @binary32.total_order_bits(0xff800000U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff800000_7fc00001",
+    if @binary32.total_order_bits(0xff800000U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff800000_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff800000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff800000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_ffc00002",
+    if @binary32.total_order_bits(0xff7fffffU, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_ffc00001",
+    if @binary32.total_order_bits(0xff7fffffU, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_ff800002",
+    if @binary32.total_order_bits(0xff7fffffU, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_ff800001",
+    if @binary32.total_order_bits(0xff7fffffU, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 112" {
+  emit_float_record(
+    "b32_minimum_ff7fffff_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_ff800000",
+    if @binary32.total_order_bits(0xff7fffffU, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_ff7fffff",
+    if @binary32.total_order_bits(0xff7fffffU, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_80000001",
+    if @binary32.total_order_bits(0xff7fffffU, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_80000000",
+    if @binary32.total_order_bits(0xff7fffffU, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_0",
+    if @binary32.total_order_bits(0xff7fffffU, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_1",
+    if @binary32.total_order_bits(0xff7fffffU, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+}
+
+///|
+test "float offline oracles 113" {
+  emit_float_record(
+    "b32_maximum_ff7fffff_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_800000",
+    if @binary32.total_order_bits(0xff7fffffU, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_7f7fffff",
+    if @binary32.total_order_bits(0xff7fffffU, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_7f800000",
+    if @binary32.total_order_bits(0xff7fffffU, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_7f800001",
+    if @binary32.total_order_bits(0xff7fffffU, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_7f800002",
+    if @binary32.total_order_bits(0xff7fffffU, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_7fc00000",
+    if @binary32.total_order_bits(0xff7fffffU, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 114" {
+  emit_float_record(
+    "b32_total_order_bits_ff7fffff_7fc00001",
+    if @binary32.total_order_bits(0xff7fffffU, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_ff7fffff_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_ff7fffff_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_ff7fffff_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_ffc00002",
+    if @binary32.total_order_bits(0x80000001U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_ffc00001",
+    if @binary32.total_order_bits(0x80000001U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_ff800002",
+    if @binary32.total_order_bits(0x80000001U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_ff800001",
+    if @binary32.total_order_bits(0x80000001U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_ff800000",
+    if @binary32.total_order_bits(0x80000001U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_ff7fffff",
+    if @binary32.total_order_bits(0x80000001U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 115" {
+  emit_float_record(
+    "b32_total_order_80000001_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_80000001",
+    if @binary32.total_order_bits(0x80000001U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_80000000",
+    if @binary32.total_order_bits(0x80000001U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_0",
+    if @binary32.total_order_bits(0x80000001U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_1",
+    if @binary32.total_order_bits(0x80000001U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_800000",
+    if @binary32.total_order_bits(0x80000001U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_7f7fffff",
+    if @binary32.total_order_bits(0x80000001U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 116" {
+  emit_float_record(
+    "b32_minimum_80000001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_7f800000",
+    if @binary32.total_order_bits(0x80000001U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_7f800001",
+    if @binary32.total_order_bits(0x80000001U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_7f800002",
+    if @binary32.total_order_bits(0x80000001U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_7fc00000",
+    if @binary32.total_order_bits(0x80000001U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000001_7fc00001",
+    if @binary32.total_order_bits(0x80000001U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000001_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_ffc00002",
+    if @binary32.total_order_bits(0x80000000U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 117" {
+  emit_float_record(
+    "b32_maximum_80000000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_ffc00001",
+    if @binary32.total_order_bits(0x80000000U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_ff800002",
+    if @binary32.total_order_bits(0x80000000U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_ff800001",
+    if @binary32.total_order_bits(0x80000000U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_ff800000",
+    if @binary32.total_order_bits(0x80000000U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_ff7fffff",
+    if @binary32.total_order_bits(0x80000000U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_80000001",
+    if @binary32.total_order_bits(0x80000000U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+}
+
+///|
+test "float offline oracles 118" {
+  emit_float_record(
+    "b32_total_order_bits_80000000_80000000",
+    if @binary32.total_order_bits(0x80000000U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_0",
+    if @binary32.total_order_bits(0x80000000U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_1",
+    if @binary32.total_order_bits(0x80000000U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_800000",
+    if @binary32.total_order_bits(0x80000000U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_7f7fffff",
+    if @binary32.total_order_bits(0x80000000U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_7f800000",
+    if @binary32.total_order_bits(0x80000000U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_7f800001",
+    if @binary32.total_order_bits(0x80000000U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 119" {
+  emit_float_record(
+    "b32_total_order_80000000_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_7f800002",
+    if @binary32.total_order_bits(0x80000000U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_7fc00000",
+    if @binary32.total_order_bits(0x80000000U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_80000000_7fc00001",
+    if @binary32.total_order_bits(0x80000000U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_80000000_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_80000000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_80000000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x80000000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_ffc00002",
+    if @binary32.total_order_bits(0x00000000U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_ffc00001",
+    if @binary32.total_order_bits(0x00000000U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_ff800002",
+    if @binary32.total_order_bits(0x00000000U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 120" {
+  emit_float_record(
+    "b32_minimum_0_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_ff800001",
+    if @binary32.total_order_bits(0x00000000U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_ff800000",
+    if @binary32.total_order_bits(0x00000000U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_ff7fffff",
+    if @binary32.total_order_bits(0x00000000U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_0_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_80000001",
+    if @binary32.total_order_bits(0x00000000U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_80000000",
+    if @binary32.total_order_bits(0x00000000U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_0",
+    if @binary32.total_order_bits(0x00000000U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 121" {
+  emit_float_record(
+    "b32_maximum_0_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_1",
+    if @binary32.total_order_bits(0x00000000U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_800000",
+    if @binary32.total_order_bits(0x00000000U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_7f7fffff",
+    if @binary32.total_order_bits(0x00000000U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_7f800000",
+    if @binary32.total_order_bits(0x00000000U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_7f800001",
+    if @binary32.total_order_bits(0x00000000U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_7f800002",
+    if @binary32.total_order_bits(0x00000000U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 122" {
+  emit_float_record(
+    "b32_total_order_bits_0_7fc00000",
+    if @binary32.total_order_bits(0x00000000U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_0_7fc00001",
+    if @binary32.total_order_bits(0x00000000U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_0_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_0_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_0_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_ffc00002",
+    if @binary32.total_order_bits(0x00000001U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_ffc00001",
+    if @binary32.total_order_bits(0x00000001U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_ff800002",
+    if @binary32.total_order_bits(0x00000001U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_ff800001",
+    if @binary32.total_order_bits(0x00000001U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_ff800000",
+    if @binary32.total_order_bits(0x00000001U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 123" {
+  emit_float_record(
+    "b32_total_order_1_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_ff7fffff",
+    if @binary32.total_order_bits(0x00000001U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_1_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_80000001",
+    if @binary32.total_order_bits(0x00000001U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_80000000",
+    if @binary32.total_order_bits(0x00000001U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_0",
+    if @binary32.total_order_bits(0x00000001U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_1",
+    if @binary32.total_order_bits(0x00000001U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_800000",
+    if @binary32.total_order_bits(0x00000001U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 124" {
+  emit_float_record(
+    "b32_minimum_1_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_7f7fffff",
+    if @binary32.total_order_bits(0x00000001U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_7f800000",
+    if @binary32.total_order_bits(0x00000001U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_7f800001",
+    if @binary32.total_order_bits(0x00000001U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_7f800002",
+    if @binary32.total_order_bits(0x00000001U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_7fc00000",
+    if @binary32.total_order_bits(0x00000001U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_1_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_1_7fc00001",
+    if @binary32.total_order_bits(0x00000001U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_1_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_1_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 125" {
+  emit_float_record(
+    "b32_maximum_1_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00000001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_ffc00002",
+    if @binary32.total_order_bits(0x00800000U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_ffc00001",
+    if @binary32.total_order_bits(0x00800000U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_ff800002",
+    if @binary32.total_order_bits(0x00800000U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_ff800001",
+    if @binary32.total_order_bits(0x00800000U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_ff800000",
+    if @binary32.total_order_bits(0x00800000U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_ff7fffff",
+    if @binary32.total_order_bits(0x00800000U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+}
+
+///|
+test "float offline oracles 126" {
+  emit_float_record(
+    "b32_total_order_bits_800000_80000001",
+    if @binary32.total_order_bits(0x00800000U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_80000000",
+    if @binary32.total_order_bits(0x00800000U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_0",
+    if @binary32.total_order_bits(0x00800000U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_1",
+    if @binary32.total_order_bits(0x00800000U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_800000",
+    if @binary32.total_order_bits(0x00800000U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_7f7fffff",
+    if @binary32.total_order_bits(0x00800000U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_7f800000",
+    if @binary32.total_order_bits(0x00800000U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 127" {
+  emit_float_record(
+    "b32_total_order_800000_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_7f800001",
+    if @binary32.total_order_bits(0x00800000U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_7f800002",
+    if @binary32.total_order_bits(0x00800000U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_7fc00000",
+    if @binary32.total_order_bits(0x00800000U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_800000_7fc00001",
+    if @binary32.total_order_bits(0x00800000U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_800000_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_800000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_800000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x00800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_ffc00002",
+    if @binary32.total_order_bits(0x7f7fffffU, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_ffc00001",
+    if @binary32.total_order_bits(0x7f7fffffU, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 128" {
+  emit_float_record(
+    "b32_minimum_7f7fffff_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_ff800002",
+    if @binary32.total_order_bits(0x7f7fffffU, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_ff800001",
+    if @binary32.total_order_bits(0x7f7fffffU, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_ff800000",
+    if @binary32.total_order_bits(0x7f7fffffU, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_ff7fffff",
+    if @binary32.total_order_bits(0x7f7fffffU, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_80000001",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_80000000",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+}
+
+///|
+test "float offline oracles 129" {
+  emit_float_record(
+    "b32_maximum_7f7fffff_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_0",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_1",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_800000",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_7f7fffff",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_7f800000",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_7f800001",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 130" {
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_7f800002",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_7fc00000",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f7fffff_7fc00001",
+    if @binary32.total_order_bits(0x7f7fffffU, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f7fffff_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f7fffff_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f7fffff_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_ffc00002",
+    if @binary32.total_order_bits(0x7f800000U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_ffc00001",
+    if @binary32.total_order_bits(0x7f800000U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_ff800002",
+    if @binary32.total_order_bits(0x7f800000U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_ff800001",
+    if @binary32.total_order_bits(0x7f800000U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 131" {
+  emit_float_record(
+    "b32_total_order_7f800000_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_ff800000",
+    if @binary32.total_order_bits(0x7f800000U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_ff7fffff",
+    if @binary32.total_order_bits(0x7f800000U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_80000001",
+    if @binary32.total_order_bits(0x7f800000U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_80000000",
+    if @binary32.total_order_bits(0x7f800000U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_0",
+    if @binary32.total_order_bits(0x7f800000U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_1",
+    if @binary32.total_order_bits(0x7f800000U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 132" {
+  emit_float_record(
+    "b32_minimum_7f800000_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_800000",
+    if @binary32.total_order_bits(0x7f800000U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_7f7fffff",
+    if @binary32.total_order_bits(0x7f800000U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_7f800000",
+    if @binary32.total_order_bits(0x7f800000U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_7f800001",
+    if @binary32.total_order_bits(0x7f800000U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_7f800002",
+    if @binary32.total_order_bits(0x7f800000U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_7fc00000",
+    if @binary32.total_order_bits(0x7f800000U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 133" {
+  emit_float_record(
+    "b32_maximum_7f800000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800000_7fc00001",
+    if @binary32.total_order_bits(0x7f800000U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800000_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_ffc00002",
+    if @binary32.total_order_bits(0x7f800001U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_ffc00001",
+    if @binary32.total_order_bits(0x7f800001U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_ff800002",
+    if @binary32.total_order_bits(0x7f800001U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_ff800001",
+    if @binary32.total_order_bits(0x7f800001U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_ff800000",
+    if @binary32.total_order_bits(0x7f800001U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 134" {
+  emit_float_record(
+    "b32_total_order_bits_7f800001_ff7fffff",
+    if @binary32.total_order_bits(0x7f800001U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_80000001",
+    if @binary32.total_order_bits(0x7f800001U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_80000000",
+    if @binary32.total_order_bits(0x7f800001U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_0",
+    if @binary32.total_order_bits(0x7f800001U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_1",
+    if @binary32.total_order_bits(0x7f800001U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_800000",
+    if @binary32.total_order_bits(0x7f800001U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_7f7fffff",
+    if @binary32.total_order_bits(0x7f800001U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 135" {
+  emit_float_record(
+    "b32_total_order_7f800001_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_7f800000",
+    if @binary32.total_order_bits(0x7f800001U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_7f800001",
+    if @binary32.total_order_bits(0x7f800001U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_7f800002",
+    if @binary32.total_order_bits(0x7f800001U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_7fc00000",
+    if @binary32.total_order_bits(0x7f800001U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800001_7fc00001",
+    if @binary32.total_order_bits(0x7f800001U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800001_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_ffc00002",
+    if @binary32.total_order_bits(0x7f800002U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 136" {
+  emit_float_record(
+    "b32_minimum_7f800002_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_ffc00001",
+    if @binary32.total_order_bits(0x7f800002U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_ff800002",
+    if @binary32.total_order_bits(0x7f800002U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_ff800001",
+    if @binary32.total_order_bits(0x7f800002U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_ff800000",
+    if @binary32.total_order_bits(0x7f800002U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_ff7fffff",
+    if @binary32.total_order_bits(0x7f800002U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_80000001",
+    if @binary32.total_order_bits(0x7f800002U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 137" {
+  emit_float_record(
+    "b32_maximum_7f800002_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_80000000",
+    if @binary32.total_order_bits(0x7f800002U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_0",
+    if @binary32.total_order_bits(0x7f800002U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_1",
+    if @binary32.total_order_bits(0x7f800002U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_800000",
+    if @binary32.total_order_bits(0x7f800002U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_7f7fffff",
+    if @binary32.total_order_bits(0x7f800002U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_7f800000",
+    if @binary32.total_order_bits(0x7f800002U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 138" {
+  emit_float_record(
+    "b32_total_order_bits_7f800002_7f800001",
+    if @binary32.total_order_bits(0x7f800002U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_7f800002",
+    if @binary32.total_order_bits(0x7f800002U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_7fc00000",
+    if @binary32.total_order_bits(0x7f800002U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7f800002_7fc00001",
+    if @binary32.total_order_bits(0x7f800002U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7f800002_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7f800002_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7f800002_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7f800002U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_ffc00002",
+    if @binary32.total_order_bits(0x7fc00000U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_ffc00001",
+    if @binary32.total_order_bits(0x7fc00000U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_ff800002",
+    if @binary32.total_order_bits(0x7fc00000U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 139" {
+  emit_float_record(
+    "b32_total_order_7fc00000_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_ff800001",
+    if @binary32.total_order_bits(0x7fc00000U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_ff800000",
+    if @binary32.total_order_bits(0x7fc00000U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_ff7fffff",
+    if @binary32.total_order_bits(0x7fc00000U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_80000001",
+    if @binary32.total_order_bits(0x7fc00000U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_80000000",
+    if @binary32.total_order_bits(0x7fc00000U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_0",
+    if @binary32.total_order_bits(0x7fc00000U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 140" {
+  emit_float_record(
+    "b32_minimum_7fc00000_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_1",
+    if @binary32.total_order_bits(0x7fc00000U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_800000",
+    if @binary32.total_order_bits(0x7fc00000U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_7f7fffff",
+    if @binary32.total_order_bits(0x7fc00000U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_7f800000",
+    if @binary32.total_order_bits(0x7fc00000U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_7f800001",
+    if @binary32.total_order_bits(0x7fc00000U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_7f800002",
+    if @binary32.total_order_bits(0x7fc00000U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 141" {
+  emit_float_record(
+    "b32_maximum_7fc00000_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_7fc00000",
+    if @binary32.total_order_bits(0x7fc00000U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00000_7fc00001",
+    if @binary32.total_order_bits(0x7fc00000U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00000_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00000_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_ffc00002",
+    if @binary32.total_order_bits(0x7fc00001U, 0xffc00002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_ffc00002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_ffc00002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xffc00002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_ffc00001",
+    if @binary32.total_order_bits(0x7fc00001U, 0xffc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_ffc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_ffc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xffc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_ff800002",
+    if @binary32.total_order_bits(0x7fc00001U, 0xff800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_ff800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_ff800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_ff800001",
+    if @binary32.total_order_bits(0x7fc00001U, 0xff800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_ff800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_ff800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 142" {
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_ff800000",
+    if @binary32.total_order_bits(0x7fc00001U, 0xff800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_ff800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_ff800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_ff7fffff",
+    if @binary32.total_order_bits(0x7fc00001U, 0xff7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_ff7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_ff7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0xff7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_80000001",
+    if @binary32.total_order_bits(0x7fc00001U, 0x80000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_80000001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_80000001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x80000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_80000000",
+    if @binary32.total_order_bits(0x7fc00001U, 0x80000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_80000000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_80000000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x80000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_0",
+    if @binary32.total_order_bits(0x7fc00001U, 0x00000000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_0",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_0",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_0",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00000000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_1",
+    if @binary32.total_order_bits(0x7fc00001U, 0x00000001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_1",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_1",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_1",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00000001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_800000",
+    if @binary32.total_order_bits(0x7fc00001U, 0x00800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 143" {
+  emit_float_record(
+    "b32_total_order_7fc00001_800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x00800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_7f7fffff",
+    if @binary32.total_order_bits(0x7fc00001U, 0x7f7fffffU) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_7f7fffff",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_7f7fffff",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f7fffffU),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_7f800000",
+    if @binary32.total_order_bits(0x7fc00001U, 0x7f800000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_7f800000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_7f800000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_7f800001",
+    if @binary32.total_order_bits(0x7fc00001U, 0x7f800001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_7f800001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_7f800001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_7f800002",
+    if @binary32.total_order_bits(0x7fc00001U, 0x7f800002U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_7f800002",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_7f800002",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7f800002U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_7fc00000",
+    if @binary32.total_order_bits(0x7fc00001U, 0x7fc00000U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_7fc00000",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_minimum_7fc00001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_7fc00000",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7fc00000U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_total_order_bits_7fc00001_7fc00001",
+    if @binary32.total_order_bits(0x7fc00001U, 0x7fc00001U) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+  emit_float_record(
+    "b32_total_order_7fc00001_7fc00001",
+    if @binary32.total_order(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ) {
+      1UL
+    } else {
+      0UL
+    },
+    0x0000000000000001UL,
+  )
+}
+
+///|
+test "float offline oracles 144" {
+  emit_float_record(
+    "b32_minimum_7fc00001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.minimum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_maximum_7fc00001_7fc00001",
+    @binary32.to_bits_canonical(
+      @binary32.maximum(
+        Float::reinterpret_from_uint(0x7fc00001U),
+        Float::reinterpret_from_uint(0x7fc00001U),
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
   )
 }

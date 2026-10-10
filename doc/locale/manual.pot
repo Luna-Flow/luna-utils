@@ -100,14 +100,26 @@ msgid "The implementation rounds directly from the sign, exponent and fraction f
 msgstr ""
 
 #: manual/api/float.md:25
-msgid "Payload encoding adapters"
+msgid "Extrema and ordering"
 msgstr ""
 
 #: manual/api/float.md:27
-msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API."
 msgstr ""
 
 #: manual/api/float.md:29
+msgid "`total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgstr ""
+
+#: manual/api/float.md:31
+msgid "Payload encoding adapters"
+msgstr ""
+
+#: manual/api/float.md:33
+msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgstr ""
+
+#: manual/api/float.md:35
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr ""
 
@@ -120,11 +132,15 @@ msgid "The contract separates exact integer encodings from portable numeric obse
 msgstr ""
 
 #: manual/conformance/float.md:5
-msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
+msgid "Ordering tests cover both argument orders for minimum/maximum, signed-zero selection, raw totalOrder across signed qNaN/sNaN payloads, portable NaN canonicalization, and array and mutable-view sorting. The generated integer-key oracle compares all pairs in a boundary sample for both binary formats."
 msgstr ""
 
 #: manual/conformance/float.md:7
-msgid "Exception flags, FMA, conversions, IEEE extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
+msgstr ""
+
+#: manual/conformance/float.md:9
+msgid "Exception flags, FMA, conversions, IEEE magnitude extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
 msgstr ""
 
 #: manual/contributing.md:1
@@ -424,6 +440,18 @@ msgstr ""
 msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same integer fields. For a finite non-integral value, discarded fraction bits determine the nearest tie rule or directed step; values below one use the signed zero encoding or the adjacent signed one encoding for directed rounding. NaNs are quieted to positive canonical NaN, dropping the input sign and payload. The API does not report the invalid exception for sNaN input or inexact for non-integral input; both are deferred to the `_exact` variant and status-flag work in [#29](https://github.com/Luna-Flow/luna-utils/issues/29). Infinities pass through unchanged."
 msgstr ""
 
+#: manual/design/float.md:13
+msgid "IEEE 754-2019 §9.6 extrema first handle NaN, then compare ordinary values, with explicit bit selection for two zeros: minimum combines the sign bits with OR to choose `-0`, and maximum combines them with AND to choose `+0`. A NaN result uses this package's positive canonical quiet encoding; exception flags are not exposed here."
+msgstr ""
+
+#: manual/design/float.md:15
+msgid "IEEE 754-2019 §5.10 totalOrder is an integer ordering over the encoding, not ordinary floating comparison. For a width of `w` bits and sign mask `S`, the signed key is `bits XOR (S - 1)` for negative encodings and `bits` otherwise. Comparing these keys as signed integers reverses all lower bits for negative values and orders positive values directly. The raw-bit API applies this key without materializing a float, so it retains negative NaN, sNaN and payload ordering on every backend. The portable numeric API first canonicalizes NaNs; it therefore provides deterministic ordering for numeric values but cannot reconstruct encoding details lost by host storage."
+msgstr ""
+
+#: manual/design/float.md:17
+msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
+msgstr ""
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr ""
@@ -433,7 +461,7 @@ msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. Th
 msgstr ""
 
 #: manual/index.md:5
-msgid "The numeric package roadmap is tracked in [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Float representation APIs are available through [#25](https://github.com/Luna-Flow/luna-utils/issues/25), and this checkout adds round-to-integral directions through [#24](https://github.com/Luna-Flow/luna-utils/issues/24). Other planned work includes integer arithmetic, conversions, IEEE extrema, stable hash, text, bigint and software FMA. The decided location for libm is the `math` subpackage ([#30](https://github.com/Luna-Flow/luna-utils/issues/30))."
+msgid "The numeric package roadmap is tracked in [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Float representation APIs are available through [#25](https://github.com/Luna-Flow/luna-utils/issues/25), round-to-integral directions through [#24](https://github.com/Luna-Flow/luna-utils/issues/24), and IEEE extrema and total ordering through [#23](https://github.com/Luna-Flow/luna-utils/issues/23). Other planned work includes integer arithmetic, conversions, magnitude extrema, stable hash, text, bigint and software FMA. The decided location for libm is the `math` subpackage ([#30](https://github.com/Luna-Flow/luna-utils/issues/30))."
 msgstr ""
 
 #: manual/index.md:7
@@ -484,6 +512,10 @@ msgstr ""
 msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies expectations for both widths, all classes and signs, payload boundaries and portable numeric results. For #24 round-to-integral directions, an independent model decodes finite encodings to exact `fractions.Fraction` values, applies floor, ceiling, truncation or the specified tie rule, and re-encodes the integral result while preserving the sign of zero. It does not reproduce the implementation's exponent-mask algorithm. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
 msgstr ""
 
+#: manual/testing.md:17
+msgid "For #23 extrema and ordering, the offline oracle constructs a boundary set containing signed zeros, subnormals, normal extremes, infinities, and positive and negative qNaN/sNaN encodings with payloads. Python integer key transforms independently determine all-pairs raw totalOrder and portable numeric order; integer comparisons also determine minimum and maximum, including NaN propagation and signed-zero selection. All results are emitted as `LUNA_BITS` records and checked against every backend transcript."
+msgstr ""
+
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
 msgstr ""
@@ -516,6 +548,6 @@ msgstr ""
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr ""
 
-#: manual/tutorial/float.md:21
+#: manual/tutorial/float.md:28
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr ""

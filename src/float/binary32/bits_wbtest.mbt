@@ -469,3 +469,65 @@ test "portable sign operations cover finite boundaries and infinities" {
     0xff800000U,
   )
 }
+
+///|
+// IEEE 754-2019 §9.6: minimum/maximum propagate NaN and select -0/+0
+// independently of argument order.
+test "minimum and maximum use IEEE edge ordering" {
+  assert_eq(to_bits_canonical(minimum(0.0, -0.0)), 0x80000000U)
+  assert_eq(to_bits_canonical(minimum(-0.0, 0.0)), 0x80000000U)
+  assert_eq(to_bits_canonical(maximum(-0.0, 0.0)), 0U)
+  assert_eq(to_bits_canonical(maximum(0.0, -0.0)), 0U)
+  let nan = Float::reinterpret_from_uint(0x7f800042U)
+  assert_eq(to_bits_canonical(minimum(1.0, nan)), 0x7fc00000U)
+  assert_eq(to_bits_canonical(minimum(nan, 1.0)), 0x7fc00000U)
+  assert_eq(to_bits_canonical(maximum(1.0, nan)), 0x7fc00000U)
+  assert_eq(to_bits_canonical(maximum(nan, 1.0)), 0x7fc00000U)
+  assert_eq(minimum(-1.0, 1.0), -1.0)
+  assert_eq(maximum(-1.0, 1.0), 1.0)
+}
+
+///|
+// IEEE 754-2019 §5.10 raw totalOrder, including reversed negative NaN order.
+test "total order compares raw encodings and portable values" {
+  let ordered = [
+    0xffff8002U, 0xffff8001U, 0xff800002U, 0xff800001U, 0xff800000U, 0x80000000U,
+    0x00000000U, 0x7f800000U, 0x7f800001U, 0x7f800002U, 0x7fc00000U, 0x7fc00001U,
+  ]
+  for i in 0..<ordered.length() {
+    assert_true(total_order_bits(ordered[i], ordered[i]))
+    if i + 1 < ordered.length() {
+      assert_true(total_order_bits(ordered[i], ordered[i + 1]))
+      assert_false(total_order_bits(ordered[i + 1], ordered[i]))
+    }
+  }
+  assert_true(total_order(-0.0, 0.0))
+  assert_false(total_order(0.0, -0.0))
+  let nan = Float::reinterpret_from_uint(0x7f800042U)
+  assert_true(total_order(1.0, nan))
+  assert_true(total_order(nan, nan))
+}
+
+///|
+test "sort total order sorts arrays and mutable views" {
+  let values = [
+    Float::reinterpret_from_uint(0x7f800001U),
+    1.0,
+    0.0,
+    -0.0,
+    -1.0,
+    Float::reinterpret_from_uint(0xff800000U),
+    Float::reinterpret_from_uint(0x7f800000U),
+  ]
+  sort_total_order(values)
+  assert_eq(to_bits_canonical(values[0]), 0xff800000U)
+  assert_eq(to_bits_canonical(values[1]), 0xbf800000U)
+  assert_eq(to_bits_canonical(values[2]), 0x80000000U)
+  assert_eq(to_bits_canonical(values[3]), 0U)
+  assert_eq(to_bits_canonical(values[4]), 0x3f800000U)
+  assert_eq(to_bits_canonical(values[5]), 0x7f800000U)
+  assert_eq(to_bits_canonical(values[6]), 0x7fc00000U)
+  let view_values : Array[Float] = [3.0, -2.0, 1.0]
+  sort_total_order_view(view_values.mut_view())
+  assert_eq(view_values, [-2.0, 1.0, 3.0])
+}
