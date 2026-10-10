@@ -224,9 +224,11 @@ def generate_float_cases():
             sign_unit | (exponent_limit * fraction_unit),
             sign_unit | (exponent_limit - 1) * fraction_unit + fraction_unit - 1,
             sign_unit | 1,
+            sign_unit | fraction_unit,
             sign_unit,
             0,
             1,
+            (0x3ff0000000000000 if width == 64 else 0x3f800000),
             fraction_unit,
             (exponent_limit - 1) * fraction_unit + fraction_unit - 1,
             exponent_limit * fraction_unit,
@@ -251,7 +253,7 @@ def generate_float_cases():
                 vx, vy = value(x), value(y)
                 add(
                     f'total_order_{x:x}_{y:x}',
-                    f'if {package}.total_order({vx}, {vy}) {{ 1UL }} else {{ 0UL }}',
+                    f'if {package}.portable_total_order({vx}, {vy}) {{ 1UL }} else {{ 0UL }}',
                     int(order_key(nx) <= order_key(ny)), [x, y],
                 )
                 if nan(x) or nan(y):

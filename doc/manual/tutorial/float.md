@@ -18,7 +18,7 @@ assert_eq(
 )
 assert_eq(@f64.to_bits_canonical(@f64.minimum(0.0, -0.0)), 0x8000000000000000UL)
 assert_eq(@f32.to_bits_canonical(@f32.maximum(-0.0, 0.0)), 0U)
-assert_true(@f64.total_order(-0.0, 0.0))
+assert_true(@f64.portable_total_order(-0.0, 0.0))
 assert_true(@f64.total_order_bits(0xfff0000000000001UL, 0xfff0000000000000UL))
 let values = [3.0, -0.0, 0.0, -2.0]
 @f64.sort_total_order(values)

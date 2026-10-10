@@ -14,7 +14,7 @@ pub fn total_order_bits(x : UInt, y : UInt) -> Bool {
 ///|
 /// IEEE 754-2019 §5.10 totalOrder on portable binary32 values.
 /// Numeric NaNs are compared as the package's positive canonical quiet NaN.
-pub fn total_order(x : Float, y : Float) -> Bool {
+pub fn portable_total_order(x : Float, y : Float) -> Bool {
   total_order_bits(to_bits_canonical(x), to_bits_canonical(y))
 }
 

@@ -58,6 +58,8 @@ pub fn portable_is_signaling(Double) -> Bool
 
 pub fn portable_negate(Double) -> Double
 
+pub fn portable_total_order(Double, Double) -> Bool
+
 pub fn radix() -> Int
 
 pub fn round_ties_away(Double) -> Double
@@ -81,8 +83,6 @@ pub fn sort_total_order(Array[Double]) -> Unit
 pub fn sort_total_order_view(MutArrayView[Double]) -> Unit
 
 pub fn to_bits_canonical(Double) -> UInt64
-
-pub fn total_order(Double, Double) -> Bool
 
 pub fn total_order_bits(UInt64, UInt64) -> Bool
 

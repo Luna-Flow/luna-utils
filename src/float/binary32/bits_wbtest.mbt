@@ -479,10 +479,10 @@ test "minimum and maximum use IEEE edge ordering" {
   assert_eq(to_bits_canonical(maximum(-0.0, 0.0)), 0U)
   assert_eq(to_bits_canonical(maximum(0.0, -0.0)), 0U)
   let nan = Float::reinterpret_from_uint(0x7f800042U)
-  assert_eq(to_bits_canonical(minimum(1.0, nan)), 0x7fc00000U)
-  assert_eq(to_bits_canonical(minimum(nan, 1.0)), 0x7fc00000U)
-  assert_eq(to_bits_canonical(maximum(1.0, nan)), 0x7fc00000U)
-  assert_eq(to_bits_canonical(maximum(nan, 1.0)), 0x7fc00000U)
+  assert_eq(minimum(1.0, nan).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(minimum(nan, 1.0).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(maximum(1.0, nan).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(maximum(nan, 1.0).reinterpret_as_uint(), 0x7fc00000U)
   assert_eq(minimum(-1.0, 1.0), -1.0)
   assert_eq(maximum(-1.0, 1.0), 1.0)
 }
@@ -501,11 +501,11 @@ test "total order compares raw encodings and portable values" {
       assert_false(total_order_bits(ordered[i + 1], ordered[i]))
     }
   }
-  assert_true(total_order(-0.0, 0.0))
-  assert_false(total_order(0.0, -0.0))
+  assert_true(portable_total_order(-0.0, 0.0))
+  assert_false(portable_total_order(0.0, -0.0))
   let nan = Float::reinterpret_from_uint(0x7f800042U)
-  assert_true(total_order(1.0, nan))
-  assert_true(total_order(nan, nan))
+  assert_true(portable_total_order(1.0, nan))
+  assert_true(portable_total_order(nan, nan))
 }
 
 ///|
