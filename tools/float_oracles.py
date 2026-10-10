@@ -1,10 +1,12 @@
 """Offline IEEE 754-2019 binary interchange field model for #25.
 
-Python arbitrary-precision divmod extracts fields independently of the MoonBit
-mask implementation. No host float NaN materialization and no library output
-is used to produce expected results. Class IDs and None's sentinel are only
-transcript transport conventions (not public API discriminants).
+The #24 rounding oracle decodes finite values to exact Fractions and applies
+the five directions to rational values, independently of the bit algorithm.
+No host float NaN materialization or library output produces expected results.
+Class IDs and None's sentinel are transcript conventions, not public API IDs.
 """
+from fractions import Fraction
+
 
 CLASSES = ["PositiveZero", "NegativeZero", "PositiveSubnormal",
            "NegativeSubnormal", "PositiveNormal", "NegativeNormal",
@@ -71,36 +73,56 @@ def generate_float_cases():
             sign, exponent, fraction = fields(n)
             if exponent == exponent_limit:
                 return canonical if fraction else n
+            sign_bits = sign * sign_unit
             if exponent == 0 and fraction == 0:
                 return n
-            unbiased = exponent - (exponent_limit // 2)
-            sign_bits = sign * sign_unit
-            if unbiased >= fraction_width:
-                return n
-            if unbiased < 0:
-                increment = ((direction == 'toward_positive' and sign == 0) or
-                             (direction == 'toward_negative' and sign == 1) or
-                             (direction == 'ties_away' and unbiased == -1) or
-                             (direction == 'ties_even' and unbiased == -1 and fraction != 0))
-                return sign_bits | ((exponent_limit // 2) << fraction_width) if increment else sign_bits
-            discarded = fraction_width - unbiased
-            mask = (1 << discarded) - 1
-            kept = n & ((sign_unit * 2 - 1) ^ mask)
-            remainder = n & mask
-            if remainder == 0:
-                return n
-            if direction == 'toward_positive':
-                increment = sign == 0
-            elif direction == 'toward_negative':
-                increment = sign == 1
-            elif direction == 'toward_zero':
-                increment = False
-            elif direction == 'ties_away':
-                increment = remainder >= (1 << (discarded - 1))
+
+            bias = exponent_limit // 2
+            if exponent == 0:
+                significand = fraction
+                power = 1 - bias - fraction_width
             else:
-                half = 1 << (discarded - 1)
-                increment = remainder > half or (remainder == half and (kept & (1 << discarded)) != 0)
-            return kept + (1 << discarded) if increment else kept
+                significand = (1 << fraction_width) | fraction
+                power = exponent - bias - fraction_width
+            value = Fraction(significand << power, 1) if power >= 0 else Fraction(significand, 1 << -power)
+            if sign:
+                value = -value
+            if value.denominator == 1:
+                return n
+
+            lower = value.numerator // value.denominator
+            remainder = value - lower
+            upper = lower if remainder == 0 else lower + 1
+            if direction == 'toward_positive':
+                rounded = upper
+            elif direction == 'toward_negative':
+                rounded = lower
+            elif direction == 'toward_zero':
+                rounded = lower if value >= 0 else upper
+            elif direction == 'ties_away':
+                twice = remainder * 2
+                if twice < 1:
+                    rounded = lower
+                elif twice > 1:
+                    rounded = upper
+                else:
+                    rounded = upper if value >= 0 else lower
+            else:
+                twice = remainder * 2
+                if twice < 1:
+                    rounded = lower
+                elif twice > 1:
+                    rounded = upper
+                else:
+                    rounded = lower if lower % 2 == 0 else upper
+
+            if rounded == 0:
+                return sign_bits
+            magnitude = abs(rounded)
+            top_bit = magnitude.bit_length() - 1
+            encoded_exponent = top_bit + bias
+            encoded_fraction = (magnitude - (1 << top_bit)) << (fraction_width - top_bit)
+            return sign_bits | (encoded_exponent << fraction_width) | encoded_fraction
 
         magnitudes = [
             ('zero', 0), ('min_subnormal', 1),
@@ -152,16 +174,33 @@ def generate_float_cases():
                     add(f'{operation}_{sign}_{payload:x}', expression, expected, [payload, sign])
 
         round_inputs = [
+            ('zero', 0),
+            ('neg_zero', sign_unit),
+            ('min_subnormal', 1),
+            ('neg_min_subnormal', sign_unit | 1),
+            ('max_subnormal', fraction_unit - 1),
+            ('neg_max_subnormal', sign_unit | (fraction_unit - 1)),
+            ('max_finite', (exponent_limit - 1) * fraction_unit + fraction_unit - 1),
+            ('neg_max_finite', sign_unit | ((exponent_limit - 1) * fraction_unit + fraction_unit - 1)),
             ('2p5', (0x4004000000000000 if width == 64 else 0x40200000)),
             ('neg2p5', (0xc004000000000000 if width == 64 else 0xc0200000)),
+            ('1p5', (0x3ff8000000000000 if width == 64 else 0x3fc00000)),
+            ('3p5', (0x400c000000000000 if width == 64 else 0x40600000)),
+            ('neg1p5', (0xbff8000000000000 if width == 64 else 0xbfc00000)),
+            ('neg3p5', (0xc00c000000000000 if width == 64 else 0xc0600000)),
             ('half', (0x3fe0000000000000 if width == 64 else 0x3f000000)),
             ('neg_half', (0xbfe0000000000000 if width == 64 else 0xbf000000)),
             ('three_quarters', (0x3fe8000000000000 if width == 64 else 0x3f400000)),
             ('neg_three_quarters', (0xbfe8000000000000 if width == 64 else 0xbf400000)),
             ('below_half', (0x3fdfffffffffffff if width == 64 else 0x3effffff)),
+            ('below_one', (0x3fefffffffffffff if width == 64 else 0x3f7fffff)),
+            ('exponent_tie', (0x4320000000000001 if width == 64 else 0x4a800001)),
+            ('boundary_tie', (0x432fffffffffffff if width == 64 else 0x4affffff)),
             ('neg_fraction', (0xbfd3333333333333 if width == 64 else 0xbe99999a)),
             ('large', (0x4330000000000001 if width == 64 else 0x4b000001)),
             ('snan', (0x7ff0000000000001 if width == 64 else 0x7f800001)),
+            ('qnan', (0x7ff8000000000000 if width == 64 else 0x7fc00000)),
+            ('neg_qnan', (0xfff8000000000000 if width == 64 else 0xffc00000)),
             ('pos_inf', (0x7ff0000000000000 if width == 64 else 0x7f800000)),
             ('neg_inf', (0xfff0000000000000 if width == 64 else 0xff800000)),
         ]

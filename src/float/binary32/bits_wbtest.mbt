@@ -179,6 +179,104 @@ test "round to integral directions" {
 }
 
 ///|
+test "rounding zero subnormal tie and exponent boundaries" {
+  let positive_zero = Float::reinterpret_from_uint(0x0U)
+  let negative_zero = Float::reinterpret_from_uint(0x80000000U)
+  assert_eq(to_bits_canonical(round_ties_even(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_ties_away(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_toward_zero(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_toward_positive(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_toward_negative(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_ties_even(negative_zero)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_ties_away(negative_zero)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_toward_zero(negative_zero)), 0x80000000U)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(negative_zero)),
+    0x80000000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_negative(negative_zero)),
+    0x80000000U,
+  )
+
+  let min_subnormal = Float::reinterpret_from_uint(0x1U)
+  let neg_min_subnormal = Float::reinterpret_from_uint(0x80000001U)
+  let max_subnormal = Float::reinterpret_from_uint(0x007fffffU)
+  let neg_max_subnormal = Float::reinterpret_from_uint(0x807fffffU)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(min_subnormal)),
+    0x3f800000U,
+  )
+  assert_eq(to_bits_canonical(round_toward_negative(min_subnormal)), 0x0U)
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_min_subnormal)),
+    0xbf800000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_min_subnormal)),
+    0x80000000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(max_subnormal)),
+    0x3f800000U,
+  )
+  assert_eq(to_bits_canonical(round_toward_negative(max_subnormal)), 0x0U)
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_max_subnormal)),
+    0xbf800000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_max_subnormal)),
+    0x80000000U,
+  )
+
+  assert_eq(round_ties_even(1.5F), 2.0F)
+  assert_eq(round_ties_even(3.5F), 4.0F)
+  assert_eq(round_ties_even(-1.5F), -2.0F)
+  assert_eq(round_ties_even(-3.5F), -4.0F)
+  assert_eq(round_ties_away(1.5F), 2.0F)
+  assert_eq(round_ties_away(3.5F), 4.0F)
+  assert_eq(round_ties_away(-1.5F), -2.0F)
+  assert_eq(round_ties_away(-3.5F), -4.0F)
+
+  let below_one = Float::reinterpret_from_uint(0x3f7fffffU)
+  assert_eq(to_bits_canonical(round_ties_even(below_one)), 0x3f800000U)
+  let exponent_tie = Float::reinterpret_from_uint(0x4a800001U)
+  assert_eq(to_bits_canonical(round_ties_even(exponent_tie)), 0x4a800000U)
+  assert_eq(to_bits_canonical(round_ties_away(exponent_tie)), 0x4a800002U)
+  let boundary_tie = Float::reinterpret_from_uint(0x4affffffU)
+  assert_eq(to_bits_canonical(round_ties_even(boundary_tie)), 0x4b000000U)
+  assert_eq(to_bits_canonical(round_ties_away(boundary_tie)), 0x4b000000U)
+
+  let max_finite = Float::reinterpret_from_uint(0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_ties_even(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_ties_away(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_toward_zero(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_toward_positive(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_toward_negative(max_finite)), 0x7f7fffffU)
+
+  let neg_max_finite = Float::reinterpret_from_uint(0xff7fffffU)
+  assert_eq(to_bits_canonical(round_ties_even(neg_max_finite)), 0xff7fffffU)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_max_finite)),
+    0xff7fffffU,
+  )
+
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0x7fc00000U)),
+    ),
+    0x7fc00000U,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0xffc00000U)),
+    ),
+    0x7fc00000U,
+  )
+}
+
+///|
 test "sign involutions payload boundaries and canonicalization" {
   assert_eq(negate_bits(negate_bits(0x0U)), 0x0U)
   assert_eq(abs_bits(0x0U), 0x0U)

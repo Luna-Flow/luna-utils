@@ -6,10 +6,13 @@ pub(all) enum RoundingDirection {
   TowardZero
   TowardPositive
   TowardNegative
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub extend RoundingDirection with Eq::{equal, not_equal}
+
+///|
+pub extend RoundingDirection with @debug.Debug::{to_repr}
 
 ///|
 fn round_bits(bits : UInt64, direction : RoundingDirection) -> UInt64 {

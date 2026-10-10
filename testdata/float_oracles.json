@@ -4182,6 +4182,326 @@
       "bits": "ffffffffffffffff"
     },
     {
+      "id": "b64_round_ties_even_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_neg_zero",
+      "inputs": [
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_neg_zero",
+      "inputs": [
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_neg_zero",
+      "inputs": [
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_neg_zero",
+      "inputs": [
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_neg_zero",
+      "inputs": [
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000001UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000001UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000001UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000001UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x0000000000000001UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_neg_min_subnormal",
+      "inputs": [
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000001UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_neg_min_subnormal",
+      "inputs": [
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000001UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_neg_min_subnormal",
+      "inputs": [
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000001UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_neg_min_subnormal",
+      "inputs": [
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000001UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_neg_min_subnormal",
+      "inputs": [
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x8000000000000001UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_max_subnormal",
+      "inputs": [
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x000fffffffffffffUL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_max_subnormal",
+      "inputs": [
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x000fffffffffffffUL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_max_subnormal",
+      "inputs": [
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x000fffffffffffffUL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_max_subnormal",
+      "inputs": [
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x000fffffffffffffUL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_max_subnormal",
+      "inputs": [
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x000fffffffffffffUL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_neg_max_subnormal",
+      "inputs": [
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x800fffffffffffffUL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_neg_max_subnormal",
+      "inputs": [
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x800fffffffffffffUL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_neg_max_subnormal",
+      "inputs": [
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x800fffffffffffffUL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_neg_max_subnormal",
+      "inputs": [
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x800fffffffffffffUL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_neg_max_subnormal",
+      "inputs": [
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x800fffffffffffffUL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_max_finite",
+      "inputs": [
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7fefffffffffffffUL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "b64_round_ties_away_max_finite",
+      "inputs": [
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7fefffffffffffffUL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "b64_round_toward_zero_max_finite",
+      "inputs": [
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7fefffffffffffffUL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "b64_round_toward_positive_max_finite",
+      "inputs": [
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7fefffffffffffffUL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "b64_round_toward_negative_max_finite",
+      "inputs": [
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7fefffffffffffffUL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "b64_round_ties_even_neg_max_finite",
+      "inputs": [
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xffefffffffffffffUL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "id": "b64_round_ties_away_neg_max_finite",
+      "inputs": [
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xffefffffffffffffUL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "id": "b64_round_toward_zero_neg_max_finite",
+      "inputs": [
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xffefffffffffffffUL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "id": "b64_round_toward_positive_neg_max_finite",
+      "inputs": [
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xffefffffffffffffUL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "id": "b64_round_toward_negative_neg_max_finite",
+      "inputs": [
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xffefffffffffffffUL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "ffefffffffffffff"
+    },
+    {
       "id": "b64_round_ties_even_2p5",
       "inputs": [
         "4612811918334230528"
@@ -4260,6 +4580,166 @@
       ],
       "expression": "@float.to_bits_canonical(@float.round_to_integral(0xc004000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
       "bits": "c008000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_1p5",
+      "inputs": [
+        "4609434218613702656"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3ff8000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "4000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_1p5",
+      "inputs": [
+        "4609434218613702656"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3ff8000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "4000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_1p5",
+      "inputs": [
+        "4609434218613702656"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3ff8000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_1p5",
+      "inputs": [
+        "4609434218613702656"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3ff8000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "4000000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_1p5",
+      "inputs": [
+        "4609434218613702656"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3ff8000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_3p5",
+      "inputs": [
+        "4615063718147915776"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x400c000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "4010000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_3p5",
+      "inputs": [
+        "4615063718147915776"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x400c000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "4010000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_3p5",
+      "inputs": [
+        "4615063718147915776"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x400c000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "4008000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_3p5",
+      "inputs": [
+        "4615063718147915776"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x400c000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "4010000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_3p5",
+      "inputs": [
+        "4615063718147915776"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x400c000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "4008000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_neg1p5",
+      "inputs": [
+        "13832806255468478464"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xbff8000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "c000000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_neg1p5",
+      "inputs": [
+        "13832806255468478464"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xbff8000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "c000000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_neg1p5",
+      "inputs": [
+        "13832806255468478464"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xbff8000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_neg1p5",
+      "inputs": [
+        "13832806255468478464"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xbff8000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_neg1p5",
+      "inputs": [
+        "13832806255468478464"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xbff8000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "c000000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_neg3p5",
+      "inputs": [
+        "13838435755002691584"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xc00c000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "c010000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_neg3p5",
+      "inputs": [
+        "13838435755002691584"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xc00c000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "c010000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_neg3p5",
+      "inputs": [
+        "13838435755002691584"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xc00c000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "c008000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_neg3p5",
+      "inputs": [
+        "13838435755002691584"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xc00c000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "c008000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_neg3p5",
+      "inputs": [
+        "13838435755002691584"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xc00c000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "c010000000000000"
     },
     {
       "id": "b64_round_ties_even_half",
@@ -4462,6 +4942,126 @@
       "bits": "0000000000000000"
     },
     {
+      "id": "b64_round_ties_even_below_one",
+      "inputs": [
+        "4607182418800017407"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3fefffffffffffffUL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_below_one",
+      "inputs": [
+        "4607182418800017407"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3fefffffffffffffUL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_below_one",
+      "inputs": [
+        "4607182418800017407"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3fefffffffffffffUL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_below_one",
+      "inputs": [
+        "4607182418800017407"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3fefffffffffffffUL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_below_one",
+      "inputs": [
+        "4607182418800017407"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x3fefffffffffffffUL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_exponent_tie",
+      "inputs": [
+        "4836865999795912705"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x4320000000000001UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "4320000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_exponent_tie",
+      "inputs": [
+        "4836865999795912705"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x4320000000000001UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "4320000000000002"
+    },
+    {
+      "id": "b64_round_toward_zero_exponent_tie",
+      "inputs": [
+        "4836865999795912705"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x4320000000000001UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "4320000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_exponent_tie",
+      "inputs": [
+        "4836865999795912705"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x4320000000000001UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "4320000000000002"
+    },
+    {
+      "id": "b64_round_toward_negative_exponent_tie",
+      "inputs": [
+        "4836865999795912705"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x4320000000000001UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "4320000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_boundary_tie",
+      "inputs": [
+        "4841369599423283199"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x432fffffffffffffUL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "4330000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_boundary_tie",
+      "inputs": [
+        "4841369599423283199"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x432fffffffffffffUL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "4330000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_boundary_tie",
+      "inputs": [
+        "4841369599423283199"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x432fffffffffffffUL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "432ffffffffffffe"
+    },
+    {
+      "id": "b64_round_toward_positive_boundary_tie",
+      "inputs": [
+        "4841369599423283199"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x432fffffffffffffUL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "4330000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_boundary_tie",
+      "inputs": [
+        "4841369599423283199"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x432fffffffffffffUL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "432ffffffffffffe"
+    },
+    {
       "id": "b64_round_ties_even_neg_fraction",
       "inputs": [
         "13822447976325526323"
@@ -4579,6 +5179,86 @@
         "9218868437227405313"
       ],
       "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7ff0000000000001UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_qnan",
+      "inputs": [
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7ff8000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_qnan",
+      "inputs": [
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7ff8000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_qnan",
+      "inputs": [
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7ff8000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_qnan",
+      "inputs": [
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7ff8000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_qnan",
+      "inputs": [
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0x7ff8000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_ties_even_neg_qnan",
+      "inputs": [
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xfff8000000000000UL.reinterpret_as_double(), @float.TiesToEven))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_ties_away_neg_qnan",
+      "inputs": [
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xfff8000000000000UL.reinterpret_as_double(), @float.TiesToAway))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_toward_zero_neg_qnan",
+      "inputs": [
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xfff8000000000000UL.reinterpret_as_double(), @float.TowardZero))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_toward_positive_neg_qnan",
+      "inputs": [
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xfff8000000000000UL.reinterpret_as_double(), @float.TowardPositive))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_round_toward_negative_neg_qnan",
+      "inputs": [
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.round_to_integral(0xfff8000000000000UL.reinterpret_as_double(), @float.TowardNegative))",
       "bits": "7ff8000000000000"
     },
     {
@@ -8842,6 +9522,326 @@
       "bits": "ffffffffffffffff"
     },
     {
+      "id": "b32_round_ties_even_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_away_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_zero_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_positive_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_negative_zero",
+      "inputs": [
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_even_neg_zero",
+      "inputs": [
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_ties_away_neg_zero",
+      "inputs": [
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_zero_neg_zero",
+      "inputs": [
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_positive_neg_zero",
+      "inputs": [
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_negative_neg_zero",
+      "inputs": [
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_ties_even_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000001U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_away_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000001U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_zero_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000001U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_positive_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000001U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_toward_negative_min_subnormal",
+      "inputs": [
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x00000001U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_even_neg_min_subnormal",
+      "inputs": [
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000001U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_ties_away_neg_min_subnormal",
+      "inputs": [
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000001U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_zero_neg_min_subnormal",
+      "inputs": [
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000001U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_positive_neg_min_subnormal",
+      "inputs": [
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000001U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_negative_neg_min_subnormal",
+      "inputs": [
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x80000001U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000bf800000"
+    },
+    {
+      "id": "b32_round_ties_even_max_subnormal",
+      "inputs": [
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x007fffffU), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_away_max_subnormal",
+      "inputs": [
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x007fffffU), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_zero_max_subnormal",
+      "inputs": [
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x007fffffU), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_positive_max_subnormal",
+      "inputs": [
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x007fffffU), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_toward_negative_max_subnormal",
+      "inputs": [
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x007fffffU), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_even_neg_max_subnormal",
+      "inputs": [
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x807fffffU), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_ties_away_neg_max_subnormal",
+      "inputs": [
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x807fffffU), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_zero_neg_max_subnormal",
+      "inputs": [
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x807fffffU), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_positive_neg_max_subnormal",
+      "inputs": [
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x807fffffU), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_round_toward_negative_neg_max_subnormal",
+      "inputs": [
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x807fffffU), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000bf800000"
+    },
+    {
+      "id": "b32_round_ties_even_max_finite",
+      "inputs": [
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7f7fffffU), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
+      "id": "b32_round_ties_away_max_finite",
+      "inputs": [
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7f7fffffU), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
+      "id": "b32_round_toward_zero_max_finite",
+      "inputs": [
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7f7fffffU), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
+      "id": "b32_round_toward_positive_max_finite",
+      "inputs": [
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7f7fffffU), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
+      "id": "b32_round_toward_negative_max_finite",
+      "inputs": [
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7f7fffffU), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
+      "id": "b32_round_ties_even_neg_max_finite",
+      "inputs": [
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xff7fffffU), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
+      "id": "b32_round_ties_away_neg_max_finite",
+      "inputs": [
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xff7fffffU), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
+      "id": "b32_round_toward_zero_neg_max_finite",
+      "inputs": [
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xff7fffffU), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
+      "id": "b32_round_toward_positive_neg_max_finite",
+      "inputs": [
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xff7fffffU), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
+      "id": "b32_round_toward_negative_neg_max_finite",
+      "inputs": [
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xff7fffffU), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
       "id": "b32_round_ties_even_2p5",
       "inputs": [
         "1075838976"
@@ -8920,6 +9920,166 @@
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xc0200000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
       "bits": "00000000c0400000"
+    },
+    {
+      "id": "b32_round_ties_even_1p5",
+      "inputs": [
+        "1069547520"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3fc00000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040000000"
+    },
+    {
+      "id": "b32_round_ties_away_1p5",
+      "inputs": [
+        "1069547520"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3fc00000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040000000"
+    },
+    {
+      "id": "b32_round_toward_zero_1p5",
+      "inputs": [
+        "1069547520"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3fc00000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_toward_positive_1p5",
+      "inputs": [
+        "1069547520"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3fc00000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040000000"
+    },
+    {
+      "id": "b32_round_toward_negative_1p5",
+      "inputs": [
+        "1069547520"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3fc00000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_ties_even_3p5",
+      "inputs": [
+        "1080033280"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x40600000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040800000"
+    },
+    {
+      "id": "b32_round_ties_away_3p5",
+      "inputs": [
+        "1080033280"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x40600000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040800000"
+    },
+    {
+      "id": "b32_round_toward_zero_3p5",
+      "inputs": [
+        "1080033280"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x40600000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040400000"
+    },
+    {
+      "id": "b32_round_toward_positive_3p5",
+      "inputs": [
+        "1080033280"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x40600000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040800000"
+    },
+    {
+      "id": "b32_round_toward_negative_3p5",
+      "inputs": [
+        "1080033280"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x40600000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000040400000"
+    },
+    {
+      "id": "b32_round_ties_even_neg1p5",
+      "inputs": [
+        "3217031168"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xbfc00000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0000000"
+    },
+    {
+      "id": "b32_round_ties_away_neg1p5",
+      "inputs": [
+        "3217031168"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xbfc00000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0000000"
+    },
+    {
+      "id": "b32_round_toward_zero_neg1p5",
+      "inputs": [
+        "3217031168"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xbfc00000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000bf800000"
+    },
+    {
+      "id": "b32_round_toward_positive_neg1p5",
+      "inputs": [
+        "3217031168"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xbfc00000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000bf800000"
+    },
+    {
+      "id": "b32_round_toward_negative_neg1p5",
+      "inputs": [
+        "3217031168"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xbfc00000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0000000"
+    },
+    {
+      "id": "b32_round_ties_even_neg3p5",
+      "inputs": [
+        "3227516928"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xc0600000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0800000"
+    },
+    {
+      "id": "b32_round_ties_away_neg3p5",
+      "inputs": [
+        "3227516928"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xc0600000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0800000"
+    },
+    {
+      "id": "b32_round_toward_zero_neg3p5",
+      "inputs": [
+        "3227516928"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xc0600000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0400000"
+    },
+    {
+      "id": "b32_round_toward_positive_neg3p5",
+      "inputs": [
+        "3227516928"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xc0600000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0400000"
+    },
+    {
+      "id": "b32_round_toward_negative_neg3p5",
+      "inputs": [
+        "3227516928"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xc0600000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000c0800000"
     },
     {
       "id": "b32_round_ties_even_half",
@@ -9122,6 +10282,126 @@
       "bits": "0000000000000000"
     },
     {
+      "id": "b32_round_ties_even_below_one",
+      "inputs": [
+        "1065353215"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3f7fffffU), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_ties_away_below_one",
+      "inputs": [
+        "1065353215"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3f7fffffU), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_toward_zero_below_one",
+      "inputs": [
+        "1065353215"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3f7fffffU), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_toward_positive_below_one",
+      "inputs": [
+        "1065353215"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3f7fffffU), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_round_toward_negative_below_one",
+      "inputs": [
+        "1065353215"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x3f7fffffU), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_round_ties_even_exponent_tie",
+      "inputs": [
+        "1249902593"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4a800001U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004a800000"
+    },
+    {
+      "id": "b32_round_ties_away_exponent_tie",
+      "inputs": [
+        "1249902593"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4a800001U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004a800002"
+    },
+    {
+      "id": "b32_round_toward_zero_exponent_tie",
+      "inputs": [
+        "1249902593"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4a800001U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004a800000"
+    },
+    {
+      "id": "b32_round_toward_positive_exponent_tie",
+      "inputs": [
+        "1249902593"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4a800001U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004a800002"
+    },
+    {
+      "id": "b32_round_toward_negative_exponent_tie",
+      "inputs": [
+        "1249902593"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4a800001U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004a800000"
+    },
+    {
+      "id": "b32_round_ties_even_boundary_tie",
+      "inputs": [
+        "1258291199"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4affffffU), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004b000000"
+    },
+    {
+      "id": "b32_round_ties_away_boundary_tie",
+      "inputs": [
+        "1258291199"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4affffffU), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004b000000"
+    },
+    {
+      "id": "b32_round_toward_zero_boundary_tie",
+      "inputs": [
+        "1258291199"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4affffffU), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004afffffe"
+    },
+    {
+      "id": "b32_round_toward_positive_boundary_tie",
+      "inputs": [
+        "1258291199"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4affffffU), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004b000000"
+    },
+    {
+      "id": "b32_round_toward_negative_boundary_tie",
+      "inputs": [
+        "1258291199"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x4affffffU), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000004afffffe"
+    },
+    {
       "id": "b32_round_ties_even_neg_fraction",
       "inputs": [
         "3197737370"
@@ -9239,6 +10519,86 @@
         "2139095041"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7f800001U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_ties_even_qnan",
+      "inputs": [
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7fc00000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_ties_away_qnan",
+      "inputs": [
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7fc00000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_toward_zero_qnan",
+      "inputs": [
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7fc00000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_toward_positive_qnan",
+      "inputs": [
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7fc00000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_toward_negative_qnan",
+      "inputs": [
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0x7fc00000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_ties_even_neg_qnan",
+      "inputs": [
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xffc00000U), @float.TiesToEven))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_ties_away_neg_qnan",
+      "inputs": [
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xffc00000U), @float.TiesToAway))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_toward_zero_neg_qnan",
+      "inputs": [
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xffc00000U), @float.TowardZero))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_toward_positive_neg_qnan",
+      "inputs": [
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xffc00000U), @float.TowardPositive))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_round_toward_negative_neg_qnan",
+      "inputs": [
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.round_to_integral(Float::reinterpret_from_uint(0xffc00000U), @float.TowardNegative))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {

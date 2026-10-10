@@ -196,6 +196,142 @@ test "round to integral directions" {
 }
 
 ///|
+test "rounding zero subnormal tie and exponent boundaries" {
+  let positive_zero = 0x0UL.reinterpret_as_double()
+  let negative_zero = 0x8000000000000000UL.reinterpret_as_double()
+  assert_eq(to_bits_canonical(round_ties_even(positive_zero)), 0x0UL)
+  assert_eq(to_bits_canonical(round_ties_away(positive_zero)), 0x0UL)
+  assert_eq(to_bits_canonical(round_toward_zero(positive_zero)), 0x0UL)
+  assert_eq(to_bits_canonical(round_toward_positive(positive_zero)), 0x0UL)
+  assert_eq(to_bits_canonical(round_toward_negative(positive_zero)), 0x0UL)
+  assert_eq(
+    to_bits_canonical(round_ties_even(negative_zero)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_ties_away(negative_zero)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_zero(negative_zero)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(negative_zero)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_negative(negative_zero)),
+    0x8000000000000000UL,
+  )
+
+  let min_subnormal = 0x1UL.reinterpret_as_double()
+  let neg_min_subnormal = 0x8000000000000001UL.reinterpret_as_double()
+  let max_subnormal = 0x000fffffffffffffUL.reinterpret_as_double()
+  let neg_max_subnormal = 0x800fffffffffffffUL.reinterpret_as_double()
+  assert_eq(
+    to_bits_canonical(round_toward_positive(min_subnormal)),
+    0x3ff0000000000000UL,
+  )
+  assert_eq(to_bits_canonical(round_toward_negative(min_subnormal)), 0x0UL)
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_min_subnormal)),
+    0xbff0000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_min_subnormal)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(max_subnormal)),
+    0x3ff0000000000000UL,
+  )
+  assert_eq(to_bits_canonical(round_toward_negative(max_subnormal)), 0x0UL)
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_max_subnormal)),
+    0xbff0000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_max_subnormal)),
+    0x8000000000000000UL,
+  )
+
+  assert_eq(round_ties_even(1.5), 2.0)
+  assert_eq(round_ties_even(3.5), 4.0)
+  assert_eq(round_ties_even(-1.5), -2.0)
+  assert_eq(round_ties_even(-3.5), -4.0)
+  assert_eq(round_ties_away(1.5), 2.0)
+  assert_eq(round_ties_away(3.5), 4.0)
+  assert_eq(round_ties_away(-1.5), -2.0)
+  assert_eq(round_ties_away(-3.5), -4.0)
+
+  let below_one = 0x3fefffffffffffffUL.reinterpret_as_double()
+  assert_eq(to_bits_canonical(round_ties_even(below_one)), 0x3ff0000000000000UL)
+  let exponent_tie = 0x4320000000000001UL.reinterpret_as_double()
+  assert_eq(
+    to_bits_canonical(round_ties_even(exponent_tie)),
+    0x4320000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_ties_away(exponent_tie)),
+    0x4320000000000002UL,
+  )
+  let boundary_tie = 0x432fffffffffffffUL.reinterpret_as_double()
+  assert_eq(
+    to_bits_canonical(round_ties_even(boundary_tie)),
+    0x4330000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_ties_away(boundary_tie)),
+    0x4330000000000000UL,
+  )
+
+  let max_finite = 0x7fefffffffffffffUL.reinterpret_as_double()
+  assert_eq(
+    to_bits_canonical(round_ties_even(max_finite)),
+    0x7fefffffffffffffUL,
+  )
+  assert_eq(
+    to_bits_canonical(round_ties_away(max_finite)),
+    0x7fefffffffffffffUL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_zero(max_finite)),
+    0x7fefffffffffffffUL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(max_finite)),
+    0x7fefffffffffffffUL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_negative(max_finite)),
+    0x7fefffffffffffffUL,
+  )
+  let neg_max_finite = 0xffefffffffffffffUL.reinterpret_as_double()
+  assert_eq(
+    to_bits_canonical(round_ties_even(neg_max_finite)),
+    0xffefffffffffffffUL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_max_finite)),
+    0xffefffffffffffffUL,
+  )
+
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(0x7ff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(0xfff8000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
 test "sign involutions payload boundaries and canonicalization" {
   assert_eq(negate_bits(negate_bits(0x0UL)), 0x0UL)
   assert_eq(abs_bits(0x0UL), 0x0UL)

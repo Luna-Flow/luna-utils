@@ -20,7 +20,7 @@ Predicates have raw `*_bits` and portable numeric forms. `is_signaling_bits` ins
 
 `RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum.
 
-The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns quiet canonical NaN for NaN input, and leaves infinities unchanged. The exact-flag variant is deferred until the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) is available.
+The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29).
 
 ## Payload encoding adapters
 
