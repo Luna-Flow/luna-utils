@@ -105,6 +105,96 @@ test "classification boundaries and numeric normalization" {
   assert_eq(radix(), 2)
 }
 
+// IEEE 754-2019 §5.9 roundToIntegral: the five directions are exact integral
+// results, preserve signed zero, leave infinities unchanged, and quiet NaN.
+// Expected table (input -> ties-even, ties-away, toward-zero, toward-positive,
+// toward-negative): 2.5 -> 2, 3, 2, 3, 2; -2.5 -> -2, -3, -2, -2, -3.
+// nextDown(0.5) -> 0, 0, 0, 1, 0; -0.3 -> -0, -0, -0, -0, -1.
+// IEEE 754-2019 §5.9 also requires already integral values in [2^52, 2^53)
+// to remain unchanged; NaN is quieted and ±infinity is unchanged.
+
+///|
+test "round to integral directions" {
+  assert_eq(round_ties_even(2.5), 2.0)
+  assert_eq(round_ties_away(2.5), 3.0)
+  assert_eq(round_toward_zero(2.5), 2.0)
+  assert_eq(round_toward_positive(2.5), 3.0)
+  assert_eq(round_toward_negative(2.5), 2.0)
+  assert_eq(round_ties_even(-2.5), -2.0)
+  assert_eq(round_ties_away(-2.5), -3.0)
+  assert_eq(round_toward_zero(-2.5), -2.0)
+  assert_eq(round_toward_positive(-2.5), -2.0)
+  assert_eq(round_toward_negative(-2.5), -3.0)
+  assert_eq(to_bits_canonical(round_ties_even(0.5)), 0x0000000000000000UL)
+  assert_eq(to_bits_canonical(round_ties_away(0.5)), 0x3ff0000000000000UL)
+  assert_eq(to_bits_canonical(round_ties_even(-0.5)), 0x8000000000000000UL)
+  assert_eq(to_bits_canonical(round_ties_away(-0.5)), 0xbff0000000000000UL)
+  assert_eq(round_ties_even(0.75), 1.0)
+  assert_eq(round_ties_even(-0.75), -1.0)
+  let below_half = 0x3fdfffffffffffffUL.reinterpret_as_double()
+  assert_eq(round_ties_even(below_half), 0.0)
+  assert_eq(round_ties_away(below_half), 0.0)
+  assert_eq(round_toward_zero(below_half), 0.0)
+  assert_eq(round_toward_positive(below_half), 1.0)
+  assert_eq(round_toward_negative(below_half), 0.0)
+  let neg_fraction = -0.3
+  assert_eq(
+    to_bits_canonical(round_ties_even(neg_fraction)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_ties_away(neg_fraction)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_zero(neg_fraction)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_fraction)),
+    0x8000000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_fraction)),
+    0xbff0000000000000UL,
+  )
+  let large = 0x4330000000000001UL.reinterpret_as_double()
+  assert_eq(to_bits_canonical(round_ties_even(large)), 0x4330000000000001UL)
+  assert_eq(to_bits_canonical(round_ties_away(large)), 0x4330000000000001UL)
+  assert_eq(to_bits_canonical(round_toward_zero(large)), 0x4330000000000001UL)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(large)),
+    0x4330000000000001UL,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_negative(large)),
+    0x4330000000000001UL,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(0x7ff0000000000001UL.reinterpret_as_double()),
+    ),
+    0x7ff8000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(0x7ff0000000000000UL.reinterpret_as_double()),
+    ),
+    0x7ff0000000000000UL,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(0xfff0000000000000UL.reinterpret_as_double()),
+    ),
+    0xfff0000000000000UL,
+  )
+  assert_eq(round_to_integral(2.5, TiesToEven), 2.0)
+  assert_eq(round_to_integral(-2.5, TiesToAway), -3.0)
+  assert_eq(round_to_integral(2.5, TowardZero), 2.0)
+  assert_eq(round_to_integral(2.5, TowardPositive), 3.0)
+  assert_eq(round_to_integral(-2.5, TowardNegative), -3.0)
+}
+
 ///|
 test "sign involutions payload boundaries and canonicalization" {
   assert_eq(negate_bits(negate_bits(0x0UL)), 0x0UL)

@@ -88,14 +88,26 @@ msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, p
 msgstr "`copy_sign_bits`、`negate_bits`、`abs_bits` は符号ビットだけを変え、NaN のペイロードとシグナリング状態を含む他の全ビットを保持します。移植可能な数値関数 `portable_copy_sign`、`portable_negate`、`portable_abs` は NaN を正規化し、NaN 以外（無限大と符号付きゼロを含む）には正確な符号変換を適用します。数値 NaN を符号源とする場合、ホストの符号を公開せず保守的な規則を使います。"
 
 #: manual/api/float.md:19
+msgid "Rounding to integral values"
+msgstr "整数値への丸め"
+
+#: manual/api/float.md:21
+msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
+msgstr "`RoundingDirection` は IEEE 754-2019 §5.9 `roundToIntegral` の五つの方向、`TiesToEven`、`TiesToAway`、`TowardZero`、`TowardPositive`、`TowardNegative` を表します。`round_to_integral(x, direction)` と五つの名前付きヘルパー（`round_ties_even`、`round_ties_away`、`round_toward_zero`、`round_toward_positive`、`round_toward_negative`）は同じ二進形式の整数値を返します。binary32 パッケージは共有の親 enum を受け取ります。"
+
+#: manual/api/float.md:23
+msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns quiet canonical NaN for NaN input, and leaves infinities unchanged. The exact-flag variant is deferred until the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) is available."
+msgstr "実装は符号、指数、仮数部のビットから直接丸めます。ゼロの両方の符号と既に整数である値を保持し、NaN 入力には quiet な正規 NaN を返し、無限大は変更しません。正確なフラグを返す版は、[#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ API が利用可能になるまで保留します。"
+
+#: manual/api/float.md:25
 msgid "Payload encoding adapters"
 msgstr "ペイロードのエンコーディングアダプタ"
 
-#: manual/api/float.md:21
+#: manual/api/float.md:27
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` は NaN 以外に `None`、NaN に quiet ビットを除く `Some(payload)` を返します。`set_payload_bits(payload, sign_minus?=false)` は quiet NaN のエンコーディングを返し、binary64 の 51 ビットまたは binary32 の 22 ビットを超える場合は `None` を返します。`set_payload_signaling_bits` は無限大になるゼロペイロードも拒否します。これらは整数エンコーディングを入出力とする IEEE 754-2019 §9.7 のアダプタであり、標準の浮動小数点 getPayload/setPayload 関数そのものではありません。"
 
-#: manual/api/float.md:23
+#: manual/api/float.md:29
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` はアプリケーションの NaN 正規化ビューを表し、元の NaN に対する IEEE 符号・分類操作を表しません。IEEE エンコーディングの意味論が必要な場合は `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` と生の符号操作を使用してください。`is_canonical_bits` は IEEE の正規エンコーディングを判定し、アプリケーション固有の固定 NaN との一致を判定するものではありません。"
 
@@ -104,16 +116,16 @@ msgid "Float conformance and limits"
 msgstr "浮動小数点の適合性と制限"
 
 #: manual/conformance/float.md:3
-msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
-msgstr "契約は正確な整数エンコーディングと移植可能な数値観測を分離します。生のテストは全分類、符号付きゼロ、指数境界、NaN の quiet ビット、両符号、ペイロード幅と signaling ゼロの拒否を網羅します。数値テストは `x != x` で NaN を検出し、入力 NaN のメタデータではなく正規整数出力を比較します。"
+msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Rounding tests cover all five IEEE 754-2019 §5.9 directions, positive and negative ties, the predecessor of 0.5, negative zero, large integral values and infinities. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
+msgstr "契約は正確な整数エンコーディングと移植可能な数値観測を分離します。生のテストは全分類、符号付きゼロ、指数境界、NaN の quiet ビット、両符号、ペイロード幅と signaling ゼロの拒否を網羅します。丸めのテストは IEEE 754-2019 §5.9 の五つの方向、正負の同値、0.5 の直前の値、負のゼロ、大きな整数値、無限大を検査します。数値テストは `x != x` で NaN を検出し、入力 NaN のメタデータではなく正規整数出力を比較します。"
 
 #: manual/conformance/float.md:5
 msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
 msgstr "四つのバックエンドの debug/release 検査と正確な記録比較は [CI 契約](../testing.md)に従います。ローカル結果だけでは Linux GCC の動作を確認できず、CI で確認する必要があります。テストは回帰の証拠であり、IEEE 754 の全動作の証明ではありません。Lean/mathlib による形式証明は提供しません。"
 
 #: manual/conformance/float.md:7
-msgid "Exception flags, FMA, conversions, IEEE extrema, rounding, stable hashing, formatting, bigint and libm remain separate issues. Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
-msgstr "例外フラグ、FMA、変換、IEEE 極値、丸め、安定ハッシュ、書式化、bigint、libm は別の issue です。正規化はアプリケーションの表現方針であり、ホスト浮動小数点値の往復でペイロードを保持する保証ではありません。"
+msgid "Exception flags, FMA, conversions, IEEE extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgstr "例外フラグ、FMA、変換、IEEE 極値、安定ハッシュ、書式化、bigint、libm は別の issue です。丸めの正確な inexact フラグ報告は [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29) を待ちます。正規化はアプリケーションの表現方針であり、ホスト浮動小数点値の往復でペイロードを保持する保証ではありません。"
 
 #: manual/contributing.md:1
 msgid "Contribution guidelines"
@@ -408,9 +420,13 @@ msgstr "生の整数エンコーディングは NaN の符号、シグナリン�
 msgid "IEEE 754-2019 §§5.7.2, 5.5.1 and 9.7 motivate classification, sign and payload operations; §6.2 does not require identical NaN payload propagation across hosts. This package makes its canonical encoding policy explicit. It does not raise IEEE exception flags or preserve numeric signaling NaNs. Current MoonBit core 0.10.14+7d59c7ec9 and official [language documentation](https://docs.moonbitlang.com/en/latest/) provide implementation evidence, not a formal verification claim."
 msgstr "分類、符号、ペイロード操作は IEEE 754-2019 §§5.7.2、5.5.1、9.7 を基礎とします。§6.2 はホスト間で同一の NaN ペイロード伝播を要求しません。本パッケージは正規化方針を明示し、IEEE 例外フラグを発生させず、数値 signaling NaN を保持しません。現在の MoonBit core 0.10.14+7d59c7ec9 と公式[言語文書](https://docs.moonbitlang.com/en/latest/)は実装の証拠であり、形式検証の主張ではありません。"
 
+#: manual/design/float.md:11
+msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same integer fields. For a finite non-integral value, discarded fraction bits determine the nearest tie rule or directed step; values below one use the signed zero encoding or the adjacent signed one encoding for directed rounding. NaNs are quieted to the package's canonical encoding and infinities pass through. Exact inexact flags are intentionally outside this issue and depend on the status-flag work in [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgstr "整数への丸め操作は同じ整数フィールドから IEEE 754-2019 §5.9 を実装します。有限の非整数値では、捨てられる小数ビットが最近接丸めの同値規則または方向付きの増分を決めます。1 未満の値を方向付きに丸める場合は、符号付きゼロのエンコーディングか隣接する符号付き 1 のエンコーディングを使います。NaN はパッケージの正規エンコーディングに quiet 化し、無限大はそのまま通します。正確な inexact フラグは意図的にこの issue の範囲外で、[#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ作業に依存します。"
+
 #: manual/index.md:1
 msgid "luna-utils"
-msgstr "luna-utils"
+msgstr "luna-utils プロジェクト"
 
 #: manual/index.md:3
 msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. The module depends only on `moonbitlang/core`; the legacy array and comparison API has been removed. At this migration stage the root package exports no functions, types or traits."
@@ -465,8 +481,8 @@ msgid "Sources: [official MoonBit native package options](https://docs.moonbitla
 msgstr "出典：[MoonBit 公式 native パッケージ設定](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options)、[MoonBit 収縮報告 #2262](https://github.com/moonbitlang/moon/issues/2262)、[Python 数値変換文書](https://docs.python.org/3/library/functions.html#float)。"
 
 #: manual/testing.md:15
-msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies independent expectations for both widths, all classes and signs, payload boundaries and portable numeric results. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
-msgstr "`tools/generate_oracles.py` は `tools/float_oracles.py` を呼び出し #25 の表現コーパスを生成します。Python の任意精度整数字段抽出で両精度、全分類と符号、ペイロード境界、移植可能な数値結果の独立した期待値を求めます。生成テストは実際の出力を `LUNA_BITS` に記録し、binary32 は 64 ビットへゼロ拡張、分類は文書化されたテスト専用 ID、`None` は全 1 で表します。コミットされた JSON は入力、呼び出し、期待出力を含みます。"
+msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies independent expectations for both widths, all classes and signs, payload boundaries, portable numeric results and #24 round-to-integral directions. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
+msgstr "`tools/generate_oracles.py` は `tools/float_oracles.py` を呼び出し #25 の表現コーパスを生成します。Python の任意精度整数字段抽出で両精度、全分類と符号、ペイロード境界、移植可能な数値結果、#24 の整数への丸め方向の独立した期待値を求めます。生成テストは実際の出力を `LUNA_BITS` に記録し、binary32 は 64 ビットへゼロ拡張、分類は文書化されたテスト専用 ID、`None` は全 1 で表します。コミットされた JSON は入力、呼び出し、期待出力を含みます。"
 
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
@@ -500,7 +516,7 @@ msgstr "浮動小数点表現のチュートリアル"
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr "moon.pkg で `Luna-Flow/luna-utils/float` を `f64`、`Luna-Flow/luna-utils/float/binary32` を `f32` としてインポートしてください。signaling NaN を整数として保持し、数値の直列化境界で正規化します。"
 
-#: manual/tutorial/float.md:15
+#: manual/tutorial/float.md:21
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "生のペイロード setter でエンコーディングを構築して `None` を確認し、ペイロードの忠実性が必要な場合は結果を Double や Float に変換しないでください。正規化数値関数は意図的に NaN メタデータを捨てます。[API](../api/float.md)と[適合性の制限](../conformance/float.md)を参照してください。"
 

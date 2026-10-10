@@ -40,3 +40,5 @@ NaN sign/payload/signaling metadata; integer APIs preserve it. No exception
 flags or host payload round-trip guarantee is introduced.
 
 Review corrections for #25: every binary encoding is IEEE-canonical, including NaNs. NaN-normalized numeric sign and classification functions use `portable_*` names; raw integer operations retain IEEE encoding semantics. Independent offline integer oracles now cover both widths in the CI transcripts.
+
+Fixed: [#24](https://github.com/Luna-Flow/luna-utils/issues/24) adds all five IEEE 754-2019 §5.9 round-to-integral directions for binary64 and binary32, with shared `RoundingDirection` dispatch and independent bit oracles. Exact inexact-flag reporting remains scoped to [#29](https://github.com/Luna-Flow/luna-utils/issues/29).

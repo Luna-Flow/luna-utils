@@ -67,6 +67,41 @@ def generate_float_cases():
             cases.append(dict(id=f'b{width}_{ident}', inputs=[str(n) for n in inputs],
                               expression=expression, bits=f'{expected:016x}'))
 
+        def round_integral(n, direction):
+            sign, exponent, fraction = fields(n)
+            if exponent == exponent_limit:
+                return canonical if fraction else n
+            if exponent == 0 and fraction == 0:
+                return n
+            unbiased = exponent - (exponent_limit // 2)
+            sign_bits = sign * sign_unit
+            if unbiased >= fraction_width:
+                return n
+            if unbiased < 0:
+                increment = ((direction == 'toward_positive' and sign == 0) or
+                             (direction == 'toward_negative' and sign == 1) or
+                             (direction == 'ties_away' and unbiased == -1) or
+                             (direction == 'ties_even' and unbiased == -1 and fraction != 0))
+                return sign_bits | ((exponent_limit // 2) << fraction_width) if increment else sign_bits
+            discarded = fraction_width - unbiased
+            mask = (1 << discarded) - 1
+            kept = n & ((sign_unit * 2 - 1) ^ mask)
+            remainder = n & mask
+            if remainder == 0:
+                return n
+            if direction == 'toward_positive':
+                increment = sign == 0
+            elif direction == 'toward_negative':
+                increment = sign == 1
+            elif direction == 'toward_zero':
+                increment = False
+            elif direction == 'ties_away':
+                increment = remainder >= (1 << (discarded - 1))
+            else:
+                half = 1 << (discarded - 1)
+                increment = remainder > half or (remainder == half and (kept & (1 << discarded)) != 0)
+            return kept + (1 << discarded) if increment else kept
+
         magnitudes = [
             ('zero', 0), ('min_subnormal', 1),
             ('max_subnormal', fraction_unit - 1), ('min_normal', fraction_unit),
@@ -115,4 +150,30 @@ def generate_float_cases():
                     expected = sign*sign_unit + exponent_limit*fraction_unit + (0 if signaling else quiet_unit) + payload if valid else 2**64-1
                     expression = f'match {package}.{operation}({literal(payload)}, sign_minus={str(bool(sign)).lower()}) {{ Some(p) => {widen("p")}; None => 0xffffffffffffffffUL }}'
                     add(f'{operation}_{sign}_{payload:x}', expression, expected, [payload, sign])
+
+        round_inputs = [
+            ('2p5', (0x4004000000000000 if width == 64 else 0x40200000)),
+            ('neg2p5', (0xc004000000000000 if width == 64 else 0xc0200000)),
+            ('half', (0x3fe0000000000000 if width == 64 else 0x3f000000)),
+            ('neg_half', (0xbfe0000000000000 if width == 64 else 0xbf000000)),
+            ('three_quarters', (0x3fe8000000000000 if width == 64 else 0x3f400000)),
+            ('neg_three_quarters', (0xbfe8000000000000 if width == 64 else 0xbf400000)),
+            ('below_half', (0x3fdfffffffffffff if width == 64 else 0x3effffff)),
+            ('neg_fraction', (0xbfd3333333333333 if width == 64 else 0xbe99999a)),
+            ('large', (0x4330000000000001 if width == 64 else 0x4b000001)),
+            ('snan', (0x7ff0000000000001 if width == 64 else 0x7f800001)),
+            ('pos_inf', (0x7ff0000000000000 if width == 64 else 0x7f800000)),
+            ('neg_inf', (0xfff0000000000000 if width == 64 else 0xff800000)),
+        ]
+        directions = [
+            ('ties_even', 'TiesToEven'), ('ties_away', 'TiesToAway'),
+            ('toward_zero', 'TowardZero'), ('toward_positive', 'TowardPositive'),
+            ('toward_negative', 'TowardNegative'),
+        ]
+        for name, n in round_inputs:
+            raw = literal(n)
+            v = value(n)
+            for direction, constructor in directions:
+                expression = f'{package}.to_bits_canonical({package}.round_to_integral({v}, @float.{constructor}))'
+                add(f'round_{direction}_{name}', widen(expression), round_integral(n, direction), [n])
     return cases

@@ -56,6 +56,18 @@ pub fn portable_negate(Float) -> Float
 
 pub fn radix() -> Int
 
+pub fn round_ties_away(Float) -> Float
+
+pub fn round_ties_even(Float) -> Float
+
+pub fn round_to_integral(Float, @float.RoundingDirection) -> Float
+
+pub fn round_toward_negative(Float) -> Float
+
+pub fn round_toward_positive(Float) -> Float
+
+pub fn round_toward_zero(Float) -> Float
+
 pub fn set_payload_bits(UInt, sign_minus? : Bool) -> UInt?
 
 pub fn set_payload_signaling_bits(UInt, sign_minus? : Bool) -> UInt?

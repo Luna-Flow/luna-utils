@@ -88,14 +88,26 @@ msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, p
 msgstr ""
 
 #: manual/api/float.md:19
-msgid "Payload encoding adapters"
+msgid "Rounding to integral values"
 msgstr ""
 
 #: manual/api/float.md:21
-msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
 msgstr ""
 
 #: manual/api/float.md:23
+msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns quiet canonical NaN for NaN input, and leaves infinities unchanged. The exact-flag variant is deferred until the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) is available."
+msgstr ""
+
+#: manual/api/float.md:25
+msgid "Payload encoding adapters"
+msgstr ""
+
+#: manual/api/float.md:27
+msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgstr ""
+
+#: manual/api/float.md:29
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr ""
 
@@ -104,7 +116,7 @@ msgid "Float conformance and limits"
 msgstr ""
 
 #: manual/conformance/float.md:3
-msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
+msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Rounding tests cover all five IEEE 754-2019 §5.9 directions, positive and negative ties, the predecessor of 0.5, negative zero, large integral values and infinities. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
 msgstr ""
 
 #: manual/conformance/float.md:5
@@ -112,7 +124,7 @@ msgid "Four-backend debug/release checks and exact transcript comparison follow 
 msgstr ""
 
 #: manual/conformance/float.md:7
-msgid "Exception flags, FMA, conversions, IEEE extrema, rounding, stable hashing, formatting, bigint and libm remain separate issues. Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgid "Exception flags, FMA, conversions, IEEE extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
 msgstr ""
 
 #: manual/contributing.md:1
@@ -408,6 +420,10 @@ msgstr ""
 msgid "IEEE 754-2019 §§5.7.2, 5.5.1 and 9.7 motivate classification, sign and payload operations; §6.2 does not require identical NaN payload propagation across hosts. This package makes its canonical encoding policy explicit. It does not raise IEEE exception flags or preserve numeric signaling NaNs. Current MoonBit core 0.10.14+7d59c7ec9 and official [language documentation](https://docs.moonbitlang.com/en/latest/) provide implementation evidence, not a formal verification claim."
 msgstr ""
 
+#: manual/design/float.md:11
+msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same integer fields. For a finite non-integral value, discarded fraction bits determine the nearest tie rule or directed step; values below one use the signed zero encoding or the adjacent signed one encoding for directed rounding. NaNs are quieted to the package's canonical encoding and infinities pass through. Exact inexact flags are intentionally outside this issue and depend on the status-flag work in [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgstr ""
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr ""
@@ -465,7 +481,7 @@ msgid "Sources: [official MoonBit native package options](https://docs.moonbitla
 msgstr ""
 
 #: manual/testing.md:15
-msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies independent expectations for both widths, all classes and signs, payload boundaries and portable numeric results. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
+msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies independent expectations for both widths, all classes and signs, payload boundaries, portable numeric results and #24 round-to-integral directions. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
 msgstr ""
 
 #: manual/tutorial/array_utils.md:1
@@ -500,6 +516,6 @@ msgstr ""
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr ""
 
-#: manual/tutorial/float.md:15
+#: manual/tutorial/float.md:21
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr ""
