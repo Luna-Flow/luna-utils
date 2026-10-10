@@ -215,4 +215,60 @@ def generate_float_cases():
             for direction, constructor in directions:
                 expression = f'{package}.to_bits_canonical({package}.round_to_integral({v}, @float.{constructor}))'
                 add(f'round_{direction}_{name}', widen(expression), round_integral(n, direction), [n])
+
+        order_samples = [
+            sign_unit | (exponent_limit * fraction_unit) | quiet_unit | 2,
+            sign_unit | (exponent_limit * fraction_unit) | quiet_unit | 1,
+            sign_unit | (exponent_limit * fraction_unit) | 2,
+            sign_unit | (exponent_limit * fraction_unit) | 1,
+            sign_unit | (exponent_limit * fraction_unit),
+            sign_unit | (exponent_limit - 1) * fraction_unit + fraction_unit - 1,
+            sign_unit | 1,
+            sign_unit | fraction_unit,
+            sign_unit,
+            0,
+            1,
+            (0x3ff0000000000000 if width == 64 else 0x3f800000),
+            fraction_unit,
+            (exponent_limit - 1) * fraction_unit + fraction_unit - 1,
+            exponent_limit * fraction_unit,
+            exponent_limit * fraction_unit | 1,
+            exponent_limit * fraction_unit | 2,
+            exponent_limit * fraction_unit | quiet_unit,
+            exponent_limit * fraction_unit | quiet_unit | 1,
+        ]
+
+        def order_key(n):
+            transformed = n ^ (sign_unit - 1 if n & sign_unit else 0)
+            return transformed - (1 << width) if transformed & sign_unit else transformed
+
+        for x in order_samples:
+            for y in order_samples:
+                add(
+                    f'total_order_bits_{x:x}_{y:x}',
+                    f'if {package}.total_order_bits({literal(x)}, {literal(y)}) {{ 1UL }} else {{ 0UL }}',
+                    int(order_key(x) <= order_key(y)), [x, y],
+                )
+                nx, ny = normalize(x), normalize(y)
+                vx, vy = value(x), value(y)
+                add(
+                    f'total_order_{x:x}_{y:x}',
+                    f'if {package}.portable_total_order({vx}, {vy}) {{ 1UL }} else {{ 0UL }}',
+                    int(order_key(nx) <= order_key(ny)), [x, y],
+                )
+                if nan(x) or nan(y):
+                    min_expected = max_expected = canonical
+                else:
+                    min_expected = x if order_key(x) <= order_key(y) else y
+                    max_expected = y if order_key(x) <= order_key(y) else x
+                add(
+                    f'minimum_{x:x}_{y:x}',
+                    widen(f'{package}.to_bits_canonical({package}.minimum({vx}, {vy}))'),
+                    min_expected, [x, y],
+                )
+                add(
+                    f'maximum_{x:x}_{y:x}',
+                    widen(f'{package}.to_bits_canonical({package}.maximum({vx}, {vy}))'),
+                    max_expected, [x, y],
+                )
     return cases

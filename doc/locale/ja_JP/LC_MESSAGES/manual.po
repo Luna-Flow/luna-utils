@@ -100,14 +100,26 @@ msgid "The implementation rounds directly from the sign, exponent and fraction f
 msgstr "実装は符号、指数、仮数部のビットから直接丸めます。ゼロの両方の符号と既に整数である値を保持し、NaN 入力には正の正規 quiet NaN を返して入力の符号とペイロードを破棄し、無限大は変更しません。sNaN 入力の invalid 例外と非整数入力の inexact フラグは報告しません。これらの報告は issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ API と `_exact` 版に委ねます。"
 
 #: manual/api/float.md:25
+msgid "Extrema and ordering"
+msgstr "極値と順序付け"
+
+#: manual/api/float.md:27
+msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API."
+msgstr "`minimum(x, y)` と `maximum(x, y)` は binary64 で IEEE 754-2019 §9.6 を実装し、binary32 パッケージも同じ名前を公開します。どちらかの入力が NaN なら、正の正規 quiet NaN を返します。ゼロ同士の場合、minimum はどちらかが負のゼロなら `-0` を選び、maximum はどちらかが正のゼロなら `+0` を選びます。これらの数値関数は sNaN の invalid 例外を報告しません。このパッケージの API に例外フラグはありません。"
+
+#: manual/api/float.md:29
+msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. The core `sort_by` operation is unstable: equal normalized keys may reorder, and original NaN bits are retained, so negative NaNs do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgstr "`total_order(x, y)` は移植可能な数値に対して §5.10 を実装します。`total_order_bits(x, y)` は整数ビットから完全なエンコーディング順序を実装し、NaN の符号、signaling 状態、ペイロードを保持します。特に JavaScript では数値 NaN の表現を移植できないため、この区別が必要です。`sort_total_order(values)` は可変配列を、`sort_total_order_view(view)` は可変配列ビューを移植可能な値の順序でソートします。NaN エンコーディングを厳密に順序付けるには、生の整数エンコーディングに `total_order_bits` を使います。"
+
+#: manual/api/float.md:31
 msgid "Payload encoding adapters"
 msgstr "ペイロードのエンコーディングアダプタ"
 
-#: manual/api/float.md:27
+#: manual/api/float.md:33
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` は NaN 以外に `None`、NaN に quiet ビットを除く `Some(payload)` を返します。`set_payload_bits(payload, sign_minus?=false)` は quiet NaN のエンコーディングを返し、binary64 の 51 ビットまたは binary32 の 22 ビットを超える場合は `None` を返します。`set_payload_signaling_bits` は無限大になるゼロペイロードも拒否します。これらは整数エンコーディングを入出力とする IEEE 754-2019 §9.7 のアダプタであり、標準の浮動小数点 getPayload/setPayload 関数そのものではありません。"
 
-#: manual/api/float.md:29
+#: manual/api/float.md:35
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` はアプリケーションの NaN 正規化ビューを表し、元の NaN に対する IEEE 符号・分類操作を表しません。IEEE エンコーディングの意味論が必要な場合は `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` と生の符号操作を使用してください。`is_canonical_bits` は IEEE の正規エンコーディングを判定し、アプリケーション固有の固定 NaN との一致を判定するものではありません。"
 
@@ -120,12 +132,16 @@ msgid "The contract separates exact integer encodings from portable numeric obse
 msgstr "契約は正確な整数エンコーディングと移植可能な数値観測を分離します。生のテストは全分類、符号付きゼロ、指数境界、NaN の quiet ビット、両符号、ペイロード幅と signaling ゼロの拒否を網羅します。丸めのテストは IEEE 754-2019 §5.9 の五つの方向、正負の同値、0.5 の直前の値、負のゼロ、大きな整数値、無限大を検査します。数値テストは `x != x` で NaN を検出し、入力 NaN のメタデータではなく正規整数出力を比較します。"
 
 #: manual/conformance/float.md:5
+msgid "Ordering tests cover both argument orders for minimum/maximum, signed-zero selection, raw totalOrder across signed qNaN/sNaN payloads, portable NaN canonicalization, and array and mutable-view sorting. The generated integer-key oracle compares all pairs in a boundary sample for both binary formats."
+msgstr "順序付けテストは minimum/maximum の両方の引数順、有符号ゼロの選択、符号付き qNaN/sNaN ペイロード間の raw totalOrder、移植可能な NaN の正規化、配列と可変ビューのソートを検証します。生成された整数 key oracle は両方の二進形式で境界サンプルの全ペアを比較します。"
+
+#: manual/conformance/float.md:7
 msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
 msgstr "四つのバックエンドの debug/release 検査と正確な記録比較は [CI 契約](../testing.md)に従います。ローカル結果だけでは Linux GCC の動作を確認できず、CI で確認する必要があります。テストは回帰の証拠であり、IEEE 754 の全動作の証明ではありません。Lean/mathlib による形式証明は提供しません。"
 
-#: manual/conformance/float.md:7
-msgid "Exception flags, FMA, conversions, IEEE extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
-msgstr "例外フラグ、FMA、変換、IEEE 極値、安定ハッシュ、書式化、bigint、libm は別の issue です。丸めの正確な inexact フラグ報告は [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29) を待ちます。正規化はアプリケーションの表現方針であり、ホスト浮動小数点値の往復でペイロードを保持する保証ではありません。"
+#: manual/conformance/float.md:9
+msgid "Exception flags, FMA, conversions, IEEE magnitude extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgstr "例外フラグ、FMA、変換、IEEE magnitude 極値、安定ハッシュ、書式化、bigint、libm は別の issue です。丸めの正確な inexact フラグ報告は [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29) を待ちます。正規化はアプリケーションの表現方針であり、ホスト浮動小数点値の往復でペイロードを保持する保証ではありません。"
 
 #: manual/contributing.md:1
 msgid "Contribution guidelines"
@@ -424,6 +440,18 @@ msgstr "分類、符号、ペイロード操作は IEEE 754-2019 §§5.7.2、5.5
 msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same integer fields. For a finite non-integral value, discarded fraction bits determine the nearest tie rule or directed step; values below one use the signed zero encoding or the adjacent signed one encoding for directed rounding. NaNs are quieted to positive canonical NaN, dropping the input sign and payload. The API does not report the invalid exception for sNaN input or inexact for non-integral input; both are deferred to the `_exact` variant and status-flag work in [#29](https://github.com/Luna-Flow/luna-utils/issues/29). Infinities pass through unchanged."
 msgstr "整数への丸め操作は同じ整数フィールドから IEEE 754-2019 §5.9 を実装します。有限の非整数値では、捨てられる小数ビットが最近接丸めの同値規則または方向付きの増分を決めます。1 未満の値を方向付きに丸める場合は、符号付きゼロのエンコーディングか隣接する符号付き 1 のエンコーディングを使います。NaN は正の正規 NaN に quiet 化し、入力の符号とペイロードを破棄します。sNaN 入力の invalid 例外と非整数入力の inexact は報告せず、[#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ作業および `_exact` 版に委ねます。無限大は変更せずに通します。"
 
+#: manual/design/float.md:13
+msgid "IEEE 754-2019 §9.6 extrema first handle NaN, then compare ordinary values, with explicit bit selection for two zeros: minimum combines the sign bits with OR to choose `-0`, and maximum combines them with AND to choose `+0`. A NaN result uses this package's positive canonical quiet encoding; exception flags are not exposed here."
+msgstr "IEEE 754-2019 §9.6 の極値演算は、まず NaN を処理してから通常の値を比較します。ゼロ同士はビット選択で明示的に扱います。minimum は符号ビットの OR で `-0` を選び、maximum は AND で `+0` を選びます。NaN の結果にはこのパッケージの正の正規 quiet エンコーディングを使い、例外フラグは公開しません。"
+
+#: manual/design/float.md:15
+msgid "IEEE 754-2019 §5.10 totalOrder is an integer ordering over the encoding, not ordinary floating comparison. For a width of `w` bits and sign mask `S`, the signed key is `bits XOR (S - 1)` for negative encodings and `bits` otherwise. Comparing these keys as signed integers reverses all lower bits for negative values and orders positive values directly. The raw-bit API applies this key without materializing a float, so it retains negative NaN, sNaN and payload ordering on every backend. The portable numeric API first canonicalizes NaNs; it therefore provides deterministic ordering for numeric values but cannot reconstruct encoding details lost by host storage."
+msgstr "IEEE 754-2019 §5.10 の totalOrder は通常の浮動小数点比較ではなく、エンコーディングに対する整数順序です。幅 `w` ビット、符号マスク `S` の形式では、負のエンコーディングの符号付き key は `bits XOR (S - 1)`、それ以外は `bits` です。これらの key を符号付き整数として比べると、負の値では下位ビットが反転した順序になり、正の値はそのまま順序付けられます。raw-bit API は浮動小数点値に変換せず key を適用するため、すべてのバックエンドで負の NaN、sNaN、ペイロードの順序を保持します。移植可能な数値 API は先に NaN を正規化するため、数値の順序は決定的ですが、ホスト保存時に失われたエンコーディング情報は復元できません。"
+
+#: manual/design/float.md:17
+msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
+msgstr "配列と可変ビューのソートはどちらも、core のインプレース `sort_by` を通じて同じ key 比較器を使います。比較器は key を減算せず、符号付き比較から -1、0、1 を返して整数オーバーフローを避けます。"
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr "luna-utils"
@@ -433,8 +461,8 @@ msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. Th
 msgstr "0.2.0 は Luna-Flow の数値基盤を再構築する非互換変更です。モジュールは `moonbitlang/core` のみに依存し、従来の配列・比較 API は削除されました。この移行段階ではルートパッケージは関数、型、trait を公開しません。"
 
 #: manual/index.md:5
-msgid "The numeric package roadmap is tracked in [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Float representation APIs are available through [#25](https://github.com/Luna-Flow/luna-utils/issues/25), and this checkout adds round-to-integral directions through [#24](https://github.com/Luna-Flow/luna-utils/issues/24). Other planned work includes integer arithmetic, conversions, IEEE extrema, stable hash, text, bigint and software FMA. The decided location for libm is the `math` subpackage ([#30](https://github.com/Luna-Flow/luna-utils/issues/30))."
-msgstr "数値パッケージのロードマップは [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19) で管理されています。浮動小数点表現 API は [#25](https://github.com/Luna-Flow/luna-utils/issues/25) で利用可能になり、この作業ツリーでは [#24](https://github.com/Luna-Flow/luna-utils/issues/24) により整数への丸め方向を追加します。今後の作業には整数演算、変換、IEEE 極値、安定ハッシュ、テキスト、bigint、ソフトウェア FMA が含まれます。libm の配置先は `math` サブパッケージに決定しています（[#30](https://github.com/Luna-Flow/luna-utils/issues/30)）。"
+msgid "The numeric package roadmap is tracked in [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Float representation APIs are available through [#25](https://github.com/Luna-Flow/luna-utils/issues/25), round-to-integral directions through [#24](https://github.com/Luna-Flow/luna-utils/issues/24), and IEEE extrema and total ordering through [#23](https://github.com/Luna-Flow/luna-utils/issues/23). Other planned work includes integer arithmetic, conversions, magnitude extrema, stable hash, text, bigint and software FMA. The decided location for libm is the `math` subpackage ([#30](https://github.com/Luna-Flow/luna-utils/issues/30))."
+msgstr "数値パッケージのロードマップは [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19) で管理されています。浮動小数点表現 API は [#25](https://github.com/Luna-Flow/luna-utils/issues/25)、整数への丸め方向は [#24](https://github.com/Luna-Flow/luna-utils/issues/24)、IEEE 極値と全順序は [#23](https://github.com/Luna-Flow/luna-utils/issues/23) で利用可能です。今後の作業には整数演算、変換、magnitude 極値、安定ハッシュ、テキスト、bigint、ソフトウェア FMA が含まれます。libm の配置先は `math` サブパッケージに決定しています（[#30](https://github.com/Luna-Flow/luna-utils/issues/30)）。"
 
 #: manual/index.md:7
 msgid "The generated interface [pkg.generated.mbti](../../src/pkg.generated.mbti) is the public-name authority for this checkout. Published Mooncakes documentation may still describe an older release. Source filenames are not MoonBit package boundaries."
@@ -465,7 +493,7 @@ msgid "Each backend prints ordered `LUNA_BITS <case> <16 lowercase hex digits>` 
 msgstr "各バックエンドは順序付きの `LUNA_BITS <case> <16 lowercase hex digits>` レコードを出力します。ゲートは欠落、重複、不正な形式、順序変更、値の変更を拒否し、コミット済み oracle と各出力を比較します。さらにバックエンド、コンパイラ、最適化モードの全十出力を比較します。ログとビット出力は CI 成果物としてダウンロードできます。wasm-gc ジョブは `moon test --enable-coverage` を実行し、概要と Cobertura カバレッジ報告も公開します。現在の空のルート API のように、モジュールにテストファイル以外のライブラリソースがない間は計測対象がないため、ジョブは失敗せず、報告を省略したことを記録します。"
 
 #: manual/testing.md:7
-msgid "The bootstrap corpus checks core binary64 bit transport (signed zeros, subnormal and normal boundaries, finite extremes and infinities), signed 64-bit conversion around ties at 2^53 and at the integer endpoints, and a non-fused multiply-add. It does not implement or certify future luna-utils numerical APIs. Add operation-specific probes and independent oracle fixtures alongside each new API. NaN payload transport and canonicalization are deliberately excluded until the API and canonicalization policy in issue #25 are defined; raw NaN equality is not promised by this corpus."
+msgid "The bootstrap corpus checks core binary64 bit transport (signed zeros, subnormal and normal boundaries, finite extremes and infinities), signed 64-bit conversion around ties at 2^53 and at the integer endpoints, and a non-fused multiply-add. It does not implement or certify future luna-utils numerical APIs. Add operation-specific probes and cross-check oracle fixtures alongside each new API. NaN payload transport and canonicalization are deliberately excluded until the API and canonicalization policy in issue #25 are defined; raw NaN equality is not promised by this corpus."
 msgstr "初期コーパスは core の binary64 ビット転送（符号付きゼロ、非正規数と正規数の境界、有限極値、無限大）、2^53 付近の中点および整数端点での符号付き 64 ビット変換、非融合乗算加算を検査します。将来の luna-utils 数値 API の実装や認証は行いません。新しい API ごとに操作別プローブと独立 oracle fixture を追加してください。issue #25 で API と正規化方針が定義されるまで、NaN payload の転送と正規化は対象外とします。生の NaN の一致は保証しません。"
 
 #: manual/testing.md:9
@@ -483,6 +511,10 @@ msgstr "出典：[MoonBit 公式 native パッケージ設定](https://docs.moon
 #: manual/testing.md:15
 msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies expectations for both widths, all classes and signs, payload boundaries and portable numeric results. For #24 round-to-integral directions, an independent model decodes finite encodings to exact `fractions.Fraction` values, applies floor, ceiling, truncation or the specified tie rule, and re-encodes the integral result while preserving the sign of zero. It does not reproduce the implementation's exponent-mask algorithm. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
 msgstr "#25 の表現コーパスは `tools/generate_oracles.py` が `tools/float_oracles.py` を呼び出して生成します。Python の任意精度整数フィールド抽出により、両形式、全クラスと符号、ペイロード境界、移植可能な数値結果の期待値を得ます。#24 の整数への丸め方向では、独立モデルが有限エンコーディングを正確な `fractions.Fraction` 値にデコードし、floor、ceiling、truncation または指定の同値規則を適用して、ゼロの符号を保ちながら整数結果を再エンコードします。実装の指数マスクアルゴリズムは再現しません。生成テストは実際の出力を `LUNA_BITS` に記録し、binary32 は 64 ビットにゼロ拡張、分類は文書化されたテスト専用 ID、`None` は全 1 で表します。コミット済み JSON には入力、呼び出し、期待出力が含まれます。"
+
+#: manual/testing.md:17
+msgid "For #23 extrema and ordering, the offline oracle constructs a boundary set containing signed zeros, the largest subnormal, `1.0`, the smallest negative normal, infinities, and positive and negative qNaN/sNaN encodings with payloads, including `+qNaN` payload 2, `-qNaN` payload 0, and both `+1` and `-1`. Python integer key transforms provide a cross-check for all-pairs raw totalOrder and portable numeric order; integer comparisons also determine minimum and maximum, including NaN propagation and signed-zero selection. All results are emitted as `LUNA_BITS` records and checked against every backend transcript."
+msgstr "#23 の極値と順序付けでは、オフライン oracle が有符号ゼロ、最大の subnormal、`1.0`、最小の負の normal、無限大、ペイロードを持つ正負の qNaN/sNaN エンコーディングを含む境界集合を作ります。payload 2 の `+qNaN`、payload 0 の `-qNaN`、`+1` と `-1` も含みます。Python の整数 key 変換が raw totalOrder と移植可能な数値順序の全ペアをクロスチェックします。整数比較で NaN 伝播と有符号ゼロ選択を含む minimum と maximum も決定します。すべての結果は `LUNA_BITS` レコードとして出力され、各バックエンドの transcript と照合されます。"
 
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
@@ -516,7 +548,7 @@ msgstr "浮動小数点表現のチュートリアル"
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr "moon.pkg で `Luna-Flow/luna-utils/float` を `f64`、`Luna-Flow/luna-utils/float/binary32` を `f32` としてインポートしてください。signaling NaN を整数として保持し、数値の直列化境界で正規化します。"
 
-#: manual/tutorial/float.md:21
+#: manual/tutorial/float.md:28
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "生のペイロード setter でエンコーディングを構築して `None` を確認し、ペイロードの忠実性が必要な場合は結果を Double や Float に変換しないでください。正規化数値関数は意図的に NaN メタデータを捨てます。[API](../api/float.md)と[適合性の制限](../conformance/float.md)を参照してください。"
 
