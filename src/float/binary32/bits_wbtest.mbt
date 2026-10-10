@@ -111,6 +111,171 @@ test "classification boundaries and numeric normalization" {
   assert_eq(radix(), 2)
 }
 
+// IEEE 754-2019 §5.9 roundToIntegral expected table: 2.5f -> 2, 3, 2, 3,
+// 2 and -2.5f -> -2, -3, -2, -2, -3 for ties-even, ties-away, toward-zero,
+// toward-positive, toward-negative. nextDown(0.5f) must not cross the tie.
+// Negative fractions preserve -0 when the directed result is zero; integral
+// values in [2^23, 2^24) are unchanged; NaN is quieted and infinities remain.
+
+///|
+test "round to integral directions" {
+  assert_eq(round_ties_even(2.5F), 2.0F)
+  assert_eq(round_ties_away(2.5F), 3.0F)
+  assert_eq(round_toward_zero(2.5F), 2.0F)
+  assert_eq(round_toward_positive(2.5F), 3.0F)
+  assert_eq(round_toward_negative(2.5F), 2.0F)
+  assert_eq(round_ties_even(-2.5F), -2.0F)
+  assert_eq(round_ties_away(-2.5F), -3.0F)
+  assert_eq(round_toward_zero(-2.5F), -2.0F)
+  assert_eq(round_toward_positive(-2.5F), -2.0F)
+  assert_eq(round_toward_negative(-2.5F), -3.0F)
+  assert_eq(to_bits_canonical(round_ties_even(0.5F)), 0x00000000U)
+  assert_eq(to_bits_canonical(round_ties_away(0.5F)), 0x3f800000U)
+  assert_eq(to_bits_canonical(round_ties_even(-0.5F)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_ties_away(-0.5F)), 0xbf800000U)
+  assert_eq(round_ties_even(0.75F), 1.0F)
+  assert_eq(round_ties_even(-0.75F), -1.0F)
+  let below_half = Float::reinterpret_from_uint(0x3effffffU)
+  assert_eq(round_ties_even(below_half), 0.0F)
+  assert_eq(round_ties_away(below_half), 0.0F)
+  assert_eq(round_toward_zero(below_half), 0.0F)
+  assert_eq(round_toward_positive(below_half), 1.0F)
+  assert_eq(round_toward_negative(below_half), 0.0F)
+  let neg_fraction = -0.3F
+  assert_eq(to_bits_canonical(round_ties_even(neg_fraction)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_ties_away(neg_fraction)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_toward_zero(neg_fraction)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_toward_positive(neg_fraction)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_toward_negative(neg_fraction)), 0xbf800000U)
+  let large = Float::reinterpret_from_uint(0x4b000001U)
+  assert_eq(to_bits_canonical(round_ties_even(large)), 0x4b000001U)
+  assert_eq(to_bits_canonical(round_ties_away(large)), 0x4b000001U)
+  assert_eq(to_bits_canonical(round_toward_zero(large)), 0x4b000001U)
+  assert_eq(to_bits_canonical(round_toward_positive(large)), 0x4b000001U)
+  assert_eq(to_bits_canonical(round_toward_negative(large)), 0x4b000001U)
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0x7f800001U)),
+    ),
+    0x7fc00000U,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0x7f800000U)),
+    ),
+    0x7f800000U,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0xff800000U)),
+    ),
+    0xff800000U,
+  )
+  assert_eq(round_to_integral(2.5F, @binary64.TiesToEven), 2.0F)
+  assert_eq(round_to_integral(-2.5F, @binary64.TiesToAway), -3.0F)
+  assert_eq(round_to_integral(2.5F, @binary64.TowardZero), 2.0F)
+  assert_eq(round_to_integral(2.5F, @binary64.TowardPositive), 3.0F)
+  assert_eq(round_to_integral(-2.5F, @binary64.TowardNegative), -3.0F)
+}
+
+///|
+test "rounding zero subnormal tie and exponent boundaries" {
+  let positive_zero = Float::reinterpret_from_uint(0x0U)
+  let negative_zero = Float::reinterpret_from_uint(0x80000000U)
+  assert_eq(to_bits_canonical(round_ties_even(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_ties_away(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_toward_zero(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_toward_positive(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_toward_negative(positive_zero)), 0x0U)
+  assert_eq(to_bits_canonical(round_ties_even(negative_zero)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_ties_away(negative_zero)), 0x80000000U)
+  assert_eq(to_bits_canonical(round_toward_zero(negative_zero)), 0x80000000U)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(negative_zero)),
+    0x80000000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_negative(negative_zero)),
+    0x80000000U,
+  )
+
+  let min_subnormal = Float::reinterpret_from_uint(0x1U)
+  let neg_min_subnormal = Float::reinterpret_from_uint(0x80000001U)
+  let max_subnormal = Float::reinterpret_from_uint(0x007fffffU)
+  let neg_max_subnormal = Float::reinterpret_from_uint(0x807fffffU)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(min_subnormal)),
+    0x3f800000U,
+  )
+  assert_eq(to_bits_canonical(round_toward_negative(min_subnormal)), 0x0U)
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_min_subnormal)),
+    0xbf800000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_min_subnormal)),
+    0x80000000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(max_subnormal)),
+    0x3f800000U,
+  )
+  assert_eq(to_bits_canonical(round_toward_negative(max_subnormal)), 0x0U)
+  assert_eq(
+    to_bits_canonical(round_toward_negative(neg_max_subnormal)),
+    0xbf800000U,
+  )
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_max_subnormal)),
+    0x80000000U,
+  )
+
+  assert_eq(round_ties_even(1.5F), 2.0F)
+  assert_eq(round_ties_even(3.5F), 4.0F)
+  assert_eq(round_ties_even(-1.5F), -2.0F)
+  assert_eq(round_ties_even(-3.5F), -4.0F)
+  assert_eq(round_ties_away(1.5F), 2.0F)
+  assert_eq(round_ties_away(3.5F), 4.0F)
+  assert_eq(round_ties_away(-1.5F), -2.0F)
+  assert_eq(round_ties_away(-3.5F), -4.0F)
+
+  let below_one = Float::reinterpret_from_uint(0x3f7fffffU)
+  assert_eq(to_bits_canonical(round_ties_even(below_one)), 0x3f800000U)
+  let exponent_tie = Float::reinterpret_from_uint(0x4a800001U)
+  assert_eq(to_bits_canonical(round_ties_even(exponent_tie)), 0x4a800000U)
+  assert_eq(to_bits_canonical(round_ties_away(exponent_tie)), 0x4a800002U)
+  let boundary_tie = Float::reinterpret_from_uint(0x4affffffU)
+  assert_eq(to_bits_canonical(round_ties_even(boundary_tie)), 0x4b000000U)
+  assert_eq(to_bits_canonical(round_ties_away(boundary_tie)), 0x4b000000U)
+
+  let max_finite = Float::reinterpret_from_uint(0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_ties_even(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_ties_away(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_toward_zero(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_toward_positive(max_finite)), 0x7f7fffffU)
+  assert_eq(to_bits_canonical(round_toward_negative(max_finite)), 0x7f7fffffU)
+
+  let neg_max_finite = Float::reinterpret_from_uint(0xff7fffffU)
+  assert_eq(to_bits_canonical(round_ties_even(neg_max_finite)), 0xff7fffffU)
+  assert_eq(
+    to_bits_canonical(round_toward_positive(neg_max_finite)),
+    0xff7fffffU,
+  )
+
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0x7fc00000U)),
+    ),
+    0x7fc00000U,
+  )
+  assert_eq(
+    to_bits_canonical(
+      round_ties_even(Float::reinterpret_from_uint(0xffc00000U)),
+    ),
+    0x7fc00000U,
+  )
+}
+
 ///|
 test "sign involutions payload boundaries and canonicalization" {
   assert_eq(negate_bits(negate_bits(0x0U)), 0x0U)

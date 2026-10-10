@@ -3986,6 +3986,1476 @@ test "float offline oracles 19" {
 ///|
 test "float offline oracles 20" {
   emit_float_record(
+    "b64_round_ties_even_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_zero",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000001UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000001UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000001UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000001UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x0000000000000001UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000001UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000001UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000001UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000001UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_min_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x8000000000000001UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x000fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 21" {
+  emit_float_record(
+    "b64_round_ties_even_neg_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_max_subnormal",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x800fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7fefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x7fefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_max_finite",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xffefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xffefffffffffffffUL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4004000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x4000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4004000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x4008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4004000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x4000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4004000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x4008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4004000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x4000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc004000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0xc000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc004000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xc008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc004000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0xc000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc004000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0xc000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg2p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc004000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xc008000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 22" {
+  emit_float_record(
+    "b64_round_ties_even_1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3ff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x4000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3ff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x4000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3ff8000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3ff8000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x4000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3ff8000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x400c000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x4010000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x400c000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x4010000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x400c000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x4008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x400c000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x4010000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x400c000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x4008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0xc000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xc000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbff8000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbff8000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg1p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbff8000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xc000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc00c000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0xc010000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc00c000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xc010000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc00c000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0xc008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc00c000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0xc008000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg3p5",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xc00c000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xc010000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe0000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe0000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe0000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe0000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe0000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 23" {
+  emit_float_record(
+    "b64_round_ties_even_neg_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe0000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe0000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe0000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe0000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe0000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe8000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe8000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe8000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe8000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fe8000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe8000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe8000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe8000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe8000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_three_quarters",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfe8000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_below_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fdfffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_below_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fdfffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_below_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fdfffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_below_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fdfffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_below_half",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fdfffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_below_one",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fefffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_below_one",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fefffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_below_one",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_below_one",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x3ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_below_one",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x3fefffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 24" {
+  emit_float_record(
+    "b64_round_ties_even_exponent_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4320000000000001UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x4320000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_exponent_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4320000000000001UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x4320000000000002UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_exponent_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4320000000000001UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x4320000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_exponent_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4320000000000001UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x4320000000000002UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_exponent_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4320000000000001UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x4320000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_boundary_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x432fffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x4330000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_boundary_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x432fffffffffffffUL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x4330000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_boundary_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x432fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x432ffffffffffffeUL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_boundary_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x432fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x4330000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_boundary_tie",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x432fffffffffffffUL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x432ffffffffffffeUL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_fraction",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfd3333333333333UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_fraction",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfd3333333333333UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_fraction",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfd3333333333333UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_fraction",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfd3333333333333UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x8000000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_fraction",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xbfd3333333333333UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xbff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_large",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4330000000000001UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x4330000000000001UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_large",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4330000000000001UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x4330000000000001UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_large",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4330000000000001UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x4330000000000001UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_large",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4330000000000001UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x4330000000000001UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_large",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x4330000000000001UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x4330000000000001UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_snan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_snan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_snan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_snan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_snan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000001UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 25" {
+  emit_float_record(
+    "b64_round_ties_even_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff8000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_qnan",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff8000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x7ff8000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_pos_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_pos_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_pos_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_pos_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_pos_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0x7ff0000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0x7ff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_even_neg_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        @float.TiesToEven,
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_ties_away_neg_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        @float.TiesToAway,
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_zero_neg_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        @float.TowardZero,
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_positive_neg_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        @float.TowardPositive,
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
+    "b64_round_toward_negative_neg_inf",
+    @float.to_bits_canonical(
+      @float.round_to_integral(
+        0xfff0000000000000UL.reinterpret_as_double(),
+        @float.TowardNegative,
+      ),
+    ),
+    0xfff0000000000000UL,
+  )
+  emit_float_record(
     "b32_zero_plus_class",
     class_id(@binary32.classify_bits(0x00000000U)),
     0x0000000000000000UL,
@@ -4024,6 +5494,10 @@ test "float offline oracles 20" {
     },
     0x0000000000000001UL,
   )
+}
+
+///|
+test "float offline oracles 26" {
   emit_float_record(
     "b32_zero_plus_is_sign_minus_bits",
     if @binary32.is_sign_minus_bits(0x00000000U) {
@@ -4180,10 +5654,6 @@ test "float offline oracles 20" {
     class_id(@binary32.classify_bits(0x00000001U)),
     0x0000000000000002UL,
   )
-}
-
-///|
-test "float offline oracles 21" {
   emit_float_record(
     "b32_min_subnormal_plus_portable_class",
     class_id(
@@ -4227,6 +5697,10 @@ test "float offline oracles 21" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 27" {
   emit_float_record(
     "b32_min_subnormal_plus_is_subnormal_bits",
     if @binary32.is_subnormal_bits(0x00000001U) {
@@ -4381,10 +5855,6 @@ test "float offline oracles 21" {
     ),
     0x0000000000000002UL,
   )
-}
-
-///|
-test "float offline oracles 22" {
   emit_float_record(
     "b32_max_subnormal_plus_is_nan_bits",
     if @binary32.is_nan_bits(0x007fffffU) {
@@ -4430,6 +5900,10 @@ test "float offline oracles 22" {
     },
     0x0000000000000001UL,
   )
+}
+
+///|
+test "float offline oracles 28" {
   emit_float_record(
     "b32_max_subnormal_plus_is_finite_bits",
     if @binary32.is_finite_bits(0x007fffffU) {
@@ -4584,10 +6058,6 @@ test "float offline oracles 22" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 23" {
   emit_float_record(
     "b32_min_normal_plus_is_signaling_bits",
     if @binary32.is_signaling_bits(0x00800000U) {
@@ -4633,6 +6103,10 @@ test "float offline oracles 23" {
     },
     0x0000000000000001UL,
   )
+}
+
+///|
+test "float offline oracles 29" {
   emit_float_record(
     "b32_min_normal_plus_is_zero_bits",
     if @binary32.is_zero_bits(0x00800000U) {
@@ -4787,10 +6261,6 @@ test "float offline oracles 23" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 24" {
   emit_float_record(
     "b32_max_normal_plus_is_canonical_bits",
     if @binary32.is_canonical_bits(0x7f7fffffU) {
@@ -4836,6 +6306,10 @@ test "float offline oracles 24" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 30" {
   emit_float_record(
     "b32_max_normal_plus_negate_bits",
     @binary32.negate_bits(0x7f7fffffU).to_uint64() & 0xffffffffUL,
@@ -4990,10 +6464,6 @@ test "float offline oracles 24" {
     },
     0x0000000000000001UL,
   )
-}
-
-///|
-test "float offline oracles 25" {
   emit_float_record(
     "b32_infinity_plus_is_sign_minus_bits",
     if @binary32.is_sign_minus_bits(0x7f800000U) {
@@ -5035,6 +6505,10 @@ test "float offline oracles 25" {
     @binary32.negate_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
     0x00000000ff800000UL,
   )
+}
+
+///|
+test "float offline oracles 31" {
   emit_float_record(
     "b32_infinity_plus_abs_bits",
     @binary32.abs_bits(0x7f800000U).to_uint64() & 0xffffffffUL,
@@ -5193,10 +6667,6 @@ test "float offline oracles 25" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 26" {
   emit_float_record(
     "b32_snan_min_plus_is_subnormal_bits",
     if @binary32.is_subnormal_bits(0x7f800001U) {
@@ -5234,6 +6704,10 @@ test "float offline oracles 26" {
     @binary32.abs_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
     0x000000007f800001UL,
   )
+}
+
+///|
+test "float offline oracles 32" {
   emit_float_record(
     "b32_snan_min_plus_canonicalize_nan_bits",
     @binary32.canonicalize_nan_bits(0x7f800001U).to_uint64() & 0xffffffffUL,
@@ -5396,10 +6870,6 @@ test "float offline oracles 26" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 27" {
   emit_float_record(
     "b32_snan_max_plus_is_finite_bits",
     if @binary32.is_finite_bits(0x7fbfffffU) {
@@ -5433,6 +6903,10 @@ test "float offline oracles 27" {
     @binary32.canonicalize_nan_bits(0x7fbfffffU).to_uint64() & 0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 33" {
   emit_float_record(
     "b32_snan_max_plus_get_payload",
     match @binary32.get_payload_bits(0x7fbfffffU) {
@@ -5599,10 +7073,6 @@ test "float offline oracles 27" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 28" {
   emit_float_record(
     "b32_qnan_zero_plus_is_zero_bits",
     if @binary32.is_zero_bits(0x7fc00000U) {
@@ -5635,6 +7105,10 @@ test "float offline oracles 28" {
     },
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 34" {
   emit_float_record(
     "b32_qnan_zero_plus_portable_negate",
     @binary32.to_bits_canonical(
@@ -5802,10 +7276,6 @@ test "float offline oracles 28" {
     },
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 29" {
   emit_float_record(
     "b32_qnan_max_plus_negate_bits",
     @binary32.negate_bits(0x7fffffffU).to_uint64() & 0xffffffffUL,
@@ -5837,6 +7307,10 @@ test "float offline oracles 29" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 35" {
   emit_float_record(
     "b32_qnan_max_plus_portable_abs",
     @binary32.to_bits_canonical(
@@ -6001,10 +7475,6 @@ test "float offline oracles 29" {
     @binary32.negate_bits(0x80000000U).to_uint64() & 0xffffffffUL,
     0x0000000000000000UL,
   )
-}
-
-///|
-test "float offline oracles 30" {
   emit_float_record(
     "b32_zero_minus_abs_bits",
     @binary32.abs_bits(0x80000000U).to_uint64() & 0xffffffffUL,
@@ -6039,6 +7509,10 @@ test "float offline oracles 30" {
     0xffffffffUL,
     0x0000000000000000UL,
   )
+}
+
+///|
+test "float offline oracles 36" {
   emit_float_record(
     "b32_zero_minus_canonicalize_nan",
     @binary32.to_bits_canonical(
@@ -6200,10 +7674,6 @@ test "float offline oracles 30" {
     @binary32.abs_bits(0x80000001U).to_uint64() & 0xffffffffUL,
     0x0000000000000001UL,
   )
-}
-
-///|
-test "float offline oracles 31" {
   emit_float_record(
     "b32_min_subnormal_minus_canonicalize_nan_bits",
     @binary32.canonicalize_nan_bits(0x80000001U).to_uint64() & 0xffffffffUL,
@@ -6241,6 +7711,10 @@ test "float offline oracles 31" {
     0xffffffffUL,
     0x0000000080000001UL,
   )
+}
+
+///|
+test "float offline oracles 37" {
   emit_float_record(
     "b32_min_subnormal_minus_copy_raw_0",
     @binary32.copy_sign_bits(0x80000001U, 0x00000000U).to_uint64() &
@@ -6399,10 +7873,6 @@ test "float offline oracles 31" {
     @binary32.canonicalize_nan_bits(0x807fffffU).to_uint64() & 0xffffffffUL,
     0x00000000807fffffUL,
   )
-}
-
-///|
-test "float offline oracles 32" {
   emit_float_record(
     "b32_max_subnormal_minus_get_payload",
     match @binary32.get_payload_bits(0x807fffffU) {
@@ -6441,6 +7911,10 @@ test "float offline oracles 32" {
     0xffffffffUL,
     0x00000000007fffffUL,
   )
+}
+
+///|
+test "float offline oracles 38" {
   emit_float_record(
     "b32_max_subnormal_minus_copy_portable_0",
     @binary32.to_bits_canonical(
@@ -6601,10 +8075,6 @@ test "float offline oracles 32" {
     },
     0xffffffffffffffffUL,
   )
-}
-
-///|
-test "float offline oracles 33" {
   emit_float_record(
     "b32_min_normal_minus_portable_negate",
     @binary32.to_bits_canonical(
@@ -6646,6 +8116,10 @@ test "float offline oracles 33" {
     0xffffffffUL,
     0x0000000000800000UL,
   )
+}
+
+///|
+test "float offline oracles 39" {
   emit_float_record(
     "b32_min_normal_minus_copy_raw_80000000",
     @binary32.copy_sign_bits(0x80800000U, 0x80000000U).to_uint64() &
@@ -6803,10 +8277,6 @@ test "float offline oracles 33" {
     0xffffffffUL,
     0x000000007f7fffffUL,
   )
-}
-
-///|
-test "float offline oracles 34" {
   emit_float_record(
     "b32_max_normal_minus_portable_abs",
     @binary32.to_bits_canonical(
@@ -6846,6 +8316,10 @@ test "float offline oracles 34" {
     0xffffffffUL,
     0x00000000ff7fffffUL,
   )
+}
+
+///|
+test "float offline oracles 40" {
   emit_float_record(
     "b32_max_normal_minus_copy_portable_80000000",
     @binary32.to_bits_canonical(
@@ -7005,10 +8479,6 @@ test "float offline oracles 34" {
     0xffffffffUL,
     0x000000007f800000UL,
   )
-}
-
-///|
-test "float offline oracles 35" {
   emit_float_record(
     "b32_infinity_minus_canonicalize_nan",
     @binary32.to_bits_canonical(
@@ -7051,6 +8521,10 @@ test "float offline oracles 35" {
     0xffffffffUL,
     0x00000000ff800000UL,
   )
+}
+
+///|
+test "float offline oracles 41" {
   emit_float_record(
     "b32_infinity_minus_copy_raw_7fffffff",
     @binary32.copy_sign_bits(0xff800000U, 0x7fffffffU).to_uint64() &
@@ -7207,10 +8681,6 @@ test "float offline oracles 35" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 36" {
   emit_float_record(
     "b32_snan_min_minus_copy_raw_0",
     @binary32.copy_sign_bits(0xff800001U, 0x00000000U).to_uint64() &
@@ -7251,6 +8721,10 @@ test "float offline oracles 36" {
     0xffffffffUL,
     0x000000007f800001UL,
   )
+}
+
+///|
+test "float offline oracles 42" {
   emit_float_record(
     "b32_snan_min_minus_copy_portable_7fffffff",
     @binary32.to_bits_canonical(
@@ -7407,10 +8881,6 @@ test "float offline oracles 36" {
     0xffffffffUL,
     0x000000007fbfffffUL,
   )
-}
-
-///|
-test "float offline oracles 37" {
   emit_float_record(
     "b32_snan_max_minus_copy_portable_0",
     @binary32.to_bits_canonical(
@@ -7456,6 +8926,10 @@ test "float offline oracles 37" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 43" {
   emit_float_record(
     "b32_snan_max_minus_copy_raw_ffffffff",
     @binary32.copy_sign_bits(0xffbfffffU, 0xffffffffU).to_uint64() &
@@ -7612,10 +9086,6 @@ test "float offline oracles 37" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
-}
-
-///|
-test "float offline oracles 38" {
   emit_float_record(
     "b32_qnan_zero_minus_copy_raw_80000000",
     @binary32.copy_sign_bits(0xffc00000U, 0x80000000U).to_uint64() &
@@ -7656,6 +9126,10 @@ test "float offline oracles 38" {
     0xffffffffUL,
     0x00000000ffc00000UL,
   )
+}
+
+///|
+test "float offline oracles 44" {
   emit_float_record(
     "b32_qnan_zero_minus_copy_portable_ffffffff",
     @binary32.to_bits_canonical(
@@ -7812,10 +9286,6 @@ test "float offline oracles 38" {
     0xffffffffUL,
     0x00000000ffffffffUL,
   )
-}
-
-///|
-test "float offline oracles 39" {
   emit_float_record(
     "b32_qnan_max_minus_copy_portable_80000000",
     @binary32.to_bits_canonical(
@@ -7861,6 +9331,10 @@ test "float offline oracles 39" {
     0xffffffffUL,
     0x000000007fc00000UL,
   )
+}
+
+///|
+test "float offline oracles 45" {
   emit_float_record(
     "b32_set_payload_bits_0_0",
     match @binary32.set_payload_bits(0x00000000U, sign_minus=false) {
@@ -8020,5 +9494,1624 @@ test "float offline oracles 39" {
       None => 0xffffffffffffffffUL
     },
     0xffffffffffffffffUL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+}
+
+///|
+test "float offline oracles 46" {
+  emit_float_record(
+    "b32_round_ties_even_neg_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_zero",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000001U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000001U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000001U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000001U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x00000001U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000001U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000001U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000001U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000001U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_min_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x80000001U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x007fffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x007fffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x007fffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x007fffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x007fffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x807fffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x807fffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x807fffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x807fffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_max_subnormal",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x807fffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+}
+
+///|
+test "float offline oracles 47" {
+  emit_float_record(
+    "b32_round_ties_even_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f7fffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_max_finite",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff7fffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff7fffffUL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40200000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40200000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040400000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40200000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40200000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040400000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40200000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0200000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0200000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0400000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0200000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0200000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg2p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0200000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0400000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3fc00000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3fc00000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3fc00000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3fc00000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3fc00000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+}
+
+///|
+test "float offline oracles 48" {
+  emit_float_record(
+    "b32_round_ties_even_3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40600000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40600000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40600000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040400000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40600000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x40600000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000040400000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbfc00000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbfc00000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbfc00000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbfc00000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg1p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbfc00000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0600000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0600000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0600000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0400000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0600000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0400000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg3p5",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xc0600000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000c0800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f000000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f000000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f000000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f000000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f000000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf000000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf000000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf000000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf000000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf000000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+}
+
+///|
+test "float offline oracles 49" {
+  emit_float_record(
+    "b32_round_ties_even_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f400000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f400000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f400000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f400000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f400000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf400000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf400000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf400000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf400000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_three_quarters",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbf400000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_below_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3effffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_below_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3effffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_below_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3effffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_below_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3effffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_below_half",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3effffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_below_one",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f7fffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_below_one",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f7fffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_below_one",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f7fffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_below_one",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f7fffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000003f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_below_one",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x3f7fffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000000000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_exponent_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4a800001U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004a800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_exponent_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4a800001U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004a800002UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_exponent_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4a800001U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004a800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_exponent_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4a800001U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004a800002UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_exponent_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4a800001U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004a800000UL,
+  )
+}
+
+///|
+test "float offline oracles 50" {
+  emit_float_record(
+    "b32_round_ties_even_boundary_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4affffffU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_boundary_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4affffffU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_boundary_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4affffffU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004afffffeUL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_boundary_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4affffffU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_boundary_tie",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4affffffU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004afffffeUL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_fraction",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbe99999aU),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_fraction",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbe99999aU),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_fraction",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbe99999aU),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_fraction",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbe99999aU),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x0000000080000000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_fraction",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xbe99999aU),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000bf800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_large",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4b000001U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000001UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_large",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4b000001U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000001UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_large",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4b000001U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000001UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_large",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4b000001U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000001UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_large",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x4b000001U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000004b000001UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_snan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800001U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_snan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800001U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_snan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800001U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_snan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800001U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_snan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800001U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7fc00000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+}
+
+///|
+test "float offline oracles 51" {
+  emit_float_record(
+    "b32_round_ties_even_neg_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xffc00000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xffc00000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xffc00000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xffc00000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_qnan",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xffc00000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007fc00000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_pos_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_pos_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_pos_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_pos_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_pos_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0x7f800000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x000000007f800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_even_neg_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff800000U),
+        @float.TiesToEven,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_round_ties_away_neg_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff800000U),
+        @float.TiesToAway,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_zero_neg_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff800000U),
+        @float.TowardZero,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_positive_neg_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff800000U),
+        @float.TowardPositive,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
+  )
+  emit_float_record(
+    "b32_round_toward_negative_neg_inf",
+    @binary32.to_bits_canonical(
+      @binary32.round_to_integral(
+        Float::reinterpret_from_uint(0xff800000U),
+        @float.TowardNegative,
+      ),
+    ).to_uint64() &
+    0xffffffffUL,
+    0x00000000ff800000UL,
   )
 }

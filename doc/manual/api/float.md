@@ -16,6 +16,12 @@ Predicates have raw `*_bits` and portable numeric forms. `is_signaling_bits` ins
 
 `copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, preserving every other bit, including NaN payload and signaling state. Portable numeric `portable_copy_sign`, `portable_negate` and `portable_abs` canonicalize NaN; all non-NaN encodings, including infinities and signed zero, undergo exact sign transformations. A numeric NaN sign donor is treated conservatively rather than exposing its host sign.
 
+## Rounding to integral values
+
+`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum.
+
+The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29).
+
 ## Payload encoding adapters
 
 `get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly.

@@ -4,8 +4,9 @@
 
 Breaking rebuild: retain the luna-utils name, remove the 0.1.x public API and
 Luna-Flow/luna-generic dependency, and depend only on moonbitlang/core.
-The root public API is empty at this stage. Float representation packages are implemented by #25; other numeric packages
-remain planned; libm repository placement remains undecided.
+The root public API is empty at this stage. Float representation is available
+through #25, and round-to-integral directions are added by #24. Remaining
+numeric work is tracked in #19; #30 places libm in the `math` subpackage.
 
 | Removed API | Migration candidate |
 | --- | --- |
@@ -40,3 +41,5 @@ NaN sign/payload/signaling metadata; integer APIs preserve it. No exception
 flags or host payload round-trip guarantee is introduced.
 
 Review corrections for #25: every binary encoding is IEEE-canonical, including NaNs. NaN-normalized numeric sign and classification functions use `portable_*` names; raw integer operations retain IEEE encoding semantics. Independent offline integer oracles now cover both widths in the CI transcripts.
+
+Added: [#24](https://github.com/Luna-Flow/luna-utils/issues/24) adds all five IEEE 754-2019 §5.9 round-to-integral directions for binary64 and binary32, with shared `RoundingDirection` dispatch and an exact `Fraction` value oracle. sNaN invalid and inexact flag reporting remain scoped to [#29](https://github.com/Luna-Flow/luna-utils/issues/29).

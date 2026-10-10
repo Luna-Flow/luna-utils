@@ -8,8 +8,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: conf.json:summary
-msgid "Backend-independent numeric base for Luna-Flow; 0.2.0 provides float representation operations; other numeric packages remain planned."
-msgstr "Luna-Flow 的后端无关数值基础层；0.2.0 提供浮点表示操作，其余数值包仍在规划中。"
+msgid "Backend-independent numeric base for Luna-Flow; 0.2.0 provides float representation and round-to-integral operations; remaining numeric work is tracked in issue #19."
+msgstr "Luna-Flow 的后端无关数值基础层；0.2.0 提供浮点表示和整数舍入操作，其余数值工作由 issue #19 跟踪。"
 
 #: manual/api/array_utils.md:1
 msgid "Array API migration"
@@ -88,14 +88,26 @@ msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, p
 msgstr "`copy_sign_bits`、`negate_bits` 和 `abs_bits` 仅改变符号位，保留其他所有位，包括 NaN payload 与信令状态。可移植数值函数 `portable_copy_sign`、`portable_negate` 和 `portable_abs` 会规范化 NaN；非 NaN 编码（包括无穷和有符号零）接受精确符号变换。数值 NaN 作为符号来源时采用保守约定，不暴露主机符号。"
 
 #: manual/api/float.md:19
+msgid "Rounding to integral values"
+msgstr "舍入为整数值"
+
+#: manual/api/float.md:21
+msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
+msgstr "`RoundingDirection` 命名 IEEE 754-2019 §5.9 `roundToIntegral` 的五种方向：`TiesToEven`、`TiesToAway`、`TowardZero`、`TowardPositive` 和 `TowardNegative`。`round_to_integral(x, direction)` 及五个具名辅助函数（`round_ties_even`、`round_ties_away`、`round_toward_zero`、`round_toward_positive`、`round_toward_negative`）在相同二进制格式中返回整数值。binary32 包接受共享的父枚举。"
+
+#: manual/api/float.md:23
+msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgstr "实现直接根据符号、指数和尾数字段进行舍入。它保留零的两种符号和已经是整数的值；NaN 输入返回正号规范 quiet NaN，丢弃输入的符号和 payload；无穷保持不变。对 sNaN 输入不报告 invalid 异常，对非整数输入不报告 inexact 标志；这些报告留待 issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) 的状态标志 API 和 `_exact` 变体。"
+
+#: manual/api/float.md:25
 msgid "Payload encoding adapters"
 msgstr "Payload 编码适配器"
 
-#: manual/api/float.md:21
+#: manual/api/float.md:27
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` 对非 NaN 返回 `None`，对 NaN 返回不含 quiet 位的 `Some(payload)`。`set_payload_bits(payload, sign_minus?=false)` 返回 quiet NaN 编码；payload 超过 binary64 的 51 位或 binary32 的 22 位时返回 `None`。`set_payload_signaling_bits` 还拒绝零 payload，避免编码为无穷。这些函数接收和返回整数编码，是 IEEE 754-2019 §9.7 的适配器，并非直接公开标准的浮点 getPayload/setPayload 函数。"
 
-#: manual/api/float.md:23
+#: manual/api/float.md:29
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` 名称表示本应用的 NaN 规范化视图，不代表针对原始 NaN 的 IEEE 符号或分类操作。需要 IEEE 编码语义时，应使用 `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` 和原始符号操作。`is_canonical_bits` 判断 IEEE 规范编码，而非是否等于应用选定的固定 NaN 编码。"
 
@@ -104,16 +116,16 @@ msgid "Float conformance and limits"
 msgstr "浮点一致性与限制"
 
 #: manual/conformance/float.md:3
-msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
-msgstr "契约将精确整数编码与可移植数值观察分开。原始测试覆盖所有分类、有符号零、指数边界、NaN quiet 位、双符号、payload 位宽限制和 signaling 零拒绝。数值测试通过 `x != x` 检测 NaN，并比较规范整数输出，不依赖输入 NaN 元数据。"
+msgid "The contract separates exact integer encodings from portable numeric observations. Raw tests cover every classification, signed zero, exponent boundaries, NaN quiet bits, both signs, payload width limits and signaling-zero rejection. Rounding tests cover all five IEEE 754-2019 §5.9 directions, positive and negative ties, the predecessor of 0.5, negative zero, large integral values and infinities. Numeric tests use `x != x` for NaN and compare canonical integer output, never input NaN metadata."
+msgstr "契约将精确整数编码与可移植数值观察分开。原始测试覆盖所有分类、有符号零、指数边界、NaN quiet 位、双符号、payload 位宽限制和 signaling 零拒绝。舍入测试覆盖 IEEE 754-2019 §5.9 的全部五种方向、正负平局、0.5 的前驱、负零、大整数值和无穷。数值测试通过 `x != x` 检测 NaN，并比较规范整数输出，不依赖输入 NaN 元数据。"
 
 #: manual/conformance/float.md:5
 msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
 msgstr "四后端 debug/release 检查与精确 transcript 比较遵循 [CI 契约](../testing.md)。本地结果无法确定 Linux GCC 行为，必须由 CI 确认。测试是回归证据，不是对全部 IEEE 754 行为的证明。本项目不提供 Lean/mathlib 形式证明。"
 
 #: manual/conformance/float.md:7
-msgid "Exception flags, FMA, conversions, IEEE extrema, rounding, stable hashing, formatting, bigint and libm remain separate issues. Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
-msgstr "异常标志、FMA、转换、IEEE 最值、舍入、稳定哈希、格式化、bigint 和 libm 仍是独立 issue。规范化属于应用表示策略，并不承诺主机浮点往返保留 payload。"
+msgid "Exception flags, FMA, conversions, IEEE extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgstr "异常标志、FMA、转换、IEEE 最值、稳定哈希、格式化、bigint 和 libm 仍是独立 issue。舍入的精确 inexact 标志报告等待 [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)。规范化属于应用表示策略，并不承诺主机浮点往返保留 payload。"
 
 #: manual/contributing.md:1
 msgid "Contribution guidelines"
@@ -408,6 +420,10 @@ msgstr "原始整数编码精确保留 NaN 符号、信令状态和 payload。�
 msgid "IEEE 754-2019 §§5.7.2, 5.5.1 and 9.7 motivate classification, sign and payload operations; §6.2 does not require identical NaN payload propagation across hosts. This package makes its canonical encoding policy explicit. It does not raise IEEE exception flags or preserve numeric signaling NaNs. Current MoonBit core 0.10.14+7d59c7ec9 and official [language documentation](https://docs.moonbitlang.com/en/latest/) provide implementation evidence, not a formal verification claim."
 msgstr "分类、符号和 payload 操作依据 IEEE 754-2019 §§5.7.2、5.5.1 和 9.7；§6.2 不要求主机之间传播完全一致的 NaN payload。本包明确规定自身的规范编码策略，不设置 IEEE 异常标志，也不保留数值 signaling NaN。当前 MoonBit core 0.10.14+7d59c7ec9 及官方[语言文档](https://docs.moonbitlang.com/en/latest/)提供实现证据，不构成形式验证声明。"
 
+#: manual/design/float.md:11
+msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same integer fields. For a finite non-integral value, discarded fraction bits determine the nearest tie rule or directed step; values below one use the signed zero encoding or the adjacent signed one encoding for directed rounding. NaNs are quieted to positive canonical NaN, dropping the input sign and payload. The API does not report the invalid exception for sNaN input or inexact for non-integral input; both are deferred to the `_exact` variant and status-flag work in [#29](https://github.com/Luna-Flow/luna-utils/issues/29). Infinities pass through unchanged."
+msgstr "整数舍入操作使用相同的整数字段实现 IEEE 754-2019 §5.9。对有限非整数值，丢弃的小数位决定最近舍入的平局规则或定向步进；绝对值小于一的值在定向舍入时使用带符号零或相邻的带符号一编码。NaN 会静默为正号规范 NaN，并丢弃输入符号和 payload。API 不报告 sNaN 输入的 invalid 异常，也不报告非整数输入的 inexact；两者留待 issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) 的状态标志工作和 `_exact` 变体。无穷保持不变。"
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr "luna-utils"
@@ -417,8 +433,8 @@ msgid "Version 0.2.0 is a breaking rebuild of the numeric base for Luna-Flow. Th
 msgstr "0.2.0 是 Luna-Flow 数值基础层的不兼容重建。模块仅依赖 `moonbitlang/core`，旧数组与比较 API 已删除。在此迁移阶段，根包不导出函数、类型或 trait。"
 
 #: manual/index.md:5
-msgid "The backend-independent numeric packages are planned in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Integer arithmetic, conversions, IEEE extrema, rounding, stable hash, text, bigint, software FMA and libm remain planned; #25 adds float classification and representation operations. The placement of libm remains undecided."
-msgstr "后端无关数值包规划见[跟踪 issue #19](https://github.com/Luna-Flow/luna-utils/issues/19)。整数算术、转换、IEEE 最值、舍入、稳定哈希、文本、bigint、软件 FMA 与 libm 仍在规划中；#25 添加浮点分类和表示操作。libm 的仓库归属仍未决定。"
+msgid "The numeric package roadmap is tracked in [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19). Float representation APIs are available through [#25](https://github.com/Luna-Flow/luna-utils/issues/25), and this checkout adds round-to-integral directions through [#24](https://github.com/Luna-Flow/luna-utils/issues/24). Other planned work includes integer arithmetic, conversions, IEEE extrema, stable hash, text, bigint and software FMA. The decided location for libm is the `math` subpackage ([#30](https://github.com/Luna-Flow/luna-utils/issues/30))."
+msgstr "数值包路线图由 [issue #19](https://github.com/Luna-Flow/luna-utils/issues/19) 跟踪。浮点表示 API 已由 [#25](https://github.com/Luna-Flow/luna-utils/issues/25) 提供；此工作树通过 [#24](https://github.com/Luna-Flow/luna-utils/issues/24) 添加整数舍入方向。其他规划工作包括整数算术、转换、IEEE 极值、稳定哈希、文本、bigint 和软件 FMA。libm 已确定放在 `math` 子包中（[#30](https://github.com/Luna-Flow/luna-utils/issues/30)）。"
 
 #: manual/index.md:7
 msgid "The generated interface [pkg.generated.mbti](../../src/pkg.generated.mbti) is the public-name authority for this checkout. Published Mooncakes documentation may still describe an older release. Source filenames are not MoonBit package boundaries."
@@ -465,8 +481,8 @@ msgid "Sources: [official MoonBit native package options](https://docs.moonbitla
 msgstr "来源：[MoonBit 官方原生包选项](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options)、[MoonBit 收缩报告 #2262](https://github.com/moonbitlang/moon/issues/2262) 和 [Python 数值转换文档](https://docs.python.org/3/library/functions.html#float)。"
 
 #: manual/testing.md:15
-msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies independent expectations for both widths, all classes and signs, payload boundaries and portable numeric results. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
-msgstr "`tools/generate_oracles.py` 调用 `tools/float_oracles.py` 生成 #25 表示语料。Python 任意精度整数字段提取为两个精度、全部分类和符号、payload 边界及可移植数值结果提供独立预期值。生成测试通过 `LUNA_BITS` 输出实际结果：binary32 零扩展为 64 位，分类使用文档化的测试专用编号，`None` 编码为全一。入库的 JSON 记录包含输入、调用和预期输出。"
+msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies expectations for both widths, all classes and signs, payload boundaries and portable numeric results. For #24 round-to-integral directions, an independent model decodes finite encodings to exact `fractions.Fraction` values, applies floor, ceiling, truncation or the specified tie rule, and re-encodes the integral result while preserving the sign of zero. It does not reproduce the implementation's exponent-mask algorithm. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
+msgstr "#25 表示语料由 `tools/generate_oracles.py` 调用 `tools/float_oracles.py` 生成。Python 任意精度整数字段提取为两种精度、全部分类和符号、payload 边界及可移植数值结果提供预期值。对于 #24 的整数舍入方向，独立模型将有限编码解码为精确的 `fractions.Fraction` 值，按 floor、ceiling、truncation 或指定的平局规则计算，再重新编码整数结果并保留零的符号。它不复刻实现中的指数掩码算法。生成测试通过 `LUNA_BITS` 输出实际结果：binary32 零扩展为 64 位，分类使用文档化的测试专用编号，`None` 编码为全一。入库 JSON 记录包含输入、调用和预期输出。"
 
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
@@ -500,7 +516,7 @@ msgstr "浮点表示教程"
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr "在 moon.pkg 中将 `Luna-Flow/luna-utils/float` 导入为 `f64`，将 `Luna-Flow/luna-utils/float/binary32` 导入为 `f32`。将 signaling NaN 保留为整数，并在数值序列化边界进行规范化。"
 
-#: manual/tutorial/float.md:15
+#: manual/tutorial/float.md:21
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "使用原始 payload setter 构造编码，检查 `None`；payload 保真度重要时，不要将结果通过 Double 或 Float 转换。规范数值函数有意丢弃 NaN 元数据。参见 [API](../api/float.md)和[一致性限制](../conformance/float.md)。"
 

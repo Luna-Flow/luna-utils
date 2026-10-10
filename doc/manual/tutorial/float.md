@@ -10,6 +10,12 @@ assert_eq(@f64.to_bits_canonical(0.0 / 0.0), 0x7ff8000000000000UL)
 assert_eq(@f32.canonicalize_nan_bits(0xff800001U), 0x7fc00000U)
 assert_eq(@f32.negate_bits(0U), 0x80000000U)
 assert_eq(@f64.radix(), 2)
+assert_eq(@f64.round_ties_even(2.5), 2.0)
+assert_eq(@f64.round_ties_away(-2.5), -3.0)
+assert_eq(
+  @f32.round_to_integral(2.5F, @f64.TowardPositive),
+  3.0F,
+)
 ```
 
 Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md).

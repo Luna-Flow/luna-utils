@@ -1,6 +1,6 @@
 {
   "title": "luna-utils",
-  "summary": "Backend-independent numeric base for Luna-Flow; 0.2.0 provides float representation operations; other numeric packages remain planned.",
+  "summary": "Backend-independent numeric base for Luna-Flow; 0.2.0 provides float representation and round-to-integral operations; remaining numeric work is tracked in issue #19.",
   "locales": [
     "zh_CN",
     "ja_JP"
