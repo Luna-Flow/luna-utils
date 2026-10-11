@@ -1,12 +1,16 @@
 # luna-utils
 
 Version 0.2.0 rebuilds the backend-independent numeric base for Luna-Flow.
-It depends only on [moonbitlang/core](https://github.com/moonbitlang/core).
+It depends only on [moonbitlang/core](https://github.com/moonbitlang/core) and
+now includes binary64 and binary32 IEEE 754 representation, round-to-integral,
+extrema and ordering APIs.
 This migration removes all 0.1.x array/comparison helpers: the root package
 currently exports no functions, types or traits. The float and float/binary32 subpackages provide classification, NaN
 canonicalization and exact integer bit operations (#25). Other numeric packages
-in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19) remain planned;
-this release boundary does not claim implemented IEEE 754 or integer conformance.
+in [tracking issue #19](https://github.com/Luna-Flow/luna-utils/issues/19) remain planned.
+The current float APIs cover representation and selected IEEE 754 operations;
+remaining extrema variants, comparison predicates, integer arithmetic and
+exception-status behavior are still tracked in the linked issues.
 
 ## Migration and documentation
 
