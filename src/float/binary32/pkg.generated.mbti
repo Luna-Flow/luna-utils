@@ -38,6 +38,10 @@ pub fn is_zero(Float) -> Bool
 
 pub fn is_zero_bits(UInt) -> Bool
 
+pub fn maximum(Float, Float) -> Float
+
+pub fn minimum(Float, Float) -> Float
+
 pub fn negate_bits(UInt) -> UInt
 
 pub fn portable_abs(Float) -> Float
@@ -53,6 +57,8 @@ pub fn portable_is_sign_minus(Float) -> Bool
 pub fn portable_is_signaling(Float) -> Bool
 
 pub fn portable_negate(Float) -> Float
+
+pub fn portable_total_order(Float, Float) -> Bool
 
 pub fn radix() -> Int
 
@@ -72,7 +78,13 @@ pub fn set_payload_bits(UInt, sign_minus? : Bool) -> UInt?
 
 pub fn set_payload_signaling_bits(UInt, sign_minus? : Bool) -> UInt?
 
+pub fn sort_total_order(Array[Float]) -> Unit
+
+pub fn sort_total_order_view(MutArrayView[Float]) -> Unit
+
 pub fn to_bits_canonical(Float) -> UInt
+
+pub fn total_order_bits(UInt, UInt) -> Bool
 
 // Errors
 

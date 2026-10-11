@@ -469,3 +469,117 @@ test "portable sign operations cover finite boundaries and infinities" {
     0xff800000U,
   )
 }
+
+///|
+// IEEE 754-2019 §9.6: minimum/maximum propagate NaN and select -0/+0
+// independently of argument order.
+test "minimum and maximum use IEEE edge ordering" {
+  assert_eq(to_bits_canonical(minimum(0.0, -0.0)), 0x80000000U)
+  assert_eq(to_bits_canonical(minimum(-0.0, 0.0)), 0x80000000U)
+  assert_eq(to_bits_canonical(maximum(-0.0, 0.0)), 0U)
+  assert_eq(to_bits_canonical(maximum(0.0, -0.0)), 0U)
+  let nan = Float::reinterpret_from_uint(0x7f800042U)
+  assert_eq(minimum(1.0, nan).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(minimum(nan, 1.0).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(maximum(1.0, nan).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(maximum(nan, 1.0).reinterpret_as_uint(), 0x7fc00000U)
+  assert_eq(minimum(-1.0, 1.0), -1.0)
+  assert_eq(maximum(-1.0, 1.0), 1.0)
+}
+
+///|
+// IEEE 754-2019 §5.10 raw totalOrder, including reversed negative NaN order.
+test "total order compares raw encodings and portable values" {
+  let ordered = [
+    0xffff8002U, 0xffff8001U, 0xff800002U, 0xff800001U, 0xff800000U, 0x80000000U,
+    0x00000000U, 0x7f800000U, 0x7f800001U, 0x7f800002U, 0x7fc00000U, 0x7fc00001U,
+  ]
+  for i in 0..<ordered.length() {
+    assert_true(total_order_bits(ordered[i], ordered[i]))
+    if i + 1 < ordered.length() {
+      assert_true(total_order_bits(ordered[i], ordered[i + 1]))
+      assert_false(total_order_bits(ordered[i + 1], ordered[i]))
+    }
+  }
+  assert_true(portable_total_order(-0.0, 0.0))
+  assert_false(portable_total_order(0.0, -0.0))
+  let nan = Float::reinterpret_from_uint(0x7f800042U)
+  assert_true(portable_total_order(1.0, nan))
+  assert_true(portable_total_order(nan, nan))
+}
+
+///|
+test "sort total order sorts arrays and mutable views" {
+  let values = [
+    Float::reinterpret_from_uint(0x7f800001U),
+    1.0,
+    0.0,
+    -0.0,
+    -1.0,
+    Float::reinterpret_from_uint(0xff800000U),
+    Float::reinterpret_from_uint(0x7f800000U),
+  ]
+  sort_total_order(values)
+  assert_eq(to_bits_canonical(values[0]), 0xff800000U)
+  assert_eq(to_bits_canonical(values[1]), 0xbf800000U)
+  assert_eq(to_bits_canonical(values[2]), 0x80000000U)
+  assert_eq(to_bits_canonical(values[3]), 0U)
+  assert_eq(to_bits_canonical(values[4]), 0x3f800000U)
+  assert_eq(to_bits_canonical(values[5]), 0x7f800000U)
+  assert_eq(to_bits_canonical(values[6]), 0x7fc00000U)
+  let duplicate_values : Array[Float] = [
+    Float::reinterpret_from_uint(0x7fc00002U),
+    Float::reinterpret_from_uint(0xffc00001U),
+    0.0,
+    -0.0,
+    2.0,
+    2.0,
+  ]
+  sort_total_order(duplicate_values)
+  assert_eq(duplicate_values[0].reinterpret_as_uint(), 0x80000000U)
+  assert_eq(duplicate_values[1].reinterpret_as_uint(), 0U)
+  assert_eq(duplicate_values[2].reinterpret_as_uint(), 0x40000000U)
+  assert_eq(duplicate_values[3].reinterpret_as_uint(), 0x40000000U)
+  assert_true(is_nan_bits(duplicate_values[4].reinterpret_as_uint()))
+  assert_true(is_nan_bits(duplicate_values[5].reinterpret_as_uint()))
+  let probe_values : Array[Float] = [
+    Float::reinterpret_from_uint(0xffc00001U),
+    -2.0,
+    1.0,
+    Float::reinterpret_from_uint(0x7fc00002U),
+    -1.0,
+    2.0,
+    -0.0,
+    0.0,
+    -1.0,
+    2.0,
+    -2.0,
+    1.0,
+    Float::reinterpret_from_uint(0x7f800000U),
+    Float::reinterpret_from_uint(0xff800000U),
+    3.0,
+    -3.0,
+    4.0,
+    -4.0,
+    5.0,
+    -5.0,
+    6.0,
+    -6.0,
+  ]
+  sort_total_order(probe_values)
+  let first_nan = probe_values.length() - 2
+  for i in 0..<first_nan {
+    assert_false(is_nan_bits(probe_values[i].reinterpret_as_uint()))
+    assert_true(
+      total_order_bits(
+        probe_values[i].reinterpret_as_uint(),
+        probe_values[i + 1].reinterpret_as_uint(),
+      ),
+    )
+  }
+  assert_true(is_nan_bits(probe_values[first_nan].reinterpret_as_uint()))
+  assert_true(is_nan_bits(probe_values[first_nan + 1].reinterpret_as_uint()))
+  let view_values : Array[Float] = [3.0, -2.0, 1.0]
+  sort_total_order_view(view_values.mut_view())
+  assert_eq(view_values, [-2.0, 1.0, 3.0])
+}

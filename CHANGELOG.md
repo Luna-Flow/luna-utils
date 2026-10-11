@@ -43,3 +43,5 @@ flags or host payload round-trip guarantee is introduced.
 Review corrections for #25: every binary encoding is IEEE-canonical, including NaNs. NaN-normalized numeric sign and classification functions use `portable_*` names; raw integer operations retain IEEE encoding semantics. Independent offline integer oracles now cover both widths in the CI transcripts.
 
 Added: [#24](https://github.com/Luna-Flow/luna-utils/issues/24) adds all five IEEE 754-2019 §5.9 round-to-integral directions for binary64 and binary32, with shared `RoundingDirection` dispatch and an exact `Fraction` value oracle. sNaN invalid and inexact flag reporting remain scoped to [#29](https://github.com/Luna-Flow/luna-utils/issues/29).
+
+Added: [#23](https://github.com/Luna-Flow/luna-utils/issues/23) adds IEEE 754-2019 §9.6 `minimum`/`maximum`, §5.10 raw-bit `total_order_bits` and portable-value `portable_total_order`, and total-order sorting for arrays and mutable views in binary64 and binary32. Numeric NaNs follow the canonical representation policy; raw bit ordering preserves their sign, signaling state and payload.

@@ -17,4 +17,4 @@ Choose an explicit additive identity and supported element operations. Core does
 
 The legacy extrema and `same`/`map_same` panicked on empty arrays. Core iterator extrema return `None`; `all` returns `true`. For `same`, choose the first element only after handling the empty case. Mapping followed by `all` preserves eager mapping; putting `f` inside `all` short-circuits and may change effects or exceptions.
 
-Core extrema use `Compare`; they are not the planned IEEE 754 minimum/maximum of #23. Review NaN, signed zero and equal-element selection separately. `Double::abs` also clears the sign of negative zero, whereas the legacy comparison-based absolute value retained it.
+Core extrema use `Compare`; they do not provide the remaining IEEE 754 extrema variants in #23. The implemented `float.minimum` and `float.maximum` APIs have explicit NaN and signed-zero semantics. Review equal-element selection separately. `Double::abs` also clears the sign of negative zero, whereas the legacy comparison-based absolute value retained it.

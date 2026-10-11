@@ -38,6 +38,10 @@ pub fn is_zero(Double) -> Bool
 
 pub fn is_zero_bits(UInt64) -> Bool
 
+pub fn maximum(Double, Double) -> Double
+
+pub fn minimum(Double, Double) -> Double
+
 pub fn negate_bits(UInt64) -> UInt64
 
 pub fn portable_abs(Double) -> Double
@@ -53,6 +57,8 @@ pub fn portable_is_sign_minus(Double) -> Bool
 pub fn portable_is_signaling(Double) -> Bool
 
 pub fn portable_negate(Double) -> Double
+
+pub fn portable_total_order(Double, Double) -> Bool
 
 pub fn radix() -> Int
 
@@ -72,7 +78,13 @@ pub fn set_payload_bits(UInt64, sign_minus? : Bool) -> UInt64?
 
 pub fn set_payload_signaling_bits(UInt64, sign_minus? : Bool) -> UInt64?
 
+pub fn sort_total_order(Array[Double]) -> Unit
+
+pub fn sort_total_order_view(MutArrayView[Double]) -> Unit
+
 pub fn to_bits_canonical(Double) -> UInt64
+
+pub fn total_order_bits(UInt64, UInt64) -> Bool
 
 // Errors
 
