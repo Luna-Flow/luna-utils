@@ -225,10 +225,12 @@ def generate_float_cases():
             sign_unit | (exponent_limit - 1) * fraction_unit + fraction_unit - 1,
             sign_unit | 1,
             sign_unit | fraction_unit,
+            sign_unit | (fraction_unit - 1),
             sign_unit,
             0,
             1,
             (0x3ff0000000000000 if width == 64 else 0x3f800000),
+            (0xbff0000000000000 if width == 64 else 0xbf800000),
             fraction_unit,
             (exponent_limit - 1) * fraction_unit + fraction_unit - 1,
             exponent_limit * fraction_unit,
@@ -236,6 +238,8 @@ def generate_float_cases():
             exponent_limit * fraction_unit | 2,
             exponent_limit * fraction_unit | quiet_unit,
             exponent_limit * fraction_unit | quiet_unit | 1,
+            exponent_limit * fraction_unit | quiet_unit | 2,
+            sign_unit | exponent_limit * fraction_unit | quiet_unit,
         ]
 
         def order_key(n):

@@ -527,6 +527,21 @@ test "sort total order sorts arrays and mutable views" {
   assert_eq(to_bits_canonical(values[4]), 0x3f800000U)
   assert_eq(to_bits_canonical(values[5]), 0x7f800000U)
   assert_eq(to_bits_canonical(values[6]), 0x7fc00000U)
+  let duplicate_values : Array[Float] = [
+    Float::reinterpret_from_uint(0x7fc00002U),
+    Float::reinterpret_from_uint(0xffc00001U),
+    0.0,
+    -0.0,
+    2.0,
+    2.0,
+  ]
+  sort_total_order(duplicate_values)
+  assert_eq(duplicate_values[0].reinterpret_as_uint(), 0x80000000U)
+  assert_eq(duplicate_values[1].reinterpret_as_uint(), 0U)
+  assert_eq(duplicate_values[2].reinterpret_as_uint(), 0x40000000U)
+  assert_eq(duplicate_values[3].reinterpret_as_uint(), 0x40000000U)
+  assert_true(is_nan_bits(duplicate_values[4].reinterpret_as_uint()))
+  assert_true(is_nan_bits(duplicate_values[5].reinterpret_as_uint()))
   let view_values : Array[Float] = [3.0, -2.0, 1.0]
   sort_total_order_view(view_values.mut_view())
   assert_eq(view_values, [-2.0, 1.0, 3.0])

@@ -22,7 +22,9 @@ assert_true(@f64.portable_total_order(-0.0, 0.0))
 assert_true(@f64.total_order_bits(0xfff0000000000001UL, 0xfff0000000000000UL))
 let values = [3.0, -0.0, 0.0, -2.0]
 @f64.sort_total_order(values)
-assert_eq(values, [-2.0, -0.0, 0.0, 3.0])
+assert_eq(values.map(fn(x) { x.reinterpret_as_uint64() }), [
+  0xc000000000000000UL, 0x8000000000000000UL, 0UL, 0x4008000000000000UL,
+])
 ```
 
 Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md).
