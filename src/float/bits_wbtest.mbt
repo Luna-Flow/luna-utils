@@ -668,6 +668,43 @@ test "sort total order sorts arrays and mutable views" {
   assert_eq(duplicate_values[3].reinterpret_as_uint64(), 0x4000000000000000UL)
   assert_true(is_nan_bits(duplicate_values[4].reinterpret_as_uint64()))
   assert_true(is_nan_bits(duplicate_values[5].reinterpret_as_uint64()))
+  let probe_values = [
+    0xfff8000000000001UL.reinterpret_as_double(),
+    -2.0,
+    1.0,
+    0x7ff8000000000002UL.reinterpret_as_double(),
+    -1.0,
+    2.0,
+    -0.0,
+    0.0,
+    -1.0,
+    2.0,
+    -2.0,
+    1.0,
+    0x7ff0000000000000UL.reinterpret_as_double(),
+    0xfff0000000000000UL.reinterpret_as_double(),
+    3.0,
+    -3.0,
+    4.0,
+    -4.0,
+    5.0,
+    -5.0,
+    6.0,
+    -6.0,
+  ]
+  sort_total_order(probe_values)
+  let first_nan = probe_values.length() - 2
+  for i in 0..<first_nan {
+    assert_false(is_nan_bits(probe_values[i].reinterpret_as_uint64()))
+    assert_true(
+      total_order_bits(
+        probe_values[i].reinterpret_as_uint64(),
+        probe_values[i + 1].reinterpret_as_uint64(),
+      ),
+    )
+  }
+  assert_true(is_nan_bits(probe_values[first_nan].reinterpret_as_uint64()))
+  assert_true(is_nan_bits(probe_values[first_nan + 1].reinterpret_as_uint64()))
   let view_values = [3.0, -2.0, 1.0]
   sort_total_order_view(view_values.mut_view())
   assert_eq(view_values, [-2.0, 1.0, 3.0])

@@ -5774,6 +5774,42 @@
       "bits": "7ff8000000000000"
     },
     {
+      "id": "b64_total_order_bits_fff8000000000002_fffffffffffff",
+      "inputs": [
+        "18444492273895866370",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xfff8000000000002UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fff8000000000002_fffffffffffff",
+      "inputs": [
+        "18444492273895866370",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xfff8000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fff8000000000002_fffffffffffff",
+      "inputs": [
+        "18444492273895866370",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xfff8000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fff8000000000002_fffffffffffff",
+      "inputs": [
+        "18444492273895866370",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xfff8000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
       "id": "b64_total_order_bits_fff8000000000002_3ff0000000000000",
       "inputs": [
         "18444492273895866370",
@@ -6599,6 +6635,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0xfff8000000000001UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fff8000000000001_fffffffffffff",
+      "inputs": [
+        "18444492273895866369",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xfff8000000000001UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fff8000000000001_fffffffffffff",
+      "inputs": [
+        "18444492273895866369",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xfff8000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fff8000000000001_fffffffffffff",
+      "inputs": [
+        "18444492273895866369",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xfff8000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fff8000000000001_fffffffffffff",
+      "inputs": [
+        "18444492273895866369",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xfff8000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "7ff8000000000000"
     },
     {
@@ -7430,6 +7502,42 @@
       "bits": "7ff8000000000000"
     },
     {
+      "id": "b64_total_order_bits_fff0000000000002_fffffffffffff",
+      "inputs": [
+        "18442240474082181122",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xfff0000000000002UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fff0000000000002_fffffffffffff",
+      "inputs": [
+        "18442240474082181122",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xfff0000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fff0000000000002_fffffffffffff",
+      "inputs": [
+        "18442240474082181122",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xfff0000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fff0000000000002_fffffffffffff",
+      "inputs": [
+        "18442240474082181122",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xfff0000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
       "id": "b64_total_order_bits_fff0000000000002_3ff0000000000000",
       "inputs": [
         "18442240474082181122",
@@ -8255,6 +8363,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0xfff0000000000001UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fff0000000000001_fffffffffffff",
+      "inputs": [
+        "18442240474082181121",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xfff0000000000001UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fff0000000000001_fffffffffffff",
+      "inputs": [
+        "18442240474082181121",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xfff0000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fff0000000000001_fffffffffffff",
+      "inputs": [
+        "18442240474082181121",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xfff0000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fff0000000000001_fffffffffffff",
+      "inputs": [
+        "18442240474082181121",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xfff0000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "7ff8000000000000"
     },
     {
@@ -9086,6 +9230,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b64_total_order_bits_fff0000000000000_fffffffffffff",
+      "inputs": [
+        "18442240474082181120",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xfff0000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fff0000000000000_fffffffffffff",
+      "inputs": [
+        "18442240474082181120",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xfff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fff0000000000000_fffffffffffff",
+      "inputs": [
+        "18442240474082181120",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xfff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "fff0000000000000"
+    },
+    {
+      "id": "b64_maximum_fff0000000000000_fffffffffffff",
+      "inputs": [
+        "18442240474082181120",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xfff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_fff0000000000000_3ff0000000000000",
       "inputs": [
         "18442240474082181120",
@@ -9912,6 +10092,42 @@
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0xffefffffffffffffUL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
       "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_bits_ffefffffffffffff_fffffffffffff",
+      "inputs": [
+        "18442240474082181119",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xffefffffffffffffUL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_ffefffffffffffff_fffffffffffff",
+      "inputs": [
+        "18442240474082181119",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xffefffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_ffefffffffffffff_fffffffffffff",
+      "inputs": [
+        "18442240474082181119",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xffefffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "id": "b64_maximum_ffefffffffffffff_fffffffffffff",
+      "inputs": [
+        "18442240474082181119",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xffefffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
     },
     {
       "id": "b64_total_order_bits_ffefffffffffffff_3ff0000000000000",
@@ -10742,6 +10958,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b64_total_order_bits_8000000000000001_fffffffffffff",
+      "inputs": [
+        "9223372036854775809",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x8000000000000001UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_8000000000000001_fffffffffffff",
+      "inputs": [
+        "9223372036854775809",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x8000000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_8000000000000001_fffffffffffff",
+      "inputs": [
+        "9223372036854775809",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x8000000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "8000000000000001"
+    },
+    {
+      "id": "b64_maximum_8000000000000001_fffffffffffff",
+      "inputs": [
+        "9223372036854775809",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x8000000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_8000000000000001_3ff0000000000000",
       "inputs": [
         "9223372036854775809",
@@ -11568,6 +11820,42 @@
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x8010000000000000UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
       "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_bits_8010000000000000_fffffffffffff",
+      "inputs": [
+        "9227875636482146304",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x8010000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_8010000000000000_fffffffffffff",
+      "inputs": [
+        "9227875636482146304",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x8010000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_8010000000000000_fffffffffffff",
+      "inputs": [
+        "9227875636482146304",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x8010000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "8010000000000000"
+    },
+    {
+      "id": "b64_maximum_8010000000000000_fffffffffffff",
+      "inputs": [
+        "9227875636482146304",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x8010000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
     },
     {
       "id": "b64_total_order_bits_8010000000000000_3ff0000000000000",
@@ -12398,6 +12686,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b64_total_order_bits_800fffffffffffff_fffffffffffff",
+      "inputs": [
+        "9227875636482146303",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x800fffffffffffffUL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_800fffffffffffff_fffffffffffff",
+      "inputs": [
+        "9227875636482146303",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x800fffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_800fffffffffffff_fffffffffffff",
+      "inputs": [
+        "9227875636482146303",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x800fffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "800fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_800fffffffffffff_fffffffffffff",
+      "inputs": [
+        "9227875636482146303",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x800fffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_800fffffffffffff_3ff0000000000000",
       "inputs": [
         "9227875636482146303",
@@ -13224,6 +13548,42 @@
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x8000000000000000UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
       "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_bits_8000000000000000_fffffffffffff",
+      "inputs": [
+        "9223372036854775808",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x8000000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_8000000000000000_fffffffffffff",
+      "inputs": [
+        "9223372036854775808",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x8000000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_8000000000000000_fffffffffffff",
+      "inputs": [
+        "9223372036854775808",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x8000000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_maximum_8000000000000000_fffffffffffff",
+      "inputs": [
+        "9223372036854775808",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x8000000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
     },
     {
       "id": "b64_total_order_bits_8000000000000000_3ff0000000000000",
@@ -14054,6 +14414,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b64_total_order_bits_0_fffffffffffff",
+      "inputs": [
+        "0",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x0000000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_0_fffffffffffff",
+      "inputs": [
+        "0",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x0000000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_0_fffffffffffff",
+      "inputs": [
+        "0",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x0000000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_maximum_0_fffffffffffff",
+      "inputs": [
+        "0",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x0000000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_0_3ff0000000000000",
       "inputs": [
         "0",
@@ -14882,6 +15278,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b64_total_order_bits_1_fffffffffffff",
+      "inputs": [
+        "1",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x0000000000000001UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_1_fffffffffffff",
+      "inputs": [
+        "1",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x0000000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_1_fffffffffffff",
+      "inputs": [
+        "1",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x0000000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_maximum_1_fffffffffffff",
+      "inputs": [
+        "1",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x0000000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_1_3ff0000000000000",
       "inputs": [
         "1",
@@ -15275,6 +15707,870 @@
         "18444492273895866368"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x0000000000000001UL.reinterpret_as_double(), 0xfff8000000000000UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866370"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xfff8000000000002UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866370"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000002UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866370"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866370"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866369"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xfff8000000000001UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866369"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000001UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866369"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866369"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181122"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xfff0000000000002UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181122"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000002UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181122"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181122"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181121"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xfff0000000000001UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181121"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000001UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181121"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181121"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181120"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xfff0000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181120"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181120"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000000UL.reinterpret_as_double()))",
+      "bits": "fff0000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181120"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff0000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_ffefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181119"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xffefffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_ffefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181119"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xffefffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_ffefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xffefffffffffffffUL.reinterpret_as_double()))",
+      "bits": "ffefffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_ffefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "18442240474082181119"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xffefffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_8000000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775809"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x8000000000000001UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_8000000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775809"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x8000000000000001UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_8000000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x8000000000000001UL.reinterpret_as_double()))",
+      "bits": "8000000000000001"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_8000000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775809"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x8000000000000001UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_8010000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146304"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x8010000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_8010000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146304"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x8010000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_8010000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146304"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x8010000000000000UL.reinterpret_as_double()))",
+      "bits": "8010000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_8010000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146304"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x8010000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_800fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146303"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x800fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_800fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146303"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x800fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_800fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x800fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "800fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_800fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9227875636482146303"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x800fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_8000000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775808"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x8000000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_8000000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775808"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x8000000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_8000000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x8000000000000000UL.reinterpret_as_double()))",
+      "bits": "8000000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_8000000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9223372036854775808"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x8000000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_0",
+      "inputs": [
+        "4503599627370495",
+        "0"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x0000000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_0",
+      "inputs": [
+        "4503599627370495",
+        "0"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x0000000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_0",
+      "inputs": [
+        "4503599627370495",
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x0000000000000000UL.reinterpret_as_double()))",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_0",
+      "inputs": [
+        "4503599627370495",
+        "0"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x0000000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_1",
+      "inputs": [
+        "4503599627370495",
+        "1"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x0000000000000001UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_1",
+      "inputs": [
+        "4503599627370495",
+        "1"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_1",
+      "inputs": [
+        "4503599627370495",
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_1",
+      "inputs": [
+        "4503599627370495",
+        "1"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_3ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4607182418800017408"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x3ff0000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_3ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4607182418800017408"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x3ff0000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_3ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4607182418800017408"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x3ff0000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_3ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4607182418800017408"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x3ff0000000000000UL.reinterpret_as_double()))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_bff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "13830554455654793216"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xbff0000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_bff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "13830554455654793216"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xbff0000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_bff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "13830554455654793216"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xbff0000000000000UL.reinterpret_as_double()))",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_bff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "13830554455654793216"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xbff0000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_10000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370496"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x0010000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_10000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370496"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x0010000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_10000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370496"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x0010000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_10000000000000",
+      "inputs": [
+        "4503599627370495",
+        "4503599627370496"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x0010000000000000UL.reinterpret_as_double()))",
+      "bits": "0010000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7fefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405311"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7fefffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7fefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405311"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7fefffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7fefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7fefffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7fefffffffffffff",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405311"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7fefffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7fefffffffffffff"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405312"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7ff0000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405312"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405312"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000000UL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7ff0000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405312"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000000UL.reinterpret_as_double()))",
+      "bits": "7ff0000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7ff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405313"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7ff0000000000001UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7ff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405313"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000001UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7ff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405313"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7ff0000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405313"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7ff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405314"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7ff0000000000002UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7ff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405314"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000002UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7ff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405314"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7ff0000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9218868437227405314"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff0000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7ff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090560"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7ff8000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7ff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090560"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7ff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000000UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7ff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090560"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000000UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7ff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090561"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7ff8000000000001UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7ff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090561"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000001UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7ff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090561"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7ff8000000000001",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090561"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_7ff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090562"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0x7ff8000000000002UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_7ff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090562"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000002UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_7ff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090562"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_7ff8000000000002",
+      "inputs": [
+        "4503599627370495",
+        "9221120237041090562"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0x7ff8000000000002UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fffffffffffff_fff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866368"
+      ],
+      "expression": "if @float.total_order_bits(0x000fffffffffffffUL, 0xfff8000000000000UL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_fffffffffffff_fff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866368"
+      ],
+      "expression": "if @float.portable_total_order(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000000UL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_fffffffffffff_fff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000000UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fffffffffffff_fff8000000000000",
+      "inputs": [
+        "4503599627370495",
+        "18444492273895866368"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x000fffffffffffffUL.reinterpret_as_double(), 0xfff8000000000000UL.reinterpret_as_double()))",
       "bits": "7ff8000000000000"
     },
     {
@@ -15707,6 +17003,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x3ff0000000000000UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "3ff0000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_3ff0000000000000_fffffffffffff",
+      "inputs": [
+        "4607182418800017408",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x3ff0000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_3ff0000000000000_fffffffffffff",
+      "inputs": [
+        "4607182418800017408",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x3ff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_3ff0000000000000_fffffffffffff",
+      "inputs": [
+        "4607182418800017408",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x3ff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_3ff0000000000000_fffffffffffff",
+      "inputs": [
+        "4607182418800017408",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x3ff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "3ff0000000000000"
     },
     {
@@ -16538,6 +17870,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b64_total_order_bits_bff0000000000000_fffffffffffff",
+      "inputs": [
+        "13830554455654793216",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xbff0000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_bff0000000000000_fffffffffffff",
+      "inputs": [
+        "13830554455654793216",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xbff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_minimum_bff0000000000000_fffffffffffff",
+      "inputs": [
+        "13830554455654793216",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xbff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "bff0000000000000"
+    },
+    {
+      "id": "b64_maximum_bff0000000000000_fffffffffffff",
+      "inputs": [
+        "13830554455654793216",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xbff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_bff0000000000000_3ff0000000000000",
       "inputs": [
         "13830554455654793216",
@@ -17363,6 +18731,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x0010000000000000UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "0010000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_10000000000000_fffffffffffff",
+      "inputs": [
+        "4503599627370496",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x0010000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_10000000000000_fffffffffffff",
+      "inputs": [
+        "4503599627370496",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x0010000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_10000000000000_fffffffffffff",
+      "inputs": [
+        "4503599627370496",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x0010000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_10000000000000_fffffffffffff",
+      "inputs": [
+        "4503599627370496",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x0010000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "0010000000000000"
     },
     {
@@ -18194,6 +19598,42 @@
       "bits": "7fefffffffffffff"
     },
     {
+      "id": "b64_total_order_bits_7fefffffffffffff_fffffffffffff",
+      "inputs": [
+        "9218868437227405311",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7fefffffffffffffUL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7fefffffffffffff_fffffffffffff",
+      "inputs": [
+        "9218868437227405311",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7fefffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7fefffffffffffff_fffffffffffff",
+      "inputs": [
+        "9218868437227405311",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7fefffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_7fefffffffffffff_fffffffffffff",
+      "inputs": [
+        "9218868437227405311",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7fefffffffffffffUL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7fefffffffffffff"
+    },
+    {
       "id": "b64_total_order_bits_7fefffffffffffff_3ff0000000000000",
       "inputs": [
         "9218868437227405311",
@@ -19019,6 +20459,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x7ff0000000000000UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff0000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_7ff0000000000000_fffffffffffff",
+      "inputs": [
+        "9218868437227405312",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7ff0000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7ff0000000000000_fffffffffffff",
+      "inputs": [
+        "9218868437227405312",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7ff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7ff0000000000000_fffffffffffff",
+      "inputs": [
+        "9218868437227405312",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7ff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "000fffffffffffff"
+    },
+    {
+      "id": "b64_maximum_7ff0000000000000_fffffffffffff",
+      "inputs": [
+        "9218868437227405312",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7ff0000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "7ff0000000000000"
     },
     {
@@ -19850,6 +21326,42 @@
       "bits": "7ff8000000000000"
     },
     {
+      "id": "b64_total_order_bits_7ff0000000000001_fffffffffffff",
+      "inputs": [
+        "9218868437227405313",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7ff0000000000001UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7ff0000000000001_fffffffffffff",
+      "inputs": [
+        "9218868437227405313",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7ff0000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7ff0000000000001_fffffffffffff",
+      "inputs": [
+        "9218868437227405313",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7ff0000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_7ff0000000000001_fffffffffffff",
+      "inputs": [
+        "9218868437227405313",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7ff0000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
       "id": "b64_total_order_bits_7ff0000000000001_3ff0000000000000",
       "inputs": [
         "9218868437227405313",
@@ -20675,6 +22187,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x7ff0000000000002UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_7ff0000000000002_fffffffffffff",
+      "inputs": [
+        "9218868437227405314",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7ff0000000000002UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7ff0000000000002_fffffffffffff",
+      "inputs": [
+        "9218868437227405314",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7ff0000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7ff0000000000002_fffffffffffff",
+      "inputs": [
+        "9218868437227405314",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7ff0000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_7ff0000000000002_fffffffffffff",
+      "inputs": [
+        "9218868437227405314",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7ff0000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "7ff8000000000000"
     },
     {
@@ -21506,6 +23054,42 @@
       "bits": "7ff8000000000000"
     },
     {
+      "id": "b64_total_order_bits_7ff8000000000000_fffffffffffff",
+      "inputs": [
+        "9221120237041090560",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7ff8000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7ff8000000000000_fffffffffffff",
+      "inputs": [
+        "9221120237041090560",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7ff8000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7ff8000000000000_fffffffffffff",
+      "inputs": [
+        "9221120237041090560",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7ff8000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_7ff8000000000000_fffffffffffff",
+      "inputs": [
+        "9221120237041090560",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7ff8000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
       "id": "b64_total_order_bits_7ff8000000000000_3ff0000000000000",
       "inputs": [
         "9221120237041090560",
@@ -22331,6 +23915,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0x7ff8000000000001UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_7ff8000000000001_fffffffffffff",
+      "inputs": [
+        "9221120237041090561",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7ff8000000000001UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7ff8000000000001_fffffffffffff",
+      "inputs": [
+        "9221120237041090561",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7ff8000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7ff8000000000001_fffffffffffff",
+      "inputs": [
+        "9221120237041090561",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7ff8000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_7ff8000000000001_fffffffffffff",
+      "inputs": [
+        "9221120237041090561",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7ff8000000000001UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "7ff8000000000000"
     },
     {
@@ -23162,6 +24782,42 @@
       "bits": "7ff8000000000000"
     },
     {
+      "id": "b64_total_order_bits_7ff8000000000002_fffffffffffff",
+      "inputs": [
+        "9221120237041090562",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0x7ff8000000000002UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_total_order_7ff8000000000002_fffffffffffff",
+      "inputs": [
+        "9221120237041090562",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0x7ff8000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_7ff8000000000002_fffffffffffff",
+      "inputs": [
+        "9221120237041090562",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0x7ff8000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_7ff8000000000002_fffffffffffff",
+      "inputs": [
+        "9221120237041090562",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0x7ff8000000000002UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
       "id": "b64_total_order_bits_7ff8000000000002_3ff0000000000000",
       "inputs": [
         "9221120237041090562",
@@ -23987,6 +25643,42 @@
         "1"
       ],
       "expression": "@float.to_bits_canonical(@float.maximum(0xfff8000000000000UL.reinterpret_as_double(), 0x0000000000000001UL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_total_order_bits_fff8000000000000_fffffffffffff",
+      "inputs": [
+        "18444492273895866368",
+        "4503599627370495"
+      ],
+      "expression": "if @float.total_order_bits(0xfff8000000000000UL, 0x000fffffffffffffUL) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b64_total_order_fff8000000000000_fffffffffffff",
+      "inputs": [
+        "18444492273895866368",
+        "4503599627370495"
+      ],
+      "expression": "if @float.portable_total_order(0xfff8000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b64_minimum_fff8000000000000_fffffffffffff",
+      "inputs": [
+        "18444492273895866368",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.minimum(0xfff8000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
+      "bits": "7ff8000000000000"
+    },
+    {
+      "id": "b64_maximum_fff8000000000000_fffffffffffff",
+      "inputs": [
+        "18444492273895866368",
+        "4503599627370495"
+      ],
+      "expression": "@float.to_bits_canonical(@float.maximum(0xfff8000000000000UL.reinterpret_as_double(), 0x000fffffffffffffUL.reinterpret_as_double()))",
       "bits": "7ff8000000000000"
     },
     {
@@ -30158,6 +31850,42 @@
       "bits": "000000007fc00000"
     },
     {
+      "id": "b32_total_order_bits_ffc00002_7fffff",
+      "inputs": [
+        "4290772994",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xffc00002U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ffc00002_7fffff",
+      "inputs": [
+        "4290772994",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xffc00002U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_ffc00002_7fffff",
+      "inputs": [
+        "4290772994",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xffc00002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_ffc00002_7fffff",
+      "inputs": [
+        "4290772994",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xffc00002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
       "id": "b32_total_order_bits_ffc00002_3f800000",
       "inputs": [
         "4290772994",
@@ -30983,6 +32711,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xffc00001U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_ffc00001_7fffff",
+      "inputs": [
+        "4290772993",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xffc00001U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ffc00001_7fffff",
+      "inputs": [
+        "4290772993",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xffc00001U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_ffc00001_7fffff",
+      "inputs": [
+        "4290772993",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xffc00001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_ffc00001_7fffff",
+      "inputs": [
+        "4290772993",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xffc00001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {
@@ -31814,6 +33578,42 @@
       "bits": "000000007fc00000"
     },
     {
+      "id": "b32_total_order_bits_ff800002_7fffff",
+      "inputs": [
+        "4286578690",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xff800002U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ff800002_7fffff",
+      "inputs": [
+        "4286578690",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xff800002U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_ff800002_7fffff",
+      "inputs": [
+        "4286578690",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xff800002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_ff800002_7fffff",
+      "inputs": [
+        "4286578690",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xff800002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
       "id": "b32_total_order_bits_ff800002_3f800000",
       "inputs": [
         "4286578690",
@@ -32639,6 +34439,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xff800001U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_ff800001_7fffff",
+      "inputs": [
+        "4286578689",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xff800001U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ff800001_7fffff",
+      "inputs": [
+        "4286578689",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xff800001U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_ff800001_7fffff",
+      "inputs": [
+        "4286578689",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xff800001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_ff800001_7fffff",
+      "inputs": [
+        "4286578689",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xff800001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {
@@ -33470,6 +35306,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b32_total_order_bits_ff800000_7fffff",
+      "inputs": [
+        "4286578688",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xff800000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ff800000_7fffff",
+      "inputs": [
+        "4286578688",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xff800000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_ff800000_7fffff",
+      "inputs": [
+        "4286578688",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xff800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff800000"
+    },
+    {
+      "id": "b32_maximum_ff800000_7fffff",
+      "inputs": [
+        "4286578688",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xff800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
       "id": "b32_total_order_bits_ff800000_3f800000",
       "inputs": [
         "4286578688",
@@ -34296,6 +36168,42 @@
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xff7fffffU), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
       "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_bits_ff7fffff_7fffff",
+      "inputs": [
+        "4286578687",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xff7fffffU, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ff7fffff_7fffff",
+      "inputs": [
+        "4286578687",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xff7fffffU), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_ff7fffff_7fffff",
+      "inputs": [
+        "4286578687",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xff7fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
+      "id": "b32_maximum_ff7fffff_7fffff",
+      "inputs": [
+        "4286578687",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xff7fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
     },
     {
       "id": "b32_total_order_bits_ff7fffff_3f800000",
@@ -35126,6 +37034,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b32_total_order_bits_80000001_7fffff",
+      "inputs": [
+        "2147483649",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x80000001U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_80000001_7fffff",
+      "inputs": [
+        "2147483649",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x80000001U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_80000001_7fffff",
+      "inputs": [
+        "2147483649",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x80000001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000001"
+    },
+    {
+      "id": "b32_maximum_80000001_7fffff",
+      "inputs": [
+        "2147483649",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x80000001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
       "id": "b32_total_order_bits_80000001_3f800000",
       "inputs": [
         "2147483649",
@@ -35952,6 +37896,42 @@
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x80800000U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
       "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_bits_80800000_7fffff",
+      "inputs": [
+        "2155872256",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x80800000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_80800000_7fffff",
+      "inputs": [
+        "2155872256",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x80800000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_80800000_7fffff",
+      "inputs": [
+        "2155872256",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x80800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080800000"
+    },
+    {
+      "id": "b32_maximum_80800000_7fffff",
+      "inputs": [
+        "2155872256",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x80800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
     },
     {
       "id": "b32_total_order_bits_80800000_3f800000",
@@ -36782,6 +38762,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b32_total_order_bits_807fffff_7fffff",
+      "inputs": [
+        "2155872255",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x807fffffU, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_807fffff_7fffff",
+      "inputs": [
+        "2155872255",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x807fffffU), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_807fffff_7fffff",
+      "inputs": [
+        "2155872255",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x807fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000807fffff"
+    },
+    {
+      "id": "b32_maximum_807fffff_7fffff",
+      "inputs": [
+        "2155872255",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x807fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
       "id": "b32_total_order_bits_807fffff_3f800000",
       "inputs": [
         "2155872255",
@@ -37608,6 +39624,42 @@
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x80000000U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
       "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_bits_80000000_7fffff",
+      "inputs": [
+        "2147483648",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x80000000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_80000000_7fffff",
+      "inputs": [
+        "2147483648",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x80000000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_80000000_7fffff",
+      "inputs": [
+        "2147483648",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x80000000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_maximum_80000000_7fffff",
+      "inputs": [
+        "2147483648",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x80000000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
     },
     {
       "id": "b32_total_order_bits_80000000_3f800000",
@@ -38438,6 +40490,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b32_total_order_bits_0_7fffff",
+      "inputs": [
+        "0",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x00000000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_0_7fffff",
+      "inputs": [
+        "0",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x00000000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_0_7fffff",
+      "inputs": [
+        "0",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x00000000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_maximum_0_7fffff",
+      "inputs": [
+        "0",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x00000000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
       "id": "b32_total_order_bits_0_3f800000",
       "inputs": [
         "0",
@@ -39266,6 +41354,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b32_total_order_bits_1_7fffff",
+      "inputs": [
+        "1",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x00000001U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_1_7fffff",
+      "inputs": [
+        "1",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x00000001U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_1_7fffff",
+      "inputs": [
+        "1",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x00000001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_maximum_1_7fffff",
+      "inputs": [
+        "1",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x00000001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
       "id": "b32_total_order_bits_1_3f800000",
       "inputs": [
         "1",
@@ -39659,6 +41783,870 @@
         "4290772992"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x00000001U), Float::reinterpret_from_uint(0xffc00000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ffc00002",
+      "inputs": [
+        "8388607",
+        "4290772994"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xffc00002U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ffc00002",
+      "inputs": [
+        "8388607",
+        "4290772994"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00002U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_ffc00002",
+      "inputs": [
+        "8388607",
+        "4290772994"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_ffc00002",
+      "inputs": [
+        "8388607",
+        "4290772994"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ffc00001",
+      "inputs": [
+        "8388607",
+        "4290772993"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xffc00001U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ffc00001",
+      "inputs": [
+        "8388607",
+        "4290772993"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00001U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_ffc00001",
+      "inputs": [
+        "8388607",
+        "4290772993"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_ffc00001",
+      "inputs": [
+        "8388607",
+        "4290772993"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ff800002",
+      "inputs": [
+        "8388607",
+        "4286578690"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xff800002U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ff800002",
+      "inputs": [
+        "8388607",
+        "4286578690"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800002U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_ff800002",
+      "inputs": [
+        "8388607",
+        "4286578690"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_ff800002",
+      "inputs": [
+        "8388607",
+        "4286578690"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ff800001",
+      "inputs": [
+        "8388607",
+        "4286578689"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xff800001U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ff800001",
+      "inputs": [
+        "8388607",
+        "4286578689"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800001U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_ff800001",
+      "inputs": [
+        "8388607",
+        "4286578689"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_ff800001",
+      "inputs": [
+        "8388607",
+        "4286578689"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ff800000",
+      "inputs": [
+        "8388607",
+        "4286578688"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xff800000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ff800000",
+      "inputs": [
+        "8388607",
+        "4286578688"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_ff800000",
+      "inputs": [
+        "8388607",
+        "4286578688"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff800000"
+    },
+    {
+      "id": "b32_maximum_7fffff_ff800000",
+      "inputs": [
+        "8388607",
+        "4286578688"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ff7fffff",
+      "inputs": [
+        "8388607",
+        "4286578687"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xff7fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ff7fffff",
+      "inputs": [
+        "8388607",
+        "4286578687"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff7fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_ff7fffff",
+      "inputs": [
+        "8388607",
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff7fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000ff7fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_ff7fffff",
+      "inputs": [
+        "8388607",
+        "4286578687"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xff7fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_80000001",
+      "inputs": [
+        "8388607",
+        "2147483649"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x80000001U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_80000001",
+      "inputs": [
+        "8388607",
+        "2147483649"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80000001U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_80000001",
+      "inputs": [
+        "8388607",
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000001"
+    },
+    {
+      "id": "b32_maximum_7fffff_80000001",
+      "inputs": [
+        "8388607",
+        "2147483649"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_80800000",
+      "inputs": [
+        "8388607",
+        "2155872256"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x80800000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_80800000",
+      "inputs": [
+        "8388607",
+        "2155872256"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80800000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_80800000",
+      "inputs": [
+        "8388607",
+        "2155872256"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080800000"
+    },
+    {
+      "id": "b32_maximum_7fffff_80800000",
+      "inputs": [
+        "8388607",
+        "2155872256"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_807fffff",
+      "inputs": [
+        "8388607",
+        "2155872255"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x807fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_807fffff",
+      "inputs": [
+        "8388607",
+        "2155872255"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x807fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_807fffff",
+      "inputs": [
+        "8388607",
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x807fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000807fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_807fffff",
+      "inputs": [
+        "8388607",
+        "2155872255"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x807fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_80000000",
+      "inputs": [
+        "8388607",
+        "2147483648"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x80000000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_80000000",
+      "inputs": [
+        "8388607",
+        "2147483648"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80000000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_80000000",
+      "inputs": [
+        "8388607",
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80000000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000080000000"
+    },
+    {
+      "id": "b32_maximum_7fffff_80000000",
+      "inputs": [
+        "8388607",
+        "2147483648"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x80000000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_0",
+      "inputs": [
+        "8388607",
+        "0"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x00000000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_0",
+      "inputs": [
+        "8388607",
+        "0"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00000000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_0",
+      "inputs": [
+        "8388607",
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00000000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_maximum_7fffff_0",
+      "inputs": [
+        "8388607",
+        "0"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00000000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_1",
+      "inputs": [
+        "8388607",
+        "1"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x00000001U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_1",
+      "inputs": [
+        "8388607",
+        "1"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00000001U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_1",
+      "inputs": [
+        "8388607",
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_maximum_7fffff_1",
+      "inputs": [
+        "8388607",
+        "1"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7fffff",
+      "inputs": [
+        "8388607",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7fffff",
+      "inputs": [
+        "8388607",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7fffff",
+      "inputs": [
+        "8388607",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_7fffff",
+      "inputs": [
+        "8388607",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_3f800000",
+      "inputs": [
+        "8388607",
+        "1065353216"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x3f800000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_3f800000",
+      "inputs": [
+        "8388607",
+        "1065353216"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x3f800000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_3f800000",
+      "inputs": [
+        "8388607",
+        "1065353216"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x3f800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_3f800000",
+      "inputs": [
+        "8388607",
+        "1065353216"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x3f800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_bf800000",
+      "inputs": [
+        "8388607",
+        "3212836864"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xbf800000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_bf800000",
+      "inputs": [
+        "8388607",
+        "3212836864"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xbf800000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fffff_bf800000",
+      "inputs": [
+        "8388607",
+        "3212836864"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xbf800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000bf800000"
+    },
+    {
+      "id": "b32_maximum_7fffff_bf800000",
+      "inputs": [
+        "8388607",
+        "3212836864"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xbf800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_800000",
+      "inputs": [
+        "8388607",
+        "8388608"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x00800000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_800000",
+      "inputs": [
+        "8388607",
+        "8388608"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00800000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_800000",
+      "inputs": [
+        "8388607",
+        "8388608"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_800000",
+      "inputs": [
+        "8388607",
+        "8388608"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x00800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000800000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7f7fffff",
+      "inputs": [
+        "8388607",
+        "2139095039"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7f7fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7f7fffff",
+      "inputs": [
+        "8388607",
+        "2139095039"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f7fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7f7fffff",
+      "inputs": [
+        "8388607",
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f7fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_7f7fffff",
+      "inputs": [
+        "8388607",
+        "2139095039"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f7fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7f800000",
+      "inputs": [
+        "8388607",
+        "2139095040"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7f800000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7f800000",
+      "inputs": [
+        "8388607",
+        "2139095040"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7f800000",
+      "inputs": [
+        "8388607",
+        "2139095040"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7fffff_7f800000",
+      "inputs": [
+        "8388607",
+        "2139095040"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f800000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7f800001",
+      "inputs": [
+        "8388607",
+        "2139095041"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7f800001U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7f800001",
+      "inputs": [
+        "8388607",
+        "2139095041"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800001U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7f800001",
+      "inputs": [
+        "8388607",
+        "2139095041"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_7f800001",
+      "inputs": [
+        "8388607",
+        "2139095041"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7f800002",
+      "inputs": [
+        "8388607",
+        "2139095042"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7f800002U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7f800002",
+      "inputs": [
+        "8388607",
+        "2139095042"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800002U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7f800002",
+      "inputs": [
+        "8388607",
+        "2139095042"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_7f800002",
+      "inputs": [
+        "8388607",
+        "2139095042"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7f800002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7fc00000",
+      "inputs": [
+        "8388607",
+        "2143289344"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7fc00000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7fc00000",
+      "inputs": [
+        "8388607",
+        "2143289344"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7fc00000",
+      "inputs": [
+        "8388607",
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_7fc00000",
+      "inputs": [
+        "8388607",
+        "2143289344"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7fc00001",
+      "inputs": [
+        "8388607",
+        "2143289345"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7fc00001U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7fc00001",
+      "inputs": [
+        "8388607",
+        "2143289345"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00001U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7fc00001",
+      "inputs": [
+        "8388607",
+        "2143289345"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_7fc00001",
+      "inputs": [
+        "8388607",
+        "2143289345"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_7fc00002",
+      "inputs": [
+        "8388607",
+        "2143289346"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0x7fc00002U) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_7fffff_7fc00002",
+      "inputs": [
+        "8388607",
+        "2143289346"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00002U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_7fc00002",
+      "inputs": [
+        "8388607",
+        "2143289346"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_7fc00002",
+      "inputs": [
+        "8388607",
+        "2143289346"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0x7fc00002U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fffff_ffc00000",
+      "inputs": [
+        "8388607",
+        "4290772992"
+      ],
+      "expression": "if @binary32.total_order_bits(0x007fffffU, 0xffc00000U) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fffff_ffc00000",
+      "inputs": [
+        "8388607",
+        "4290772992"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00000U)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_7fffff_ffc00000",
+      "inputs": [
+        "8388607",
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00000U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fffff_ffc00000",
+      "inputs": [
+        "8388607",
+        "4290772992"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x007fffffU), Float::reinterpret_from_uint(0xffc00000U)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {
@@ -40091,6 +43079,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x3f800000U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000003f800000"
+    },
+    {
+      "id": "b32_total_order_bits_3f800000_7fffff",
+      "inputs": [
+        "1065353216",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x3f800000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_3f800000_7fffff",
+      "inputs": [
+        "1065353216",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x3f800000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_3f800000_7fffff",
+      "inputs": [
+        "1065353216",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x3f800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_3f800000_7fffff",
+      "inputs": [
+        "1065353216",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x3f800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000003f800000"
     },
     {
@@ -40922,6 +43946,42 @@
       "bits": "0000000000000001"
     },
     {
+      "id": "b32_total_order_bits_bf800000_7fffff",
+      "inputs": [
+        "3212836864",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xbf800000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_bf800000_7fffff",
+      "inputs": [
+        "3212836864",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xbf800000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_minimum_bf800000_7fffff",
+      "inputs": [
+        "3212836864",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xbf800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000bf800000"
+    },
+    {
+      "id": "b32_maximum_bf800000_7fffff",
+      "inputs": [
+        "3212836864",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xbf800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
       "id": "b32_total_order_bits_bf800000_3f800000",
       "inputs": [
         "3212836864",
@@ -41747,6 +44807,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x00800000U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "0000000000800000"
+    },
+    {
+      "id": "b32_total_order_bits_800000_7fffff",
+      "inputs": [
+        "8388608",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x00800000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_800000_7fffff",
+      "inputs": [
+        "8388608",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x00800000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_800000_7fffff",
+      "inputs": [
+        "8388608",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x00800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_800000_7fffff",
+      "inputs": [
+        "8388608",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x00800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "0000000000800000"
     },
     {
@@ -42578,6 +45674,42 @@
       "bits": "000000007f7fffff"
     },
     {
+      "id": "b32_total_order_bits_7f7fffff_7fffff",
+      "inputs": [
+        "2139095039",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7f7fffffU, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7f7fffff_7fffff",
+      "inputs": [
+        "2139095039",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7f7fffffU), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7f7fffff_7fffff",
+      "inputs": [
+        "2139095039",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7f7fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7f7fffff_7fffff",
+      "inputs": [
+        "2139095039",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7f7fffffU), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f7fffff"
+    },
+    {
       "id": "b32_total_order_bits_7f7fffff_3f800000",
       "inputs": [
         "2139095039",
@@ -43403,6 +46535,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7f800000U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007f800000"
+    },
+    {
+      "id": "b32_total_order_bits_7f800000_7fffff",
+      "inputs": [
+        "2139095040",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7f800000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7f800000_7fffff",
+      "inputs": [
+        "2139095040",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7f800000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7f800000_7fffff",
+      "inputs": [
+        "2139095040",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7f800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "00000000007fffff"
+    },
+    {
+      "id": "b32_maximum_7f800000_7fffff",
+      "inputs": [
+        "2139095040",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7f800000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007f800000"
     },
     {
@@ -44234,6 +47402,42 @@
       "bits": "000000007fc00000"
     },
     {
+      "id": "b32_total_order_bits_7f800001_7fffff",
+      "inputs": [
+        "2139095041",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7f800001U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7f800001_7fffff",
+      "inputs": [
+        "2139095041",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7f800001U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7f800001_7fffff",
+      "inputs": [
+        "2139095041",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7f800001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7f800001_7fffff",
+      "inputs": [
+        "2139095041",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7f800001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
       "id": "b32_total_order_bits_7f800001_3f800000",
       "inputs": [
         "2139095041",
@@ -45059,6 +48263,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7f800002U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7f800002_7fffff",
+      "inputs": [
+        "2139095042",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7f800002U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7f800002_7fffff",
+      "inputs": [
+        "2139095042",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7f800002U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7f800002_7fffff",
+      "inputs": [
+        "2139095042",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7f800002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7f800002_7fffff",
+      "inputs": [
+        "2139095042",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7f800002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {
@@ -45890,6 +49130,42 @@
       "bits": "000000007fc00000"
     },
     {
+      "id": "b32_total_order_bits_7fc00000_7fffff",
+      "inputs": [
+        "2143289344",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7fc00000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fc00000_7fffff",
+      "inputs": [
+        "2143289344",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7fc00000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fc00000_7fffff",
+      "inputs": [
+        "2143289344",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7fc00000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fc00000_7fffff",
+      "inputs": [
+        "2143289344",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7fc00000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
       "id": "b32_total_order_bits_7fc00000_3f800000",
       "inputs": [
         "2143289344",
@@ -46715,6 +49991,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7fc00001U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_7fc00001_7fffff",
+      "inputs": [
+        "2143289345",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7fc00001U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fc00001_7fffff",
+      "inputs": [
+        "2143289345",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7fc00001U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fc00001_7fffff",
+      "inputs": [
+        "2143289345",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7fc00001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fc00001_7fffff",
+      "inputs": [
+        "2143289345",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7fc00001U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {
@@ -47546,6 +50858,42 @@
       "bits": "000000007fc00000"
     },
     {
+      "id": "b32_total_order_bits_7fc00002_7fffff",
+      "inputs": [
+        "2143289346",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0x7fc00002U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_total_order_7fc00002_7fffff",
+      "inputs": [
+        "2143289346",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0x7fc00002U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_7fc00002_7fffff",
+      "inputs": [
+        "2143289346",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0x7fc00002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_7fc00002_7fffff",
+      "inputs": [
+        "2143289346",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0x7fc00002U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
       "id": "b32_total_order_bits_7fc00002_3f800000",
       "inputs": [
         "2143289346",
@@ -48371,6 +51719,42 @@
         "1"
       ],
       "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xffc00000U), Float::reinterpret_from_uint(0x00000001U)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_total_order_bits_ffc00000_7fffff",
+      "inputs": [
+        "4290772992",
+        "8388607"
+      ],
+      "expression": "if @binary32.total_order_bits(0xffc00000U, 0x007fffffU) { 1UL } else { 0UL }",
+      "bits": "0000000000000001"
+    },
+    {
+      "id": "b32_total_order_ffc00000_7fffff",
+      "inputs": [
+        "4290772992",
+        "8388607"
+      ],
+      "expression": "if @binary32.portable_total_order(Float::reinterpret_from_uint(0xffc00000U), Float::reinterpret_from_uint(0x007fffffU)) { 1UL } else { 0UL }",
+      "bits": "0000000000000000"
+    },
+    {
+      "id": "b32_minimum_ffc00000_7fffff",
+      "inputs": [
+        "4290772992",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.minimum(Float::reinterpret_from_uint(0xffc00000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
+      "bits": "000000007fc00000"
+    },
+    {
+      "id": "b32_maximum_ffc00000_7fffff",
+      "inputs": [
+        "4290772992",
+        "8388607"
+      ],
+      "expression": "((@binary32.to_bits_canonical(@binary32.maximum(Float::reinterpret_from_uint(0xffc00000U), Float::reinterpret_from_uint(0x007fffffU)))).to_uint64() & 0xffffffffUL)",
       "bits": "000000007fc00000"
     },
     {

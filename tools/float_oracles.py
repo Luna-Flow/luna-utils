@@ -229,6 +229,7 @@ def generate_float_cases():
             sign_unit,
             0,
             1,
+            fraction_unit - 1,
             (0x3ff0000000000000 if width == 64 else 0x3f800000),
             (0xbff0000000000000 if width == 64 else 0xbf800000),
             fraction_unit,

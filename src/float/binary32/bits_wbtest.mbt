@@ -542,6 +542,43 @@ test "sort total order sorts arrays and mutable views" {
   assert_eq(duplicate_values[3].reinterpret_as_uint(), 0x40000000U)
   assert_true(is_nan_bits(duplicate_values[4].reinterpret_as_uint()))
   assert_true(is_nan_bits(duplicate_values[5].reinterpret_as_uint()))
+  let probe_values : Array[Float] = [
+    Float::reinterpret_from_uint(0xffc00001U),
+    -2.0,
+    1.0,
+    Float::reinterpret_from_uint(0x7fc00002U),
+    -1.0,
+    2.0,
+    -0.0,
+    0.0,
+    -1.0,
+    2.0,
+    -2.0,
+    1.0,
+    Float::reinterpret_from_uint(0x7f800000U),
+    Float::reinterpret_from_uint(0xff800000U),
+    3.0,
+    -3.0,
+    4.0,
+    -4.0,
+    5.0,
+    -5.0,
+    6.0,
+    -6.0,
+  ]
+  sort_total_order(probe_values)
+  let first_nan = probe_values.length() - 2
+  for i in 0..<first_nan {
+    assert_false(is_nan_bits(probe_values[i].reinterpret_as_uint()))
+    assert_true(
+      total_order_bits(
+        probe_values[i].reinterpret_as_uint(),
+        probe_values[i + 1].reinterpret_as_uint(),
+      ),
+    )
+  }
+  assert_true(is_nan_bits(probe_values[first_nan].reinterpret_as_uint()))
+  assert_true(is_nan_bits(probe_values[first_nan + 1].reinterpret_as_uint()))
   let view_values : Array[Float] = [3.0, -2.0, 1.0]
   sort_total_order_view(view_values.mut_view())
   assert_eq(view_values, [-2.0, 1.0, 3.0])
