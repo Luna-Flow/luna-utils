@@ -1,5 +1,35 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- `Luna-Flow/luna-utils/float` and `Luna-Flow/luna-utils/float/binary32`: sixteen
+  portable integer conversions per package, `to_{int,int64,uint,uint64}_checked`
+  and `to_{int,int64,uint,uint64}_saturating`, each with a `_with` form that takes
+  a `RoundingDirection`. The value is rounded first (the forms without `_with`
+  round toward zero) and the range is decided on the rounded integer. NaN and the
+  infinities give `None` (checked) or `0`/the nearest bound (saturating), both
+  zeros convert to `0`, and out-of-range values never reach a core primitive, so
+  results are identical on wasm, wasm-gc, js and native.
+- `@float.int64_to_float` and `@float.uint64_to_float`: `Int64`/`UInt64` to
+  binary32 `Float`, rounded once to nearest-even. They are the direct-rounding
+  replacement for core `Float::from_int64`/`Float::from_uint64`, which on the js
+  backend convert through binary64 and so round twice. They return a binary32
+  `Float` and live in `@float`; their placement is open for the maintainer.
+- Tests: table-driven offline oracle (exact `fractions`/integer arithmetic) for the
+  conversions in both formats, including halfway inputs, the `2^k` sweep and
+  carry cases, plus the default-direction functions; the fixtures are folded into
+  compact transcript records. `.moonignore` keeps fixtures, tools, CI files and
+  `src/ci_probe` out of the published package.
+- Manual (API, design, tutorial, conformance, testing) and zh_CN/ja_JP catalogs.
+
+### Fixed
+
+- The js double rounding of `Int64`/`UInt64` to binary32 (`Float::from_int64`,
+  `Float::from_uint64`) is avoided by `int64_to_float`/`uint64_to_float`.
+  Closes [#22](https://github.com/Luna-Flow/luna-utils/issues/22).
+
 ## 0.2.0 — 2026-10-11
 
 Breaking rebuild: retain the luna-utils name, remove the 0.1.x public API and

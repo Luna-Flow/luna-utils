@@ -27,4 +27,24 @@ assert_eq(values.map(fn(x) { x.reinterpret_as_uint64() }), [
 ])
 ```
 
+```moonbit
+assert_eq(@f64.to_int_checked(-2.9), Some(-2))
+assert_eq(@f64.to_int_checked(-0.0), Some(0))
+assert_eq(@f64.to_uint_checked(-0.5), Some(0U))
+assert_eq(@f64.to_uint_checked_with(-0.5, @f64.TowardNegative), None)
+assert_eq(@f64.to_int_checked(0.0 / 0.0), None)
+assert_eq(@f64.to_int_checked(2147483648.0), None)
+assert_eq(@f64.to_int_saturating(0.0 / 0.0), 0)
+assert_eq(@f64.to_int_saturating(-1.0 / 0.0), -2147483648)
+assert_eq(@f64.to_uint64_saturating(1.0e30), 0xffffffffffffffffUL)
+assert_eq(@f32.to_int_checked_with(2.5F, @f64.TiesToAway), Some(3))
+assert_eq(@f32.to_int64_saturating(-3.5F), -3L)
+assert_eq(
+  @f64.int64_to_float(9007199791611905L).to_double(),
+  9007200328482816.0,
+)
+```
+
+Integer conversions round first and test the range afterwards. Use the `_checked` forms when out-of-range input is an error and the `_saturating` forms when clamping is the intended policy; NaN maps to `None` or to `0` explicitly in either case. `int64_to_float` and `uint64_to_float` round a 64-bit integer to binary32 exactly once, which JavaScript's `Float::from_int64` does not.
+
 Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md).

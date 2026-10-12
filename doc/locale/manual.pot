@@ -100,26 +100,46 @@ msgid "The implementation rounds directly from the sign, exponent and fraction f
 msgstr ""
 
 #: manual/api/float.md:25
-msgid "Extrema and ordering"
+msgid "Integer conversions"
 msgstr ""
 
 #: manual/api/float.md:27
-msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgid "Both packages provide the same sixteen functions: `to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the four `*_saturating` counterparts, and a `_with` form of each that takes a `RoundingDirection`. `@float` converts `Double`; `@binary32` converts `Float` and widens it exactly to binary64 first, so both packages follow one contract. The targets are `Int` (`[-2^31, 2^31 - 1]`), `Int64` (`[-2^63, 2^63 - 1]`), `UInt` (`[0, 2^32 - 1]`) and `UInt64` (`[0, 2^64 - 1]`)."
 msgstr ""
 
 #: manual/api/float.md:29
-msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgid "The value is first rounded to an integer with the chosen direction; the functions without `_with` round toward zero (truncation). The range decision is made on that rounded integer, after rounding, and never on the input. Hence `-0.5` converts to `Some(0)` for `to_uint_checked` (it truncates to zero) but to `None` with `TowardNegative` (it rounds to `-1`), and `2147483647.5` fits `Int` when truncated but not when rounded `TiesToEven`. Both zeros, `+0` and `-0`, convert to `0`."
 msgstr ""
 
 #: manual/api/float.md:31
-msgid "Payload encoding adapters"
+msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the rounded integer is outside the target range; otherwise `Some(n)`. `*_saturating` clamps like WebAssembly `trunc_sat`: NaN converts to `0`, `+inf` and any rounded value above the range convert to the largest value of the target, and `-inf` and any value below the range convert to its smallest (`0` for the unsigned targets). The range tests run on the rounded `Double` before any core conversion primitive is called, because core's behavior for out-of-range values differs between backends."
 msgstr ""
 
 #: manual/api/float.md:33
-msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the direct-rounding replacement for core's `Float::from_int64` and `Float::from_uint64`, which on the JavaScript backend convert through binary64 first and therefore round twice; for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
 msgstr ""
 
 #: manual/api/float.md:35
+msgid "Extrema and ordering"
+msgstr ""
+
+#: manual/api/float.md:37
+msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgstr ""
+
+#: manual/api/float.md:39
+msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgstr ""
+
+#: manual/api/float.md:41
+msgid "Payload encoding adapters"
+msgstr ""
+
+#: manual/api/float.md:43
+msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgstr ""
+
+#: manual/api/float.md:45
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr ""
 
@@ -132,14 +152,18 @@ msgid "The contract separates exact integer encodings from portable numeric obse
 msgstr ""
 
 #: manual/conformance/float.md:5
-msgid "Ordering tests cover both argument orders for minimum/maximum, signed-zero selection, raw totalOrder across signed qNaN/sNaN payloads, portable NaN canonicalization, and array and mutable-view sorting. The generated integer-key oracle compares all pairs in a boundary sample for both binary formats."
+msgid "Integer conversion tests are table driven. For each binary format a generated table lists the exact rounded integer of every input in each of the five directions (computed offline with `fractions.Fraction`, or marked NaN, at least `2^64` or at most `-2^64`). The test converts every input with all sixteen functions in the checked-presence, checked-value and saturating modes, in all five directions through the `_with` forms and once through the default functions, and compares each result with the table. The inputs include `+0` and `-0`, `±0.5` and the other eighths below 9, halfway and quarter points next to every power of two `2^j` for `j = 0..69`, the sweep `2^k` and its neighbors one ulp away, the neighborhoods of `±2^31`, `2^32`, `±2^63` and `2^64` with fractional parts `0`, `1/8`, `1/4`, `1/2` and `3/4`, infinities, quiet and signaling NaNs with payloads, the smallest subnormal and the largest finite values, and 64 seeded random encodings. The default functions truncate; changing the default direction of any of them to `TowardPositive` fails the test (checked by mutation). For `Int64` and `UInt64` converted to binary32 and binary64, the table covers `2^k` and its neighbors for `k = 0..63`, halfway and nearby remainders for 24-bit and 53-bit significands, `2^64 - 1`, values near `2^64 - 2^39`, and `2^53 + 2^29 + 1`, where rounding through binary64 first gives the wrong binary32 result."
 msgstr ""
 
 #: manual/conformance/float.md:7
-msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
+msgid "Ordering tests cover both argument orders for minimum/maximum, signed-zero selection, raw totalOrder across signed qNaN/sNaN payloads, portable NaN canonicalization, and array and mutable-view sorting. The generated integer-key oracle compares all pairs in a boundary sample for both binary formats."
 msgstr ""
 
 #: manual/conformance/float.md:9
+msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
+msgstr ""
+
+#: manual/conformance/float.md:11
 msgid "Exception flags, FMA, conversions, IEEE magnitude extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
 msgstr ""
 
@@ -441,14 +465,18 @@ msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same 
 msgstr ""
 
 #: manual/design/float.md:13
-msgid "IEEE 754-2019 §9.6 extrema first handle NaN, then compare ordinary values, with explicit bit selection for two zeros: minimum combines the sign bits with OR to choose `-0`, and maximum combines them with AND to choose `+0`. A NaN result uses this package's positive canonical quiet encoding; exception flags are not exposed here."
+msgid "Integer conversions first apply `round_to_integral` and then compare the rounded `Double` with the half-open interval of the target before calling a core primitive, since core's `to_int` family is backend-specific outside its range. Comparing after rounding is the contract: `-0.5` truncates into the `UInt` range. `UInt64` values at or above `2^63` are converted by subtracting `2^63`, converting the remainder as `Int64` and setting the top bit, because no single core primitive covers that range on every backend. `int64_to_float` and `uint64_to_float` take the magnitude, keep its top 53 bits and fold all lower bits into the last kept bit (round to odd), and then narrow that exactly representable intermediate to binary32 with a single ties-to-even rounding. Because a binary64 significand has at least two more bits than binary32, the round-to-odd intermediate preserves every rounding decision, so the result equals a direct rounding of the integer."
 msgstr ""
 
 #: manual/design/float.md:15
-msgid "IEEE 754-2019 §5.10 totalOrder is an integer ordering over the encoding, not ordinary floating comparison. For a width of `w` bits and sign mask `S`, the signed key is `bits XOR (S - 1)` for negative encodings and `bits` otherwise. Comparing these keys as signed integers reverses all lower bits for negative values and orders positive values directly. The raw-bit API applies this key without materializing a float, so it retains negative NaN, sNaN and payload ordering on every backend. The portable numeric API first canonicalizes NaNs; it therefore provides deterministic ordering for numeric values but cannot reconstruct encoding details lost by host storage."
+msgid "IEEE 754-2019 §9.6 extrema first handle NaN, then compare ordinary values, with explicit bit selection for two zeros: minimum combines the sign bits with OR to choose `-0`, and maximum combines them with AND to choose `+0`. A NaN result uses this package's positive canonical quiet encoding; exception flags are not exposed here."
 msgstr ""
 
 #: manual/design/float.md:17
+msgid "IEEE 754-2019 §5.10 totalOrder is an integer ordering over the encoding, not ordinary floating comparison. For a width of `w` bits and sign mask `S`, the signed key is `bits XOR (S - 1)` for negative encodings and `bits` otherwise. Comparing these keys as signed integers reverses all lower bits for negative values and orders positive values directly. The raw-bit API applies this key without materializing a float, so it retains negative NaN, sNaN and payload ordering on every backend. The portable numeric API first canonicalizes NaNs; it therefore provides deterministic ordering for numeric values but cannot reconstruct encoding details lost by host storage."
+msgstr ""
+
+#: manual/design/float.md:19
 msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
 msgstr ""
 
@@ -501,18 +529,22 @@ msgid "The offline generator `tools/generate_oracles.py` uses CPython IEEE binar
 msgstr ""
 
 #: manual/testing.md:11
-msgid "Run `python3 tools/generate_oracles.py --check`, `python3 tools/test_ci_harness.py` and `python3 tools/run_backend_tests.py <backend>` locally. Run `python3 tools/generate_oracles.py` only when intentionally updating the committed fixtures; MoonBit's formatter is required. The generator runs offline and introduces no package dependency. CI installs the pinned MoonBit toolchain version from its official installer (`MOONBIT_INSTALL_VERSION` in the workflow), records it and fails if the installed `moonc` differs; bump the pin deliberately and rerun every gate. Pushes run the workflow only on `main`; pull requests run it on every update. Fixture drift fails rather than updating expected values. Linux GCC and macOS Clang acceptance requires the hosted CI jobs, not a claim based solely on a local macOS run."
+msgid "The integer-conversion suite keeps the generated source small: it embeds one table of inputs per format and loops over targets, modes and directions at run time instead of expanding every combination into source lines. Each input emits one `LUNA_BITS` record whose value is an FNV-1a fold of all results for that input (all four targets, all five directions plus the default functions, presence, checked value and saturating value), computed by the Python oracle from exact integer arithmetic and compared on every backend; each result is also checked individually against the exact rounded integer in the table so that a failure names the input, target, mode and direction. `.moonignore` keeps `testdata`, `tools`, `.github` and the `src/ci_probe` test package out of the published package (`moon package --list` shows what is shipped)."
 msgstr ""
 
 #: manual/testing.md:13
-msgid "Sources: [official MoonBit native package options](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options), [MoonBit contraction report #2262](https://github.com/moonbitlang/moon/issues/2262), and [Python numeric conversion documentation](https://docs.python.org/3/library/functions.html#float)."
+msgid "Run `python3 tools/generate_oracles.py --check`, `python3 tools/test_ci_harness.py` and `python3 tools/run_backend_tests.py <backend>` locally. Run `python3 tools/generate_oracles.py` only when intentionally updating the committed fixtures; MoonBit's formatter is required. The generator runs offline and introduces no package dependency. CI installs the pinned MoonBit toolchain version from its official installer (`MOONBIT_INSTALL_VERSION` in the workflow), records it and fails if the installed `moonc` differs; bump the pin deliberately and rerun every gate. Pushes run the workflow only on `main`; pull requests run it on every update. Fixture drift fails rather than updating expected values. Linux GCC and macOS Clang acceptance requires the hosted CI jobs, not a claim based solely on a local macOS run."
 msgstr ""
 
 #: manual/testing.md:15
-msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies expectations for both widths, all classes and signs, payload boundaries and portable numeric results. For #24 round-to-integral directions, an independent model decodes finite encodings to exact `fractions.Fraction` values, applies floor, ceiling, truncation or the specified tie rule, and re-encodes the integral result while preserving the sign of zero. It does not reproduce the implementation's exponent-mask algorithm. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
+msgid "Sources: [official MoonBit native package options](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options), [MoonBit contraction report #2262](https://github.com/moonbitlang/moon/issues/2262), and [Python numeric conversion documentation](https://docs.python.org/3/library/functions.html#float)."
 msgstr ""
 
 #: manual/testing.md:17
+msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies expectations for both widths, all classes and signs, payload boundaries and portable numeric results. For #24 round-to-integral directions, an independent model decodes finite encodings to exact `fractions.Fraction` values, applies floor, ceiling, truncation or the specified tie rule, and re-encodes the integral result while preserving the sign of zero. It does not reproduce the implementation's exponent-mask algorithm. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
+msgstr ""
+
+#: manual/testing.md:19
 msgid "For #23 extrema and ordering, the offline oracle constructs a boundary set containing signed zeros, the largest positive subnormal, the largest negative subnormal, `1.0`, the smallest negative normal, infinities, and positive and negative qNaN/sNaN encodings with payloads, including `+qNaN` payload 2, `-qNaN` payload 0, and both `+1` and `-1`. Python integer key transforms provide a cross-check for all-pairs raw totalOrder and portable numeric order; integer comparisons also determine minimum and maximum, which return a canonical positive quiet NaN when an input is NaN, while preserving signed-zero selection. All results are emitted as `LUNA_BITS` records and checked against every backend transcript."
 msgstr ""
 
@@ -548,6 +580,10 @@ msgstr ""
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr ""
 
-#: manual/tutorial/float.md:30
+#: manual/tutorial/float.md:48
+msgid "Integer conversions round first and test the range afterwards. Use the `_checked` forms when out-of-range input is an error and the `_saturating` forms when clamping is the intended policy; NaN maps to `None` or to `0` explicitly in either case. `int64_to_float` and `uint64_to_float` round a 64-bit integer to binary32 exactly once, which JavaScript's `Float::from_int64` does not."
+msgstr ""
+
+#: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr ""

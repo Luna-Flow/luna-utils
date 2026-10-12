@@ -1,0 +1,5 @@
+# Test fixtures and generators are not part of the published package.
+/testdata/
+/tools/
+/src/ci_probe/
+/.github/
