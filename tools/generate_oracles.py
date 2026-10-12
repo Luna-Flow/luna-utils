@@ -62,8 +62,9 @@ def generate():
                       '  let hex = value.to_string(radix=16)', '  let padded = "0".repeat(16 - hex.length()) + hex',
                       f'  println("LUNA_BITS {case["id"]} " + padded)'])
     # Representation oracles use a separate offline integer model; no library calls.
-    from float_oracles import generate_conversion_cases, generate_float_cases, generate_integer_float_cases, class_encoder
-    float_cases = generate_float_cases() + generate_conversion_cases() + generate_integer_float_cases()
+    from float_oracles import class_encoder, conversion_suite, generate_float_cases
+    float_cases = generate_float_cases()
+    conversion_records, conversion_lines, conversion_tables = conversion_suite()
     lines.append('}')
     lines.extend(class_encoder())
     lines.extend(['///|', 'fn emit_float_record(id : String, value : UInt64, expected : UInt64) -> Unit raise {',
@@ -76,11 +77,12 @@ def generate():
         for case in float_cases[start:start + 25]:
             lines.append(f'  emit_float_record("{case["id"]}", {case["expression"]}, 0x{case["bits"]}UL)')
         lines.append('}')
+    lines.extend(conversion_lines)
     moonfmt = shutil.which('moonfmt') or str(Path.home()/'.moon/bin/moonfmt')
     formatted = subprocess.run([moonfmt, '-'], input='\n'.join(lines)+'\n', text=True, capture_output=True, check=True).stdout
     return {ROOT/'testdata/oracles.json': json.dumps(dict(format="binary64", rounding="nearest_ties_even", cases=cases), indent=2)+'\n',
-            ROOT/'testdata/float_oracles.json': json.dumps(dict(model="IEEE binary interchange integer fields; portable NaN policy", cases=float_cases), indent=2)+'\n',
-            ROOT/'testdata/expected.bits': ''.join(f"LUNA_BITS {case['id']} {case['bits']}\n" for case in cases + float_cases),
+            ROOT/'testdata/float_oracles.json': json.dumps(dict(model="IEEE binary interchange integer fields; portable NaN policy", cases=float_cases, conversion_tables=conversion_tables), indent=1, separators=(',', ': '))+'\n',
+            ROOT/'testdata/expected.bits': ''.join(f"LUNA_BITS {case['id']} {case['bits']}\n" for case in cases + float_cases) + ''.join(f"LUNA_BITS {ident} {bits}\n" for ident, bits in conversion_records),
             ROOT/'src/ci_probe/oracles_wbtest.mbt': formatted}
 
 def main():
