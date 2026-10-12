@@ -1,5 +1,5 @@
 ///|
-fn round_bits(bits : UInt, direction : @binary64.RoundingDirection) -> UInt {
+fn round_bits(bits : UInt32, direction : @binary64.RoundingDirection) -> UInt32 {
   let sign = bits & 0x80000000U
   let exponent = ((bits >> 23) & 0xffU).reinterpret_as_int()
   let fraction = bits & 0x7fffffU

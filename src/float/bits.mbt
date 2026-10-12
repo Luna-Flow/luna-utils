@@ -123,7 +123,7 @@ pub fn get_payload_bits(bits : UInt64) -> UInt64? {
 /// A zero quiet payload is valid. No existing float value is modified.
 pub fn set_payload_bits(
   payload : UInt64,
-  sign_minus? : Bool = false,
+  sign_minus~ : Bool = false,
 ) -> UInt64? {
   if payload > 0x7ffffffffffffUL {
     None
@@ -140,7 +140,7 @@ pub fn set_payload_bits(
 /// Build a signaling NaN encoding; reject zero payload (which would encode infinity).
 pub fn set_payload_signaling_bits(
   payload : UInt64,
-  sign_minus? : Bool = false,
+  sign_minus~ : Bool = false,
 ) -> UInt64? {
   if payload == 0UL || payload > 0x7ffffffffffffUL {
     None
@@ -237,6 +237,6 @@ pub fn portable_abs(x : Double) -> Double {
 
 ///|
 /// The radix of both supported binary interchange formats.
-pub fn radix() -> Int {
+pub fn radix() -> Int32 {
   2
 }

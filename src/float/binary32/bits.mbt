@@ -1,6 +1,6 @@
 ///|
 /// Classify an uninterpreted IEEE binary32 encoding, preserving all NaN bits.
-pub fn classify_bits(bits : UInt) -> @binary64.Classification {
+pub fn classify_bits(bits : UInt32) -> @binary64.Classification {
   let e = bits & 0x7f800000U
   let f = bits & 0x7fffffU
   let negative = is_sign_minus_bits(bits)
@@ -37,26 +37,26 @@ pub fn classify_bits(bits : UInt) -> @binary64.Classification {
 
 ///|
 /// True exactly for NaN encodings (exponent all ones, nonzero fraction).
-pub fn is_nan_bits(bits : UInt) -> Bool {
+pub fn is_nan_bits(bits : UInt32) -> Bool {
   (bits & 0x7f800000U) == 0x7f800000U && (bits & 0x7fffffU) != 0U
 }
 
 ///|
 /// Signaling status is meaningful only for raw encodings, before float materialization.
-pub fn is_signaling_bits(bits : UInt) -> Bool {
+pub fn is_signaling_bits(bits : UInt32) -> Bool {
   is_nan_bits(bits) && (bits & 0x400000U) == 0U
 }
 
 ///|
 /// Every binary interchange encoding is canonical (IEEE 754-2019 §5.7.2).
-pub fn is_canonical_bits(bits : UInt) -> Bool {
+pub fn is_canonical_bits(bits : UInt32) -> Bool {
   ignore(bits)
   true
 }
 
 ///|
 /// Replace every NaN encoding with the fixed positive quiet NaN.
-pub fn canonicalize_nan_bits(bits : UInt) -> UInt {
+pub fn canonicalize_nan_bits(bits : UInt32) -> UInt32 {
   if is_nan_bits(bits) {
     0x7fc00000U
   } else {
@@ -66,50 +66,50 @@ pub fn canonicalize_nan_bits(bits : UInt) -> UInt {
 
 ///|
 /// Read the raw sign bit, including NaN signs.
-pub fn is_sign_minus_bits(bits : UInt) -> Bool {
+pub fn is_sign_minus_bits(bits : UInt32) -> Bool {
   (bits & 0x80000000U) != 0U
 }
 
 ///|
 /// Subnormal encoding: zero exponent and nonzero fraction.
-pub fn is_subnormal_bits(bits : UInt) -> Bool {
+pub fn is_subnormal_bits(bits : UInt32) -> Bool {
   (bits & 0x7f800000U) == 0U && (bits & 0x7fffffU) != 0U
 }
 
 ///|
 /// Finite encoding: exponent is not all ones.
-pub fn is_finite_bits(bits : UInt) -> Bool {
+pub fn is_finite_bits(bits : UInt32) -> Bool {
   (bits & 0x7f800000U) != 0x7f800000U
 }
 
 ///|
 /// Zero encoding, ignoring the sign bit.
-pub fn is_zero_bits(bits : UInt) -> Bool {
+pub fn is_zero_bits(bits : UInt32) -> Bool {
   (bits & 0x7fffffffU) == 0U
 }
 
 ///|
 /// Copy only the raw sign bit; no floating-point materialization or rounding.
-pub fn copy_sign_bits(magnitude : UInt, sign : UInt) -> UInt {
+pub fn copy_sign_bits(magnitude : UInt32, sign : UInt32) -> UInt32 {
   (magnitude & 0x7fffffffU) | (sign & 0x80000000U)
 }
 
 ///|
 /// Toggle only the raw sign bit; NaN payload and signaling status are preserved.
-pub fn negate_bits(bits : UInt) -> UInt {
+pub fn negate_bits(bits : UInt32) -> UInt32 {
   bits ^ 0x80000000U
 }
 
 ///|
 /// Clear only the raw sign bit; NaN payload and signaling status are preserved.
-pub fn abs_bits(bits : UInt) -> UInt {
+pub fn abs_bits(bits : UInt32) -> UInt32 {
   bits & 0x7fffffffU
 }
 
 ///|
 /// Return integer payload bits excluding the quiet bit; non-NaNs return None.
 /// This is an encoding API, not IEEE getPayload's floating-point result API.
-pub fn get_payload_bits(bits : UInt) -> UInt? {
+pub fn get_payload_bits(bits : UInt32) -> UInt32? {
   if is_nan_bits(bits) {
     Some(bits & 0x3fffffU)
   } else {
@@ -120,7 +120,10 @@ pub fn get_payload_bits(bits : UInt) -> UInt? {
 ///|
 /// Build a quiet NaN encoding. Reject payloads wider than 22 bits.
 /// A zero quiet payload is valid. No existing float value is modified.
-pub fn set_payload_bits(payload : UInt, sign_minus? : Bool = false) -> UInt? {
+pub fn set_payload_bits(
+  payload : UInt32,
+  sign_minus~ : Bool = false,
+) -> UInt32? {
   if payload > 0x3fffffU {
     None
   } else {
@@ -131,9 +134,9 @@ pub fn set_payload_bits(payload : UInt, sign_minus? : Bool = false) -> UInt? {
 ///|
 /// Build a signaling NaN encoding; reject zero payload (which would encode infinity).
 pub fn set_payload_signaling_bits(
-  payload : UInt,
-  sign_minus? : Bool = false,
-) -> UInt? {
+  payload : UInt32,
+  sign_minus~ : Bool = false,
+) -> UInt32? {
   if payload == 0U || payload > 0x3fffffU {
     None
   } else {
@@ -144,7 +147,7 @@ pub fn set_payload_signaling_bits(
 ///|
 /// Portable numeric view: any NaN is mapped to one quiet encoding.
 /// Never use this to recover the input NaN sign, payload or signaling status.
-pub fn to_bits_canonical(x : Float) -> UInt {
+pub fn to_bits_canonical(x : Float) -> UInt32 {
   if x != x {
     0x7fc00000U
   } else {
@@ -229,6 +232,6 @@ pub fn portable_abs(x : Float) -> Float {
 
 ///|
 /// The radix of both supported binary interchange formats.
-pub fn radix() -> Int {
+pub fn radix() -> Int32 {
   2
 }

@@ -1,14 +1,15 @@
+///|
 /// Checked and saturating conversions from binary64 values.
 ///
 /// The range checks use half-open mathematical intervals.  They run before
 /// any core conversion primitive, whose behavior for an out-of-range value is
 /// backend-specific.
-
 fn rounded(x : Double, direction : RoundingDirection) -> Double {
   round_to_integral(x, direction)
 }
 
-fn int_checked_rounded(x : Double, direction : RoundingDirection) -> Int? {
+///|
+fn int_checked_rounded(x : Double, direction : RoundingDirection) -> Int32? {
   let y = rounded(x, direction)
   if y != y || y >= 2147483648.0 || y < -2147483648.0 {
     None
@@ -17,6 +18,7 @@ fn int_checked_rounded(x : Double, direction : RoundingDirection) -> Int? {
   }
 }
 
+///|
 fn int64_checked_rounded(x : Double, direction : RoundingDirection) -> Int64? {
   let y = rounded(x, direction)
   if y != y || y >= 9223372036854775808.0 || y < -9223372036854775808.0 {
@@ -26,7 +28,8 @@ fn int64_checked_rounded(x : Double, direction : RoundingDirection) -> Int64? {
   }
 }
 
-fn uint_checked_rounded(x : Double, direction : RoundingDirection) -> UInt? {
+///|
+fn uint_checked_rounded(x : Double, direction : RoundingDirection) -> UInt32? {
   let y = rounded(x, direction)
   if y != y || y < 0.0 || y >= 4294967296.0 {
     None
@@ -35,6 +38,7 @@ fn uint_checked_rounded(x : Double, direction : RoundingDirection) -> UInt? {
   }
 }
 
+///|
 fn uint64_checked_rounded(x : Double, direction : RoundingDirection) -> UInt64? {
   let y = rounded(x, direction)
   if y != y || y < 0.0 || y >= 18446744073709551616.0 {
@@ -47,23 +51,30 @@ fn uint64_checked_rounded(x : Double, direction : RoundingDirection) -> UInt64? 
   }
 }
 
+///|
 /// Convert toward zero, returning `None` for NaN, infinities and overflow.
-pub fn to_int_checked(x : Double) -> Int? {
+pub fn to_int_checked(x : Double) -> Int32? {
   int_checked_rounded(x, TowardZero)
 }
 
+///|
 /// Convert after applying an explicit IEEE rounding direction.
-pub fn to_int_checked_with(x : Double, direction : RoundingDirection) -> Int? {
+pub fn to_int_checked_with(x : Double, direction : RoundingDirection) -> Int32? {
   int_checked_rounded(x, direction)
 }
 
+///|
 /// Convert toward zero, saturating like WebAssembly `trunc_sat`.
-pub fn to_int_saturating(x : Double) -> Int {
+pub fn to_int_saturating(x : Double) -> Int32 {
   to_int_saturating_with(x, TowardZero)
 }
 
+///|
 /// Convert after rounding, saturating like WebAssembly `trunc_sat`.
-pub fn to_int_saturating_with(x : Double, direction : RoundingDirection) -> Int {
+pub fn to_int_saturating_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> Int32 {
   let y = rounded(x, direction)
   if y != y {
     0
@@ -76,23 +87,33 @@ pub fn to_int_saturating_with(x : Double, direction : RoundingDirection) -> Int 
   }
 }
 
+///|
 /// Convert toward zero, returning `None` for NaN, infinities and overflow.
 pub fn to_int64_checked(x : Double) -> Int64? {
   int64_checked_rounded(x, TowardZero)
 }
 
+///|
 /// Convert after applying an explicit IEEE rounding direction.
-pub fn to_int64_checked_with(x : Double, direction : RoundingDirection) -> Int64? {
+pub fn to_int64_checked_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> Int64? {
   int64_checked_rounded(x, direction)
 }
 
+///|
 /// Convert toward zero, saturating like WebAssembly `trunc_sat`.
 pub fn to_int64_saturating(x : Double) -> Int64 {
   to_int64_saturating_with(x, TowardZero)
 }
 
+///|
 /// Convert after rounding, saturating like WebAssembly `trunc_sat`.
-pub fn to_int64_saturating_with(x : Double, direction : RoundingDirection) -> Int64 {
+pub fn to_int64_saturating_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> Int64 {
   let y = rounded(x, direction)
   if y != y {
     0L
@@ -105,23 +126,33 @@ pub fn to_int64_saturating_with(x : Double, direction : RoundingDirection) -> In
   }
 }
 
+///|
 /// Convert toward zero, returning `None` for NaN, infinities and overflow.
-pub fn to_uint_checked(x : Double) -> UInt? {
+pub fn to_uint_checked(x : Double) -> UInt32? {
   uint_checked_rounded(x, TowardZero)
 }
 
+///|
 /// Convert after applying an explicit IEEE rounding direction.
-pub fn to_uint_checked_with(x : Double, direction : RoundingDirection) -> UInt? {
+pub fn to_uint_checked_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> UInt32? {
   uint_checked_rounded(x, direction)
 }
 
+///|
 /// Convert toward zero, saturating like WebAssembly `trunc_sat`.
-pub fn to_uint_saturating(x : Double) -> UInt {
+pub fn to_uint_saturating(x : Double) -> UInt32 {
   to_uint_saturating_with(x, TowardZero)
 }
 
+///|
 /// Convert after rounding, saturating like WebAssembly `trunc_sat`.
-pub fn to_uint_saturating_with(x : Double, direction : RoundingDirection) -> UInt {
+pub fn to_uint_saturating_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> UInt32 {
   let y = rounded(x, direction)
   if y != y {
     0U
@@ -134,23 +165,33 @@ pub fn to_uint_saturating_with(x : Double, direction : RoundingDirection) -> UIn
   }
 }
 
+///|
 /// Convert toward zero, returning `None` for NaN, infinities and overflow.
 pub fn to_uint64_checked(x : Double) -> UInt64? {
   uint64_checked_rounded(x, TowardZero)
 }
 
+///|
 /// Convert after applying an explicit IEEE rounding direction.
-pub fn to_uint64_checked_with(x : Double, direction : RoundingDirection) -> UInt64? {
+pub fn to_uint64_checked_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> UInt64? {
   uint64_checked_rounded(x, direction)
 }
 
+///|
 /// Convert toward zero, saturating like WebAssembly `trunc_sat`.
 pub fn to_uint64_saturating(x : Double) -> UInt64 {
   to_uint64_saturating_with(x, TowardZero)
 }
 
+///|
 /// Convert after rounding, saturating like WebAssembly `trunc_sat`.
-pub fn to_uint64_saturating_with(x : Double, direction : RoundingDirection) -> UInt64 {
+pub fn to_uint64_saturating_with(
+  x : Double,
+  direction : RoundingDirection,
+) -> UInt64 {
   let y = rounded(x, direction)
   if y != y {
     0UL
@@ -166,6 +207,7 @@ pub fn to_uint64_saturating_with(x : Double, direction : RoundingDirection) -> U
   }
 }
 
+///|
 fn uint64_to_float_round_to_odd(magnitude : UInt64) -> Double {
   if magnitude == 0UL {
     0.0
@@ -173,7 +215,7 @@ fn uint64_to_float_round_to_odd(magnitude : UInt64) -> Double {
     let top = 63 - magnitude.clz()
     let shift = top - 52
     let significand : UInt64 = if shift <= 0 {
-      magnitude << (-shift)
+      magnitude << -shift
     } else {
       let kept = magnitude >> shift
       let remainder = magnitude & ((1UL << shift) - 1UL)
@@ -189,17 +231,22 @@ fn uint64_to_float_round_to_odd(magnitude : UInt64) -> Double {
   }
 }
 
+///|
 /// Correctly rounded direct conversion from `Int64` to binary32.
 pub fn int64_to_float(value : Int64) -> Float {
   let raw = value.reinterpret_as_uint64()
   let negative = (raw & 0x8000000000000000UL) != 0UL
-  let magnitude = if negative { (raw ^ 0xffffffffffffffffUL) + 1UL } else { raw }
+  let magnitude = if negative {
+    (raw ^ 0xffffffffffffffffUL) + 1UL
+  } else {
+    raw
+  }
   let intermediate = uint64_to_float_round_to_odd(magnitude)
   Float::from_double(if negative { -intermediate } else { intermediate })
 }
 
+///|
 /// Correctly rounded direct conversion from `UInt64` to binary32.
 pub fn uint64_to_float(value : UInt64) -> Float {
   Float::from_double(uint64_to_float_round_to_odd(value))
 }
-
