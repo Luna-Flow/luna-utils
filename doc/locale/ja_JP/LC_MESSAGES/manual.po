@@ -100,26 +100,46 @@ msgid "The implementation rounds directly from the sign, exponent and fraction f
 msgstr "実装は符号、指数、仮数部のビットから直接丸めます。ゼロの両方の符号と既に整数である値を保持し、NaN 入力には正の正規 quiet NaN を返して入力の符号とペイロードを破棄し、無限大は変更しません。sNaN 入力の invalid 例外と非整数入力の inexact フラグは報告しません。これらの報告は issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ API と `_exact` 版に委ねます。"
 
 #: manual/api/float.md:25
+msgid "Integer conversions"
+msgstr "整数への変換"
+
+#: manual/api/float.md:27
+msgid "Both packages provide the same sixteen functions: `to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the four `*_saturating` counterparts, and a `_with` form of each that takes a `RoundingDirection`. `@float` converts `Double`; `@binary32` converts `Float` and widens it exactly to binary64 first, so both packages follow one contract. The targets are `Int` (`[-2^31, 2^31 - 1]`), `Int64` (`[-2^63, 2^63 - 1]`), `UInt` (`[0, 2^32 - 1]`) and `UInt64` (`[0, 2^64 - 1]`)."
+msgstr "両パッケージは同じ 16 個の関数を提供します。`to_int_checked`、`to_int64_checked`、`to_uint_checked`、`to_uint64_checked`、対応する 4 つの `*_saturating`、そして各関数に `RoundingDirection` を受け取る `_with` 形式です。`@float` は `Double` を、`@binary32` は `Float` を変換し、後者はまず binary64 へ正確に拡張するため、両パッケージは同一の契約に従います。変換先は `Int`（`[-2^31, 2^31 - 1]`）、`Int64`（`[-2^63, 2^63 - 1]`）、`UInt`（`[0, 2^32 - 1]`）、`UInt64`（`[0, 2^64 - 1]`）です。"
+
+#: manual/api/float.md:29
+msgid "The value is first rounded to an integer with the chosen direction; the functions without `_with` round toward zero (truncation). The range decision is made on that rounded integer, after rounding, and never on the input. Hence `-0.5` converts to `Some(0)` for `to_uint_checked` (it truncates to zero) but to `None` with `TowardNegative` (it rounds to `-1`), and `2147483647.5` fits `Int` when truncated but not when rounded `TiesToEven`. Both zeros, `+0` and `-0`, convert to `0`."
+msgstr "値はまず指定した方向で整数に丸められます。`_with` なしの関数は 0 方向（切り捨て）に丸めます。範囲の判定は丸めた後の整数に対して、丸めの後で行い、入力そのものには決して行いません。したがって `-0.5` は `to_uint_checked` では `Some(0)`（0 に切り捨て）になりますが、`TowardNegative` では `None`（`-1` に丸め）になります。`2147483647.5` は切り捨てなら `Int` に収まりますが、`TiesToEven` で丸めると収まりません。`+0` と `-0` のどちらのゼロも `0` に変換されます。"
+
+#: manual/api/float.md:31
+msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the rounded integer is outside the target range; otherwise `Some(n)`. `*_saturating` clamps like WebAssembly `trunc_sat`: NaN converts to `0`, `+inf` and any rounded value above the range convert to the largest value of the target, and `-inf` and any value below the range convert to its smallest (`0` for the unsigned targets). The range tests run on the rounded `Double` before any core conversion primitive is called, because core's behavior for out-of-range values differs between backends."
+msgstr "`*_checked` は NaN、`+inf`、`-inf`、および丸めた整数が変換先の範囲外の場合に `None` を返し、それ以外は `Some(n)` を返します。`*_saturating` は WebAssembly の `trunc_sat` と同様に範囲内へ飽和させます。NaN は `0` に、`+inf` と範囲を超える丸め値は変換先の最大値に、`-inf` と範囲を下回る値は最小値（符号なしでは `0`）に変換されます。範囲の判定は、core の変換プリミティブを呼ぶ前に丸めた `Double` に対して行います。範囲外の値に対する core の挙動がバックエンドごとに異なるためです。"
+
+#: manual/api/float.md:33
+msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the direct-rounding replacement for core's `Float::from_int64` and `Float::from_uint64`, which on the JavaScript backend convert through binary64 first and therefore round twice; for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
+msgstr "`int64_to_float(Int64) -> Float` と `uint64_to_float(UInt64) -> Float` は `@float` にありますが、binary32 の `Float` を返します。結果は 64 ビット整数を一度だけ丸めた最も近い binary32 値で、同値の場合は偶数側です。これらは core の `Float::from_int64` と `Float::from_uint64` の直接丸めによる代替であり、後者は JavaScript バックエンドでまず binary64 に変換するため二度丸めます。例えば `2^53 + 2^29 + 1` は最初の丸めで同値の `2^53 + 2^29` になり、次に誤った binary32 の隣接値 `2^53` に丸められます。実装は奇数への丸めを用いた中間有効数を使うため、結果はすべてのバックエンドでビット単位で一致します。この 2 つの関数の配置（`@float` か `@binary32` か）はメンテナ向けの未決事項です。"
+
+#: manual/api/float.md:35
 msgid "Extrema and ordering"
 msgstr "極値と順序付け"
 
-#: manual/api/float.md:27
+#: manual/api/float.md:37
 msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
 msgstr "`minimum(x, y)` と `maximum(x, y)` は binary64 で IEEE 754-2019 §9.6 を実装し、binary32 パッケージも同じ名前を公開します。どちらかの入力が NaN なら、正の正規 quiet NaN を返し、NaN の符号とペイロードは伝播しません。ゼロ同士の場合、minimum はどちらかが負のゼロなら `-0` を選び、maximum はどちらかが正のゼロなら `+0` を選びます。これらの数値関数は sNaN の invalid 例外を報告しません。このパッケージの API に例外フラグはなく、シグナル動作は issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) に委ねます。"
 
-#: manual/api/float.md:29
+#: manual/api/float.md:39
 msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
 msgstr "`portable_total_order(x, y)` は移植可能な数値に対して §5.10 を実装します。`total_order_bits(x, y)` は整数ビットから完全なエンコーディング順序を実装し、NaN の符号、signaling 状態、ペイロードを保持します。特に JavaScript では数値 NaN の表現を移植できないため、この区別が必要です。`sort_total_order(values)` は可変配列を、`sort_total_order_view(view)` は可変配列ビューを移植可能な値の順序でソートします。正規化された NaN はすべて数値の後に比較されますが、core の `sort_by` は不安定です。同じ正規化 key の順序が変わることがあり、元の NaN ビットは保持され、JavaScript ではペイロードが正規化される場合があります。そのため負の NaN は raw IEEE totalOrder の位置を得ません。NaN エンコーディングを厳密に順序付けるには、生の整数エンコーディングに `total_order_bits` を使います。"
 
-#: manual/api/float.md:31
+#: manual/api/float.md:41
 msgid "Payload encoding adapters"
 msgstr "ペイロードのエンコーディングアダプタ"
 
-#: manual/api/float.md:33
+#: manual/api/float.md:43
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` は NaN 以外に `None`、NaN に quiet ビットを除く `Some(payload)` を返します。`set_payload_bits(payload, sign_minus?=false)` は quiet NaN のエンコーディングを返し、binary64 の 51 ビットまたは binary32 の 22 ビットを超える場合は `None` を返します。`set_payload_signaling_bits` は無限大になるゼロペイロードも拒否します。これらは整数エンコーディングを入出力とする IEEE 754-2019 §9.7 のアダプタであり、標準の浮動小数点 getPayload/setPayload 関数そのものではありません。"
 
-#: manual/api/float.md:35
+#: manual/api/float.md:45
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` はアプリケーションの NaN 正規化ビューを表し、元の NaN に対する IEEE 符号・分類操作を表しません。IEEE エンコーディングの意味論が必要な場合は `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` と生の符号操作を使用してください。`is_canonical_bits` は IEEE の正規エンコーディングを判定し、アプリケーション固有の固定 NaN との一致を判定するものではありません。"
 
@@ -132,14 +152,18 @@ msgid "The contract separates exact integer encodings from portable numeric obse
 msgstr "契約は正確な整数エンコーディングと移植可能な数値観測を分離します。生のテストは全分類、符号付きゼロ、指数境界、NaN の quiet ビット、両符号、ペイロード幅と signaling ゼロの拒否を網羅します。丸めのテストは IEEE 754-2019 §5.9 の五つの方向、正負の同値、0.5 の直前の値、負のゼロ、大きな整数値、無限大を検査します。数値テストは `x != x` で NaN を検出し、入力 NaN のメタデータではなく正規整数出力を比較します。"
 
 #: manual/conformance/float.md:5
+msgid "Integer conversion tests are table driven. For each binary format a generated table lists the exact rounded integer of every input in each of the five directions (computed offline with `fractions.Fraction`, or marked NaN, at least `2^64` or at most `-2^64`). The test converts every input with all sixteen functions in the checked-presence, checked-value and saturating modes, in all five directions through the `_with` forms and once through the default functions, and compares each result with the table. The inputs include `+0` and `-0`, `±0.5` and the other eighths below 9, halfway and quarter points next to every power of two `2^j` for `j = 0..69`, the sweep `2^k` and its neighbors one ulp away, the neighborhoods of `±2^31`, `2^32`, `±2^63` and `2^64` with fractional parts `0`, `1/8`, `1/4`, `1/2` and `3/4`, infinities, quiet and signaling NaNs with payloads, the smallest subnormal and the largest finite values, and 64 seeded random encodings. The default functions truncate; changing the default direction of any of them to `TowardPositive` fails the test (checked by mutation). For `Int64` and `UInt64` converted to binary32 and binary64, the table covers `2^k` and its neighbors for `k = 0..63`, halfway and nearby remainders for 24-bit and 53-bit significands, `2^64 - 1`, values near `2^64 - 2^39`, and `2^53 + 2^29 + 1`, where rounding through binary64 first gives the wrong binary32 result."
+msgstr "整数変換のテストは表駆動です。各 2 進形式について、生成された表に各入力の 5 方向すべての正確な丸め後整数（`fractions.Fraction` でオフライン計算、または NaN、`2^64` 以上、`-2^64` 以下の印）が並びます。テストは 16 個すべての関数を checked の存在、checked の値、saturating の 3 モードで各入力に適用します。`_with` 形式で 5 方向すべてを、デフォルト関数で 1 回ずつ変換し、各結果を表と比較します。入力には `+0` と `-0`、`±0.5` と 9 未満のその他の 8 分の 1 の値、`j = 0..69` の各 `2^j` の隣にある半値点と 4 分の 1 点、`2^k` の列とそこから 1 ulp 離れた隣接値、`±2^31`、`2^32`、`±2^63`、`2^64` の近傍（小数部は `0`、`1/8`、`1/4`、`1/2`、`3/4`）、無限大、payload 付きの quiet NaN と signaling NaN、最小の非正規数と最大の有限値、シード固定の 64 個の乱数エンコーディングが含まれます。デフォルト関数は 0 方向に切り捨てます。いずれかのデフォルト方向を `TowardPositive` に変えるとテストが失敗します（ミューテーションで確認済み）。`Int64` と `UInt64` から binary32 と binary64 への変換では、`k = 0..63` の `2^k` とその隣接値、24 ビットと 53 ビットの有効数に対する半値点とその付近の余り、`2^64 - 1`、`2^64 - 2^39` 付近の値、そして `2^53 + 2^29 + 1` を表が網羅します。最後の値は binary64 を経由して丸めると binary32 の結果が誤ります。"
+
+#: manual/conformance/float.md:7
 msgid "Ordering tests cover both argument orders for minimum/maximum, signed-zero selection, raw totalOrder across signed qNaN/sNaN payloads, portable NaN canonicalization, and array and mutable-view sorting. The generated integer-key oracle compares all pairs in a boundary sample for both binary formats."
 msgstr "順序付けテストは minimum/maximum の両方の引数順、有符号ゼロの選択、符号付き qNaN/sNaN ペイロード間の raw totalOrder、移植可能な NaN の正規化、配列と可変ビューのソートを検証します。生成された整数 key oracle は両方の二進形式で境界サンプルの全ペアを比較します。"
 
-#: manual/conformance/float.md:7
+#: manual/conformance/float.md:9
 msgid "Four-backend debug/release checks and exact transcript comparison follow the [CI contract](../testing.md). Local results cannot establish Linux GCC behavior; CI must confirm that job. Tests are regression evidence, not a proof of all IEEE 754 behavior. No Lean/mathlib formal proof is supplied."
 msgstr "四つのバックエンドの debug/release 検査と正確な記録比較は [CI 契約](../testing.md)に従います。ローカル結果だけでは Linux GCC の動作を確認できず、CI で確認する必要があります。テストは回帰の証拠であり、IEEE 754 の全動作の証明ではありません。Lean/mathlib による形式証明は提供しません。"
 
-#: manual/conformance/float.md:9
+#: manual/conformance/float.md:11
 msgid "Exception flags, FMA, conversions, IEEE magnitude extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
 msgstr "例外フラグ、FMA、変換、IEEE magnitude 極値、安定ハッシュ、書式化、bigint、libm は別の issue です。丸めの正確な inexact フラグ報告は [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29) を待ちます。正規化はアプリケーションの表現方針であり、ホスト浮動小数点値の往復でペイロードを保持する保証ではありません。"
 
@@ -441,14 +465,18 @@ msgid "Round-to-integral operations implement IEEE 754-2019 §5.9 from the same 
 msgstr "整数への丸め操作は同じ整数フィールドから IEEE 754-2019 §5.9 を実装します。有限の非整数値では、捨てられる小数ビットが最近接丸めの同値規則または方向付きの増分を決めます。1 未満の値を方向付きに丸める場合は、符号付きゼロのエンコーディングか隣接する符号付き 1 のエンコーディングを使います。NaN は正の正規 NaN に quiet 化し、入力の符号とペイロードを破棄します。sNaN 入力の invalid 例外と非整数入力の inexact は報告せず、[#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ作業および `_exact` 版に委ねます。無限大は変更せずに通します。"
 
 #: manual/design/float.md:13
+msgid "Integer conversions first apply `round_to_integral` and then compare the rounded `Double` with the half-open interval of the target before calling a core primitive, since core's `to_int` family is backend-specific outside its range. Comparing after rounding is the contract: `-0.5` truncates into the `UInt` range. `UInt64` values at or above `2^63` are converted by subtracting `2^63`, converting the remainder as `Int64` and setting the top bit, because no single core primitive covers that range on every backend. `int64_to_float` and `uint64_to_float` take the magnitude, keep its top 53 bits and fold all lower bits into the last kept bit (round to odd), and then narrow that exactly representable intermediate to binary32 with a single ties-to-even rounding. Because a binary64 significand has at least two more bits than binary32, the round-to-odd intermediate preserves every rounding decision, so the result equals a direct rounding of the integer."
+msgstr "整数変換はまず `round_to_integral` を適用し、丸めた `Double` を変換先の半開区間と比較してから core のプリミティブを呼びます。core の `to_int` 系は範囲外でバックエンド依存の挙動になるためです。丸めた後で比較することが契約であり、`-0.5` は切り捨てられて `UInt` の範囲に入ります。`2^63` 以上の `UInt64` 値は、`2^63` を引いて余りを `Int64` として変換し、最上位ビットを立てて得ます。すべてのバックエンドでその範囲を扱える単一の core プリミティブがないためです。`int64_to_float` と `uint64_to_float` は絶対値の上位 53 ビットを残し、それより下位のビットをすべて最後に残したビットへ畳み込みます（奇数への丸め）。その後、正確に表現できるこの中間値を、同値は偶数側とする丸め 1 回だけで binary32 に狭めます。binary64 の有効数は binary32 より 2 ビット以上長いので、奇数への丸めによる中間値はすべての丸め判定を保存し、結果は整数の直接丸めと等しくなります。"
+
+#: manual/design/float.md:15
 msgid "IEEE 754-2019 §9.6 extrema first handle NaN, then compare ordinary values, with explicit bit selection for two zeros: minimum combines the sign bits with OR to choose `-0`, and maximum combines them with AND to choose `+0`. A NaN result uses this package's positive canonical quiet encoding; exception flags are not exposed here."
 msgstr "IEEE 754-2019 §9.6 の極値演算は、まず NaN を処理してから通常の値を比較します。ゼロ同士はビット選択で明示的に扱います。minimum は符号ビットの OR で `-0` を選び、maximum は AND で `+0` を選びます。NaN の結果にはこのパッケージの正の正規 quiet エンコーディングを使い、例外フラグは公開しません。"
 
-#: manual/design/float.md:15
+#: manual/design/float.md:17
 msgid "IEEE 754-2019 §5.10 totalOrder is an integer ordering over the encoding, not ordinary floating comparison. For a width of `w` bits and sign mask `S`, the signed key is `bits XOR (S - 1)` for negative encodings and `bits` otherwise. Comparing these keys as signed integers reverses all lower bits for negative values and orders positive values directly. The raw-bit API applies this key without materializing a float, so it retains negative NaN, sNaN and payload ordering on every backend. The portable numeric API first canonicalizes NaNs; it therefore provides deterministic ordering for numeric values but cannot reconstruct encoding details lost by host storage."
 msgstr "IEEE 754-2019 §5.10 の totalOrder は通常の浮動小数点比較ではなく、エンコーディングに対する整数順序です。幅 `w` ビット、符号マスク `S` の形式では、負のエンコーディングの符号付き key は `bits XOR (S - 1)`、それ以外は `bits` です。これらの key を符号付き整数として比べると、負の値では下位ビットが反転した順序になり、正の値はそのまま順序付けられます。raw-bit API は浮動小数点値に変換せず key を適用するため、すべてのバックエンドで負の NaN、sNaN、ペイロードの順序を保持します。移植可能な数値 API は先に NaN を正規化するため、数値の順序は決定的ですが、ホスト保存時に失われたエンコーディング情報は復元できません。"
 
-#: manual/design/float.md:17
+#: manual/design/float.md:19
 msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
 msgstr "配列と可変ビューのソートはどちらも、core のインプレース `sort_by` を通じて同じ key 比較器を使います。比較器は key を減算せず、符号付き比較から -1、0、1 を返して整数オーバーフローを避けます。"
 
@@ -501,18 +529,22 @@ msgid "The offline generator `tools/generate_oracles.py` uses CPython IEEE binar
 msgstr "オフライン生成器 `tools/generate_oracles.py` は CPython IEEE binary64 の `float(int)` と正確な `fractions.Fraction` オペランドを使います。収縮プローブでは積を丸めてから加算します。`(1 + 2^-27) * (1 - 2^-27)` は 1 に丸められ、1 を引くと正のゼロになります。一回だけ丸めると -2^-54 になります。生成されるプローブは、各オペランドのビットパターンをプロセス引数の個数から導いたマスクと XOR します。このマスクは実行時にゼロであり、アサーションでゼロであることを確認するため、最適化する C コンパイラは式を定数畳み込みできず、乗算加算は debug と release の両方のビルドで実行時に評価されます。`-ffp-contract=fast` でプローブをビルドすると Apple Clang で両モードとも失敗し、コンパイル時に固定された値ではなく収縮そのものを検出していることを確認できます。定数配列のオペランドでは release ビルドが式を畳み込み、`-ffp-contract=fast` でもプローブが通過していました。モデルは IEEE 754-2019 binary64、roundTiesToEven、独立した乗算と加算、および収縮制御（§10.4）です。有限の標本は回帰の証拠であり、普遍的証明や形式検証ではありません。ISO/IEC 10967-1 の言語非依存算術が、ここで選択した IEEE 表現と丸めモデルを上書きすることはありません。"
 
 #: manual/testing.md:11
+msgid "The integer-conversion suite keeps the generated source small: it embeds one table of inputs per format and loops over targets, modes and directions at run time instead of expanding every combination into source lines. Each input emits one `LUNA_BITS` record whose value is an FNV-1a fold of all results for that input (all four targets, all five directions plus the default functions, presence, checked value and saturating value), computed by the Python oracle from exact integer arithmetic and compared on every backend; each result is also checked individually against the exact rounded integer in the table so that a failure names the input, target, mode and direction. `.moonignore` keeps `testdata`, `tools`, `.github` and the `src/ci_probe` test package out of the published package (`moon package --list` shows what is shipped)."
+msgstr "整数変換スイートは生成されるソースを小さく保ちます。各形式につき入力の表を 1 つだけ埋め込み、すべての組み合わせをソース行に展開する代わりに、変換先、モード、方向を実行時にループします。各入力は `LUNA_BITS` レコードを 1 つ出力し、その値はその入力に対する全結果（4 つの変換先、5 方向とデフォルト関数、存在、checked の値、saturating の値）の FNV-1a 畳み込みです。値は Python の oracle が正確な整数演算から計算し、すべてのバックエンドで比較されます。各結果は表の正確な丸め後整数とも個別に照合されるため、失敗時には入力、変換先、モード、方向が分かります。`.moonignore` により `testdata`、`tools`、`.github`、`src/ci_probe` テストパッケージは公開パッケージに含まれません（実際に配布される内容は `moon package --list` で確認できます）。"
+
+#: manual/testing.md:13
 msgid "Run `python3 tools/generate_oracles.py --check`, `python3 tools/test_ci_harness.py` and `python3 tools/run_backend_tests.py <backend>` locally. Run `python3 tools/generate_oracles.py` only when intentionally updating the committed fixtures; MoonBit's formatter is required. The generator runs offline and introduces no package dependency. CI installs the pinned MoonBit toolchain version from its official installer (`MOONBIT_INSTALL_VERSION` in the workflow), records it and fails if the installed `moonc` differs; bump the pin deliberately and rerun every gate. Pushes run the workflow only on `main`; pull requests run it on every update. Fixture drift fails rather than updating expected values. Linux GCC and macOS Clang acceptance requires the hosted CI jobs, not a claim based solely on a local macOS run."
 msgstr "ローカルでは `python3 tools/generate_oracles.py --check`、`python3 tools/test_ci_harness.py`、`python3 tools/run_backend_tests.py <backend>` を実行します。コミット済み fixture を意図的に更新するときだけ `python3 tools/generate_oracles.py` を実行してください。MoonBit フォーマッタが必要です。生成器はオフラインで動作し、パッケージ依存を追加しません。CI は公式インストーラで固定版の MoonBit ツールチェーン（ワークフローの `MOONBIT_INSTALL_VERSION`）を導入して記録し、実際に導入された `moonc` が異なれば失敗します。固定版の更新は意図的に行い、すべての検査を再実行してください。push ではワークフローは `main` でのみ実行され、pull request では更新のたびに実行されます。fixture の変化は検査を失敗させ、期待値を自動更新しません。Linux GCC と macOS Clang の受け入れにはホスト型 CI ジョブが必要であり、ローカル macOS 実行のみでは完了を主張できません。"
 
-#: manual/testing.md:13
+#: manual/testing.md:15
 msgid "Sources: [official MoonBit native package options](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options), [MoonBit contraction report #2262](https://github.com/moonbitlang/moon/issues/2262), and [Python numeric conversion documentation](https://docs.python.org/3/library/functions.html#float)."
 msgstr "出典：[MoonBit 公式 native パッケージ設定](https://docs.moonbitlang.com/en/latest/toolchain/moon/package.html#native-backend-link-options)、[MoonBit 収縮報告 #2262](https://github.com/moonbitlang/moon/issues/2262)、[Python 数値変換文書](https://docs.python.org/3/library/functions.html#float)。"
 
-#: manual/testing.md:15
+#: manual/testing.md:17
 msgid "The #25 representation corpus is generated by `tools/float_oracles.py`, invoked by `tools/generate_oracles.py`. Python arbitrary-precision integer field extraction supplies expectations for both widths, all classes and signs, payload boundaries and portable numeric results. For #24 round-to-integral directions, an independent model decodes finite encodings to exact `fractions.Fraction` values, applies floor, ceiling, truncation or the specified tie rule, and re-encodes the integral result while preserving the sign of zero. It does not reproduce the implementation's exponent-mask algorithm. The generated test emits actual outputs as `LUNA_BITS`, with binary32 zero-extended to 64 bits, classification encoded by a documented test-only ID, and `None` encoded as all ones. The checked-in JSON records include inputs, calls and expected outputs."
 msgstr "#25 の表現コーパスは `tools/generate_oracles.py` が `tools/float_oracles.py` を呼び出して生成します。Python の任意精度整数フィールド抽出により、両形式、全クラスと符号、ペイロード境界、移植可能な数値結果の期待値を得ます。#24 の整数への丸め方向では、独立モデルが有限エンコーディングを正確な `fractions.Fraction` 値にデコードし、floor、ceiling、truncation または指定の同値規則を適用して、ゼロの符号を保ちながら整数結果を再エンコードします。実装の指数マスクアルゴリズムは再現しません。生成テストは実際の出力を `LUNA_BITS` に記録し、binary32 は 64 ビットにゼロ拡張、分類は文書化されたテスト専用 ID、`None` は全 1 で表します。コミット済み JSON には入力、呼び出し、期待出力が含まれます。"
 
-#: manual/testing.md:17
+#: manual/testing.md:19
 msgid "For #23 extrema and ordering, the offline oracle constructs a boundary set containing signed zeros, the largest positive subnormal, the largest negative subnormal, `1.0`, the smallest negative normal, infinities, and positive and negative qNaN/sNaN encodings with payloads, including `+qNaN` payload 2, `-qNaN` payload 0, and both `+1` and `-1`. Python integer key transforms provide a cross-check for all-pairs raw totalOrder and portable numeric order; integer comparisons also determine minimum and maximum, which return a canonical positive quiet NaN when an input is NaN, while preserving signed-zero selection. All results are emitted as `LUNA_BITS` records and checked against every backend transcript."
 msgstr "#23 の極値と順序付けでは、オフライン oracle が有符号ゼロ、最大の正の subnormal、最大の負の subnormal、`1.0`、最小の負の normal、無限大、ペイロードを持つ正負の qNaN/sNaN エンコーディングを含む境界集合を作ります。payload 2 の `+qNaN`、payload 0 の `-qNaN`、`+1` と `-1` も含みます。Python の整数 key 変換が raw totalOrder と移植可能な数値順序の全ペアをクロスチェックします。入力が NaN の場合に正の正規 quiet NaN を返し、有符号ゼロの選択を保持する minimum と maximum も整数比較で決定します。すべての結果は `LUNA_BITS` レコードとして出力され、各バックエンドの transcript と照合されます。"
 
@@ -548,7 +580,11 @@ msgstr "浮動小数点表現のチュートリアル"
 msgid "Import `Luna-Flow/luna-utils/float` as `f64` and `Luna-Flow/luna-utils/float/binary32` as `f32` in moon.pkg. Keep a signaling NaN as an integer and canonicalize at a numeric serialization boundary."
 msgstr "moon.pkg で `Luna-Flow/luna-utils/float` を `f64`、`Luna-Flow/luna-utils/float/binary32` を `f32` としてインポートしてください。signaling NaN を整数として保持し、数値の直列化境界で正規化します。"
 
-#: manual/tutorial/float.md:30
+#: manual/tutorial/float.md:48
+msgid "Integer conversions round first and test the range afterwards. Use the `_checked` forms when out-of-range input is an error and the `_saturating` forms when clamping is the intended policy; NaN maps to `None` or to `0` explicitly in either case. `int64_to_float` and `uint64_to_float` round a 64-bit integer to binary32 exactly once, which JavaScript's `Float::from_int64` does not."
+msgstr "整数変換は先に丸め、その後で範囲を検査します。範囲外の入力をエラーとして扱いたい場合は `_checked` 形式を、範囲内への飽和が意図した方針の場合は `_saturating` 形式を使ってください。どちらの場合も NaN は `None` または `0` に明示的に対応付けられます。`int64_to_float` と `uint64_to_float` は 64 ビット整数を binary32 へ一度だけ丸めますが、JavaScript 上の `Float::from_int64` はそうではありません。"
+
+#: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "生のペイロード setter でエンコーディングを構築して `None` を確認し、ペイロードの忠実性が必要な場合は結果を Double や Float に変換しないでください。正規化数値関数は意図的に NaN メタデータを捨てます。[API](../api/float.md)と[適合性の制限](../conformance/float.md)を参照してください。"
 
