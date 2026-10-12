@@ -84,6 +84,38 @@ pub fn sort_total_order_view(MutArrayView[Float]) -> Unit
 
 pub fn to_bits_canonical(Float) -> UInt
 
+pub fn to_int64_checked(Float) -> Int64?
+
+pub fn to_int64_checked_with(Float, @float.RoundingDirection) -> Int64?
+
+pub fn to_int64_saturating(Float) -> Int64
+
+pub fn to_int64_saturating_with(Float, @float.RoundingDirection) -> Int64
+
+pub fn to_int_checked(Float) -> Int?
+
+pub fn to_int_checked_with(Float, @float.RoundingDirection) -> Int?
+
+pub fn to_int_saturating(Float) -> Int
+
+pub fn to_int_saturating_with(Float, @float.RoundingDirection) -> Int
+
+pub fn to_uint64_checked(Float) -> UInt64?
+
+pub fn to_uint64_checked_with(Float, @float.RoundingDirection) -> UInt64?
+
+pub fn to_uint64_saturating(Float) -> UInt64
+
+pub fn to_uint64_saturating_with(Float, @float.RoundingDirection) -> UInt64
+
+pub fn to_uint_checked(Float) -> UInt?
+
+pub fn to_uint_checked_with(Float, @float.RoundingDirection) -> UInt?
+
+pub fn to_uint_saturating(Float) -> UInt
+
+pub fn to_uint_saturating_with(Float, @float.RoundingDirection) -> UInt
+
 pub fn total_order_bits(UInt, UInt) -> Bool
 
 // Errors

@@ -1,9 +1,12 @@
+// Checked and saturating conversions from binary64 values.
+//
+// The range checks use half-open mathematical intervals on the rounded integer.
+// They run before any core conversion primitive, whose behavior for an
+// out-of-range value is backend-specific.
+
 ///|
-/// Checked and saturating conversions from binary64 values.
-///
-/// The range checks use half-open mathematical intervals.  They run before
-/// any core conversion primitive, whose behavior for an out-of-range value is
-/// backend-specific.
+/// Round `x` to an integral value in the given direction (NaN and infinities
+/// are unchanged); the shared first step of every integer conversion below.
 fn rounded(x : Double, direction : RoundingDirection) -> Double {
   round_to_integral(x, direction)
 }
@@ -52,25 +55,50 @@ fn uint64_checked_rounded(x : Double, direction : RoundingDirection) -> UInt64? 
 }
 
 ///|
-/// Convert toward zero, returning `None` for NaN, infinities and overflow.
+/// Convert the binary64 value `x` to `Int`, rounding toward zero (truncation)
+/// first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[-2147483648, 2147483647]`. The range decision is made after
+/// rounding, not on `x` itself; both zeros convert to `Some(0)`. For example
+/// `2147483647.5` rounds toward zero to `2147483647` and yields
+/// `Some(2147483647)`, while `2147483648.0` yields `None`.
 pub fn to_int_checked(x : Double) -> Int32? {
   int_checked_rounded(x, TowardZero)
 }
 
 ///|
-/// Convert after applying an explicit IEEE rounding direction.
+/// Convert the binary64 value `x` to `Int`, rounding in the given `direction`
+/// (one of the five IEEE 754-2019 §5.9 directions) first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[-2147483648, 2147483647]`. The range decision is made after
+/// rounding, not on `x` itself; both zeros convert to `Some(0)`. For example,
+/// with `TowardZero`, `2147483647.5` rounds to `2147483647` and yields
+/// `Some(2147483647)`, while `2147483648.0` yields `None`.
 pub fn to_int_checked_with(x : Double, direction : RoundingDirection) -> Int32? {
   int_checked_rounded(x, direction)
 }
 
 ///|
-/// Convert toward zero, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `Int`, rounding toward zero (truncation)
+/// first and saturating like WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[-2147483648, 2147483647]`. The
+/// decision is made after rounding; both zeros convert to `0`.
 pub fn to_int_saturating(x : Double) -> Int32 {
   to_int_saturating_with(x, TowardZero)
 }
 
 ///|
-/// Convert after rounding, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `Int`, rounding in the given `direction`
+/// (one of the five IEEE 754-2019 §5.9 directions) first and saturating like
+/// WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[-2147483648, 2147483647]`. The
+/// decision is made after rounding; both zeros convert to `0`.
 pub fn to_int_saturating_with(
   x : Double,
   direction : RoundingDirection,
@@ -88,13 +116,27 @@ pub fn to_int_saturating_with(
 }
 
 ///|
-/// Convert toward zero, returning `None` for NaN, infinities and overflow.
+/// Convert the binary64 value `x` to `Int64`, rounding toward zero (truncation)
+/// first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[-9223372036854775808, 9223372036854775807]`. The range decision is
+/// made after rounding, not on `x` itself; both zeros convert to `Some(0)`. For
+/// example `-9223372036854775808.0` is exactly the minimum and yields `Some`,
+/// while `9223372036854775808.0` yields `None`.
 pub fn to_int64_checked(x : Double) -> Int64? {
   int64_checked_rounded(x, TowardZero)
 }
 
 ///|
-/// Convert after applying an explicit IEEE rounding direction.
+/// Convert the binary64 value `x` to `Int64`, rounding in the given `direction`
+/// (one of the five IEEE 754-2019 §5.9 directions) first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[-9223372036854775808, 9223372036854775807]`. The range decision is
+/// made after rounding, not on `x` itself; both zeros convert to `Some(0)`. For
+/// example `-9223372036854775808.0` is exactly the minimum and yields `Some`,
+/// while `9223372036854775808.0` yields `None`.
 pub fn to_int64_checked_with(
   x : Double,
   direction : RoundingDirection,
@@ -103,13 +145,26 @@ pub fn to_int64_checked_with(
 }
 
 ///|
-/// Convert toward zero, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `Int64`, rounding toward zero (truncation)
+/// first and saturating like WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[-9223372036854775808,
+/// 9223372036854775807]`. The decision is made after rounding; both zeros
+/// convert to `0`.
 pub fn to_int64_saturating(x : Double) -> Int64 {
   to_int64_saturating_with(x, TowardZero)
 }
 
 ///|
-/// Convert after rounding, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `Int64`, rounding in the given `direction`
+/// (one of the five IEEE 754-2019 §5.9 directions) first and saturating like
+/// WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[-9223372036854775808,
+/// 9223372036854775807]`. The decision is made after rounding; both zeros
+/// convert to `0`.
 pub fn to_int64_saturating_with(
   x : Double,
   direction : RoundingDirection,
@@ -127,13 +182,25 @@ pub fn to_int64_saturating_with(
 }
 
 ///|
-/// Convert toward zero, returning `None` for NaN, infinities and overflow.
+/// Convert the binary64 value `x` to `UInt`, rounding toward zero (truncation)
+/// first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[0, 4294967295]`. The range decision is made after rounding, not on
+/// `x` itself; both zeros convert to `Some(0)`. For example `-0.5` rounds
+/// toward zero to `0` and yields `Some(0)`, while `-1.0` yields `None`.
 pub fn to_uint_checked(x : Double) -> UInt32? {
   uint_checked_rounded(x, TowardZero)
 }
 
 ///|
-/// Convert after applying an explicit IEEE rounding direction.
+/// Convert the binary64 value `x` to `UInt`, rounding in the given `direction`
+/// (one of the five IEEE 754-2019 §5.9 directions) first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[0, 4294967295]`. The range decision is made after rounding, not on
+/// `x` itself; both zeros convert to `Some(0)`. For example, with `TowardZero`,
+/// `-0.5` rounds to `0` and yields `Some(0)`, while `-1.0` yields `None`.
 pub fn to_uint_checked_with(
   x : Double,
   direction : RoundingDirection,
@@ -142,13 +209,24 @@ pub fn to_uint_checked_with(
 }
 
 ///|
-/// Convert toward zero, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `UInt`, rounding toward zero (truncation)
+/// first and saturating like WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[0, 4294967295]`. The decision
+/// is made after rounding; both zeros convert to `0`.
 pub fn to_uint_saturating(x : Double) -> UInt32 {
   to_uint_saturating_with(x, TowardZero)
 }
 
 ///|
-/// Convert after rounding, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `UInt`, rounding in the given `direction`
+/// (one of the five IEEE 754-2019 §5.9 directions) first and saturating like
+/// WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[0, 4294967295]`. The decision
+/// is made after rounding; both zeros convert to `0`.
 pub fn to_uint_saturating_with(
   x : Double,
   direction : RoundingDirection,
@@ -166,13 +244,27 @@ pub fn to_uint_saturating_with(
 }
 
 ///|
-/// Convert toward zero, returning `None` for NaN, infinities and overflow.
+/// Convert the binary64 value `x` to `UInt64`, rounding toward zero
+/// (truncation) first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[0, 18446744073709551615]`. The range decision is made after
+/// rounding, not on `x` itself; both zeros convert to `Some(0)`. For example
+/// `-0.5` rounds toward zero to `0` and yields `Some(0)`, while
+/// `18446744073709551616.0` yields `None`.
 pub fn to_uint64_checked(x : Double) -> UInt64? {
   uint64_checked_rounded(x, TowardZero)
 }
 
 ///|
-/// Convert after applying an explicit IEEE rounding direction.
+/// Convert the binary64 value `x` to `UInt64`, rounding in the given
+/// `direction` (one of the five IEEE 754-2019 §5.9 directions) first.
+///
+/// Returns `None` for NaN, for infinities, and when the rounded integer lies
+/// outside `[0, 18446744073709551615]`. The range decision is made after
+/// rounding, not on `x` itself; both zeros convert to `Some(0)`. For example,
+/// with `TowardZero`, `-0.5` rounds to `0` and yields `Some(0)`, while
+/// `18446744073709551616.0` yields `None`.
 pub fn to_uint64_checked_with(
   x : Double,
   direction : RoundingDirection,
@@ -181,13 +273,24 @@ pub fn to_uint64_checked_with(
 }
 
 ///|
-/// Convert toward zero, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `UInt64`, rounding toward zero
+/// (truncation) first and saturating like WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[0, 18446744073709551615]`. The
+/// decision is made after rounding; both zeros convert to `0`.
 pub fn to_uint64_saturating(x : Double) -> UInt64 {
   to_uint64_saturating_with(x, TowardZero)
 }
 
 ///|
-/// Convert after rounding, saturating like WebAssembly `trunc_sat`.
+/// Convert the binary64 value `x` to `UInt64`, rounding in the given
+/// `direction` (one of the five IEEE 754-2019 §5.9 directions) first and
+/// saturating like WebAssembly `trunc_sat`.
+///
+/// NaN converts to `0`, and an out-of-range rounded integer (including an
+/// infinity) converts to the nearest bound of `[0, 18446744073709551615]`. The
+/// decision is made after rounding; both zeros convert to `0`.
 pub fn to_uint64_saturating_with(
   x : Double,
   direction : RoundingDirection,
@@ -232,7 +335,15 @@ fn uint64_to_float_round_to_odd(magnitude : UInt64) -> Double {
 }
 
 ///|
-/// Correctly rounded direct conversion from `Int64` to binary32.
+/// Convert an `Int64` to the nearest binary32 `Float` (ties to even), rounding
+/// the 64-bit integer exactly once.
+///
+/// This is the direct-rounding replacement for core `Float::from_int64`, which
+/// on the js backend converts through binary64 first and so rounds twice (for
+/// example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` and then to the
+/// wrong neighbor `2^53`). It lives in `@float` because it uses the binary64 bit
+/// helpers of this package, and returns a binary32 `Float`; the result is
+/// bit-identical on every backend.
 pub fn int64_to_float(value : Int64) -> Float {
   let raw = value.reinterpret_as_uint64()
   let negative = (raw & 0x8000000000000000UL) != 0UL
@@ -246,7 +357,12 @@ pub fn int64_to_float(value : Int64) -> Float {
 }
 
 ///|
-/// Correctly rounded direct conversion from `UInt64` to binary32.
+/// Convert a `UInt64` to the nearest binary32 `Float` (ties to even), rounding
+/// the 64-bit integer exactly once.
+///
+/// This is the direct-rounding replacement for core `Float::from_uint64`, which
+/// on the js backend converts through binary64 first and so rounds twice. See
+/// `int64_to_float`; the result is bit-identical on every backend.
 pub fn uint64_to_float(value : UInt64) -> Float {
   Float::from_double(uint64_to_float_round_to_odd(value))
 }

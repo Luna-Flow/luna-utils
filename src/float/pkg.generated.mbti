@@ -18,6 +18,8 @@ pub fn copy_sign_bits(UInt64, UInt64) -> UInt64
 
 pub fn get_payload_bits(UInt64) -> UInt64?
 
+pub fn int64_to_float(Int64) -> Float
+
 pub fn is_canonical_bits(UInt64) -> Bool
 
 pub fn is_finite(Double) -> Bool
@@ -84,7 +86,41 @@ pub fn sort_total_order_view(MutArrayView[Double]) -> Unit
 
 pub fn to_bits_canonical(Double) -> UInt64
 
+pub fn to_int64_checked(Double) -> Int64?
+
+pub fn to_int64_checked_with(Double, RoundingDirection) -> Int64?
+
+pub fn to_int64_saturating(Double) -> Int64
+
+pub fn to_int64_saturating_with(Double, RoundingDirection) -> Int64
+
+pub fn to_int_checked(Double) -> Int?
+
+pub fn to_int_checked_with(Double, RoundingDirection) -> Int?
+
+pub fn to_int_saturating(Double) -> Int
+
+pub fn to_int_saturating_with(Double, RoundingDirection) -> Int
+
+pub fn to_uint64_checked(Double) -> UInt64?
+
+pub fn to_uint64_checked_with(Double, RoundingDirection) -> UInt64?
+
+pub fn to_uint64_saturating(Double) -> UInt64
+
+pub fn to_uint64_saturating_with(Double, RoundingDirection) -> UInt64
+
+pub fn to_uint_checked(Double) -> UInt?
+
+pub fn to_uint_checked_with(Double, RoundingDirection) -> UInt?
+
+pub fn to_uint_saturating(Double) -> UInt
+
+pub fn to_uint_saturating_with(Double, RoundingDirection) -> UInt
+
 pub fn total_order_bits(UInt64, UInt64) -> Bool
+
+pub fn uint64_to_float(UInt64) -> Float
 
 // Errors
 
