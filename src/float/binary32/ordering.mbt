@@ -1,5 +1,5 @@
 ///|
-fn total_order_key_bits(bits : UInt) -> Int {
+fn total_order_key_bits(bits : UInt32) -> Int32 {
   let sign = bits >> 31
   (bits ^ (if sign != 0U { 0x7fffffffU } else { 0U })).reinterpret_as_int()
 }
@@ -7,7 +7,7 @@ fn total_order_key_bits(bits : UInt) -> Int {
 ///|
 /// IEEE 754-2019 §5.10 totalOrder on raw binary32 encodings.
 /// The comparison preserves NaN sign, signaling state and payload.
-pub fn total_order_bits(x : UInt, y : UInt) -> Bool {
+pub fn total_order_bits(x : UInt32, y : UInt32) -> Bool {
   total_order_key_bits(x) <= total_order_key_bits(y)
 }
 
