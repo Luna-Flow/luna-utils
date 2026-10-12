@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 — Unreleased
+## 0.2.0 — 2026-10-11
 
 Breaking rebuild: retain the luna-utils name, remove the 0.1.x public API and
 Luna-Flow/luna-generic dependency, and depend only on moonbitlang/core.
