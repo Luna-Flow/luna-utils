@@ -6,11 +6,92 @@ No host float NaN materialization or library output produces expected results.
 Class IDs and None's sentinel are transcript conventions, not public API IDs.
 """
 from fractions import Fraction
+import random
+import struct
 
 
 CLASSES = ["PositiveZero", "NegativeZero", "PositiveSubnormal",
            "NegativeSubnormal", "PositiveNormal", "NegativeNormal",
            "PositiveInfinity", "NegativeInfinity", "SignalingNaN", "QuietNaN"]
+
+ROUNDINGS = [
+    ("TiesToEven", "ties_even"), ("TiesToAway", "ties_away"),
+    ("TowardZero", "toward_zero"), ("TowardPositive", "toward_positive"),
+    ("TowardNegative", "toward_negative"),
+]
+
+INTEGER_TARGETS = [
+    ("int", -(1 << 31), (1 << 31) - 1, "Int", "to_int"),
+    ("int64", -(1 << 63), (1 << 63) - 1, "Int64", "to_int64"),
+    ("uint", 0, (1 << 32) - 1, "UInt", "to_uint"),
+    ("uint64", 0, (1 << 64) - 1, "UInt64", "to_uint64"),
+]
+
+
+def decode_finite(bits, width):
+    frac_width, exp_width = ((52, 11) if width == 64 else (23, 8))
+    sign = -1 if bits >> (width - 1) else 1
+    fraction_mask = (1 << frac_width) - 1
+    fraction = bits & fraction_mask
+    exponent = (bits >> frac_width) & ((1 << exp_width) - 1)
+    if exponent == (1 << exp_width) - 1:
+        return None
+    bias = (1 << (exp_width - 1)) - 1
+    if exponent == 0:
+        significand, power = fraction, 1 - bias - frac_width
+    else:
+        significand, power = (1 << frac_width) | fraction, exponent - bias - frac_width
+    magnitude = Fraction(significand << power, 1) if power >= 0 else Fraction(significand, 1 << -power)
+    return sign * magnitude
+
+
+def round_fraction(value, direction):
+    lower = value.numerator // value.denominator
+    remainder = value - lower
+    if direction == "TowardPositive":
+        return lower if remainder == 0 else lower + 1
+    if direction == "TowardNegative":
+        return lower
+    if direction == "TowardZero":
+        return int(value)
+    twice = remainder * 2
+    if twice < 1:
+        return lower
+    if twice > 1:
+        return lower + 1
+    if direction == "TiesToAway":
+        return lower if value < 0 else lower + 1
+    return lower if lower % 2 == 0 else lower + 1
+
+
+def conversion_expression(package, source, target, mode, direction=None, presence=False):
+    name, _, _, _, _ = target
+    suffix = "_with" if direction is not None else ""
+    function = f"{package}.to_{name}_{mode}{suffix}({source}"
+    if direction is not None:
+        function += f", @float.{direction}"
+    function += ")"
+    if mode == "checked":
+        if presence:
+            return f"match {function} {{ Some(_) => 1UL; None => 0UL }}"
+        value_expr = "value.to_int64().reinterpret_as_uint64()" if name == "int" else (
+            "value.reinterpret_as_uint64()" if name == "int64" else
+            "(value.to_uint64() & 0xffffffffUL)" if name == "uint" else "value"
+        )
+        return f"match {function} {{ Some(value) => {value_expr}; None => 0UL }}"
+    return f"({function}).to_int64().reinterpret_as_uint64()" if name == "int" else (
+        f"({function}).reinterpret_as_uint64()" if name == "int64" else
+        f"(({function}).to_uint64() & 0xffffffffUL)" if name == "uint" else function
+    )
+
+
+def conversion_output(value, target):
+    name, _, _, _, _ = target
+    if name in ("int", "int64"):
+        return value & 0xffffffffffffffff
+    if name == "uint":
+        return value & 0xffffffff
+    return value
 
 
 def class_encoder():
@@ -276,4 +357,125 @@ def generate_float_cases():
                     widen(f'{package}.to_bits_canonical({package}.maximum({vx}, {vy}))'),
                     max_expected, [x, y],
                 )
+    return cases
+
+
+def generate_conversion_cases():
+    cases = []
+    rng = random.Random(0x22C0FFEE)
+    for width, package in [(64, "@float"), (32, "@binary32")]:
+        sign_mask = 1 << (width - 1)
+        exponent_mask = 0x7ff0000000000000 if width == 64 else 0x7f800000
+        fraction_width, exponent_width = ((52, 11) if width == 64 else (23, 8))
+        cases_bits = {0, sign_mask, 1, sign_mask | 1, exponent_mask - 1, sign_mask | (exponent_mask - 1),
+                      exponent_mask, sign_mask | exponent_mask, exponent_mask | 1, sign_mask | exponent_mask | 1,
+                      exponent_mask | (1 << (fraction_width - 1)), sign_mask | exponent_mask | (1 << (fraction_width - 1))}
+        def encode(value):
+            if width == 64:
+                import struct
+                return struct.unpack(">Q", struct.pack(">d", float(value)))[0]
+            import struct
+            return struct.unpack(">I", struct.pack(">f", float(value)))[0]
+        for _, lo, hi, _, _ in INTEGER_TARGETS:
+            for boundary in (lo, hi, lo - 1, hi + 1):
+                base = encode(boundary)
+                cases_bits.add(base)
+                if base & sign_mask == 0:
+                    if base > 0:
+                        cases_bits.add(base - 1)
+                    cases_bits.add(base + 1)
+                else:
+                    cases_bits.add(base + 1)
+                    if base > sign_mask:
+                        cases_bits.add(base - 1)
+        # Deterministic random encodings exercise ordinary, subnormal and extreme exponents.
+        cases_bits.update(rng.getrandbits(width) for _ in range(32))
+        for raw in sorted(cases_bits):
+            finite = decode_finite(raw, width)
+            src = (f"0x{raw:016x}UL.reinterpret_as_double()" if width == 64 else
+                   f"Float::reinterpret_from_uint(0x{raw:08x}U)")
+            for target in INTEGER_TARGETS:
+                name, lower, upper, _, _ = target
+                for direction, direction_name in ROUNDINGS:
+                    rounded_value = None if finite is None else round_fraction(finite, direction)
+                    valid = rounded_value is not None and lower <= rounded_value <= upper
+                    for mode in ("checked", "saturating"):
+                        if mode == "checked":
+                            # Value records use zero for an absent optional result;
+                            # the separate presence record carries validity.
+                            expected_value = conversion_output(rounded_value, target) if valid else 0
+                            present_expr = conversion_expression(package, src, target, mode, direction, presence=True)
+                            cases.append(dict(
+                                id=f"conv{width}_{name}_checked_present_{direction_name}_{raw:x}",
+                                inputs=[str(raw)], expression=present_expr, bits=f"{int(valid):016x}",
+                            ))
+                        else:
+                            if rounded_value is None:
+                                fraction_mask = (1 << fraction_width) - 1
+                                is_infinity = (raw & fraction_mask) == 0 and (raw & exponent_mask) == exponent_mask
+                                if is_infinity:
+                                    saturated = upper if (raw & sign_mask) == 0 else lower
+                                else:
+                                    saturated = 0
+                            else:
+                                saturated = min(max(rounded_value, lower), upper)
+                            expected_value = conversion_output(saturated, target)
+                        expr = conversion_expression(package, src, target, mode, direction)
+                        cases.append(dict(
+                            id=f"conv{width}_{name}_{mode}_{direction_name}_{raw:x}",
+                            inputs=[str(raw)], expression=expr, bits=f"{expected_value:016x}",
+                        ))
+    return cases
+
+
+def binary32_bits_from_integer(value):
+    magnitude = abs(value)
+    if magnitude == 0:
+        return 0
+    top = magnitude.bit_length() - 1
+    if top <= 23:
+        significand = magnitude << (23 - top)
+    else:
+        shift = top - 23
+        significand = magnitude >> shift
+        remainder = magnitude & ((1 << shift) - 1)
+        halfway = 1 << (shift - 1)
+        if remainder > halfway or (remainder == halfway and significand & 1):
+            significand += 1
+    if significand == 1 << 24:
+        top += 1
+        significand = 1 << 23
+    bits = ((top + 127) << 23) | (significand & 0x7fffff)
+    return bits | (0x80000000 if value < 0 else 0)
+
+
+def generate_integer_float_cases():
+    cases = []
+    signed = [0, 1, -1, 2**24 - 1, 2**24, 2**24 + 1,
+              2**53 + 2**29 + 1, -(2**53 + 2**29 + 1),
+              2**63 - 1, -(2**63)]
+    unsigned = [0, 1, 2**24 - 1, 2**24, 2**24 + 1,
+                2**53 + 2**29 + 1, 2**63, 2**64 - 1]
+    for value in signed:
+        cases.append(dict(
+            id=f"i64_to_float_{value}", inputs=[str(value)],
+            expression=f"@binary32.to_bits_canonical(@float.int64_to_float({value}L)).to_uint64()",
+            bits=f"{binary32_bits_from_integer(value):016x}",
+        ))
+        cases.append(dict(
+            id=f"i64_to_double_{value}", inputs=[str(value)],
+            expression=f"({value}L).to_double().reinterpret_as_uint64()",
+            bits=f"{struct.unpack('>Q', struct.pack('>d', float(value)))[0]:016x}",
+        ))
+    for value in unsigned:
+        cases.append(dict(
+            id=f"u64_to_float_{value}", inputs=[str(value)],
+            expression=f"@binary32.to_bits_canonical(@float.uint64_to_float({value}UL)).to_uint64()",
+            bits=f"{binary32_bits_from_integer(value):016x}",
+        ))
+        cases.append(dict(
+            id=f"u64_to_double_{value}", inputs=[str(value)],
+            expression=f"({value}UL).to_double().reinterpret_as_uint64()",
+            bits=f"{struct.unpack('>Q', struct.pack('>d', float(value)))[0]:016x}",
+        ))
     return cases
