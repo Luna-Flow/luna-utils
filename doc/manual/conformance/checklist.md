@@ -6,7 +6,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 | Standard | Rows | Conforming | Partial | Not implemented | Not applicable | Required gaps | Recommended or optional gaps |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | IEEE 754-2019: float | 28 | 4 | 9 | 15 | 0 | 17 | 7 |
-| Planned packages | 5 | 0 | 0 | 5 | 0 | 4 | 1 |
+| Planned packages | 10 | 0 | 2 | 8 | 0 | 9 | 1 |
 
 **IEEE 754-2019: float**
 
@@ -41,7 +41,12 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 
 **Planned packages**
 
-- [ ] Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)
+- [ ] ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`) [required] (not implemented)
+- [ ] ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`) [required] (partial)
+- [ ] ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`) [required] (not implemented)
+- [ ] ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`) [required] (not implemented)
+- [ ] ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`) [required] (not implemented)
+- [ ] ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions [required] (partial)
 - [ ] IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)
 - [ ] IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`) [required] (not implemented)
 - [ ] IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`) [recommended] (not implemented)

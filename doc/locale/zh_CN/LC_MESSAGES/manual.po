@@ -312,22 +312,42 @@ msgid "**Planned packages**"
 msgstr "**计划中的包**"
 
 #: manual/conformance/checklist.md:44
-msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
-msgstr "整数算术，溢出和除法行为有明确定义（包 `int`；IEEE 754 没有整数算术，语义来自包的设计，并用精确整数核对） [必须] （未实现）"
+msgid "ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.1 整数结果函数：溢出必须被通知，不能悄悄给出错误值（包 `int`） [必须] （未实现）"
 
 #: manual/conformance/checklist.md:45
+msgid "ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`) [required] (partial)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.1 整数比较（包 `int`） [必须] （部分符合）"
+
+#: manual/conformance/checklist.md:46
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 带溢出通知的 neg、add、sub、mul、abs、signum（包 `int`） [必须] （未实现）"
+
+#: manual/conformance/checklist.md:47
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 quot（向下取整除法）与 mod（包 `int`） [必须] （未实现）"
+
+#: manual/conformance/checklist.md:48
+msgid "ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.3.1 整数到整数转换（包 `int`） [必须] （未实现）"
+
+#: manual/conformance/checklist.md:49
+msgid "ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions [required] (partial)"
+msgstr "ISO/IEC 10967-1:2012 §5.3.2、§5.3.3 浮点到整数与整数到浮点转换 [必须] （部分符合）"
+
+#: manual/conformance/checklist.md:50
 msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)"
 msgstr "IEEE 754-2019 §5.12 十进制与十六进制字符转换（包 `text`） [必须] （未实现）"
 
-#: manual/conformance/checklist.md:46
+#: manual/conformance/checklist.md:51
 msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`) [required] (not implemented)"
 msgstr "IEEE 754-2019 §5.4.1、§7.4 BigInt 到二进制浮点的正确舍入转换（包 `bigint`） [必须] （未实现）"
 
-#: manual/conformance/checklist.md:47
+#: manual/conformance/checklist.md:52
 msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`) [recommended] (not implemented)"
 msgstr "IEEE 754-2019 §9.2 正确舍入的初等函数（包 `math`） [推荐] （未实现）"
 
-#: manual/conformance/checklist.md:48
+#: manual/conformance/checklist.md:53
 msgid "Stable seeded hash, identical on every backend (package `hash`; no standard clause) [required] (not implemented)"
 msgstr "带种子的稳定哈希，所有后端一致（包 `hash`；没有标准条款） [必须] （未实现）"
 
@@ -417,7 +437,12 @@ msgstr "§3.4 binary32 与 binary64 交换格式编码"
 #: manual/conformance/planned.md:9
 #: manual/conformance/planned.md:10
 #: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
 #: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:14
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:18
 msgid "required"
 msgstr "必须"
 
@@ -484,10 +509,13 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 #: manual/conformance/float.md:43
 #: manual/conformance/float.md:44
 #: manual/conformance/planned.md:9
-#: manual/conformance/planned.md:10
 #: manual/conformance/planned.md:11
 #: manual/conformance/planned.md:12
 #: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:17
+#: manual/conformance/planned.md:18
 msgid "none"
 msgstr "无"
 
@@ -629,7 +657,7 @@ msgstr "§5.12 十进制字符转换"
 
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
-#: manual/conformance/planned.md:10
+#: manual/conformance/planned.md:15
 msgid "not implemented; [#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
 msgstr "未实现；[#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
 
@@ -668,7 +696,7 @@ msgstr "§8 替代异常处理"
 #: manual/conformance/float.md:44
 #: manual/conformance/float.md:45
 #: manual/conformance/float.md:46
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "recommended"
 msgstr "推荐"
 
@@ -681,7 +709,7 @@ msgid "§9.2 recommended mathematical functions"
 msgstr "§9.2 推荐的数学函数"
 
 #: manual/conformance/float.md:41
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "not implemented; [#30](https://github.com/Luna-Flow/luna-utils/issues/30)"
 msgstr "未实现；[#30](https://github.com/Luna-Flow/luna-utils/issues/30)"
 
@@ -742,38 +770,93 @@ msgid "Planned packages and their standards"
 msgstr "计划中的包及其对应标准"
 
 #: manual/conformance/planned.md:3
-msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. IEEE 754-2019 is the standard of reference; it defines no integer arithmetic, so the `int` row has no external clause and the package defines its semantics in its design page and checks them against exact integers. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
-msgstr "这些包尚未实现；表格记录了每个包所对照的标准，让检查清单把它们计为缺口。参照标准是 IEEE 754-2019；它没有定义整数算术，所以 `int` 一行没有外部条款，该包在设计页中定义自己的语义，并用精确整数核对。`Level` 为 `required` 表示 “shall”，`recommended` 表示 “should”。"
+msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. Floating point is measured against IEEE 754-2019 and integers against ISO/IEC 10967-1:2012 (LIA-1), whose integer clauses are cited below; LIA-1 may be extended to floating point later. The clause numbers come from the standard; its text is not reproduced here. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
+msgstr "这些包尚未实现；表格记录了每个包所对照的标准，让检查清单把它们计为缺口。浮点按 IEEE 754-2019 对照，整数按 ISO/IEC 10967-1:2012（LIA-1）对照，下面引用的是它的整数条款；以后 LIA-1 可能扩展到浮点。条款编号来自标准本身，这里不复制其文本。`Level` 为 `required` 表示 “shall”，`recommended` 表示 “should”。"
 
 #: manual/conformance/planned.md:9
-msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
-msgstr "整数算术，溢出和除法行为有明确定义（包 `int`；IEEE 754 没有整数算术，语义来自包的设计，并用精确整数核对）"
+msgid "ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.1 整数结果函数：溢出必须被通知，不能悄悄给出错误值（包 `int`）"
 
 #: manual/conformance/planned.md:9
+#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:13
 msgid "not implemented; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
 msgstr "未实现；[#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
 
 #: manual/conformance/planned.md:10
+msgid "ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.1 整数比较（包 `int`）"
+
+#: manual/conformance/planned.md:10
+msgid "host `==` and `<` on `Int`, `Int64`, `UInt` and `UInt64`"
+msgstr "宿主对 `Int`、`Int64`、`UInt`、`UInt64` 的 `==` 与 `<`"
+
+#: manual/conformance/planned.md:10
+msgid "compiler matrix (`tools/compiler_matrix.py`)"
+msgstr "编译器矩阵（`tools/compiler_matrix.py`）"
+
+#: manual/conformance/planned.md:10
+msgid "partial: host operators only, no named operations; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
+msgstr "部分符合：只有宿主运算符，没有具名运算；[#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
+
+#: manual/conformance/planned.md:11
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 带溢出通知的 neg、add、sub、mul、abs、signum（包 `int`）"
+
+#: manual/conformance/planned.md:11
+msgid "none (host operators wrap)"
+msgstr "无（宿主运算符会环绕）"
+
+#: manual/conformance/planned.md:12
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 quot（向下取整除法）与 mod（包 `int`）"
+
+#: manual/conformance/planned.md:12
+msgid "none (host `/` and `%` truncate)"
+msgstr "无（宿主的 `/` 与 `%` 向零截断）"
+
+#: manual/conformance/planned.md:13
+msgid "ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.3.1 整数到整数转换（包 `int`）"
+
+#: manual/conformance/planned.md:14
+msgid "ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions"
+msgstr "ISO/IEC 10967-1:2012 §5.3.2、§5.3.3 浮点到整数与整数到浮点转换"
+
+#: manual/conformance/planned.md:14
+msgid "the conversions of the `float` packages"
+msgstr "`float` 包的转换"
+
+#: manual/conformance/planned.md:14
+msgid "the convertToInteger and convertFromInt rows of [float](./float.md#clause-traceability)"
+msgstr "[float](./float.md#clause-traceability) 中的 convertToInteger 与 convertFromInt 行"
+
+#: manual/conformance/planned.md:14
+msgid "partial: see those rows"
+msgstr "部分符合：见那些行"
+
+#: manual/conformance/planned.md:15
 msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`)"
 msgstr "IEEE 754-2019 §5.12 十进制与十六进制字符转换（包 `text`）"
 
-#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:16
 msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`)"
 msgstr "IEEE 754-2019 §5.4.1、§7.4 BigInt 到二进制浮点的正确舍入转换（包 `bigint`）"
 
-#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:16
 msgid "not implemented; [#28](https://github.com/Luna-Flow/luna-utils/issues/28)"
 msgstr "未实现；[#28](https://github.com/Luna-Flow/luna-utils/issues/28)"
 
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`)"
 msgstr "IEEE 754-2019 §9.2 正确舍入的初等函数（包 `math`）"
 
-#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:18
 msgid "Stable seeded hash, identical on every backend (package `hash`; no standard clause)"
 msgstr "带种子的稳定哈希，所有后端一致（包 `hash`；没有标准条款）"
 
-#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:18
 msgid "not implemented; [#26](https://github.com/Luna-Flow/luna-utils/issues/26)"
 msgstr "未实现；[#26](https://github.com/Luna-Flow/luna-utils/issues/26)"
 
@@ -1229,6 +1312,12 @@ msgstr "整数转换先舍入，之后再检查范围。越界输入应视为错
 #: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "使用原始 payload setter 构造编码，检查 `None`；payload 保真度重要时，不要将结果通过 Double 或 Float 转换。规范数值函数有意丢弃 NaN 元数据。参见 [API](../api/float.md)和[一致性限制](../conformance/float.md)。"
+
+#~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
+#~ msgstr "整数算术，溢出和除法行为有明确定义（包 `int`；IEEE 754 没有整数算术，语义来自包的设计，并用精确整数核对） [必须] （未实现）"
+
+#~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
+#~ msgstr "整数算术，溢出和除法行为有明确定义（包 `int`；IEEE 754 没有整数算术，语义来自包的设计，并用精确整数核对）"
 
 #~ msgid "LIA-1 integer operations and notifications (package `int`) [required] (not implemented)"
 #~ msgstr "LIA-1 整数运算与通知（包 `int`） [必须] （未实现）"
