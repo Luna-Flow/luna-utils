@@ -11,7 +11,7 @@ from fractions import Fraction
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from random_audit import Fmt, round_fraction, key, m_extremum, m_round_to_integral, m_arith, m_sqrt, arith_pair  # noqa: E402
+from random_audit import Fmt, round_fraction, key, m_extremum, m_round_to_integral, m_arith, m_sqrt, arith_pair, m_next_up, m_remainder, m_scaleb, m_logb, random_bits  # noqa: E402
 
 
 def main():
@@ -81,6 +81,29 @@ def main():
                 assert m_sqrt(fmt, xb) == want, (fmt.width, "sqrt", hex(xb))
                 checked += 1
         assert checked > 20000
+    # nextUp, remainder, scaleB and logB against CPython (binary64 only: math.nextafter, math.remainder, math.ldexp)
+    def bits64(x):
+        return struct.unpack(">Q", struct.pack(">d", x))[0]
+    for _ in range(20000):
+        xb, yb = random_bits(rng, f64), random_bits(rng, f64)
+        x, y = host(f64, xb), host(f64, yb)
+        if x != x or y != y:
+            continue
+        if not math.isinf(x):
+            assert m_next_up(f64, xb) == (bits64(math.nextafter(x, math.inf)) if x != 0 else 1), hex(xb)
+        if not math.isinf(x) and y != 0 and not math.isinf(y):
+            r = math.remainder(x, y)
+            want = bits64(r) if r != 0 else (xb & f64.sign)
+            assert m_remainder(f64, xb, yb) == want, (hex(xb), hex(yb))
+        if x != 0 and not math.isinf(x):
+            n = rng.randrange(-2300, 2300)
+            try:
+                want = bits64(math.ldexp(x, n))
+            except OverflowError:
+                want = 0x7ff0000000000000 | (xb & f64.sign)
+            assert m_scaleb(f64, xb, n, "TiesToEven") == want, (hex(xb), n)
+            mant, exp = math.frexp(abs(x))
+            assert m_logb(f64, xb) == exp - 1, hex(xb)
     print("audit models: ok")
     return 0
 

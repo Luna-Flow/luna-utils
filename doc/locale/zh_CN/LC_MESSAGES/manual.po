@@ -167,6 +167,26 @@ msgstr "`get_payload_bits(bits)` 对非 NaN 返回 `None`，对 NaN 返回不含
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` 名称表示本应用的 NaN 规范化视图，不代表针对原始 NaN 的 IEEE 符号或分类操作。需要 IEEE 编码语义时，应使用 `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` 和原始符号操作。`is_canonical_bits` 判断 IEEE 规范编码，而非是否等于应用选定的固定 NaN 编码。"
 
+#: manual/api/float.md:59
+msgid "Remainder, nextUp, nextDown, scaleB and logB"
+msgstr "remainder、nextUp、nextDown、scaleB 与 logB"
+
+#: manual/api/float.md:61
+msgid "All of these work on the integer fields, with no host arithmetic, so they are identical on every backend. Each has a raw form on encodings (`*_bits`) that keeps NaN payloads and a numeric form that returns the canonical quiet NaN for every NaN."
+msgstr "这些运算都作用在整数字段上，不使用宿主算术，所以在所有后端上一致。每个运算有一个作用于编码的原始形式（`*_bits`），它保留 NaN 载荷；还有一个数值形式，对所有 NaN 返回规范安静 NaN。"
+
+#: manual/api/float.md:63
+msgid "`next_up_bits` and `next_down_bits` (numeric `next_up`, `next_down`) are IEEE 754-2019 §5.3.1 nextUp and nextDown: the neighbouring value in the format, `nextUp(-0)` and `nextUp(+0)` are the smallest positive value, the successor of the negative value of least magnitude is `-0`, and `nextUp(+inf)` is `+inf`. A NaN becomes quiet and keeps its sign and payload in the raw form."
+msgstr "`next_up_bits` 与 `next_down_bits`（数值形式 `next_up`、`next_down`）是 IEEE 754-2019 §5.3.1 的 nextUp 和 nextDown：返回格式中相邻的值，`nextUp(-0)` 和 `nextUp(+0)` 是最小的正值，绝对值最小的负值的后继是 `-0`，`nextUp(+inf)` 是 `+inf`。NaN 在原始形式里变为安静 NaN，并保留符号与载荷。"
+
+#: manual/api/float.md:65
+msgid "`remainder_bits(x, y)` and `remainder(x, y)` are the IEEE remainder `x - y * n` with `n` the integer nearest `x / y`, ties to even. The result is exact for every finite operand, a zero result has the sign of `x`, `remainder(x, inf)` is `x`, and an infinite `x` or a zero `y` gives the canonical quiet NaN. The invalid operation exception is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29))."
+msgstr "`remainder_bits(x, y)` 和 `remainder(x, y)` 是 IEEE 余数 `x - y * n`，其中 `n` 是最接近 `x / y` 的整数，平局取偶。对任何有限操作数结果都是精确的，零结果带 `x` 的符号，`remainder(x, inf)` 是 `x`，无穷的 `x` 或为零的 `y` 给出规范安静 NaN。在异常标志出现之前（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）不报告无效操作异常。"
+
+#: manual/api/float.md:67
+msgid "`scaleb_bits_with(bits, n, direction)` and `scaleb_with(x, n, direction)` compute `x * 2^n` rounded once to the format by the given `RoundingDirection`, with gradual underflow and the overflow rule of each direction; `scaleb_bits` and `scaleb` use ties to even. Zeros, infinities and `n = 0` return `x`, and `n` may be any `Int`. `logb_bits(bits)` returns the exponent `floor(log2 |x|)` as an `Int?` computed as though the range were unbounded (a subnormal gives its true exponent), and `None` for NaN, infinities and zeros, which the standard calls exceptional. `logb(x)` is the floating-point form: `logB(NaN)` is a NaN, `logB(inf)` is `+inf` and `logB(0)` is `-inf`."
+msgstr "`scaleb_bits_with(bits, n, direction)` 和 `scaleb_with(x, n, direction)` 计算 `x * 2^n`，按给定的 `RoundingDirection` 只舍入一次，包含渐进下溢和各方向的上溢规则；`scaleb_bits` 与 `scaleb` 取平局到偶数。零、无穷和 `n = 0` 返回 `x`，`n` 可以是任意 `Int`。`logb_bits(bits)` 以 `Int?` 返回指数 `floor(log2 |x|)`，按范围无界来计算（次正规数给出其真实指数），对 NaN、无穷和零返回 `None`，标准把这些视为异常情形。`logb(x)` 是浮点形式：`logB(NaN)` 是 NaN，`logB(inf)` 是 `+inf`，`logB(0)` 是 `-inf`。"
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr "一致性检查清单"
@@ -236,16 +256,16 @@ msgid "§5.3.1 fusedMultiplyAdd [required] (not implemented)"
 msgstr "§5.3.1 fusedMultiplyAdd [必须] （未实现）"
 
 #: manual/conformance/checklist.md:17
-msgid "§5.3.1 remainder [required] (not implemented)"
-msgstr "§5.3.1 remainder [必须] （未实现）"
+msgid "§5.3.1 remainder [required]"
+msgstr "§5.3.1 remainder [必须]"
 
 #: manual/conformance/checklist.md:18
-msgid "§5.3.1 nextUp, nextDown [required] (not implemented)"
-msgstr "§5.3.1 nextUp、nextDown [必须] （未实现）"
+msgid "§5.3.1 nextUp, nextDown [required]"
+msgstr "§5.3.1 nextUp、nextDown [必须]"
 
 #: manual/conformance/checklist.md:19
-msgid "§5.3.1 scaleB, logB [required] (not implemented)"
-msgstr "§5.3.1 scaleB、logB [必须] （未实现）"
+msgid "§5.3.3 scaleB, logB [required]"
+msgstr "§5.3.3 scaleB、logB [必须]"
 
 #: manual/conformance/checklist.md:20
 msgid "§5.9 roundToIntegral (five directions) [required]"
@@ -475,6 +495,7 @@ msgid "fixed corpus (`testdata/float_oracles.json`); the randomized audit (`tool
 msgstr "固定语料（`testdata/float_oracles.json`）；随机审计（`tools/random_audit.py`）的 classify、canon 族"
 
 #: manual/conformance/float.md:19
+#: manual/conformance/float.md:24
 #: manual/conformance/float.md:31
 #: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
@@ -519,9 +540,6 @@ msgid "§5.3.1 fusedMultiplyAdd"
 msgstr "§5.3.1 fusedMultiplyAdd"
 
 #: manual/conformance/float.md:22
-#: manual/conformance/float.md:23
-#: manual/conformance/float.md:24
-#: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
 #: manual/conformance/float.md:36
@@ -554,18 +572,32 @@ msgid "§5.3.1 remainder"
 msgstr "§5.3.1 remainder"
 
 #: manual/conformance/float.md:23
-#: manual/conformance/float.md:24
-#: manual/conformance/float.md:25
-msgid "not implemented; [#46](https://github.com/Luna-Flow/luna-utils/issues/46)"
-msgstr "未实现；[#46](https://github.com/Luna-Flow/luna-utils/issues/46)"
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family remainder"
+msgstr "`src/float/operations_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 remainder 族"
+
+#: manual/conformance/float.md:23
+msgid "conforming; no invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "符合；不报告无效操作（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
 
 #: manual/conformance/float.md:24
 msgid "§5.3.1 nextUp, nextDown"
 msgstr "§5.3.1 nextUp、nextDown"
 
+#: manual/conformance/float.md:24
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family next"
+msgstr "`src/float/operations_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 next 族"
+
 #: manual/conformance/float.md:25
-msgid "§5.3.1 scaleB, logB"
-msgstr "§5.3.1 scaleB、logB"
+msgid "§5.3.3 scaleB, logB"
+msgstr "§5.3.3 scaleB、logB"
+
+#: manual/conformance/float.md:25
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families scaleb, logb"
+msgstr "`src/float/operations_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 scaleb、logb 族"
+
+#: manual/conformance/float.md:25
+msgid "conforming; no divideByZero or invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "符合；不报告 divideByZero 或无效操作（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
 
 #: manual/conformance/float.md:26
 msgid "§5.9 roundToIntegral (five directions)"
@@ -1349,6 +1381,12 @@ msgstr "使用原始 payload setter 构造编码，检查 `None`；payload 保�
 msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr "比较谓词"
 
+#~ msgid "§5.3.1 scaleB, logB [required] (not implemented)"
+#~ msgstr "§5.3.1 scaleB、logB [必须] （未实现）"
+
+#~ msgid "not implemented; [#46](https://github.com/Luna-Flow/luna-utils/issues/46)"
+#~ msgstr "未实现；[#46](https://github.com/Luna-Flow/luna-utils/issues/46)"
+
 #~ msgid "not implemented; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
 #~ msgstr "未实现；[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
 
@@ -1363,12 +1401,6 @@ msgstr "比较谓词"
 
 #~ msgid "host `==`, `<` (quiet predicates only)"
 #~ msgstr "宿主的 `==`、`<`（仅安静谓词）"
-
-#~ msgid "partial: no signaling predicates; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-#~ msgstr "部分符合：没有信号谓词；[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-
-#~ msgid "partial: no `is_infinite` or `is_normal`; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-#~ msgstr "部分符合：没有 `is_infinite` 和 `is_normal`；[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
 
 #~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
 #~ msgstr "整数算术，溢出和除法行为有明确定义（包 `int`；IEEE 754 没有整数算术，语义来自包的设计，并用精确整数核对） [必须] （未实现）"

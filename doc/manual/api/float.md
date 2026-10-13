@@ -55,3 +55,14 @@ The remaining §9.6 operations are `minimum_number` and `maximum_number` (the nu
 `get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly.
 
 The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern.
+
+## Remainder, nextUp, nextDown, scaleB and logB
+
+All of these work on the integer fields, with no host arithmetic, so they are identical on every backend. Each has a raw form on encodings (`*_bits`) that keeps NaN payloads and a numeric form that returns the canonical quiet NaN for every NaN.
+
+`next_up_bits` and `next_down_bits` (numeric `next_up`, `next_down`) are IEEE 754-2019 §5.3.1 nextUp and nextDown: the neighbouring value in the format, `nextUp(-0)` and `nextUp(+0)` are the smallest positive value, the successor of the negative value of least magnitude is `-0`, and `nextUp(+inf)` is `+inf`. A NaN becomes quiet and keeps its sign and payload in the raw form.
+
+`remainder_bits(x, y)` and `remainder(x, y)` are the IEEE remainder `x - y * n` with `n` the integer nearest `x / y`, ties to even. The result is exact for every finite operand, a zero result has the sign of `x`, `remainder(x, inf)` is `x`, and an infinite `x` or a zero `y` gives the canonical quiet NaN. The invalid operation exception is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)).
+
+`scaleb_bits_with(bits, n, direction)` and `scaleb_with(x, n, direction)` compute `x * 2^n` rounded once to the format by the given `RoundingDirection`, with gradual underflow and the overflow rule of each direction; `scaleb_bits` and `scaleb` use ties to even. Zeros, infinities and `n = 0` return `x`, and `n` may be any `Int`. `logb_bits(bits)` returns the exponent `floor(log2 |x|)` as an `Int?` computed as though the range were unbounded (a subnormal gives its true exponent), and `None` for NaN, infinities and zeros, which the standard calls exceptional. `logb(x)` is the floating-point form: `logB(NaN)` is a NaN, `logB(inf)` is `+inf` and `logB(0)` is `-inf`.
+

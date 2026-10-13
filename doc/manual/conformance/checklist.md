@@ -5,7 +5,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 <!-- conformance-checklist-start -->
 | Standard | Rows | Conforming | Partial | Not implemented | Not applicable | Required gaps | Recommended or optional gaps |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| IEEE 754-2019: float | 28 | 8 | 6 | 14 | 0 | 14 | 6 |
+| IEEE 754-2019: float | 28 | 11 | 6 | 11 | 0 | 11 | 6 |
 | Planned packages | 10 | 0 | 2 | 8 | 0 | 9 | 1 |
 
 **IEEE 754-2019: float**
@@ -14,9 +14,9 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [ ] §4.3 rounding-direction attributes [required] (partial)
 - [ ] §5.3.1 addition, subtraction, multiplication, division, squareRoot [required] (partial)
 - [ ] §5.3.1 fusedMultiplyAdd [required] (not implemented)
-- [ ] §5.3.1 remainder [required] (not implemented)
-- [ ] §5.3.1 nextUp, nextDown [required] (not implemented)
-- [ ] §5.3.1 scaleB, logB [required] (not implemented)
+- [x] §5.3.1 remainder [required]
+- [x] §5.3.1 nextUp, nextDown [required]
+- [x] §5.3.3 scaleB, logB [required]
 - [x] §5.9 roundToIntegral (five directions) [required]
 - [ ] §5.9 roundToIntegralExact [required] (not implemented)
 - [ ] §5.4.1, §5.8 convertToInteger [required] (partial)
