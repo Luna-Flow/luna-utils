@@ -199,6 +199,18 @@ msgstr "`to_binary32_bits_with(bits, direction)` と `to_binary32_with(x, direct
 msgid "For NaNs the raw forms follow §6.2.3: the result is quiet, keeps the sign, and carries the payload bits that fit (the high 22 payload bits when narrowing, shifted up when widening), so widening a quiet NaN and narrowing it back changes nothing. The numeric forms return the canonical quiet NaN. The invalid operation exception for a signaling NaN is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)). The randomized audit also checks core's `Float::from_double` and `Float::to_double` against the same model and finds them correct on every backend, so they are safe for values; they do not give directed rounding or a defined NaN payload."
 msgstr "NaN については、生の形式は §6.2.3 に従います。結果は quiet で、符号を保ち、収まるペイロードのビットを運びます（縮小時は上位 22 ビット、拡張時は左にシフト）。そのため quiet NaN を拡張して縮小し直しても何も変わりません。数値形式は正準 quiet NaN を返します。例外フラグができるまで（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）、シグナリング NaN の無効演算例外は報告しません。ランダム監査は core の `Float::from_double` と `Float::to_double` も同じモデルで検査し、全バックエンドで正しいことを確認しています。値については安心して使えますが、方向丸めや NaN ペイロードの定義はありません。"
 
+#: manual/api/float.md:75
+msgid "Fused multiply-add"
+msgstr "融合積和"
+
+#: manual/api/float.md:77
+msgid "`fma_bits_with(x, y, z, direction)` and `fma_with(x, y, z, direction)` are IEEE 754-2019 §5.3.1 fusedMultiplyAdd: `x * y + z` computed exactly and rounded once by the given `RoundingDirection`, with gradual underflow and the overflow rule of the direction; `fma_bits` and `fma` use ties to even. The `float/binary32` package has the same names for binary32, rounding once at binary32 precision (not through binary64). The implementation is pure integer arithmetic on the encodings (a 128-bit window with a sticky bit), so it is identical on every backend and does not depend on a host fma."
+msgstr "`fma_bits_with(x, y, z, direction)` と `fma_with(x, y, z, direction)` は IEEE 754-2019 §5.3.1 の fusedMultiplyAdd です。`x * y + z` を厳密に計算し、指定した `RoundingDirection` で一度だけ丸め、段階的アンダーフローと各方向のオーバーフロー規則を含みます。`fma_bits` と `fma` は最近接偶数です。`float/binary32` パッケージにも同じ名前の関数があり、binary64 を経由せず binary32 の精度で一度だけ丸めます。実装は純粋な整数演算（スティッキービット付きの 128 ビットウィンドウ）なので、全バックエンドで同一で、ホストの fma にも依存しません。"
+
+#: manual/api/float.md:79
+msgid "Special values: a NaN operand gives a quiet NaN that keeps its sign and payload (the first of `x`, `y`, `z`); `inf * 0` and `inf + (-inf)` give the canonical quiet NaN; an infinite product or addend gives the infinity; the sign of an exact zero result is the common sign when the product and the addend are both zero of the same sign, and otherwise `+0` (`-0` for `TowardNegative`). Numeric forms return the canonical quiet NaN. The invalid operation, overflow, underflow and inexact exceptions are not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)). `fma_finite_bits` is the engine shared by both formats; use the functions above."
+msgstr "特殊値：NaN のオペランドは符号とペイロードを保つ quiet NaN になります（`x`、`y`、`z` の最初のもの）。`inf * 0` と `inf + (-inf)` は正準 quiet NaN、無限大の積または加数はその無限大を返します。厳密なゼロの結果の符号は、積と加数がどちらも同符号のゼロならその符号、そうでなければ `+0`（`TowardNegative` では `-0`）です。数値形式は正準 quiet NaN を返します。例外フラグができるまで（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）、無効演算、オーバーフロー、アンダーフロー、不正確の各例外は報告しません。`fma_finite_bits` は両フォーマット共通のエンジンなので、上の関数を使ってください。"
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr "適合性チェックリスト"
@@ -264,8 +276,8 @@ msgid "§5.3.1 addition, subtraction, multiplication, division, squareRoot [requ
 msgstr "§5.3.1 addition、subtraction、multiplication、division、squareRoot [必須] （部分準拠）"
 
 #: manual/conformance/checklist.md:16
-msgid "§5.3.1 fusedMultiplyAdd [required] (not implemented)"
-msgstr "§5.3.1 fusedMultiplyAdd [必須] （未実装）"
+msgid "§5.3.1 fusedMultiplyAdd [required]"
+msgstr "§5.3.1 fusedMultiplyAdd [必須]"
 
 #: manual/conformance/checklist.md:17
 msgid "§5.3.1 remainder [required]"
@@ -552,31 +564,16 @@ msgid "§5.3.1 fusedMultiplyAdd"
 msgstr "§5.3.1 fusedMultiplyAdd"
 
 #: manual/conformance/float.md:22
-#: manual/conformance/float.md:27
-#: manual/conformance/float.md:36
-#: manual/conformance/float.md:37
-#: manual/conformance/float.md:39
-#: manual/conformance/float.md:40
-#: manual/conformance/float.md:41
-#: manual/conformance/float.md:42
-#: manual/conformance/float.md:43
-#: manual/conformance/float.md:44
-#: manual/conformance/planned.md:9
-#: manual/conformance/planned.md:11
-#: manual/conformance/planned.md:12
-#: manual/conformance/planned.md:13
-#: manual/conformance/planned.md:15
-#: manual/conformance/planned.md:16
-#: manual/conformance/planned.md:17
-#: manual/conformance/planned.md:18
-msgid "none"
-msgstr "なし"
+msgid "`fma_bits_with`, `fma_bits`, `fma_with`, `fma` (and the `float/binary32` versions)"
+msgstr "`fma_bits_with`、`fma_bits`、`fma_with`、`fma`（および `float/binary32` の版）"
 
 #: manual/conformance/float.md:22
-#: manual/conformance/float.md:27
-#: manual/conformance/float.md:39
-msgid "not implemented; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
-msgstr "未実装。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgid "`src/float/fma_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family fma"
+msgstr "`src/float/fma_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の fma ファミリー"
+
+#: manual/conformance/float.md:22
+msgid "conforming; no flags yet ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "準拠。フラグはまだない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
 
 #: manual/conformance/float.md:23
 msgid "§5.3.1 remainder"
@@ -625,6 +622,31 @@ msgstr "準拠。invalid と inexact は報告しない"
 #: manual/conformance/float.md:27
 msgid "§5.9 roundToIntegralExact"
 msgstr "§5.9 roundToIntegralExact"
+
+#: manual/conformance/float.md:27
+#: manual/conformance/float.md:36
+#: manual/conformance/float.md:37
+#: manual/conformance/float.md:39
+#: manual/conformance/float.md:40
+#: manual/conformance/float.md:41
+#: manual/conformance/float.md:42
+#: manual/conformance/float.md:43
+#: manual/conformance/float.md:44
+#: manual/conformance/planned.md:9
+#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:17
+#: manual/conformance/planned.md:18
+msgid "none"
+msgstr "なし"
+
+#: manual/conformance/float.md:27
+#: manual/conformance/float.md:39
+msgid "not implemented; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgstr "未実装。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
 
 #: manual/conformance/float.md:28
 msgid "§5.4.1, §5.8 convertToInteger"
@@ -1394,9 +1416,6 @@ msgstr "比較述語"
 
 #~ msgid "none (host `Float::from_double` and `Double::to_float` are not audited)"
 #~ msgstr "なし（ホストの `Float::from_double` と `Double::to_float` は監査していない）"
-
-#~ msgid "not implemented; [#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
-#~ msgstr "未実装。[#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
 
 #~ msgid "§5.3.1 scaleB, logB [required] (not implemented)"
 #~ msgstr "§5.3.1 scaleB、logB [必須] （未実装）"

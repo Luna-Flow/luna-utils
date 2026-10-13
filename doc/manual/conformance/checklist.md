@@ -5,7 +5,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 <!-- conformance-checklist-start -->
 | Standard | Rows | Conforming | Partial | Not implemented | Not applicable | Required gaps | Recommended or optional gaps |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| IEEE 754-2019: float | 28 | 12 | 6 | 10 | 0 | 10 | 6 |
+| IEEE 754-2019: float | 28 | 13 | 6 | 9 | 0 | 9 | 6 |
 | Planned packages | 10 | 0 | 2 | 8 | 0 | 9 | 1 |
 
 **IEEE 754-2019: float**
@@ -13,7 +13,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [x] §3.4 binary32 and binary64 interchange encodings [required]
 - [ ] §4.3 rounding-direction attributes [required] (partial)
 - [ ] §5.3.1 addition, subtraction, multiplication, division, squareRoot [required] (partial)
-- [ ] §5.3.1 fusedMultiplyAdd [required] (not implemented)
+- [x] §5.3.1 fusedMultiplyAdd [required]
 - [x] §5.3.1 remainder [required]
 - [x] §5.3.1 nextUp, nextDown [required]
 - [x] §5.3.3 scaleB, logB [required]

@@ -20,6 +20,14 @@ pub fn compare_predicate_bits(@float.ComparisonPredicate, UInt, UInt) -> (Bool, 
 
 pub fn copy_sign_bits(UInt, UInt) -> UInt
 
+pub fn fma(Float, Float, Float) -> Float
+
+pub fn fma_bits(UInt, UInt, UInt) -> UInt
+
+pub fn fma_bits_with(UInt, UInt, UInt, @float.RoundingDirection) -> UInt
+
+pub fn fma_with(Float, Float, Float, @float.RoundingDirection) -> Float
+
 pub fn get_payload_bits(UInt) -> UInt?
 
 pub fn is_canonical_bits(UInt) -> Bool
