@@ -5,7 +5,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 <!-- conformance-checklist-start -->
 | Standard | Rows | Conforming | Partial | Not implemented | Not applicable | Required gaps | Recommended or optional gaps |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| IEEE 754-2019: float | 28 | 11 | 6 | 11 | 0 | 11 | 6 |
+| IEEE 754-2019: float | 28 | 12 | 6 | 10 | 0 | 10 | 6 |
 | Planned packages | 10 | 0 | 2 | 8 | 0 | 9 | 1 |
 
 **IEEE 754-2019: float**
@@ -21,7 +21,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [ ] §5.9 roundToIntegralExact [required] (not implemented)
 - [ ] §5.4.1, §5.8 convertToInteger [required] (partial)
 - [ ] §5.4.1 convertFromInt [required] (partial)
-- [ ] §5.4.2 convertFormat [required] (not implemented)
+- [x] §5.4.2 convertFormat [required]
 - [x] §5.5 copy, negate, abs, copySign [required]
 - [x] §5.6, §5.11 comparison predicates [required]
 - [x] §5.7 class and sign predicates [required]

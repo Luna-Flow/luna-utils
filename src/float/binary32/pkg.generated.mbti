@@ -138,6 +138,10 @@ pub fn sort_total_order(Array[Float]) -> Unit
 
 pub fn sort_total_order_view(MutArrayView[Float]) -> Unit
 
+pub fn to_binary64(Float) -> Double
+
+pub fn to_binary64_bits(UInt) -> UInt64
+
 pub fn to_bits_canonical(Float) -> UInt
 
 pub fn to_int64_checked(Float) -> Int64?

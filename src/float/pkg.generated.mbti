@@ -142,6 +142,14 @@ pub fn sort_total_order(Array[Double]) -> Unit
 
 pub fn sort_total_order_view(MutArrayView[Double]) -> Unit
 
+pub fn to_binary32(Double) -> Float
+
+pub fn to_binary32_bits(UInt64) -> UInt
+
+pub fn to_binary32_bits_with(UInt64, RoundingDirection) -> UInt
+
+pub fn to_binary32_with(Double, RoundingDirection) -> Float
+
 pub fn to_bits_canonical(Double) -> UInt64
 
 pub fn to_int64_checked(Double) -> Int64?
