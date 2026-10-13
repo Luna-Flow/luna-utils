@@ -558,11 +558,11 @@ msgstr "上面的固定语料固定了选定的边界用例。随机化审计对
 
 #: manual/testing.md:25
 msgid "`tools/run_audit.py <backend> --seed S --count N` runs the test in debug and release on one backend and writes a transcript and a JSON summary to `_build/audit/`. A mismatch prints `LUNA_AUDIT <family> <case> <details>`. The same seed regenerates the same cases, so a failing nightly seed can be replayed locally. Pull requests run seed 1 with 400 cases per family on every backend; the nightly workflow runs a seed taken from the date with 20,000 cases per family on all five CI configurations."
-msgstr "`tools/run_audit.py <backend> --seed S --count N` 在一个后端上以 debug 与 release 运行该测试，并把转录和 JSON 摘要写入 `_build/audit/`。出现不一致时会打印 `LUNA_AUDIT <family> <case> <details>`。相同种子会重新生成相同用例，因此夜间失败的种子可以在本地复现。拉取请求在每个后端上以种子 1、每个族 400 个用例运行；夜间工作流以日期为种子，在全部五种 CI 配置上每族运行 20,000 个用例。"
+msgstr "`tools/run_audit.py <backend> --seed S --count N` 在一个后端上以 debug 与 release 运行该测试，并把转录和 JSON 摘要写入 `_build/audit/`。出现不一致时会打印 `LUNA_AUDIT <family> <case> <details>`。相同种子会重新生成相同用例，因此每日失败的种子可以在本地复现。拉取请求在每个后端上以种子 1、每个族 400 个用例运行；每日工作流以日期为种子，在全部五种 CI 配置上每族运行 20,000 个用例。"
 
 #: manual/testing.md:27
 msgid "Three further checks keep the audit honest. `tools/test_audit_models.py` checks the exact models against CPython's IEEE conversions. `tools/api_audit.py` fails when a public function in a generated `.mbti` file is not called by the audit. `tools/mutation_check.py` injects known bugs (a wrong tie rule, a range boundary one off, a flipped zero selection) and fails when the audit does not notice one. A mismatch that is understood and tracked can be listed in `tools/known_issues.json` with its issue; the report then shows it separately instead of failing, and prints a reminder when the entry stops reproducing. The nightly job aggregates all results with `tools/audit_report.py` into a Markdown report that is attached to the run and shown in its summary."
-msgstr "另有三项检查保证审计本身可信。`tools/test_audit_models.py` 用 CPython 自带的 IEEE 转换检查精确模型。`tools/api_audit.py` 在生成的 `.mbti` 文件中存在审计未调用的公开函数时失败。`tools/mutation_check.py` 注入已知缺陷（错误的平局规则、差一位的范围边界、反转的零选择），审计没有发现时失败。已理解并有跟踪 issue 的不一致可以列入 `tools/known_issues.json`；报告会单独列出而不是失败，并在该条目不再复现时提示删除。夜间任务用 `tools/audit_report.py` 把所有结果汇总为 Markdown 报告，附在运行记录上并显示在其摘要中。"
+msgstr "另有三项检查保证审计本身可信。`tools/test_audit_models.py` 用 CPython 自带的 IEEE 转换检查精确模型。`tools/api_audit.py` 在生成的 `.mbti` 文件中存在审计未调用的公开函数时失败。`tools/mutation_check.py` 注入已知缺陷（错误的平局规则、差一位的范围边界、反转的零选择），审计没有发现时失败。已理解并有跟踪 issue 的不一致可以列入 `tools/known_issues.json`；报告会单独列出而不是失败，并在该条目不再复现时提示删除。每日任务用 `tools/audit_report.py` 把所有结果汇总为 Markdown 报告，附在运行记录上并显示在其摘要中。"
 
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
