@@ -20,6 +20,8 @@ pub fn compare_predicate_bits(@float.ComparisonPredicate, UInt, UInt) -> (Bool, 
 
 pub fn copy_sign_bits(UInt, UInt) -> UInt
 
+pub fn fast_two_sum(Float, Float) -> (Float, Float)
+
 pub fn fma(Float, Float, Float) -> Float
 
 pub fn fma_bits(UInt, UInt, UInt) -> UInt
@@ -187,6 +189,10 @@ pub fn to_uint_saturating_with(Float, @float.RoundingDirection) -> UInt
 pub fn total_order_bits(UInt, UInt) -> Bool
 
 pub fn total_order_mag_bits(UInt, UInt) -> Bool
+
+pub fn two_prod(Float, Float) -> (Float, Float)
+
+pub fn two_sum(Float, Float) -> (Float, Float)
 
 // Errors
 

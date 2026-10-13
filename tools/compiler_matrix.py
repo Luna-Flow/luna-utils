@@ -77,14 +77,18 @@ TYPES = {
                    ops=[("bits", "x.reinterpret_as_uint64()"), ("add1", "(x + 1.0).reinterpret_as_uint64()"),
                         ("mul3", "(x * 3.0).reinterpret_as_uint64()"), ("div3", "(x / 3.0).reinterpret_as_uint64()"),
                         ("neg", "(-x).reinterpret_as_uint64()"), ("gt1", "(x > 1.0).to_int()"), ("eq", "(x == x).to_int()"),
-                        ("abs", "x.abs().reinterpret_as_uint64()")]),
+                        ("abs", "x.abs().reinterpret_as_uint64()"),
+                        ("add_zero_literal", "(x + 0.0).reinterpret_as_uint64()"),
+                        ("add_zero_opaque", "(x + opaque_zero_double()).reinterpret_as_uint64()")]),
     "Float": dict(suffix="", cross=False,
                   values=["(0.0 : Float)", "(-0.0 : Float)", "(1.0 : Float)", "(-1.0 : Float)", "(0.5 : Float)", "(2.5 : Float)",
                           "Float::from_double(16777217.0)", "Float::reinterpret_from_uint(0x7f7fffffU)",
                           "Float::reinterpret_from_uint(1U)", "Float::reinterpret_from_uint(0x00800000U)"],
                   ops=[("bits", "x.reinterpret_as_uint()"), ("add1", "(x + (1.0 : Float)).reinterpret_as_uint()"),
                        ("mul3", "(x * (3.0 : Float)).reinterpret_as_uint()"), ("neg", "(-x).reinterpret_as_uint()"),
-                       ("gt1", "(x > (1.0 : Float)).to_int()"), ("eq", "(x == x).to_int()")]),
+                       ("gt1", "(x > (1.0 : Float)).to_int()"), ("eq", "(x == x).to_int()"),
+                       ("add_zero_literal", "(x + (0.0 : Float)).reinterpret_as_uint()"),
+                       ("add_zero_opaque", "(x + opaque_zero_float()).reinterpret_as_uint()")]),
     "Bool": dict(suffix="", cross=True, values=["false", "true"],
                  ops=[("to_int", "x.to_int()"), ("not", "(!x).to_int()"), ("and", "(x && true).to_int()"),
                       ("or", "(x || false).to_int()"), ("to_string", "x.to_string()")]),
@@ -117,6 +121,8 @@ def emit_module():
            "///|", "fn emit(c : String, t : String, vi : Int, op : String, r : String) -> Unit {",
            '  println("CELL " + c + " " + t + " " + vi.to_string() + " " + op + " " + r)', "}", "",
            "///|", "fn[X] pass(x : X) -> X { x }", "",
+           "///|", "fn opaque_zero_double() -> Double { (@env.args().length() >> 30).to_double() }", "",
+           "///|", "fn opaque_zero_float() -> Float { Float::from_int(@env.args().length() >> 30) }", "",
            "///|", "fn[X] apply(x : X, f : (X) -> Unit) -> Unit { f(x) }", ""]
     for t, spec in TYPES.items():
         vals = [f"({v}).to_uint16()" if t == "UInt16" else v for v in spec["values"]]
@@ -162,7 +168,18 @@ def is_known(known, run, t, container):
     stem = Path(run).stem
     backend, mode = stem.rsplit("-", 1)
     for k in known:
-        if k["backend"] == backend and k["mode"] == mode and t in k["types"] and container in k["containers"]:
+        if k["backend"] in (backend, "*") and k["mode"] in (mode, "*") and t in k["types"] and container in k["containers"] \
+                and "relation" not in k:
+            return k["issue"]
+    return None
+
+
+def is_known_relation(known, run, t, container, relation):
+    stem = Path(run).stem
+    backend, mode = stem.rsplit("-", 1)
+    for k in known:
+        if k.get("relation") == relation and k["backend"] in (backend, "*") and k["mode"] in (mode, "*") \
+                and t in k["types"] and container in k["containers"]:
             return k["issue"]
     return None
 
@@ -192,6 +209,18 @@ def analyze(paths):
                     known_hits[issue] += 1
                     continue
                 findings["container"].append(dict(run=path, type=t, value=vi, op=op, container=cont, got=result, direct=direct))
+    # relation: adding a literal zero must equal adding an opaque zero (x + 0.0 is +0 for x = -0)
+    for path, cells in runs.items():
+        for (t, vi, op, cont), result in cells.items():
+            if op == "add_zero_literal":
+                other = cells.get((t, vi, "add_zero_opaque", cont))
+                if other is not None and other != result:
+                    issue = is_known_relation(known, path, t, cont, "add_zero")
+                    if issue:
+                        known_hits[issue] += 1
+                        continue
+                    findings["relation"].append(dict(run=path, type=t, value=vi, container=cont,
+                                                     relation="x + 0.0 equals x + opaque 0.0", literal=result, opaque=other))
     names = list(runs)
     for i, a in enumerate(names):
         for b in names[i + 1:]:
