@@ -187,6 +187,18 @@ msgstr ""
 msgid "`scaleb_bits_with(bits, n, direction)` and `scaleb_with(x, n, direction)` compute `x * 2^n` rounded once to the format by the given `RoundingDirection`, with gradual underflow and the overflow rule of each direction; `scaleb_bits` and `scaleb` use ties to even. Zeros, infinities and `n = 0` return `x`, and `n` may be any `Int`. `logb_bits(bits)` returns the exponent `floor(log2 |x|)` as an `Int?` computed as though the range were unbounded (a subnormal gives its true exponent), and `None` for NaN, infinities and zeros, which the standard calls exceptional. `logb(x)` is the floating-point form: `logB(NaN)` is a NaN, `logB(inf)` is `+inf` and `logB(0)` is `-inf`."
 msgstr ""
 
+#: manual/api/float.md:69
+msgid "Conversion between binary64 and binary32"
+msgstr ""
+
+#: manual/api/float.md:71
+msgid "`to_binary32_bits_with(bits, direction)` and `to_binary32_with(x, direction)` are IEEE 754-2019 §5.4.2 convertFormat from binary64 to binary32: the value is rounded once by the given `RoundingDirection`, with gradual underflow and the overflow rule of the direction (infinity or the largest finite value); `to_binary32_bits` and `to_binary32` use ties to even. Zeros and infinities keep their sign. In `float/binary32`, `to_binary64_bits(bits)` and `to_binary64(x)` widen exactly."
+msgstr ""
+
+#: manual/api/float.md:73
+msgid "For NaNs the raw forms follow §6.2.3: the result is quiet, keeps the sign, and carries the payload bits that fit (the high 22 payload bits when narrowing, shifted up when widening), so widening a quiet NaN and narrowing it back changes nothing. The numeric forms return the canonical quiet NaN. The invalid operation exception for a signaling NaN is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)). The randomized audit also checks core's `Float::from_double` and `Float::to_double` against the same model and finds them correct on every backend, so they are safe for values; they do not give directed rounding or a defined NaN payload."
+msgstr ""
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr ""
@@ -284,7 +296,7 @@ msgid "§5.4.1 convertFromInt [required] (partial)"
 msgstr ""
 
 #: manual/conformance/checklist.md:24
-msgid "§5.4.2 convertFormat [required] (not implemented)"
+msgid "§5.4.2 convertFormat [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:25
@@ -541,7 +553,6 @@ msgstr ""
 
 #: manual/conformance/float.md:22
 #: manual/conformance/float.md:27
-#: manual/conformance/float.md:30
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
 #: manual/conformance/float.md:39
@@ -652,11 +663,11 @@ msgid "§5.4.2 convertFormat"
 msgstr ""
 
 #: manual/conformance/float.md:30
-msgid "none (host `Float::from_double` and `Double::to_float` are not audited)"
+msgid "`src/float/convert_format_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families narrow, widen"
 msgstr ""
 
 #: manual/conformance/float.md:30
-msgid "not implemented; [#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
+msgid "conforming; no invalid report for signaling NaN ([#29](https://github.com/Luna-Flow/luna-utils/issues/29)); the host `Float::from_double` and `Float::to_double` also match the model on every backend"
 msgstr ""
 
 #: manual/conformance/float.md:31

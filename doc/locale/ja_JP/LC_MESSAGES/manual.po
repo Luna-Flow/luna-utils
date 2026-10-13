@@ -187,6 +187,18 @@ msgstr "`remainder_bits(x, y)` と `remainder(x, y)` は IEEE の剰余 `x - y *
 msgid "`scaleb_bits_with(bits, n, direction)` and `scaleb_with(x, n, direction)` compute `x * 2^n` rounded once to the format by the given `RoundingDirection`, with gradual underflow and the overflow rule of each direction; `scaleb_bits` and `scaleb` use ties to even. Zeros, infinities and `n = 0` return `x`, and `n` may be any `Int`. `logb_bits(bits)` returns the exponent `floor(log2 |x|)` as an `Int?` computed as though the range were unbounded (a subnormal gives its true exponent), and `None` for NaN, infinities and zeros, which the standard calls exceptional. `logb(x)` is the floating-point form: `logB(NaN)` is a NaN, `logB(inf)` is `+inf` and `logB(0)` is `-inf`."
 msgstr "`scaleb_bits_with(bits, n, direction)` と `scaleb_with(x, n, direction)` は `x * 2^n` を、指定した `RoundingDirection` で一度だけ丸めて計算し、段階的アンダーフローと各方向のオーバーフロー規則を含みます。`scaleb_bits` と `scaleb` は最近接偶数です。ゼロ、無限大、`n = 0` は `x` を返し、`n` は任意の `Int` にできます。`logb_bits(bits)` は指数 `floor(log2 |x|)` を、範囲を無制限としたかのように `Int?` で返し（非正規数は真の指数）、NaN、無限大、ゼロには `None` を返します。規格はこれらを例外的な場合とします。`logb(x)` は浮動小数点形式で、`logB(NaN)` は NaN、`logB(inf)` は `+inf`、`logB(0)` は `-inf` です。"
 
+#: manual/api/float.md:69
+msgid "Conversion between binary64 and binary32"
+msgstr "binary64 と binary32 の間の変換"
+
+#: manual/api/float.md:71
+msgid "`to_binary32_bits_with(bits, direction)` and `to_binary32_with(x, direction)` are IEEE 754-2019 §5.4.2 convertFormat from binary64 to binary32: the value is rounded once by the given `RoundingDirection`, with gradual underflow and the overflow rule of the direction (infinity or the largest finite value); `to_binary32_bits` and `to_binary32` use ties to even. Zeros and infinities keep their sign. In `float/binary32`, `to_binary64_bits(bits)` and `to_binary64(x)` widen exactly."
+msgstr "`to_binary32_bits_with(bits, direction)` と `to_binary32_with(x, direction)` は IEEE 754-2019 §5.4.2 の binary64 から binary32 への convertFormat です。値は指定した `RoundingDirection` で一度だけ丸められ、段階的アンダーフローと各方向のオーバーフロー規則（無限大または最大の有限値）を含みます。`to_binary32_bits` と `to_binary32` は最近接偶数です。ゼロと無限大は符号を保ちます。`float/binary32` の `to_binary64_bits(bits)` と `to_binary64(x)` は厳密に拡張します。"
+
+#: manual/api/float.md:73
+msgid "For NaNs the raw forms follow §6.2.3: the result is quiet, keeps the sign, and carries the payload bits that fit (the high 22 payload bits when narrowing, shifted up when widening), so widening a quiet NaN and narrowing it back changes nothing. The numeric forms return the canonical quiet NaN. The invalid operation exception for a signaling NaN is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)). The randomized audit also checks core's `Float::from_double` and `Float::to_double` against the same model and finds them correct on every backend, so they are safe for values; they do not give directed rounding or a defined NaN payload."
+msgstr "NaN については、生の形式は §6.2.3 に従います。結果は quiet で、符号を保ち、収まるペイロードのビットを運びます（縮小時は上位 22 ビット、拡張時は左にシフト）。そのため quiet NaN を拡張して縮小し直しても何も変わりません。数値形式は正準 quiet NaN を返します。例外フラグができるまで（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）、シグナリング NaN の無効演算例外は報告しません。ランダム監査は core の `Float::from_double` と `Float::to_double` も同じモデルで検査し、全バックエンドで正しいことを確認しています。値については安心して使えますが、方向丸めや NaN ペイロードの定義はありません。"
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr "適合性チェックリスト"
@@ -284,8 +296,8 @@ msgid "§5.4.1 convertFromInt [required] (partial)"
 msgstr "§5.4.1 convertFromInt [必須] （部分準拠）"
 
 #: manual/conformance/checklist.md:24
-msgid "§5.4.2 convertFormat [required] (not implemented)"
-msgstr "§5.4.2 convertFormat [必須] （未実装）"
+msgid "§5.4.2 convertFormat [required]"
+msgstr "§5.4.2 convertFormat [必須]"
 
 #: manual/conformance/checklist.md:25
 msgid "§5.5 copy, negate, abs, copySign [required]"
@@ -541,7 +553,6 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 
 #: manual/conformance/float.md:22
 #: manual/conformance/float.md:27
-#: manual/conformance/float.md:30
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
 #: manual/conformance/float.md:39
@@ -652,12 +663,12 @@ msgid "§5.4.2 convertFormat"
 msgstr "§5.4.2 convertFormat"
 
 #: manual/conformance/float.md:30
-msgid "none (host `Float::from_double` and `Double::to_float` are not audited)"
-msgstr "なし（ホストの `Float::from_double` と `Double::to_float` は監査していない）"
+msgid "`src/float/convert_format_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families narrow, widen"
+msgstr "`src/float/convert_format_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の narrow、widen ファミリー"
 
 #: manual/conformance/float.md:30
-msgid "not implemented; [#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
-msgstr "未実装。[#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
+msgid "conforming; no invalid report for signaling NaN ([#29](https://github.com/Luna-Flow/luna-utils/issues/29)); the host `Float::from_double` and `Float::to_double` also match the model on every backend"
+msgstr "準拠。シグナリング NaN の無効演算は報告しない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）。ホストの `Float::from_double` と `Float::to_double` も全バックエンドでモデルと一致"
 
 #: manual/conformance/float.md:31
 msgid "§5.5 copy, negate, abs, copySign"
@@ -1380,6 +1391,12 @@ msgstr "生のペイロード setter でエンコーディングを構築して 
 #: manual/tutorial/float.md:52
 msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr "比較述語"
+
+#~ msgid "none (host `Float::from_double` and `Double::to_float` are not audited)"
+#~ msgstr "なし（ホストの `Float::from_double` と `Double::to_float` は監査していない）"
+
+#~ msgid "not implemented; [#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
+#~ msgstr "未実装。[#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
 
 #~ msgid "§5.3.1 scaleB, logB [required] (not implemented)"
 #~ msgstr "§5.3.1 scaleB、logB [必須] （未実装）"

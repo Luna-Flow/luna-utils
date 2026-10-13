@@ -475,6 +475,69 @@ def m_logb(fmt, bits):
     return flog2(abs(fmt.value(bits)))
 
 
+def m_narrow(f64, f32, bits, direction):
+    """convertFormat binary64 -> binary32 of an encoding (see IEEE 754-2019 5.4.2 and 6.2.3)."""
+    sign = (bits >> 32) & 0x80000000
+    if f64.is_nan(bits):
+        return sign | 0x7fc00000 | ((bits >> 29) & 0x3fffff)
+    c = f64.cls(bits)
+    if c.endswith("Infinity"):
+        return sign | 0x7f800000
+    if c.endswith("Zero"):
+        return sign
+    return encode_directed(f32, f64.value(bits), direction)
+
+
+def m_widen(f32, f64, bits):
+    """convertFormat binary32 -> binary64 of an encoding (exact)."""
+    sign = (bits & 0x80000000) << 32
+    if f32.is_nan(bits):
+        return sign | 0x7ff8000000000000 | ((bits & 0x3fffff) << 29)
+    c = f32.cls(bits)
+    if c.endswith("Infinity"):
+        return sign | 0x7ff0000000000000
+    if c.endswith("Zero"):
+        return sign
+    return f64.encode_exact(f32.value(bits))
+
+
+def scaleb_tie_case(rng, fmt):
+    """An operand and a scale that put the exact result halfway between two subnormal neighbours."""
+    s = rng.randrange(1, fmt.mbits + 1)
+    high = (rng.getrandbits(fmt.mbits - s) if fmt.mbits - s > 0 else 0) | (1 << (fmt.mbits - s))
+    m = (high << s) | (1 << (s - 1))
+    e = rng.randrange(1, fmt.emax_field)
+    bits = (rng.randrange(2) << (fmt.width - 1)) | (e << fmt.mbits) | (m & fmt.frac_mask)
+    e0 = e - fmt.bias - fmt.mbits
+    return bits, (1 - fmt.bias - fmt.mbits) - e0 - s
+
+
+def remainder_tie_case(rng, fmt):
+    """x and y with x / y exactly halfway between two integers, so the quotient is rounded by the even rule."""
+    half_bits = max(2, (fmt.mbits // 2) - 1)
+    my = (rng.getrandbits(half_bits) << 1) | 1
+    k2 = (rng.getrandbits(half_bits) << 1) | 1  # 2k + 1
+    ey = rng.randrange(-fmt.bias // 2, fmt.bias // 2)
+    sy = rng.choice((1, -1))
+    sx = rng.choice((1, -1))
+    y = sy * my * Fraction(2) ** ey
+    x = sx * my * k2 * Fraction(2) ** (ey - 1)
+    return fmt.encode_exact(x), fmt.encode_exact(y)
+
+
+def narrow_input(rng, f64, f32):
+    """Binary64 values on and around the binary32 grid: ties, overflow and underflow edges."""
+    if rng.randrange(2):
+        return random_bits(rng, f64)
+    g = random_bits(rng, f32)
+    if f32.cls(g) in ("SignalingNaN", "QuietNaN", "PositiveInfinity", "NegativeInfinity"):
+        return random_bits(rng, f64)
+    v = f32.value(g)
+    e = max(flog2(abs(v)) if v != 0 else -149, -126)
+    ulp = Fraction(2) ** (e - 23)
+    return f64.encode_exact(v + rng.choice((-3, -2, -1, 0, 1, 2, 3)) * ulp / 4)
+
+
 # ----------------------------------------------------------------- tables
 
 class Tables:
@@ -529,16 +592,28 @@ def build(seed, count):
                   m_magnitude(fmt, b, y, True, True), m_magnitude(fmt, b, y, False, True),
                   int(key(fmt, b & ~fmt.sign & fmt.mask) <= key(fmt, y & ~fmt.sign & fmt.mask)),
                   int(key(fmt, numeric(fmt, b) & ~fmt.sign & fmt.mask) <= key(fmt, numeric(fmt, y) & ~fmt.sign & fmt.mask)))
+            if fmt.width == 64:
+                nb = narrow_input(rng, fmt, Fmt(32))
+                nres = [m_narrow(fmt, Fmt(32), nb, d) for d in DIRECTIONS]
+                t.add(p + "narrow", nb, *nres, *[(0x7fc00000 if Fmt(32).is_nan(v) else v) for v in nres])
+            else:
+                t.add(p + "widen", b, m_widen(fmt, Fmt(64), b), 0x7ff8000000000000 if fmt.is_nan(b) else m_widen(fmt, Fmt(64), b))
             canon = lambda v: fmt.canonical_nan if fmt.is_nan(v) else v
             t.add(p + "next", b, m_next_up(fmt, b), m_next_down(fmt, b), canon(m_next_up(fmt, b)) if fmt.is_nan(b) else m_next_up(fmt, b),
                   canon(m_next_down(fmt, b)) if fmt.is_nan(b) else m_next_down(fmt, b))
-            rb = m_remainder(fmt, b, y)
-            t.add(p + "remainder", b, y, rb, canon(rb))
+            rx, ry = (b, y)
+            if rng.randrange(3) == 0:
+                rx, ry = remainder_tie_case(rng, fmt)
+            rb = m_remainder(fmt, rx, ry)
+            t.add(p + "remainder", rx, ry, rb, canon(rb))
             sn = rng.choice((0, 1, -1, 2, -2, 7, -7, fmt.mbits, -fmt.mbits, fmt.bias, -fmt.bias, fmt.bias + fmt.mbits + 1,
                              -(fmt.bias + fmt.mbits + 1), 2 * (fmt.bias + fmt.mbits), -2 * (fmt.bias + fmt.mbits), 2400, -2400,
                              (1 << 31) - 1, -(1 << 31), rng.randrange(-3000, 3000), rng.randrange(-300, 300)))
-            sres = [m_scaleb(fmt, b, sn, d) for d in DIRECTIONS]
-            t.add(p + "scaleb", b, sn, *sres, *[canon(v) if fmt.is_nan(b) else v for v in sres])
+            sb = b
+            if rng.randrange(3) == 0:
+                sb, sn = scaleb_tie_case(rng, fmt)
+            sres = [m_scaleb(fmt, sb, sn, d) for d in DIRECTIONS]
+            t.add(p + "scaleb", sb, sn, *sres, *[canon(v) if fmt.is_nan(sb) else v for v in sres])
             lg = m_logb(fmt, b)
             lgf = fmt.canonical_nan if fmt.is_nan(b) else (fmt.emax_field << fmt.mbits) if fmt.cls(b) == "PositiveInfinity" or fmt.cls(b) == "NegativeInfinity" else (fmt.sign | (fmt.emax_field << fmt.mbits)) if lg is None else fmt.encode_exact(Fraction(lg))
             t.add(p + "logb", b, 0 if lg is None else 1, 0 if lg is None else lg, lgf)
@@ -784,6 +859,24 @@ def emit(t, seed, count):
             "  Some(v) => { if table[r + 1] != 1UL { report(fam, i, \"logb_bits present\"); bad += 1 } else if !check(fam, i, \"logb_bits\", v.to_int64().reinterpret_as_uint64(), table[r + 2]) { bad += 1 } }",
             "  None => if table[r + 1] != 0UL { report(fam, i, \"logb_bits missing\"); bad += 1 }", "}",
             f"if !check(fam, i, \"logb\", {from_bt(f'{M}.to_bits_canonical({M}.logb(x))')}, table[r + 3]) {{ bad += 1 }}"])
+        if width == 64:
+            dsn = ", ".join(f"@float.{d}" for d in DIRECTIONS)
+            row_fn("narrow", "narrow", [
+                f"let fam = \"{p}narrow\"", f"let x = {fb('table[r]')}", f"let dirs = [{dsn}]",
+                "for k in 0..<5 {",
+                "  if !check(fam, i, \"to_binary32_bits_with#\" + k.to_string(), @float.to_binary32_bits_with(b, dirs[k]).to_uint64(), table[r + 1 + k]) { bad += 1 }",
+                "  if !check(fam, i, \"to_binary32_with#\" + k.to_string(), @binary32.to_bits_canonical(@float.to_binary32_with(x, dirs[k])).to_uint64(), table[r + 6 + k]) { bad += 1 }",
+                "}",
+                "if !check(fam, i, \"to_binary32_bits\", @float.to_binary32_bits(b).to_uint64(), table[r + 1]) { bad += 1 }",
+                "if !check(fam, i, \"to_binary32\", @binary32.to_bits_canonical(@float.to_binary32(x)).to_uint64(), table[r + 6]) { bad += 1 }",
+                "if !check(fam, i, \"core Float::from_double\", @binary32.to_bits_canonical(Float::from_double(x)).to_uint64(), table[r + 6]) { bad += 1 }"])
+        else:
+            row_fn("widen", "widen", [
+                f"let fam = \"{p}widen\"", f"let x = {fb('table[r]')}",
+                "if !check(fam, i, \"to_binary64_bits\", @binary32.to_binary64_bits(b), table[r + 1]) { bad += 1 }",
+                "if !check(fam, i, \"to_binary64\", @float.to_bits_canonical(@binary32.to_binary64(x)), table[r + 2]) { bad += 1 }",
+                "if !check(fam, i, \"core Float::to_double\", @float.to_bits_canonical(x.to_double()), table[r + 2]) { bad += 1 }",
+                "if !check(fam, i, \"round trip\", @float.to_binary32_bits(@binary32.to_binary64_bits(b)).to_uint64(), if @binary32.is_nan_bits(b) { b.to_uint64() | 0x400000UL } else { b.to_uint64() }) { bad += 1 }"])
         ps = ", ".join(f"@float.{n}" for n, _, _ in PREDICATES)
         row_fn("compare", "compare", [
             f"let fam = \"{p}compare\"", f"let preds = [{ps}]", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
