@@ -11,7 +11,7 @@ from fractions import Fraction
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from random_audit import Fmt, round_fraction, key, m_extremum, m_round_to_integral, m_arith, m_sqrt, arith_pair, m_next_up, m_remainder, m_scaleb, m_logb, random_bits  # noqa: E402
+from random_audit import Fmt, round_fraction, key, m_extremum, m_round_to_integral, m_arith, m_sqrt, arith_pair, m_next_up, m_remainder, m_scaleb, m_logb, random_bits, m_fma, fma_triple  # noqa: E402
 
 
 def main():
@@ -104,6 +104,23 @@ def main():
             assert m_scaleb(f64, xb, n, "TiesToEven") == want, (hex(xb), n)
             mant, exp = math.frexp(abs(x))
             assert m_logb(f64, xb) == exp - 1, hex(xb)
+    # fusedMultiplyAdd against CPython's math.fma (round to nearest even, binary64)
+    if hasattr(math, "fma"):
+        checked = 0
+        for _ in range(20000):
+            xb, yb, zb = fma_triple(rng, f64)
+            x, y, z = host(f64, xb), host(f64, yb), host(f64, zb)
+            if x != x or y != y or z != z or any(math.isinf(v) for v in (x, y, z)):
+                continue
+            try:
+                want = bits64(math.fma(x, y, z))
+            except OverflowError:
+                exact = Fraction(x) * Fraction(y) + Fraction(z)
+                want = 0xfff0000000000000 if exact < 0 else 0x7ff0000000000000
+            got = m_fma(f64, xb, yb, zb, "TiesToEven")
+            assert got == want, (hex(xb), hex(yb), hex(zb), hex(got), hex(want))
+            checked += 1
+        assert checked > 10000, checked
     print("audit models: ok")
     return 0
 

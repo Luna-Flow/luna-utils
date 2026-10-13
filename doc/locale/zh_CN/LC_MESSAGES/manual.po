@@ -199,6 +199,18 @@ msgstr "`to_binary32_bits_with(bits, direction)` 和 `to_binary32_with(x, direct
 msgid "For NaNs the raw forms follow §6.2.3: the result is quiet, keeps the sign, and carries the payload bits that fit (the high 22 payload bits when narrowing, shifted up when widening), so widening a quiet NaN and narrowing it back changes nothing. The numeric forms return the canonical quiet NaN. The invalid operation exception for a signaling NaN is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)). The randomized audit also checks core's `Float::from_double` and `Float::to_double` against the same model and finds them correct on every backend, so they are safe for values; they do not give directed rounding or a defined NaN payload."
 msgstr "对于 NaN，原始形式遵循 §6.2.3：结果是安静 NaN，保留符号，并携带放得下的载荷位（缩窄时取高 22 位载荷，加宽时左移），所以把安静 NaN 加宽再缩窄不会改变任何东西。数值形式返回规范安静 NaN。在异常标志出现之前（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）不报告信号 NaN 的无效操作异常。随机审计还用同一模型检查了 core 的 `Float::from_double` 和 `Float::to_double`，在所有后端上都是正确的，所以对数值来说可以放心使用；它们不提供定向舍入，也不定义 NaN 载荷。"
 
+#: manual/api/float.md:75
+msgid "Fused multiply-add"
+msgstr "融合乘加"
+
+#: manual/api/float.md:77
+msgid "`fma_bits_with(x, y, z, direction)` and `fma_with(x, y, z, direction)` are IEEE 754-2019 §5.3.1 fusedMultiplyAdd: `x * y + z` computed exactly and rounded once by the given `RoundingDirection`, with gradual underflow and the overflow rule of the direction; `fma_bits` and `fma` use ties to even. The `float/binary32` package has the same names for binary32, rounding once at binary32 precision (not through binary64). The implementation is pure integer arithmetic on the encodings (a 128-bit window with a sticky bit), so it is identical on every backend and does not depend on a host fma."
+msgstr "`fma_bits_with(x, y, z, direction)` 和 `fma_with(x, y, z, direction)` 是 IEEE 754-2019 §5.3.1 的 fusedMultiplyAdd：精确计算 `x * y + z`，按给定的 `RoundingDirection` 只舍入一次，包含渐进下溢和各方向的上溢规则；`fma_bits` 与 `fma` 取平局到偶数。`float/binary32` 包有同名函数，按 binary32 精度只舍入一次（不经过 binary64）。实现是纯整数运算（带粘滞位的 128 位窗口），所以在所有后端上一致，也不依赖宿主的 fma。"
+
+#: manual/api/float.md:79
+msgid "Special values: a NaN operand gives a quiet NaN that keeps its sign and payload (the first of `x`, `y`, `z`); `inf * 0` and `inf + (-inf)` give the canonical quiet NaN; an infinite product or addend gives the infinity; the sign of an exact zero result is the common sign when the product and the addend are both zero of the same sign, and otherwise `+0` (`-0` for `TowardNegative`). Numeric forms return the canonical quiet NaN. The invalid operation, overflow, underflow and inexact exceptions are not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)). `fma_finite_bits` is the engine shared by both formats; use the functions above."
+msgstr "特殊值：NaN 操作数给出保留符号与载荷的安静 NaN（取 `x`、`y`、`z` 中第一个）；`inf * 0` 与 `inf + (-inf)` 给出规范安静 NaN；无穷的乘积或加数给出该无穷；精确的零结果的符号是：乘积与加数都是同号零时取该符号，否则是 `+0`（`TowardNegative` 时是 `-0`）。数值形式返回规范安静 NaN。在异常标志出现之前（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）不报告无效操作、上溢、下溢和不精确异常。`fma_finite_bits` 是两种格式共用的引擎，请使用上面的函数。"
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr "一致性检查清单"
@@ -264,8 +276,8 @@ msgid "§5.3.1 addition, subtraction, multiplication, division, squareRoot [requ
 msgstr "§5.3.1 addition、subtraction、multiplication、division、squareRoot [必须] （部分符合）"
 
 #: manual/conformance/checklist.md:16
-msgid "§5.3.1 fusedMultiplyAdd [required] (not implemented)"
-msgstr "§5.3.1 fusedMultiplyAdd [必须] （未实现）"
+msgid "§5.3.1 fusedMultiplyAdd [required]"
+msgstr "§5.3.1 fusedMultiplyAdd [必须]"
 
 #: manual/conformance/checklist.md:17
 msgid "§5.3.1 remainder [required]"
@@ -552,31 +564,16 @@ msgid "§5.3.1 fusedMultiplyAdd"
 msgstr "§5.3.1 fusedMultiplyAdd"
 
 #: manual/conformance/float.md:22
-#: manual/conformance/float.md:27
-#: manual/conformance/float.md:36
-#: manual/conformance/float.md:37
-#: manual/conformance/float.md:39
-#: manual/conformance/float.md:40
-#: manual/conformance/float.md:41
-#: manual/conformance/float.md:42
-#: manual/conformance/float.md:43
-#: manual/conformance/float.md:44
-#: manual/conformance/planned.md:9
-#: manual/conformance/planned.md:11
-#: manual/conformance/planned.md:12
-#: manual/conformance/planned.md:13
-#: manual/conformance/planned.md:15
-#: manual/conformance/planned.md:16
-#: manual/conformance/planned.md:17
-#: manual/conformance/planned.md:18
-msgid "none"
-msgstr "无"
+msgid "`fma_bits_with`, `fma_bits`, `fma_with`, `fma` (and the `float/binary32` versions)"
+msgstr "`fma_bits_with`、`fma_bits`、`fma_with`、`fma`（以及 `float/binary32` 的版本）"
 
 #: manual/conformance/float.md:22
-#: manual/conformance/float.md:27
-#: manual/conformance/float.md:39
-msgid "not implemented; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
-msgstr "未实现；[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgid "`src/float/fma_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family fma"
+msgstr "`src/float/fma_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 fma 族"
+
+#: manual/conformance/float.md:22
+msgid "conforming; no flags yet ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "符合；暂无标志（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
 
 #: manual/conformance/float.md:23
 msgid "§5.3.1 remainder"
@@ -625,6 +622,31 @@ msgstr "符合；不报告 invalid 或 inexact"
 #: manual/conformance/float.md:27
 msgid "§5.9 roundToIntegralExact"
 msgstr "§5.9 roundToIntegralExact"
+
+#: manual/conformance/float.md:27
+#: manual/conformance/float.md:36
+#: manual/conformance/float.md:37
+#: manual/conformance/float.md:39
+#: manual/conformance/float.md:40
+#: manual/conformance/float.md:41
+#: manual/conformance/float.md:42
+#: manual/conformance/float.md:43
+#: manual/conformance/float.md:44
+#: manual/conformance/planned.md:9
+#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:17
+#: manual/conformance/planned.md:18
+msgid "none"
+msgstr "无"
+
+#: manual/conformance/float.md:27
+#: manual/conformance/float.md:39
+msgid "not implemented; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgstr "未实现；[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
 
 #: manual/conformance/float.md:28
 msgid "§5.4.1, §5.8 convertToInteger"
@@ -1394,9 +1416,6 @@ msgstr "比较谓词"
 
 #~ msgid "none (host `Float::from_double` and `Double::to_float` are not audited)"
 #~ msgstr "无（宿主的 `Float::from_double` 和 `Double::to_float` 未经审计）"
-
-#~ msgid "not implemented; [#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
-#~ msgstr "未实现；[#47](https://github.com/Luna-Flow/luna-utils/issues/47)"
 
 #~ msgid "§5.3.1 scaleB, logB [required] (not implemented)"
 #~ msgstr "§5.3.1 scaleB、logB [必须] （未实现）"

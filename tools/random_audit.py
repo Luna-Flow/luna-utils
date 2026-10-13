@@ -525,6 +525,61 @@ def remainder_tie_case(rng, fmt):
     return fmt.encode_exact(x), fmt.encode_exact(y)
 
 
+def m_fma(fmt, xb, yb, zb, direction):
+    """fusedMultiplyAdd: x * y + z rounded once by the direction, IEEE 754-2019 5.3.1, 6.2.3 and 6.3."""
+    for b in (xb, yb, zb):
+        if fmt.is_nan(b):
+            return quiet(fmt, b)
+    cx, cy, cz = fmt.cls(xb), fmt.cls(yb), fmt.cls(zb)
+    xinf, yinf, zinf = cx.endswith("Infinity"), cy.endswith("Infinity"), cz.endswith("Infinity")
+    if (xinf and cy.endswith("Zero")) or (cx.endswith("Zero") and yinf):
+        return fmt.canonical_nan
+    sp = (xb ^ yb) & fmt.sign
+    if xinf or yinf:
+        if zinf and (zb & fmt.sign) != sp:
+            return fmt.canonical_nan
+        return sp | (fmt.emax_field << fmt.mbits)
+    if zinf:
+        return zb
+    x, y, z = fmt.value(xb), fmt.value(yb), fmt.value(zb)
+    exact = x * y + z
+    if exact == 0:
+        if x * y == 0 and z == 0:
+            neg = (sp != 0) if (sp != 0) == ((zb & fmt.sign) != 0) else direction == "TowardNegative"
+        else:
+            neg = direction == "TowardNegative"
+        return fmt.sign if neg else 0
+    return encode_directed(fmt, exact, direction)
+
+
+def fma_triple(rng, fmt):
+    """Operands that exercise cancellation, huge exponent gaps, subnormal products, ties and overflow."""
+    kind = rng.randrange(8)
+    if kind <= 1:
+        return random_bits(rng, fmt), random_bits(rng, fmt), random_bits(rng, fmt)
+    x, y = arith_pair(rng, fmt)
+    if fmt.is_nan(x) or fmt.is_nan(y) or fmt.cls(x).endswith("Infinity") or fmt.cls(y).endswith("Infinity"):
+        return x, y, random_bits(rng, fmt)
+    prod = fmt.value(x) * fmt.value(y)
+    if kind == 2:  # exact cancellation or one ulp away
+        z = fmt.encode_nearest_even(-prod)
+        return x, y, (z + rng.choice((0, 0, 1, -1, 2)) & fmt.mask) if not fmt.is_nan(z) else z
+    if kind == 3:  # z is half an ulp of the product: ties
+        if prod == 0:
+            return x, y, random_bits(rng, fmt)
+        e = max(flog2(abs(prod)), 1 - fmt.bias)
+        zv = (Fraction(1, 2) + rng.choice((0, 0, 1, -1))) * Fraction(2) ** (e - fmt.mbits)
+        return x, y, fmt.encode_nearest_even(rng.choice((1, -1)) * zv)
+    if kind == 4:  # z far below or far above the product
+        k = rng.choice((-1, 1)) * rng.randrange(fmt.mbits + 2, 3 * fmt.mbits + 8)
+        base = flog2(abs(prod)) if prod != 0 else 0
+        return x, y, fmt.encode_nearest_even(rng.choice((1, -1)) * Fraction(2) ** max(min(base + k, fmt.bias), 2 - fmt.bias - fmt.mbits))
+    if kind == 5:  # subnormal range
+        z = rng.getrandbits(fmt.mbits) | (rng.randrange(2) << (fmt.width - 1))
+        return x, y, z
+    return x, y, random_bits(rng, fmt)
+
+
 def narrow_input(rng, f64, f32):
     """Binary64 values on and around the binary32 grid: ties, overflow and underflow edges."""
     if rng.randrange(2):
@@ -592,6 +647,9 @@ def build(seed, count):
                   m_magnitude(fmt, b, y, True, True), m_magnitude(fmt, b, y, False, True),
                   int(key(fmt, b & ~fmt.sign & fmt.mask) <= key(fmt, y & ~fmt.sign & fmt.mask)),
                   int(key(fmt, numeric(fmt, b) & ~fmt.sign & fmt.mask) <= key(fmt, numeric(fmt, y) & ~fmt.sign & fmt.mask)))
+            fx, fy, fz = fma_triple(rng, fmt)
+            fres = [m_fma(fmt, fx, fy, fz, d) for d in DIRECTIONS]
+            t.add(p + "fma", fx, fy, fz, *fres, *[fmt.canonical_nan if fmt.is_nan(v) else v for v in fres])
             if fmt.width == 64:
                 nb = narrow_input(rng, fmt, Fmt(32))
                 nres = [m_narrow(fmt, Fmt(32), nb, d) for d in DIRECTIONS]
@@ -877,6 +935,20 @@ def emit(t, seed, count):
                 "if !check(fam, i, \"to_binary64\", @float.to_bits_canonical(@binary32.to_binary64(x)), table[r + 2]) { bad += 1 }",
                 "if !check(fam, i, \"core Float::to_double\", @float.to_bits_canonical(x.to_double()), table[r + 2]) { bad += 1 }",
                 "if !check(fam, i, \"round trip\", @float.to_binary32_bits(@binary32.to_binary64_bits(b)).to_uint64(), if @binary32.is_nan_bits(b) { b.to_uint64() | 0x400000UL } else { b.to_uint64() }) { bad += 1 }"])
+        dsf = ", ".join(f"@float.{d}" for d in DIRECTIONS)
+        row_fn("fma", "fma", [
+            f"let fam = \"{p}fma\"", f"let y = {to_bt('table[r + 1]')}", f"let z = {to_bt('table[r + 2]')}",
+            f"let x = {fb('table[r]')}", f"let yv = {fb('table[r + 1]')}", f"let zv = {fb('table[r + 2]')}", f"let dirs = [{dsf}]",
+            "for k in 0..<5 {",
+            f"  if !check(fam, i, \"fma_bits_with#\" + k.to_string(), {from_bt(f'{M}.fma_bits_with(b, y, z, dirs[k])')}, table[r + 3 + k]) {{ bad += 1 }}",
+            f"  if !check(fam, i, \"fma_with#\" + k.to_string(), {from_bt(f'{M}.to_bits_canonical({M}.fma_with(x, yv, zv, dirs[k]))')}, table[r + 8 + k]) {{ bad += 1 }}",
+            "}",
+            f"if !check(fam, i, \"fma_bits\", {from_bt(f'{M}.fma_bits(b, y, z)')}, table[r + 3]) {{ bad += 1 }}",
+            *([f"if {M}.is_finite_bits(b) && {M}.is_finite_bits(y) && {M}.is_finite_bits(z) {{",
+               "  for k in 0..<5 {",
+               f"    if !check(fam, i, \"fma_finite_bits#\" + k.to_string(), @float.fma_finite_bits({'b, y, z' if width == 64 else '@binary32.to_binary64_bits(b), @binary32.to_binary64_bits(y), @binary32.to_binary64_bits(z)'}, {52 if width == 64 else 23}, dirs[k]), table[r + 3 + k]) {{ bad += 1 }}",
+               "  }", "}"]),
+            f"if !check(fam, i, \"fma\", {from_bt(f'{M}.to_bits_canonical({M}.fma(x, yv, zv))')}, table[r + 8]) {{ bad += 1 }}"])
         ps = ", ".join(f"@float.{n}" for n, _, _ in PREDICATES)
         row_fn("compare", "compare", [
             f"let fam = \"{p}compare\"", f"let preds = [{ps}]", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
