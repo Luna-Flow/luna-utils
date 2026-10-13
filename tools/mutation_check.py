@@ -30,6 +30,10 @@ MUTATIONS = [
     ("signaling payload accepts zero (encodes infinity)", F + "bits.mbt", "payload == 0UL || payload >", "payload >"),
     ("negate_bits sets instead of toggling the sign", F + "bits.mbt", "bits ^ 0x8000000000000000UL", "bits | 0x8000000000000000UL"),
     ("binary32 signaling payload accepts zero", B + "bits.mbt", "payload == 0U || payload >", "payload >"),
+    ("minimumNumber returns the NaN instead of the number", F + "ordering.mbt", "  } else if y != y {\n    x\n  } else {\n    minimum(x, y)", "  } else if y != y {\n    y\n  } else {\n    minimum(x, y)"),
+    ("maximumMagnitude picks the smaller magnitude", F + "ordering.mbt", "    if ax > ay {\n      x\n    } else if ay > ax {\n      y\n    } else {\n      maximum(x, y)", "    if ax < ay {\n      x\n    } else if ay < ax {\n      y\n    } else {\n      maximum(x, y)"),
+    ("minimumMagnitude breaks ties by maximum", B + "ordering.mbt", "    } else {\n      minimum(x, y)\n    }\n  } else {\n    minimum(x, y)\n  }\n}\n\n///|\n/// IEEE 754-2019 §9.6 maximumMagnitude:", "    } else {\n      maximum(x, y)\n    }\n  } else {\n    minimum(x, y)\n  }\n}\n\n///|\n/// IEEE 754-2019 §9.6 maximumMagnitude:"),
+    ("totalOrderMag ignores the magnitude", F + "ordering.mbt", "total_order_bits(abs_bits(x), abs_bits(y))", "total_order_bits(x, y)"),
     ("signaling predicates ignore quiet NaN operands", F + "comparison.mbt", "(predicate_is_signaling(predicate) && nan_operand)", "(predicate_is_signaling(predicate) && signaling_nan_operand)"),
     ("quiet predicates ignore a signaling NaN operand", F + "comparison.mbt", "signaling_nan_operand || (predicate_is_signaling", "(predicate_is_signaling"),
     ("-0 compares unequal to +0", F + "comparison.mbt", "is_zero_bits(x) && is_zero_bits(y)", "is_zero_bits(x) && is_zero_bits(x)"),
@@ -41,12 +45,24 @@ MUTATIONS = [
 
 
 def run(backend):
+    """Run the audit once; return (failed tests other than the audit verdict, unexpected mismatches)."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    from random_audit import report
     result = subprocess.run(["moon", "test", "--target", backend, "-p", "Luna-Flow/luna-utils/ci_probe"],
                             cwd=ROOT, text=True, capture_output=True)
     out = result.stdout + result.stderr
-    m = re.search(r"LUNA_AUDIT_VERDICT mismatches=(\d+)", out)
-    mism = int(m.group(1)) if m else None
-    return result.returncode, mism
+    summary = report(out)
+    known_path = ROOT / "tools/known_issues.json"
+    known = {e["family"] for e in (json.loads(known_path.read_text()) if known_path.exists() else [])
+             if "family" in e and e["backend"] == backend and e["mode"] == "debug"}
+    known_mismatches = sum(v["mismatches"] for f, v in summary["families"].items() if f in known)
+    unexpected = summary["mismatch_count"] - known_mismatches
+    totals = re.search(r"Total tests: \d+, passed: \d+, failed: (\d+)", out)
+    failed = int(totals.group(3 - 2)) if totals else 1
+    other_failures = failed - (1 if summary["mismatch_count"] else 0)
+    if not summary["families"]:
+        return 1, None
+    return other_failures, unexpected
 
 
 def main():
@@ -59,7 +75,7 @@ def main():
     subprocess.run([sys.executable, "tools/random_audit.py", "--seed", str(args.seed), "--count", str(args.count), "--write"], cwd=ROOT, check=True)
     code, mism = run(args.backend)
     if code != 0 or mism != 0:
-        raise SystemExit(f"unmutated tree does not pass (exit {code}, mismatches {mism})")
+        raise SystemExit(f"unmutated tree does not pass (other failures {code}, unexpected mismatches {mism})")
     results = []
     for name, rel, old, new in MUTATIONS:
         path = ROOT / rel

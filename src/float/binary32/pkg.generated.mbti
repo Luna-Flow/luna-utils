@@ -54,7 +54,19 @@ pub fn is_zero_bits(UInt) -> Bool
 
 pub fn maximum(Float, Float) -> Float
 
+pub fn maximum_magnitude(Float, Float) -> Float
+
+pub fn maximum_magnitude_number(Float, Float) -> Float
+
+pub fn maximum_number(Float, Float) -> Float
+
 pub fn minimum(Float, Float) -> Float
+
+pub fn minimum_magnitude(Float, Float) -> Float
+
+pub fn minimum_magnitude_number(Float, Float) -> Float
+
+pub fn minimum_number(Float, Float) -> Float
 
 pub fn negate_bits(UInt) -> UInt
 
@@ -73,6 +85,8 @@ pub fn portable_is_signaling(Float) -> Bool
 pub fn portable_negate(Float) -> Float
 
 pub fn portable_total_order(Float, Float) -> Bool
+
+pub fn portable_total_order_mag(Float, Float) -> Bool
 
 pub fn radix() -> Int
 
@@ -135,6 +149,8 @@ pub fn to_uint_saturating(Float) -> UInt
 pub fn to_uint_saturating_with(Float, @float.RoundingDirection) -> UInt
 
 pub fn total_order_bits(UInt, UInt) -> Bool
+
+pub fn total_order_mag_bits(UInt, UInt) -> Bool
 
 // Errors
 

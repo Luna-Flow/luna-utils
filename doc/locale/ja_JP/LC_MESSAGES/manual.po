@@ -144,18 +144,26 @@ msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for bin
 msgstr "`minimum(x, y)` と `maximum(x, y)` は binary64 で IEEE 754-2019 §9.6 を実装し、binary32 パッケージも同じ名前を公開します。どちらかの入力が NaN なら、正の正規 quiet NaN を返し、NaN の符号とペイロードは伝播しません。ゼロ同士の場合、minimum はどちらかが負のゼロなら `-0` を選び、maximum はどちらかが正のゼロなら `+0` を選びます。これらの数値関数は sNaN の invalid 例外を報告しません。このパッケージの API に例外フラグはなく、シグナル動作は issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) に委ねます。"
 
 #: manual/api/float.md:47
+msgid "The remaining §9.6 operations are `minimum_number` and `maximum_number` (the number when exactly one operand is a NaN, the canonical quiet NaN when both are), `minimum_magnitude` and `maximum_magnitude` (the operand of smaller or larger absolute value, otherwise `minimum` or `maximum`) and `minimum_magnitude_number` and `maximum_magnitude_number` (the same with the `Number` rule). A numeric value cannot tell a signaling NaN from a quiet one, so these functions do not report the invalid operation that the standard requires for a signaling NaN operand."
+msgstr "§9.6 の残りの演算は、`minimum_number` と `maximum_number`（NaN のオペランドがちょうど 1 つのときはその数、両方 NaN なら正準 quiet NaN）、`minimum_magnitude` と `maximum_magnitude`（絶対値が小さい方または大きい方のオペランド、等しければ `minimum` または `maximum`）、`minimum_magnitude_number` と `maximum_magnitude_number`（同様に `Number` の規則）です。数値はシグナリング NaN と quiet NaN を区別できないため、これらの関数は規格がシグナリング NaN のオペランドに求める無効演算を報告しません。"
+
+#: manual/api/float.md:49
+msgid "`total_order_mag_bits(x, y)` is §5.10 totalOrderMag on raw encodings, that is totalOrder of the absolute values, and `portable_total_order_mag(x, y)` is the numeric form."
+msgstr "`total_order_mag_bits(x, y)` は生のエンコーディングに対する §5.10 totalOrderMag、つまり絶対値の totalOrder で、`portable_total_order_mag(x, y)` は数値形式です。"
+
+#: manual/api/float.md:51
 msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
 msgstr "`portable_total_order(x, y)` は移植可能な数値に対して §5.10 を実装します。`total_order_bits(x, y)` は整数ビットから完全なエンコーディング順序を実装し、NaN の符号、signaling 状態、ペイロードを保持します。特に JavaScript では数値 NaN の表現を移植できないため、この区別が必要です。`sort_total_order(values)` は可変配列を、`sort_total_order_view(view)` は可変配列ビューを移植可能な値の順序でソートします。正規化された NaN はすべて数値の後に比較されますが、core の `sort_by` は不安定です。同じ正規化 key の順序が変わることがあり、元の NaN ビットは保持され、JavaScript ではペイロードが正規化される場合があります。そのため負の NaN は raw IEEE totalOrder の位置を得ません。NaN エンコーディングを厳密に順序付けるには、生の整数エンコーディングに `total_order_bits` を使います。"
 
-#: manual/api/float.md:49
+#: manual/api/float.md:53
 msgid "Payload encoding adapters"
 msgstr "ペイロードのエンコーディングアダプタ"
 
-#: manual/api/float.md:51
+#: manual/api/float.md:55
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` は NaN 以外に `None`、NaN に quiet ビットを除く `Some(payload)` を返します。`set_payload_bits(payload, sign_minus?=false)` は quiet NaN のエンコーディングを返し、binary64 の 51 ビットまたは binary32 の 22 ビットを超える場合は `None` を返します。`set_payload_signaling_bits` は無限大になるゼロペイロードも拒否します。これらは整数エンコーディングを入出力とする IEEE 754-2019 §9.7 のアダプタであり、標準の浮動小数点 getPayload/setPayload 関数そのものではありません。"
 
-#: manual/api/float.md:53
+#: manual/api/float.md:57
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` はアプリケーションの NaN 正規化ビューを表し、元の NaN に対する IEEE 符号・分類操作を表しません。IEEE エンコーディングの意味論が必要な場合は `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` と生の符号操作を使用してください。`is_canonical_bits` は IEEE の正規エンコーディングを判定し、アプリケーション固有の固定 NaN との一致を判定するものではありません。"
 
@@ -276,8 +284,8 @@ msgid "§5.10 totalOrder [required]"
 msgstr "§5.10 totalOrder [必須]"
 
 #: manual/conformance/checklist.md:29
-msgid "§5.10 totalOrderMag [required] (not implemented)"
-msgstr "§5.10 totalOrderMag [必須] （未実装）"
+msgid "§5.10 totalOrderMag [required]"
+msgstr "§5.10 totalOrderMag [必須]"
 
 #: manual/conformance/checklist.md:30
 msgid "§5.12 decimal character conversion [required] (not implemented)"
@@ -316,8 +324,8 @@ msgid "§9.5 augmented arithmetic [recommended] (not implemented)"
 msgstr "§9.5 拡張算術 [推奨] （未実装）"
 
 #: manual/conformance/checklist.md:39
-msgid "§9.6 minimum and maximum [recommended] (partial)"
-msgstr "§9.6 minimum と maximum [推奨] （部分準拠）"
+msgid "§9.6 minimum and maximum [recommended]"
+msgstr "§9.6 minimum と maximum [推奨]"
 
 #: manual/conformance/checklist.md:40
 msgid "§9.7 NaN payload operations [recommended] (partial)"
@@ -470,6 +478,7 @@ msgstr "固定コーパス（`testdata/float_oracles.json`）、ランダム監�
 #: manual/conformance/float.md:31
 #: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
+#: manual/conformance/float.md:35
 msgid "conforming"
 msgstr "準拠"
 
@@ -515,7 +524,6 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 #: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
-#: manual/conformance/float.md:35
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
 #: manual/conformance/float.md:39
@@ -664,8 +672,8 @@ msgid "§5.10 totalOrderMag"
 msgstr "§5.10 totalOrderMag"
 
 #: manual/conformance/float.md:35
-msgid "not implemented; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
-msgstr "未実装。[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+msgid "the randomized audit (`tools/random_audit.py`) family extrema"
+msgstr "ランダム監査（`tools/random_audit.py`）の extrema ファミリー"
 
 #: manual/conformance/float.md:36
 msgid "§5.12 decimal character conversion"
@@ -766,8 +774,8 @@ msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py
 msgstr "`src/float/bits_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の extrema ファミリー"
 
 #: manual/conformance/float.md:45
-msgid "partial: no number and magnitude variants; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
-msgstr "部分準拠：number と magnitude の変種がない。[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+msgid "conforming; a numeric value cannot report invalid operation for a signaling NaN"
+msgstr "準拠。数値ではシグナリング NaN に対する無効演算を報告できない"
 
 #: manual/conformance/float.md:46
 msgid "§9.7 NaN payload operations"
@@ -1340,6 +1348,12 @@ msgstr "生のペイロード setter でエンコーディングを構築して 
 #: manual/tutorial/float.md:52
 msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr "比較述語"
+
+#~ msgid "not implemented; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+#~ msgstr "未実装。[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+
+#~ msgid "partial: no number and magnitude variants; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+#~ msgstr "部分準拠：number と magnitude の変種がない。[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
 
 #~ msgid "contraction probe (`testdata/oracles.json`); no independent corpus for the operations"
 #~ msgstr "contraction プローブ（`testdata/oracles.json`）。これらの演算には独立したコーパスがない"
