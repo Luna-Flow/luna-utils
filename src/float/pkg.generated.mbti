@@ -14,6 +14,10 @@ pub fn canonicalize_nan_bits(UInt64) -> UInt64
 
 pub fn classify_bits(UInt64) -> Classification
 
+pub fn compare_predicate(ComparisonPredicate, Double, Double) -> (Bool, Bool)
+
+pub fn compare_predicate_bits(ComparisonPredicate, UInt64, UInt64) -> (Bool, Bool)
+
 pub fn copy_sign_bits(UInt64, UInt64) -> UInt64
 
 pub fn get_payload_bits(UInt64) -> UInt64?
@@ -26,7 +30,17 @@ pub fn is_finite(Double) -> Bool
 
 pub fn is_finite_bits(UInt64) -> Bool
 
+pub fn is_infinite(Double) -> Bool
+
+pub fn is_infinite_bits(UInt64) -> Bool
+
+pub fn is_nan(Double) -> Bool
+
 pub fn is_nan_bits(UInt64) -> Bool
+
+pub fn is_normal(Double) -> Bool
+
+pub fn is_normal_bits(UInt64) -> Bool
 
 pub fn is_sign_minus_bits(UInt64) -> Bool
 
@@ -62,7 +76,13 @@ pub fn portable_negate(Double) -> Double
 
 pub fn portable_total_order(Double, Double) -> Bool
 
+pub fn predicate_outcome(ComparisonPredicate, Relation, Bool, Bool) -> (Bool, Bool)
+
 pub fn radix() -> Int
+
+pub fn relation(Double, Double) -> Relation
+
+pub fn relation_bits(UInt64, UInt64) -> Relation
 
 pub fn round_ties_away(Double) -> Double
 
@@ -140,6 +160,44 @@ pub(all) enum Classification {
 pub fn Classification::equal(Self, Self) -> Bool
 pub fn Classification::not_equal(Self, Self) -> Bool
 pub fn Classification::to_repr(Self) -> @debug.Repr
+
+pub(all) enum ComparisonPredicate {
+  QuietEqual
+  QuietNotEqual
+  SignalingEqual
+  SignalingNotEqual
+  SignalingGreater
+  SignalingNotGreater
+  SignalingGreaterEqual
+  SignalingLessUnordered
+  SignalingLess
+  SignalingNotLess
+  SignalingLessEqual
+  SignalingGreaterUnordered
+  QuietGreater
+  QuietNotGreater
+  QuietGreaterEqual
+  QuietLessUnordered
+  QuietLess
+  QuietNotLess
+  QuietLessEqual
+  QuietGreaterUnordered
+  QuietUnordered
+  QuietOrdered
+} derive(Eq, @debug.Debug)
+pub fn ComparisonPredicate::equal(Self, Self) -> Bool
+pub fn ComparisonPredicate::not_equal(Self, Self) -> Bool
+pub fn ComparisonPredicate::to_repr(Self) -> @debug.Repr
+
+pub(all) enum Relation {
+  Less
+  Equal
+  Greater
+  Unordered
+} derive(Eq, @debug.Debug)
+pub fn Relation::equal(Self, Self) -> Bool
+pub fn Relation::not_equal(Self, Self) -> Bool
+pub fn Relation::to_repr(Self) -> @debug.Repr
 
 pub(all) enum RoundingDirection {
   TiesToEven

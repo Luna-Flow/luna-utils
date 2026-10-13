@@ -76,70 +76,86 @@ msgid "Predicates have raw `*_bits` and portable numeric forms. `is_signaling_bi
 msgstr ""
 
 #: manual/api/float.md:13
-msgid "Canonicalization and sign"
+msgid "`is_infinite_bits` and `is_normal_bits` complete the §5.7.2 predicates on raw encodings; the numeric forms are `is_nan` (`x != x`), `is_infinite` and `is_normal` next to the existing `is_finite`, `is_subnormal` and `is_zero`."
 msgstr ""
 
 #: manual/api/float.md:15
-msgid "`canonicalize_nan_bits` maps every raw NaN to positive quiet NaN `0x7ff8000000000000` (binary64) or `0x7fc00000` (binary32), leaving non-NaNs unchanged. `to_bits_canonical(x)` guarantees that exact integer encoding for numeric NaN. `canonicalize_nan(x)` returns a numeric quiet NaN; subsequent host storage may change its representation, so use `to_bits_canonical` at serialization boundaries."
+msgid "Comparison predicates"
 msgstr ""
 
 #: manual/api/float.md:17
-msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, preserving every other bit, including NaN payload and signaling state. Portable numeric `portable_copy_sign`, `portable_negate` and `portable_abs` canonicalize NaN; all non-NaN encodings, including infinities and signed zero, undergo exact sign transformations. A numeric NaN sign donor is treated conservatively rather than exposing its host sign."
+msgid "`Relation` has the four mutually exclusive relations of IEEE 754-2019 §5.11: `Less`, `Equal`, `Greater` and `Unordered`. `relation_bits(x, y)` works on raw encodings and `relation(x, y)` on numeric values: every NaN is unordered with everything including itself, `+0` and `-0` are equal, and infinities of the same sign are equal. `ComparisonPredicate` names the 22 predicates of §5.6.1 (Tables 5.1 and 5.2), from `QuietEqual` to `QuietOrdered`. Each is true for the relations its name lists, so `SignalingNotLess` is true for `Equal`, `Greater` and `Unordered`, and is not the logical negation of `SignalingGreaterEqual` when an operand is a NaN."
 msgstr ""
 
 #: manual/api/float.md:19
-msgid "Rounding to integral values"
+msgid "`compare_predicate_bits(predicate, x, y)` and `compare_predicate(predicate, x, y)` return `(value, invalid)`. `invalid` is true where the standard requires the invalid operation exception: for a signaling NaN operand with any predicate, and for a quiet NaN operand with a `Signaling` predicate. The numeric form cannot see signaling NaNs (the same limit as the rest of the package), so it reports `invalid` only for the `Signaling` predicates and a NaN operand. Until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the `Bool` is the only way the exception is reported. `predicate_outcome` is the evaluation step shared by `float` and `float/binary32`; use the two functions above instead. The `binary32` package has the same function names and shares the two enums with `float`."
 msgstr ""
 
 #: manual/api/float.md:21
-msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
+msgid "Canonicalization and sign"
 msgstr ""
 
 #: manual/api/float.md:23
-msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgid "`canonicalize_nan_bits` maps every raw NaN to positive quiet NaN `0x7ff8000000000000` (binary64) or `0x7fc00000` (binary32), leaving non-NaNs unchanged. `to_bits_canonical(x)` guarantees that exact integer encoding for numeric NaN. `canonicalize_nan(x)` returns a numeric quiet NaN; subsequent host storage may change its representation, so use `to_bits_canonical` at serialization boundaries."
 msgstr ""
 
 #: manual/api/float.md:25
-msgid "Integer conversions"
+msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, preserving every other bit, including NaN payload and signaling state. Portable numeric `portable_copy_sign`, `portable_negate` and `portable_abs` canonicalize NaN; all non-NaN encodings, including infinities and signed zero, undergo exact sign transformations. A numeric NaN sign donor is treated conservatively rather than exposing its host sign."
 msgstr ""
 
 #: manual/api/float.md:27
-msgid "Both packages provide the same sixteen functions: `to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the four `*_saturating` counterparts, and a `_with` form of each that takes a `RoundingDirection`. `@float` converts `Double`; `@binary32` converts `Float` and widens it exactly to binary64 first, so both packages follow one contract. The targets are `Int` (`[-2^31, 2^31 - 1]`), `Int64` (`[-2^63, 2^63 - 1]`), `UInt` (`[0, 2^32 - 1]`) and `UInt64` (`[0, 2^64 - 1]`)."
+msgid "Rounding to integral values"
 msgstr ""
 
 #: manual/api/float.md:29
-msgid "The value is first rounded to an integer with the chosen direction; the functions without `_with` round toward zero (truncation). The range decision is made on that rounded integer, after rounding, and never on the input. Hence `-0.5` converts to `Some(0)` for `to_uint_checked` (it truncates to zero) but to `None` with `TowardNegative` (it rounds to `-1`), and `2147483647.5` fits `Int` when truncated but not when rounded `TiesToEven`. Both zeros, `+0` and `-0`, convert to `0`."
+msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
 msgstr ""
 
 #: manual/api/float.md:31
-msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the rounded integer is outside the target range; otherwise `Some(n)`. `*_saturating` clamps like WebAssembly `trunc_sat`: NaN converts to `0`, `+inf` and any rounded value above the range convert to the largest value of the target, and `-inf` and any value below the range convert to its smallest (`0` for the unsigned targets). The range tests run on the rounded `Double` before any core conversion primitive is called, because core's behavior for out-of-range values differs between backends."
+msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
 msgstr ""
 
 #: manual/api/float.md:33
-msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the backend-independent counterpart of core's `Float::from_int64` and `Float::from_uint64`, which follow each backend's own conversion (on the JavaScript backend through binary64 first, so they round twice, by design of core); for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
+msgid "Integer conversions"
 msgstr ""
 
 #: manual/api/float.md:35
-msgid "Extrema and ordering"
+msgid "Both packages provide the same sixteen functions: `to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the four `*_saturating` counterparts, and a `_with` form of each that takes a `RoundingDirection`. `@float` converts `Double`; `@binary32` converts `Float` and widens it exactly to binary64 first, so both packages follow one contract. The targets are `Int` (`[-2^31, 2^31 - 1]`), `Int64` (`[-2^63, 2^63 - 1]`), `UInt` (`[0, 2^32 - 1]`) and `UInt64` (`[0, 2^64 - 1]`)."
 msgstr ""
 
 #: manual/api/float.md:37
-msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgid "The value is first rounded to an integer with the chosen direction; the functions without `_with` round toward zero (truncation). The range decision is made on that rounded integer, after rounding, and never on the input. Hence `-0.5` converts to `Some(0)` for `to_uint_checked` (it truncates to zero) but to `None` with `TowardNegative` (it rounds to `-1`), and `2147483647.5` fits `Int` when truncated but not when rounded `TiesToEven`. Both zeros, `+0` and `-0`, convert to `0`."
 msgstr ""
 
 #: manual/api/float.md:39
-msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the rounded integer is outside the target range; otherwise `Some(n)`. `*_saturating` clamps like WebAssembly `trunc_sat`: NaN converts to `0`, `+inf` and any rounded value above the range convert to the largest value of the target, and `-inf` and any value below the range convert to its smallest (`0` for the unsigned targets). The range tests run on the rounded `Double` before any core conversion primitive is called, because core's behavior for out-of-range values differs between backends."
 msgstr ""
 
 #: manual/api/float.md:41
-msgid "Payload encoding adapters"
+msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the backend-independent counterpart of core's `Float::from_int64` and `Float::from_uint64`, which follow each backend's own conversion (on the JavaScript backend through binary64 first, so they round twice, by design of core); for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
 msgstr ""
 
 #: manual/api/float.md:43
-msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgid "Extrema and ordering"
 msgstr ""
 
 #: manual/api/float.md:45
+msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
+msgstr ""
+
+#: manual/api/float.md:47
+msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgstr ""
+
+#: manual/api/float.md:49
+msgid "Payload encoding adapters"
+msgstr ""
+
+#: manual/api/float.md:51
+msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgstr ""
+
+#: manual/api/float.md:53
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr ""
 
@@ -248,11 +264,11 @@ msgid "§5.5 copy, negate, abs, copySign [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:26
-msgid "§5.6, §5.11 comparison predicates [required] (partial)"
+msgid "§5.6, §5.11 comparison predicates [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:27
-msgid "§5.7 class and sign predicates [required] (partial)"
+msgid "§5.7 class and sign predicates [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:28
@@ -452,6 +468,7 @@ msgstr ""
 
 #: manual/conformance/float.md:19
 #: manual/conformance/float.md:31
+#: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
 msgid "conforming"
 msgstr ""
@@ -498,7 +515,6 @@ msgstr ""
 #: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
-#: manual/conformance/float.md:32
 #: manual/conformance/float.md:35
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
@@ -616,11 +632,15 @@ msgid "§5.6, §5.11 comparison predicates"
 msgstr ""
 
 #: manual/conformance/float.md:32
-msgid "host `==`, `<` (quiet predicates only)"
+msgid "`ComparisonPredicate` (the 22 predicates), `Relation`, `relation`, `relation_bits`, `compare_predicate`, `compare_predicate_bits`, `predicate_outcome`"
 msgstr ""
 
 #: manual/conformance/float.md:32
-msgid "partial: no signaling predicates; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+msgid "`src/float/comparison_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family compare"
+msgstr ""
+
+#: manual/conformance/float.md:32
+msgid "conforming; invalid operation is returned as a `Bool` until exception flags exist ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
 msgstr ""
 
 #: manual/conformance/float.md:33
@@ -629,10 +649,6 @@ msgstr ""
 
 #: manual/conformance/float.md:33
 msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family classify"
-msgstr ""
-
-#: manual/conformance/float.md:33
-msgid "partial: no `is_infinite` or `is_normal`; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
 msgstr ""
 
 #: manual/conformance/float.md:34
@@ -1173,6 +1189,10 @@ msgstr ""
 msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
 msgstr ""
 
+#: manual/design/float.md:21
+msgid "The comparison predicates of IEEE 754-2019 §5.6.1 and §5.11 are one table: a predicate is a set of the four relations plus a flag saying whether quiet NaN operands also signal. Evaluating a predicate is therefore a mask test on the relation, which keeps the 22 names from becoming 22 hand-written functions that could disagree. The relation of two encodings uses the totalOrder key except that two zeros are equal, which gives `-0 = +0`, equal same-sign infinities and unordered NaNs without floating-point arithmetic. The result is a pair `(value, invalid)` because the package has no flags yet; once exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the second component becomes a flag and the pair stays as a convenience."
+msgstr ""
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr ""
@@ -1311,4 +1331,8 @@ msgstr ""
 
 #: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
+msgstr ""
+
+#: manual/tutorial/float.md:52
+msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr ""

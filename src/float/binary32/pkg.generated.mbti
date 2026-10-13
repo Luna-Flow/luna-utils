@@ -14,6 +14,10 @@ pub fn canonicalize_nan_bits(UInt) -> UInt
 
 pub fn classify_bits(UInt) -> @float.Classification
 
+pub fn compare_predicate(@float.ComparisonPredicate, Float, Float) -> (Bool, Bool)
+
+pub fn compare_predicate_bits(@float.ComparisonPredicate, UInt, UInt) -> (Bool, Bool)
+
 pub fn copy_sign_bits(UInt, UInt) -> UInt
 
 pub fn get_payload_bits(UInt) -> UInt?
@@ -24,7 +28,17 @@ pub fn is_finite(Float) -> Bool
 
 pub fn is_finite_bits(UInt) -> Bool
 
+pub fn is_infinite(Float) -> Bool
+
+pub fn is_infinite_bits(UInt) -> Bool
+
+pub fn is_nan(Float) -> Bool
+
 pub fn is_nan_bits(UInt) -> Bool
+
+pub fn is_normal(Float) -> Bool
+
+pub fn is_normal_bits(UInt) -> Bool
 
 pub fn is_sign_minus_bits(UInt) -> Bool
 
@@ -61,6 +75,10 @@ pub fn portable_negate(Float) -> Float
 pub fn portable_total_order(Float, Float) -> Bool
 
 pub fn radix() -> Int
+
+pub fn relation(Float, Float) -> @float.Relation
+
+pub fn relation_bits(UInt, UInt) -> @float.Relation
 
 pub fn round_ties_away(Float) -> Float
 

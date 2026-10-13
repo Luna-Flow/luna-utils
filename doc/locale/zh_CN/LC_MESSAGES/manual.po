@@ -76,70 +76,86 @@ msgid "Predicates have raw `*_bits` and portable numeric forms. `is_signaling_bi
 msgstr "谓词提供原始 `*_bits` 与可移植数值形式。`is_signaling_bits` 检查 quiet 位；信令状态不可移植，因此 `portable_is_signaling` 始终返回 `false`。所有二进制交换编码都是规范编码，因此 `is_canonical_bits` 与 `portable_is_canonical` 始终返回 `true`。对于数值 NaN，不应推断主机符号；请参考生成接口和一致性测试所定义的保守观察语义。"
 
 #: manual/api/float.md:13
+msgid "`is_infinite_bits` and `is_normal_bits` complete the §5.7.2 predicates on raw encodings; the numeric forms are `is_nan` (`x != x`), `is_infinite` and `is_normal` next to the existing `is_finite`, `is_subnormal` and `is_zero`."
+msgstr "`is_infinite_bits` 和 `is_normal_bits` 补全了原始编码上的 §5.7.2 谓词；数值形式是 `is_nan`（`x != x`）、`is_infinite` 和 `is_normal`，与已有的 `is_finite`、`is_subnormal`、`is_zero` 并列。"
+
+#: manual/api/float.md:15
+msgid "Comparison predicates"
+msgstr "比较谓词"
+
+#: manual/api/float.md:17
+msgid "`Relation` has the four mutually exclusive relations of IEEE 754-2019 §5.11: `Less`, `Equal`, `Greater` and `Unordered`. `relation_bits(x, y)` works on raw encodings and `relation(x, y)` on numeric values: every NaN is unordered with everything including itself, `+0` and `-0` are equal, and infinities of the same sign are equal. `ComparisonPredicate` names the 22 predicates of §5.6.1 (Tables 5.1 and 5.2), from `QuietEqual` to `QuietOrdered`. Each is true for the relations its name lists, so `SignalingNotLess` is true for `Equal`, `Greater` and `Unordered`, and is not the logical negation of `SignalingGreaterEqual` when an operand is a NaN."
+msgstr "`Relation` 是 IEEE 754-2019 §5.11 中四种互斥的关系：`Less`、`Equal`、`Greater` 和 `Unordered`。`relation_bits(x, y)` 作用于原始编码，`relation(x, y)` 作用于数值：任何 NaN 与所有值（包括它自己）都是无序的，`+0` 与 `-0` 相等，同号无穷相等。`ComparisonPredicate` 列出 §5.6.1（表 5.1 和表 5.2）的 22 个谓词，从 `QuietEqual` 到 `QuietOrdered`。每个谓词在其名称所列的关系上为真，所以 `SignalingNotLess` 在 `Equal`、`Greater` 和 `Unordered` 上为真，当操作数含 NaN 时它不是 `SignalingGreaterEqual` 的逻辑否定。"
+
+#: manual/api/float.md:19
+msgid "`compare_predicate_bits(predicate, x, y)` and `compare_predicate(predicate, x, y)` return `(value, invalid)`. `invalid` is true where the standard requires the invalid operation exception: for a signaling NaN operand with any predicate, and for a quiet NaN operand with a `Signaling` predicate. The numeric form cannot see signaling NaNs (the same limit as the rest of the package), so it reports `invalid` only for the `Signaling` predicates and a NaN operand. Until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the `Bool` is the only way the exception is reported. `predicate_outcome` is the evaluation step shared by `float` and `float/binary32`; use the two functions above instead. The `binary32` package has the same function names and shares the two enums with `float`."
+msgstr "`compare_predicate_bits(predicate, x, y)` 和 `compare_predicate(predicate, x, y)` 返回 `(value, invalid)`。`invalid` 在标准要求无效操作异常的情形下为真：任何谓词遇到信号 NaN 操作数，以及 `Signaling` 谓词遇到安静 NaN 操作数。数值形式看不到信号 NaN（与本包其他部分的限制相同），所以它只在 `Signaling` 谓词且有 NaN 操作数时报告 `invalid`。在异常标志出现之前（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)），这个 `Bool` 是报告该异常的唯一方式。`predicate_outcome` 是 `float` 与 `float/binary32` 共用的求值步骤，请使用上面两个函数。`binary32` 包有同样的函数名，并与 `float` 共用这两个枚举。"
+
+#: manual/api/float.md:21
 msgid "Canonicalization and sign"
 msgstr "规范化与符号"
 
-#: manual/api/float.md:15
+#: manual/api/float.md:23
 msgid "`canonicalize_nan_bits` maps every raw NaN to positive quiet NaN `0x7ff8000000000000` (binary64) or `0x7fc00000` (binary32), leaving non-NaNs unchanged. `to_bits_canonical(x)` guarantees that exact integer encoding for numeric NaN. `canonicalize_nan(x)` returns a numeric quiet NaN; subsequent host storage may change its representation, so use `to_bits_canonical` at serialization boundaries."
 msgstr "`canonicalize_nan_bits` 将所有原始 NaN 映射为正 quiet NaN：binary64 为 `0x7ff8000000000000`，binary32 为 `0x7fc00000`；非 NaN 保持不变。`to_bits_canonical(x)` 保证数值 NaN 输出该整数编码。`canonicalize_nan(x)` 返回数值 quiet NaN；后续主机存储可能改变其表示，因此序列化边界应使用 `to_bits_canonical`。"
 
-#: manual/api/float.md:17
+#: manual/api/float.md:25
 msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, preserving every other bit, including NaN payload and signaling state. Portable numeric `portable_copy_sign`, `portable_negate` and `portable_abs` canonicalize NaN; all non-NaN encodings, including infinities and signed zero, undergo exact sign transformations. A numeric NaN sign donor is treated conservatively rather than exposing its host sign."
 msgstr "`copy_sign_bits`、`negate_bits` 和 `abs_bits` 仅改变符号位，保留其他所有位，包括 NaN payload 与信令状态。可移植数值函数 `portable_copy_sign`、`portable_negate` 和 `portable_abs` 会规范化 NaN；非 NaN 编码（包括无穷和有符号零）接受精确符号变换。数值 NaN 作为符号来源时采用保守约定，不暴露主机符号。"
 
-#: manual/api/float.md:19
+#: manual/api/float.md:27
 msgid "Rounding to integral values"
 msgstr "舍入为整数值"
 
-#: manual/api/float.md:21
+#: manual/api/float.md:29
 msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
 msgstr "`RoundingDirection` 命名 IEEE 754-2019 §5.9 `roundToIntegral` 的五种方向：`TiesToEven`、`TiesToAway`、`TowardZero`、`TowardPositive` 和 `TowardNegative`。`round_to_integral(x, direction)` 及五个具名辅助函数（`round_ties_even`、`round_ties_away`、`round_toward_zero`、`round_toward_positive`、`round_toward_negative`）在相同二进制格式中返回整数值。binary32 包接受共享的父枚举。"
 
-#: manual/api/float.md:23
+#: manual/api/float.md:31
 msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
 msgstr "实现直接根据符号、指数和尾数字段进行舍入。它保留零的两种符号和已经是整数的值；NaN 输入返回正号规范 quiet NaN，丢弃输入的符号和 payload；无穷保持不变。对 sNaN 输入不报告 invalid 异常，对非整数输入不报告 inexact 标志；这些报告留待 issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) 的状态标志 API 和 `_exact` 变体。"
 
-#: manual/api/float.md:25
+#: manual/api/float.md:33
 msgid "Integer conversions"
 msgstr "整数转换"
 
-#: manual/api/float.md:27
+#: manual/api/float.md:35
 msgid "Both packages provide the same sixteen functions: `to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the four `*_saturating` counterparts, and a `_with` form of each that takes a `RoundingDirection`. `@float` converts `Double`; `@binary32` converts `Float` and widens it exactly to binary64 first, so both packages follow one contract. The targets are `Int` (`[-2^31, 2^31 - 1]`), `Int64` (`[-2^63, 2^63 - 1]`), `UInt` (`[0, 2^32 - 1]`) and `UInt64` (`[0, 2^64 - 1]`)."
 msgstr "两个包提供相同的十六个函数：`to_int_checked`、`to_int64_checked`、`to_uint_checked`、`to_uint64_checked`，对应的四个 `*_saturating` 函数，以及每个函数带 `RoundingDirection` 参数的 `_with` 形式。`@float` 转换 `Double`；`@binary32` 转换 `Float`，先将其精确扩展为 binary64，因此两个包遵循同一契约。目标类型为 `Int`（`[-2^31, 2^31 - 1]`）、`Int64`（`[-2^63, 2^63 - 1]`）、`UInt`（`[0, 2^32 - 1]`）和 `UInt64`（`[0, 2^64 - 1]`）。"
 
-#: manual/api/float.md:29
+#: manual/api/float.md:37
 msgid "The value is first rounded to an integer with the chosen direction; the functions without `_with` round toward zero (truncation). The range decision is made on that rounded integer, after rounding, and never on the input. Hence `-0.5` converts to `Some(0)` for `to_uint_checked` (it truncates to zero) but to `None` with `TowardNegative` (it rounds to `-1`), and `2147483647.5` fits `Int` when truncated but not when rounded `TiesToEven`. Both zeros, `+0` and `-0`, convert to `0`."
 msgstr "数值先按所选方向舍入为整数；不带 `_with` 的函数向零舍入（截断）。范围判定针对舍入后的整数，在舍入之后进行，绝不针对输入本身。因此 `-0.5` 在 `to_uint_checked` 中转换为 `Some(0)`（截断为零），而使用 `TowardNegative` 时得到 `None`（舍入为 `-1`）；`2147483647.5` 截断后可放入 `Int`，按 `TiesToEven` 舍入则不行。`+0` 和 `-0` 两个零都转换为 `0`。"
 
-#: manual/api/float.md:31
+#: manual/api/float.md:39
 msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the rounded integer is outside the target range; otherwise `Some(n)`. `*_saturating` clamps like WebAssembly `trunc_sat`: NaN converts to `0`, `+inf` and any rounded value above the range convert to the largest value of the target, and `-inf` and any value below the range convert to its smallest (`0` for the unsigned targets). The range tests run on the rounded `Double` before any core conversion primitive is called, because core's behavior for out-of-range values differs between backends."
 msgstr "`*_checked` 对 NaN、`+inf` 和 `-inf`，以及舍入后的整数超出目标范围的情况返回 `None`，否则返回 `Some(n)`。`*_saturating` 与 WebAssembly 的 `trunc_sat` 一样截断到范围内：NaN 转换为 `0`，`+inf` 和高于范围的舍入值转换为目标类型的最大值，`-inf` 和低于范围的值转换为其最小值（无符号目标为 `0`）。范围判断在调用任何 core 转换原语之前，对舍入后的 `Double` 进行，因为 core 对越界值的行为因后端而异。"
 
-#: manual/api/float.md:33
+#: manual/api/float.md:41
 msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the backend-independent counterpart of core's `Float::from_int64` and `Float::from_uint64`, which follow each backend's own conversion (on the JavaScript backend through binary64 first, so they round twice, by design of core); for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
 msgstr "`int64_to_float(Int64) -> Float` 和 `uint64_to_float(UInt64) -> Float` 位于 `@float`，但返回 binary32 的 `Float`：结果是 64 位整数仅舍入一次得到的最近 binary32 值，平局取偶。它们是 core 的 `Float::from_int64` 和 `Float::from_uint64` 的与后端无关的对应版本；后两者按各后端自己的转换实现（在 JavaScript 后端先转换为 binary64，因此舍入两次，这是 core 的设计）。例如 `2^53 + 2^29 + 1` 第一次舍入为平局值 `2^53 + 2^29`，再舍入为错误的 binary32 邻居 `2^53`。实现使用舍入到奇数的中间有效数，因此所有后端的结果逐位一致。这两个函数的归属（`@float` 还是 `@binary32`）是留给维护者决定的开放问题。"
 
-#: manual/api/float.md:35
+#: manual/api/float.md:43
 msgid "Extrema and ordering"
 msgstr "极值与排序"
 
-#: manual/api/float.md:37
+#: manual/api/float.md:45
 msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
 msgstr "`minimum(x, y)` 和 `maximum(x, y)` 为 binary64 实现 IEEE 754-2019 §9.6；binary32 包提供相同名称。任一输入为 NaN 时返回正号规范 quiet NaN；NaN 的符号和 payload 不会传播。两个操作数均为零时，minimum 在任一为负零时选择 `-0`，maximum 在任一为正零时选择 `+0`。这些数值函数不报告 sNaN 的 invalid 异常；本包 API 不提供异常标志，信号行为留待 issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)。"
 
-#: manual/api/float.md:39
+#: manual/api/float.md:47
 msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
 msgstr "`portable_total_order(x, y)` 对可移植数值实现 §5.10。`total_order_bits(x, y)` 则根据整数位实现完整的编码顺序，保留 NaN 符号、信号状态和 payload。数值 NaN 表示不可移植，尤其是在 JavaScript 上，因此需要区分这两个接口。`sort_total_order(values)` 对可变数组排序，`sort_total_order_view(view)` 对可变数组视图排序，二者都使用可移植数值顺序。所有规范化 NaN 都排在数值之后，但 core 的 `sort_by` 不稳定：相同的规范化 key 可能重新排列，原始 NaN 位会保留，而 JavaScript 可能将 payload 规范化。因此负 NaN 不会获得原始 IEEE totalOrder 的位置。只有对原始整数编码调用 `total_order_bits` 才能精确排列 NaN 编码。"
 
-#: manual/api/float.md:41
+#: manual/api/float.md:49
 msgid "Payload encoding adapters"
 msgstr "Payload 编码适配器"
 
-#: manual/api/float.md:43
+#: manual/api/float.md:51
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` 对非 NaN 返回 `None`，对 NaN 返回不含 quiet 位的 `Some(payload)`。`set_payload_bits(payload, sign_minus?=false)` 返回 quiet NaN 编码；payload 超过 binary64 的 51 位或 binary32 的 22 位时返回 `None`。`set_payload_signaling_bits` 还拒绝零 payload，避免编码为无穷。这些函数接收和返回整数编码，是 IEEE 754-2019 §9.7 的适配器，并非直接公开标准的浮点 getPayload/setPayload 函数。"
 
-#: manual/api/float.md:45
+#: manual/api/float.md:53
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` 名称表示本应用的 NaN 规范化视图，不代表针对原始 NaN 的 IEEE 符号或分类操作。需要 IEEE 编码语义时，应使用 `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` 和原始符号操作。`is_canonical_bits` 判断 IEEE 规范编码，而非是否等于应用选定的固定 NaN 编码。"
 
@@ -248,12 +264,12 @@ msgid "§5.5 copy, negate, abs, copySign [required]"
 msgstr "§5.5 copy、negate、abs、copySign [必须]"
 
 #: manual/conformance/checklist.md:26
-msgid "§5.6, §5.11 comparison predicates [required] (partial)"
-msgstr "§5.6、§5.11 比较谓词 [必须] （部分符合）"
+msgid "§5.6, §5.11 comparison predicates [required]"
+msgstr "§5.6、§5.11 比较谓词 [必须]"
 
 #: manual/conformance/checklist.md:27
-msgid "§5.7 class and sign predicates [required] (partial)"
-msgstr "§5.7 class 与符号谓词 [必须] （部分符合）"
+msgid "§5.7 class and sign predicates [required]"
+msgstr "§5.7 class 与符号谓词 [必须]"
 
 #: manual/conformance/checklist.md:28
 msgid "§5.10 totalOrder [required]"
@@ -452,6 +468,7 @@ msgstr "固定语料（`testdata/float_oracles.json`）；随机审计（`tools/
 
 #: manual/conformance/float.md:19
 #: manual/conformance/float.md:31
+#: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
 msgid "conforming"
 msgstr "符合"
@@ -498,7 +515,6 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 #: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
-#: manual/conformance/float.md:32
 #: manual/conformance/float.md:35
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
@@ -616,12 +632,16 @@ msgid "§5.6, §5.11 comparison predicates"
 msgstr "§5.6、§5.11 比较谓词"
 
 #: manual/conformance/float.md:32
-msgid "host `==`, `<` (quiet predicates only)"
-msgstr "宿主的 `==`、`<`（仅安静谓词）"
+msgid "`ComparisonPredicate` (the 22 predicates), `Relation`, `relation`, `relation_bits`, `compare_predicate`, `compare_predicate_bits`, `predicate_outcome`"
+msgstr "`ComparisonPredicate`（22 个谓词）、`Relation`、`relation`、`relation_bits`、`compare_predicate`、`compare_predicate_bits`、`predicate_outcome`"
 
 #: manual/conformance/float.md:32
-msgid "partial: no signaling predicates; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-msgstr "部分符合：没有信号谓词；[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+msgid "`src/float/comparison_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family compare"
+msgstr "`src/float/comparison_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 compare 族"
+
+#: manual/conformance/float.md:32
+msgid "conforming; invalid operation is returned as a `Bool` until exception flags exist ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "符合；在异常标志出现之前（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)），无效操作以 `Bool` 返回"
 
 #: manual/conformance/float.md:33
 msgid "§5.7 class and sign predicates"
@@ -630,10 +650,6 @@ msgstr "§5.7 class 与符号谓词"
 #: manual/conformance/float.md:33
 msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family classify"
 msgstr "`src/float/bits_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 classify 族"
-
-#: manual/conformance/float.md:33
-msgid "partial: no `is_infinite` or `is_normal`; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-msgstr "部分符合：没有 `is_infinite` 和 `is_normal`；[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
 
 #: manual/conformance/float.md:34
 msgid "§5.10 totalOrder"
@@ -1173,6 +1189,10 @@ msgstr "IEEE 754-2019 §5.10 totalOrder 是对编码进行的整数排序，并�
 msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
 msgstr "数组和可变视图排序都通过 core 的原地 `sort_by` 使用相同的 key 比较器。比较器根据有符号 key 比较返回 -1、0 或 1，不通过 key 相减，因此不会发生整数溢出。"
 
+#: manual/design/float.md:21
+msgid "The comparison predicates of IEEE 754-2019 §5.6.1 and §5.11 are one table: a predicate is a set of the four relations plus a flag saying whether quiet NaN operands also signal. Evaluating a predicate is therefore a mask test on the relation, which keeps the 22 names from becoming 22 hand-written functions that could disagree. The relation of two encodings uses the totalOrder key except that two zeros are equal, which gives `-0 = +0`, equal same-sign infinities and unordered NaNs without floating-point arithmetic. The result is a pair `(value, invalid)` because the package has no flags yet; once exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the second component becomes a flag and the pair stays as a convenience."
+msgstr "IEEE 754-2019 §5.6.1 和 §5.11 的比较谓词其实是一张表：一个谓词是四种关系的一个集合，加上一个标志，说明安静 NaN 操作数是否也要发信号。因此求值一个谓词就是对关系做一次掩码测试，避免 22 个名字变成 22 个可能互相不一致的手写函数。两个编码的关系使用 totalOrder 键，只是两个零相等，这样不用浮点运算就得到 `-0 = +0`、同号无穷相等和 NaN 无序。结果是一个 `(value, invalid)` 对，因为本包还没有标志；一旦有了异常标志（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)），第二个分量会变成标志，这个对仍作为便利形式保留。"
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr "luna-utils"
@@ -1312,6 +1332,19 @@ msgstr "整数转换先舍入，之后再检查范围。越界输入应视为错
 #: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "使用原始 payload setter 构造编码，检查 `None`；payload 保真度重要时，不要将结果通过 Double 或 Float 转换。规范数值函数有意丢弃 NaN 元数据。参见 [API](../api/float.md)和[一致性限制](../conformance/float.md)。"
+
+#: manual/tutorial/float.md:52
+msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
+msgstr "比较谓词"
+
+#~ msgid "host `==`, `<` (quiet predicates only)"
+#~ msgstr "宿主的 `==`、`<`（仅安静谓词）"
+
+#~ msgid "partial: no signaling predicates; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+#~ msgstr "部分符合：没有信号谓词；[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+
+#~ msgid "partial: no `is_infinite` or `is_normal`; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+#~ msgstr "部分符合：没有 `is_infinite` 和 `is_normal`；[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
 
 #~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
 #~ msgstr "整数算术，溢出和除法行为有明确定义（包 `int`；IEEE 754 没有整数算术，语义来自包的设计，并用精确整数核对） [必须] （未实现）"

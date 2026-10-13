@@ -25,6 +25,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "src/ci_probe/random_audit_wbtest.mbt"
 
+PREDICATES = (
+    ("QuietEqual", "E", False), ("QuietNotEqual", "LGU", False), ("SignalingEqual", "E", True), ("SignalingNotEqual", "LGU", True),
+    ("SignalingGreater", "G", True), ("SignalingNotGreater", "LEU", True), ("SignalingGreaterEqual", "EG", True),
+    ("SignalingLessUnordered", "LU", True), ("SignalingLess", "L", True), ("SignalingNotLess", "EGU", True),
+    ("SignalingLessEqual", "LE", True), ("SignalingGreaterUnordered", "GU", True), ("QuietGreater", "G", False),
+    ("QuietNotGreater", "LEU", False), ("QuietGreaterEqual", "EG", False), ("QuietLessUnordered", "LU", False),
+    ("QuietLess", "L", False), ("QuietNotLess", "EGU", False), ("QuietLessEqual", "LE", False),
+    ("QuietGreaterUnordered", "GU", False), ("QuietUnordered", "U", False), ("QuietOrdered", "LEG", False),
+)
+RELATIONS = ("L", "E", "G", "U")
+
 DIRECTIONS = ("TiesToEven", "TiesToAway", "TowardZero", "TowardPositive", "TowardNegative")
 CLASSES = ("SignalingNaN", "QuietNaN", "PositiveInfinity", "NegativeInfinity",
            "PositiveNormal", "NegativeNormal", "PositiveSubnormal", "NegativeSubnormal",
@@ -141,6 +152,9 @@ def random_bits(rng, fmt, structured=True):
         return s | (fmt.emax_field << fmt.mbits) | f
     if kind == 3:  # subnormals and zeros
         return s | rng.choice((0, 1, fmt.frac_mask, rng.getrandbits(fmt.mbits)))
+    if kind in (4, 5):  # both signs of infinity, zero and the edges of the finite ranges
+        return s | rng.choice((fmt.emax_field << fmt.mbits, 0, 1 << fmt.mbits, (1 << fmt.mbits) - 1,
+                               ((fmt.emax_field - 1) << fmt.mbits) | fmt.frac_mask))
     e = rng.randrange(0, fmt.emax_field + 1)
     return s | (e << fmt.mbits) | rng.getrandbits(fmt.mbits)
 
@@ -229,6 +243,21 @@ def key(fmt, bits):
     return (~bits & fmt.mask) if bits & fmt.sign else bits | fmt.sign
 
 
+def host_value(fmt, bits):
+    """Python float of a non-NaN encoding (exact for binary32 and binary64); an independent comparison oracle."""
+    import struct
+    if fmt.width == 64:
+        return struct.unpack(">d", struct.pack(">Q", bits))[0]
+    return struct.unpack(">f", struct.pack(">I", bits))[0]
+
+
+def m_relation(fmt, xb, yb):
+    if fmt.is_nan(xb) or fmt.is_nan(yb):
+        return "U"
+    x, y = host_value(fmt, xb), host_value(fmt, yb)
+    return "L" if x < y else "G" if x > y else "E"
+
+
 def numeric(fmt, bits):
     return fmt.canonical_nan if fmt.is_nan(bits) else bits
 
@@ -271,10 +300,12 @@ def build(seed, count):
             s, e, f = fmt.fields(b)
             flags = (fmt.is_nan(b) << 0) | ((fmt.cls(b) == "SignalingNaN") << 1) \
                 | (fmt.cls(b).endswith("Subnormal") << 2) | (fmt.cls(b).endswith("Zero") << 3) \
-                | ((e != fmt.emax_field) << 4) | (bool(s) << 5)
+                | ((e != fmt.emax_field) << 4) | (bool(s) << 5) \
+                | ((e == fmt.emax_field and f == 0) << 6) | ((0 < e < fmt.emax_field) << 7)
             nb, ny = numeric(fmt, b), numeric(fmt, y)
             nflags = ((nb >> fmt.mbits) & fmt.emax_field != fmt.emax_field) | (fmt.cls(nb).endswith("Subnormal") << 1) \
-                | (fmt.cls(nb).endswith("Zero") << 2) | (bool(nb & fmt.sign) << 3)
+                | (fmt.cls(nb).endswith("Zero") << 2) | (bool(nb & fmt.sign) << 3) \
+                | (fmt.cls(nb).endswith("Infinity") << 4) | (fmt.cls(nb).endswith("Normal") << 5) | (fmt.is_nan(nb) << 6)
             t.add(p + "classify", b, CLASSES.index(fmt.cls(b)), flags, nflags)
             t.add(p + "canon", b, fmt.canonical_nan if fmt.is_nan(b) else b)
             t.add(p + "sign", b, y, (b & ~fmt.sign & fmt.mask) | (y & fmt.sign), b ^ fmt.sign, b & ~fmt.sign & fmt.mask,
@@ -293,6 +324,15 @@ def build(seed, count):
             t.add(p + "total_order", b, y, int(key(fmt, b) <= key(fmt, y)),
                   int(key(fmt, numeric(fmt, b)) <= key(fmt, numeric(fmt, y))))
             t.add(p + "extrema", b, y, m_extremum(fmt, b, y, True), m_extremum(fmt, b, y, False))
+            rel = m_relation(fmt, b, y)
+            snan = fmt.cls(b) == "SignalingNaN" or fmt.cls(y) == "SignalingNaN"
+            anan = fmt.is_nan(b) or fmt.is_nan(y)
+            vmask = imask = pmask = 0
+            for k, (_, rels, sig) in enumerate(PREDICATES):
+                vmask |= (rel in rels) << k
+                imask |= (snan or (sig and anan)) << k
+                pmask |= (sig and anan) << k
+            t.add(p + "compare", b, y, RELATIONS.index(rel), vmask, imask, pmask, int(snan), int(anan))
         for b in rounding_inputs(rng, fmt, count):
             t.add(p + "round", b, *[m_round_to_integral(fmt, b, d) for d in DIRECTIONS])
             row = [b]
@@ -408,11 +448,11 @@ def emit(t, seed, count):
             f"if !check(fam, i, \"class\", class_index({M}.classify_bits(b)), table[r + 1]) {{ bad += 1 }}",
             f"if !check(fam, i, \"portable_class\", class_index({M}.portable_classify({fb('table[r]')})), if table[r + 1] <= 1UL {{ 1UL }} else {{ table[r + 1] }}) {{ bad += 1 }}",
             f"let fl = table[r + 2]",
-            f"let got = (if {M}.is_nan_bits(b) {{ 1UL }} else {{ 0UL }}) | (if {M}.is_signaling_bits(b) {{ 2UL }} else {{ 0UL }}) | (if {M}.is_subnormal_bits(b) {{ 4UL }} else {{ 0UL }}) | (if {M}.is_zero_bits(b) {{ 8UL }} else {{ 0UL }}) | (if {M}.is_finite_bits(b) {{ 16UL }} else {{ 0UL }}) | (if {M}.is_sign_minus_bits(b) {{ 32UL }} else {{ 0UL }})",
+            f"let got = (if {M}.is_nan_bits(b) {{ 1UL }} else {{ 0UL }}) | (if {M}.is_signaling_bits(b) {{ 2UL }} else {{ 0UL }}) | (if {M}.is_subnormal_bits(b) {{ 4UL }} else {{ 0UL }}) | (if {M}.is_zero_bits(b) {{ 8UL }} else {{ 0UL }}) | (if {M}.is_finite_bits(b) {{ 16UL }} else {{ 0UL }}) | (if {M}.is_sign_minus_bits(b) {{ 32UL }} else {{ 0UL }}) | (if {M}.is_infinite_bits(b) {{ 64UL }} else {{ 0UL }}) | (if {M}.is_normal_bits(b) {{ 128UL }} else {{ 0UL }})",
             "if !check(fam, i, \"predicates\", got, fl) { bad += 1 }",
             f"if !{M}.is_canonical_bits(b) {{ report(fam, i, \"canonical\"); bad += 1 }}",
             f"let xv = {fb('table[r]')}",
-            f"let ngot = (if {M}.is_finite(xv) {{ 1UL }} else {{ 0UL }}) | (if {M}.is_subnormal(xv) {{ 2UL }} else {{ 0UL }}) | (if {M}.is_zero(xv) {{ 4UL }} else {{ 0UL }}) | (if {M}.portable_is_sign_minus(xv) {{ 8UL }} else {{ 0UL }})",
+            f"let ngot = (if {M}.is_finite(xv) {{ 1UL }} else {{ 0UL }}) | (if {M}.is_subnormal(xv) {{ 2UL }} else {{ 0UL }}) | (if {M}.is_zero(xv) {{ 4UL }} else {{ 0UL }}) | (if {M}.portable_is_sign_minus(xv) {{ 8UL }} else {{ 0UL }}) | (if {M}.is_infinite(xv) {{ 16UL }} else {{ 0UL }}) | (if {M}.is_normal(xv) {{ 32UL }} else {{ 0UL }}) | (if {M}.is_nan(xv) {{ 64UL }} else {{ 0UL }})",
             "if !check(fam, i, \"numeric predicates\", ngot, table[r + 3]) { bad += 1 }",
             f"if {M}.portable_is_signaling(xv) || !{M}.portable_is_canonical(xv) || {M}.radix() != 2 {{ report(fam, i, \"portable constants\"); bad += 1 }}"])
         row_fn("canon", "canon", [
@@ -451,6 +491,26 @@ def emit(t, seed, count):
             f"let fam = \"{p}extrema\"", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
             f"if !check(fam, i, \"minimum\", {from_bt(f'{M}.to_bits_canonical({M}.minimum(x, y))')}, table[r + 2]) {{ bad += 1 }}",
             f"if !check(fam, i, \"maximum\", {from_bt(f'{M}.to_bits_canonical({M}.maximum(x, y))')}, table[r + 3]) {{ bad += 1 }}"])
+        ps = ", ".join(f"@float.{n}" for n, _, _ in PREDICATES)
+        row_fn("compare", "compare", [
+            f"let fam = \"{p}compare\"", f"let preds = [{ps}]", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
+            f"let rel = {M}.relation_bits(b, {to_bt('table[r + 1]')})",
+            "let code = match rel {", "  Less => 0UL", "  Equal => 1UL", "  Greater => 2UL", "  Unordered => 3UL", "}",
+            "if !check(fam, i, \"relation_bits\", code, table[r + 2]) { bad += 1 }",
+            f"let rel2 = {M}.relation(x, y)",
+            "let code2 = match rel2 {", "  Less => 0UL", "  Equal => 1UL", "  Greater => 2UL", "  Unordered => 3UL", "}",
+            "if !check(fam, i, \"relation\", code2, table[r + 2]) { bad += 1 }",
+            "for k in 0..<22 {",
+            f"  let (v, inv) = {M}.compare_predicate_bits(preds[k], b, {to_bt('table[r + 1]')})",
+            "  if !check(fam, i, \"compare_predicate_bits value#\" + k.to_string(), if v { 1UL } else { 0UL }, (table[r + 3] >> k) & 1UL) { bad += 1 }",
+            "  if !check(fam, i, \"compare_predicate_bits invalid#\" + k.to_string(), if inv { 1UL } else { 0UL }, (table[r + 4] >> k) & 1UL) { bad += 1 }",
+            f"  let (pv, pinv) = {M}.compare_predicate(preds[k], x, y)",
+            "  if !check(fam, i, \"compare_predicate value#\" + k.to_string(), if pv { 1UL } else { 0UL }, (table[r + 3] >> k) & 1UL) { bad += 1 }",
+            "  if !check(fam, i, \"compare_predicate invalid#\" + k.to_string(), if pinv { 1UL } else { 0UL }, (table[r + 5] >> k) & 1UL) { bad += 1 }",
+            f"  let (ov, oinv) = @float.predicate_outcome(preds[k], rel, table[r + 6] != 0UL, table[r + 7] != 0UL)",
+            "  if !check(fam, i, \"predicate_outcome value#\" + k.to_string(), if ov { 1UL } else { 0UL }, (table[r + 3] >> k) & 1UL) { bad += 1 }",
+            "  if !check(fam, i, \"predicate_outcome invalid#\" + k.to_string(), if oinv { 1UL } else { 0UL }, (table[r + 4] >> k) & 1UL) { bad += 1 }",
+            "}"])
         ds = ", ".join(f"@float.{d}" for d in DIRECTIONS)
         row_fn("round", "round", [
             f"let fam = \"{p}round\"", f"let x = {fb('table[r]')}", f"let dirs = [{ds}]",

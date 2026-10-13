@@ -76,70 +76,86 @@ msgid "Predicates have raw `*_bits` and portable numeric forms. `is_signaling_bi
 msgstr "述語には生の `*_bits` 形式と移植可能な数値形式があります。`is_signaling_bits` は quiet ビットを調べます。シグナリング状態は移植できないため `portable_is_signaling` は常に `false` です。二進交換形式の全エンコーディングは正規なので `is_canonical_bits` と `portable_is_canonical` は常に `true` です。数値 NaN についてホストの符号を推測しないでください。保守的な観測の契約は生成インターフェースと適合性テストを参照してください。"
 
 #: manual/api/float.md:13
+msgid "`is_infinite_bits` and `is_normal_bits` complete the §5.7.2 predicates on raw encodings; the numeric forms are `is_nan` (`x != x`), `is_infinite` and `is_normal` next to the existing `is_finite`, `is_subnormal` and `is_zero`."
+msgstr "`is_infinite_bits` と `is_normal_bits` は生のエンコーディングに対する §5.7.2 の述語を補います。数値形式は `is_nan`（`x != x`）、`is_infinite`、`is_normal` で、既存の `is_finite`、`is_subnormal`、`is_zero` と並びます。"
+
+#: manual/api/float.md:15
+msgid "Comparison predicates"
+msgstr "比較述語"
+
+#: manual/api/float.md:17
+msgid "`Relation` has the four mutually exclusive relations of IEEE 754-2019 §5.11: `Less`, `Equal`, `Greater` and `Unordered`. `relation_bits(x, y)` works on raw encodings and `relation(x, y)` on numeric values: every NaN is unordered with everything including itself, `+0` and `-0` are equal, and infinities of the same sign are equal. `ComparisonPredicate` names the 22 predicates of §5.6.1 (Tables 5.1 and 5.2), from `QuietEqual` to `QuietOrdered`. Each is true for the relations its name lists, so `SignalingNotLess` is true for `Equal`, `Greater` and `Unordered`, and is not the logical negation of `SignalingGreaterEqual` when an operand is a NaN."
+msgstr "`Relation` は IEEE 754-2019 §5.11 の互いに排他的な 4 つの関係 `Less`、`Equal`、`Greater`、`Unordered` を表します。`relation_bits(x, y)` は生のエンコーディングに、`relation(x, y)` は数値に作用します。NaN は自分自身を含むすべてと順序なしで、`+0` と `-0` は等しく、同じ符号の無限大は等しくなります。`ComparisonPredicate` は §5.6.1（表 5.1 と表 5.2）の 22 個の述語を `QuietEqual` から `QuietOrdered` まで挙げます。各述語は名前に挙げた関係で真になるので、`SignalingNotLess` は `Equal`、`Greater`、`Unordered` で真であり、オペランドに NaN があるとき `SignalingGreaterEqual` の論理否定ではありません。"
+
+#: manual/api/float.md:19
+msgid "`compare_predicate_bits(predicate, x, y)` and `compare_predicate(predicate, x, y)` return `(value, invalid)`. `invalid` is true where the standard requires the invalid operation exception: for a signaling NaN operand with any predicate, and for a quiet NaN operand with a `Signaling` predicate. The numeric form cannot see signaling NaNs (the same limit as the rest of the package), so it reports `invalid` only for the `Signaling` predicates and a NaN operand. Until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the `Bool` is the only way the exception is reported. `predicate_outcome` is the evaluation step shared by `float` and `float/binary32`; use the two functions above instead. The `binary32` package has the same function names and shares the two enums with `float`."
+msgstr "`compare_predicate_bits(predicate, x, y)` と `compare_predicate(predicate, x, y)` は `(value, invalid)` を返します。`invalid` は規格が無効演算例外を要求する場合に真です。どの述語でもシグナリング NaN のオペランドがあるとき、および `Signaling` 述語で quiet NaN のオペランドがあるときです。数値形式はシグナリング NaN を見分けられない（このパッケージの他の部分と同じ制限）ので、`Signaling` 述語で NaN のオペランドがあるときだけ `invalid` を報告します。例外フラグができるまで（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）、この `Bool` がこの例外を報告する唯一の手段です。`predicate_outcome` は `float` と `float/binary32` で共通の評価ステップなので、上の 2 つの関数を使ってください。`binary32` パッケージにも同じ名前の関数があり、2 つの enum は `float` と共有します。"
+
+#: manual/api/float.md:21
 msgid "Canonicalization and sign"
 msgstr "正規化と符号"
 
-#: manual/api/float.md:15
+#: manual/api/float.md:23
 msgid "`canonicalize_nan_bits` maps every raw NaN to positive quiet NaN `0x7ff8000000000000` (binary64) or `0x7fc00000` (binary32), leaving non-NaNs unchanged. `to_bits_canonical(x)` guarantees that exact integer encoding for numeric NaN. `canonicalize_nan(x)` returns a numeric quiet NaN; subsequent host storage may change its representation, so use `to_bits_canonical` at serialization boundaries."
 msgstr "`canonicalize_nan_bits` は生の NaN を正の quiet NaN（binary64 は `0x7ff8000000000000`、binary32 は `0x7fc00000`）に写し、NaN 以外を保持します。`to_bits_canonical(x)` は数値 NaN にその整数エンコーディングを保証します。`canonicalize_nan(x)` は数値 quiet NaN を返しますが、後続のホスト格納で表現が変わり得るため、直列化境界では `to_bits_canonical` を使ってください。"
 
-#: manual/api/float.md:17
+#: manual/api/float.md:25
 msgid "`copy_sign_bits`, `negate_bits` and `abs_bits` alter only the sign bit, preserving every other bit, including NaN payload and signaling state. Portable numeric `portable_copy_sign`, `portable_negate` and `portable_abs` canonicalize NaN; all non-NaN encodings, including infinities and signed zero, undergo exact sign transformations. A numeric NaN sign donor is treated conservatively rather than exposing its host sign."
 msgstr "`copy_sign_bits`、`negate_bits`、`abs_bits` は符号ビットだけを変え、NaN のペイロードとシグナリング状態を含む他の全ビットを保持します。移植可能な数値関数 `portable_copy_sign`、`portable_negate`、`portable_abs` は NaN を正規化し、NaN 以外（無限大と符号付きゼロを含む）には正確な符号変換を適用します。数値 NaN を符号源とする場合、ホストの符号を公開せず保守的な規則を使います。"
 
-#: manual/api/float.md:19
+#: manual/api/float.md:27
 msgid "Rounding to integral values"
 msgstr "整数値への丸め"
 
-#: manual/api/float.md:21
+#: manual/api/float.md:29
 msgid "`RoundingDirection` names the five IEEE 754-2019 §5.9 `roundToIntegral` directions: `TiesToEven`, `TiesToAway`, `TowardZero`, `TowardPositive` and `TowardNegative`. `round_to_integral(x, direction)` and the five named helpers (`round_ties_even`, `round_ties_away`, `round_toward_zero`, `round_toward_positive`, `round_toward_negative`) return an integral value in the same binary format. The binary32 package accepts the shared parent enum."
 msgstr "`RoundingDirection` は IEEE 754-2019 §5.9 `roundToIntegral` の五つの方向、`TiesToEven`、`TiesToAway`、`TowardZero`、`TowardPositive`、`TowardNegative` を表します。`round_to_integral(x, direction)` と五つの名前付きヘルパー（`round_ties_even`、`round_ties_away`、`round_toward_zero`、`round_toward_positive`、`round_toward_negative`）は同じ二進形式の整数値を返します。binary32 パッケージは共有の親 enum を受け取ります。"
 
-#: manual/api/float.md:23
+#: manual/api/float.md:31
 msgid "The implementation rounds directly from the sign, exponent and fraction fields. It preserves both zero signs and already integral values, returns positive canonical quiet NaN for NaN input (dropping NaN sign and payload), and leaves infinities unchanged. It does not report the invalid exception for sNaN input or the inexact flag for non-integral input; those reports are deferred to the `_exact` variant with the status-flag API in issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
 msgstr "実装は符号、指数、仮数部のビットから直接丸めます。ゼロの両方の符号と既に整数である値を保持し、NaN 入力には正の正規 quiet NaN を返して入力の符号とペイロードを破棄し、無限大は変更しません。sNaN 入力の invalid 例外と非整数入力の inexact フラグは報告しません。これらの報告は issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) の状態フラグ API と `_exact` 版に委ねます。"
 
-#: manual/api/float.md:25
+#: manual/api/float.md:33
 msgid "Integer conversions"
 msgstr "整数への変換"
 
-#: manual/api/float.md:27
+#: manual/api/float.md:35
 msgid "Both packages provide the same sixteen functions: `to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the four `*_saturating` counterparts, and a `_with` form of each that takes a `RoundingDirection`. `@float` converts `Double`; `@binary32` converts `Float` and widens it exactly to binary64 first, so both packages follow one contract. The targets are `Int` (`[-2^31, 2^31 - 1]`), `Int64` (`[-2^63, 2^63 - 1]`), `UInt` (`[0, 2^32 - 1]`) and `UInt64` (`[0, 2^64 - 1]`)."
 msgstr "両パッケージは同じ 16 個の関数を提供します。`to_int_checked`、`to_int64_checked`、`to_uint_checked`、`to_uint64_checked`、対応する 4 つの `*_saturating`、そして各関数に `RoundingDirection` を受け取る `_with` 形式です。`@float` は `Double` を、`@binary32` は `Float` を変換し、後者はまず binary64 へ正確に拡張するため、両パッケージは同一の契約に従います。変換先は `Int`（`[-2^31, 2^31 - 1]`）、`Int64`（`[-2^63, 2^63 - 1]`）、`UInt`（`[0, 2^32 - 1]`）、`UInt64`（`[0, 2^64 - 1]`）です。"
 
-#: manual/api/float.md:29
+#: manual/api/float.md:37
 msgid "The value is first rounded to an integer with the chosen direction; the functions without `_with` round toward zero (truncation). The range decision is made on that rounded integer, after rounding, and never on the input. Hence `-0.5` converts to `Some(0)` for `to_uint_checked` (it truncates to zero) but to `None` with `TowardNegative` (it rounds to `-1`), and `2147483647.5` fits `Int` when truncated but not when rounded `TiesToEven`. Both zeros, `+0` and `-0`, convert to `0`."
 msgstr "値はまず指定した方向で整数に丸められます。`_with` なしの関数は 0 方向（切り捨て）に丸めます。範囲の判定は丸めた後の整数に対して、丸めの後で行い、入力そのものには決して行いません。したがって `-0.5` は `to_uint_checked` では `Some(0)`（0 に切り捨て）になりますが、`TowardNegative` では `None`（`-1` に丸め）になります。`2147483647.5` は切り捨てなら `Int` に収まりますが、`TiesToEven` で丸めると収まりません。`+0` と `-0` のどちらのゼロも `0` に変換されます。"
 
-#: manual/api/float.md:31
+#: manual/api/float.md:39
 msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the rounded integer is outside the target range; otherwise `Some(n)`. `*_saturating` clamps like WebAssembly `trunc_sat`: NaN converts to `0`, `+inf` and any rounded value above the range convert to the largest value of the target, and `-inf` and any value below the range convert to its smallest (`0` for the unsigned targets). The range tests run on the rounded `Double` before any core conversion primitive is called, because core's behavior for out-of-range values differs between backends."
 msgstr "`*_checked` は NaN、`+inf`、`-inf`、および丸めた整数が変換先の範囲外の場合に `None` を返し、それ以外は `Some(n)` を返します。`*_saturating` は WebAssembly の `trunc_sat` と同様に範囲内へ飽和させます。NaN は `0` に、`+inf` と範囲を超える丸め値は変換先の最大値に、`-inf` と範囲を下回る値は最小値（符号なしでは `0`）に変換されます。範囲の判定は、core の変換プリミティブを呼ぶ前に丸めた `Double` に対して行います。範囲外の値に対する core の挙動がバックエンドごとに異なるためです。"
 
-#: manual/api/float.md:33
+#: manual/api/float.md:41
 msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the backend-independent counterpart of core's `Float::from_int64` and `Float::from_uint64`, which follow each backend's own conversion (on the JavaScript backend through binary64 first, so they round twice, by design of core); for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
 msgstr "`int64_to_float(Int64) -> Float` と `uint64_to_float(UInt64) -> Float` は `@float` にありますが、binary32 の `Float` を返します。結果は 64 ビット整数を一度だけ丸めた最も近い binary32 値で、同値の場合は偶数側です。これらは core の `Float::from_int64` と `Float::from_uint64` のバックエンド非依存の対応版です。後者は各バックエンド自身の変換に従い（JavaScript バックエンドではまず binary64 に変換するため二度丸めます。これは core の設計です）。例えば `2^53 + 2^29 + 1` は最初の丸めで同値の `2^53 + 2^29` になり、次に誤った binary32 の隣接値 `2^53` に丸められます。実装は奇数への丸めを用いた中間有効数を使うため、結果はすべてのバックエンドでビット単位で一致します。この 2 つの関数の配置（`@float` か `@binary32` か）はメンテナ向けの未決事項です。"
 
-#: manual/api/float.md:35
+#: manual/api/float.md:43
 msgid "Extrema and ordering"
 msgstr "極値と順序付け"
 
-#: manual/api/float.md:37
+#: manual/api/float.md:45
 msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for binary64; the binary32 package exposes the same names. Either NaN input produces positive canonical quiet NaN; NaN sign and payload are not propagated. For zero operands, minimum selects `-0` if either operand is negative zero, while maximum selects `+0` if either operand is positive zero. These value functions do not report the invalid exception for sNaN; exception flags are not part of this package's API, and signaling behavior is deferred to issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)."
 msgstr "`minimum(x, y)` と `maximum(x, y)` は binary64 で IEEE 754-2019 §9.6 を実装し、binary32 パッケージも同じ名前を公開します。どちらかの入力が NaN なら、正の正規 quiet NaN を返し、NaN の符号とペイロードは伝播しません。ゼロ同士の場合、minimum はどちらかが負のゼロなら `-0` を選び、maximum はどちらかが正のゼロなら `+0` を選びます。これらの数値関数は sNaN の invalid 例外を報告しません。このパッケージの API に例外フラグはなく、シグナル動作は issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29) に委ねます。"
 
-#: manual/api/float.md:39
+#: manual/api/float.md:47
 msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
 msgstr "`portable_total_order(x, y)` は移植可能な数値に対して §5.10 を実装します。`total_order_bits(x, y)` は整数ビットから完全なエンコーディング順序を実装し、NaN の符号、signaling 状態、ペイロードを保持します。特に JavaScript では数値 NaN の表現を移植できないため、この区別が必要です。`sort_total_order(values)` は可変配列を、`sort_total_order_view(view)` は可変配列ビューを移植可能な値の順序でソートします。正規化された NaN はすべて数値の後に比較されますが、core の `sort_by` は不安定です。同じ正規化 key の順序が変わることがあり、元の NaN ビットは保持され、JavaScript ではペイロードが正規化される場合があります。そのため負の NaN は raw IEEE totalOrder の位置を得ません。NaN エンコーディングを厳密に順序付けるには、生の整数エンコーディングに `total_order_bits` を使います。"
 
-#: manual/api/float.md:41
+#: manual/api/float.md:49
 msgid "Payload encoding adapters"
 msgstr "ペイロードのエンコーディングアダプタ"
 
-#: manual/api/float.md:43
+#: manual/api/float.md:51
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` は NaN 以外に `None`、NaN に quiet ビットを除く `Some(payload)` を返します。`set_payload_bits(payload, sign_minus?=false)` は quiet NaN のエンコーディングを返し、binary64 の 51 ビットまたは binary32 の 22 ビットを超える場合は `None` を返します。`set_payload_signaling_bits` は無限大になるゼロペイロードも拒否します。これらは整数エンコーディングを入出力とする IEEE 754-2019 §9.7 のアダプタであり、標準の浮動小数点 getPayload/setPayload 関数そのものではありません。"
 
-#: manual/api/float.md:45
+#: manual/api/float.md:53
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` はアプリケーションの NaN 正規化ビューを表し、元の NaN に対する IEEE 符号・分類操作を表しません。IEEE エンコーディングの意味論が必要な場合は `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` と生の符号操作を使用してください。`is_canonical_bits` は IEEE の正規エンコーディングを判定し、アプリケーション固有の固定 NaN との一致を判定するものではありません。"
 
@@ -248,12 +264,12 @@ msgid "§5.5 copy, negate, abs, copySign [required]"
 msgstr "§5.5 copy、negate、abs、copySign [必須]"
 
 #: manual/conformance/checklist.md:26
-msgid "§5.6, §5.11 comparison predicates [required] (partial)"
-msgstr "§5.6、§5.11 比較述語 [必須] （部分準拠）"
+msgid "§5.6, §5.11 comparison predicates [required]"
+msgstr "§5.6、§5.11 比較述語 [必須]"
 
 #: manual/conformance/checklist.md:27
-msgid "§5.7 class and sign predicates [required] (partial)"
-msgstr "§5.7 class と符号の述語 [必須] （部分準拠）"
+msgid "§5.7 class and sign predicates [required]"
+msgstr "§5.7 class と符号の述語 [必須]"
 
 #: manual/conformance/checklist.md:28
 msgid "§5.10 totalOrder [required]"
@@ -452,6 +468,7 @@ msgstr "固定コーパス（`testdata/float_oracles.json`）、ランダム監�
 
 #: manual/conformance/float.md:19
 #: manual/conformance/float.md:31
+#: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
 msgid "conforming"
 msgstr "準拠"
@@ -498,7 +515,6 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 #: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
-#: manual/conformance/float.md:32
 #: manual/conformance/float.md:35
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
@@ -616,12 +632,16 @@ msgid "§5.6, §5.11 comparison predicates"
 msgstr "§5.6、§5.11 比較述語"
 
 #: manual/conformance/float.md:32
-msgid "host `==`, `<` (quiet predicates only)"
-msgstr "ホストの `==`、`<`（quiet 述語のみ）"
+msgid "`ComparisonPredicate` (the 22 predicates), `Relation`, `relation`, `relation_bits`, `compare_predicate`, `compare_predicate_bits`, `predicate_outcome`"
+msgstr "`ComparisonPredicate`（22 個の述語）、`Relation`、`relation`、`relation_bits`、`compare_predicate`、`compare_predicate_bits`、`predicate_outcome`"
 
 #: manual/conformance/float.md:32
-msgid "partial: no signaling predicates; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-msgstr "部分準拠：signaling 述語がない。[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+msgid "`src/float/comparison_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family compare"
+msgstr "`src/float/comparison_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の compare ファミリー"
+
+#: manual/conformance/float.md:32
+msgid "conforming; invalid operation is returned as a `Bool` until exception flags exist ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "準拠。例外フラグができるまで（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）、無効演算は `Bool` で返す"
 
 #: manual/conformance/float.md:33
 msgid "§5.7 class and sign predicates"
@@ -630,10 +650,6 @@ msgstr "§5.7 class と符号の述語"
 #: manual/conformance/float.md:33
 msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family classify"
 msgstr "`src/float/bits_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の classify ファミリー"
-
-#: manual/conformance/float.md:33
-msgid "partial: no `is_infinite` or `is_normal`; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
-msgstr "部分準拠：`is_infinite` と `is_normal` がない。[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
 
 #: manual/conformance/float.md:34
 msgid "§5.10 totalOrder"
@@ -1173,6 +1189,10 @@ msgstr "IEEE 754-2019 §5.10 の totalOrder は通常の浮動小数点比較で
 msgid "Sorting uses the same key comparator through core's in-place `sort_by`, for both arrays and mutable views. The comparator returns -1, 0 or 1 from signed key comparisons instead of subtracting keys, avoiding integer overflow."
 msgstr "配列と可変ビューのソートはどちらも、core のインプレース `sort_by` を通じて同じ key 比較器を使います。比較器は key を減算せず、符号付き比較から -1、0、1 を返して整数オーバーフローを避けます。"
 
+#: manual/design/float.md:21
+msgid "The comparison predicates of IEEE 754-2019 §5.6.1 and §5.11 are one table: a predicate is a set of the four relations plus a flag saying whether quiet NaN operands also signal. Evaluating a predicate is therefore a mask test on the relation, which keeps the 22 names from becoming 22 hand-written functions that could disagree. The relation of two encodings uses the totalOrder key except that two zeros are equal, which gives `-0 = +0`, equal same-sign infinities and unordered NaNs without floating-point arithmetic. The result is a pair `(value, invalid)` because the package has no flags yet; once exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the second component becomes a flag and the pair stays as a convenience."
+msgstr "IEEE 754-2019 §5.6.1 と §5.11 の比較述語は 1 つの表です。述語は 4 つの関係の集合と、quiet NaN のオペランドでもシグナルを出すかどうかのフラグです。したがって述語の評価は関係に対するマスクテストになり、22 個の名前が互いに食い違いかねない 22 個の手書き関数になるのを防ぎます。2 つのエンコーディングの関係は totalOrder のキーを使い、2 つのゼロだけは等しいとするので、浮動小数点演算なしで `-0 = +0`、同符号の無限大が等しいこと、NaN が順序なしであることが得られます。結果は `(value, invalid)` の組です。このパッケージにはまだフラグがないためで、例外フラグができたら（[issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)）第 2 要素がフラグになり、組は便宜として残ります。"
+
 #: manual/index.md:1
 msgid "luna-utils"
 msgstr "luna-utils"
@@ -1312,6 +1332,19 @@ msgstr "整数変換は先に丸め、その後で範囲を検査します。範
 #: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "生のペイロード setter でエンコーディングを構築して `None` を確認し、ペイロードの忠実性が必要な場合は結果を Double や Float に変換しないでください。正規化数値関数は意図的に NaN メタデータを捨てます。[API](../api/float.md)と[適合性の制限](../conformance/float.md)を参照してください。"
+
+#: manual/tutorial/float.md:52
+msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
+msgstr "比較述語"
+
+#~ msgid "host `==`, `<` (quiet predicates only)"
+#~ msgstr "ホストの `==`、`<`（quiet 述語のみ）"
+
+#~ msgid "partial: no signaling predicates; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+#~ msgstr "部分準拠：signaling 述語がない。[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+
+#~ msgid "partial: no `is_infinite` or `is_normal`; [#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
+#~ msgstr "部分準拠：`is_infinite` と `is_normal` がない。[#48](https://github.com/Luna-Flow/luna-utils/issues/48)"
 
 #~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
 #~ msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する） [必須] （未実装）"

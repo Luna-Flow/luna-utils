@@ -240,3 +240,34 @@ pub fn portable_abs(x : Double) -> Double {
 pub fn radix() -> Int32 {
   2
 }
+
+///|
+/// Infinity encoding: exponent all ones and zero fraction (IEEE 754-2019 isInfinite).
+pub fn is_infinite_bits(bits : UInt64) -> Bool {
+  (bits & 0x7fffffffffffffffUL) == 0x7ff0000000000000UL
+}
+
+///|
+/// Normal encoding: exponent neither zero nor all ones (IEEE 754-2019 isNormal).
+pub fn is_normal_bits(bits : UInt64) -> Bool {
+  let e = bits & 0x7ff0000000000000UL
+  e != 0UL && e != 0x7ff0000000000000UL
+}
+
+///|
+/// True for any NaN value; a numeric NaN is detected by `x != x`.
+pub fn is_nan(x : Double) -> Bool {
+  x != x
+}
+
+///|
+/// Test the portable numeric view for infinities.
+pub fn is_infinite(x : Double) -> Bool {
+  is_infinite_bits(to_bits_canonical(x))
+}
+
+///|
+/// Test the portable numeric view for normal values.
+pub fn is_normal(x : Double) -> Bool {
+  is_normal_bits(to_bits_canonical(x))
+}
