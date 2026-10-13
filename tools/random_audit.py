@@ -384,6 +384,97 @@ def m_magnitude(fmt, xb, yb, want_min, number):
     return xb if ax > ay else yb if ay > ax else base(fmt, xb, yb, want_min)
 
 
+def encode_directed(fmt, v, direction):
+    """Round a nonzero exact rational to the format by an IEEE 754 rounding direction."""
+    negative = v < 0
+    a = abs(v)
+    e = max(flog2(a), 1 - fmt.bias)
+    scaled = a / Fraction(2) ** (e - fmt.mbits)
+    q = scaled.numerator // scaled.denominator
+    frac = scaled - q
+    up = {"TiesToEven": frac > Fraction(1, 2) or (frac == Fraction(1, 2) and q & 1),
+          "TiesToAway": frac >= Fraction(1, 2), "TowardZero": False,
+          "TowardPositive": (not negative) and frac > 0, "TowardNegative": negative and frac > 0}[direction]
+    if up:
+        q += 1
+    if q == 1 << (fmt.mbits + 1):
+        q >>= 1
+        e += 1
+    sign = fmt.sign if negative else 0
+    if e > fmt.bias:
+        inf = sign | (fmt.emax_field << fmt.mbits)
+        max_finite = sign | ((fmt.emax_field - 1) << fmt.mbits) | fmt.frac_mask
+        if direction in ("TiesToEven", "TiesToAway"):
+            return inf
+        if direction == "TowardZero":
+            return max_finite
+        return inf if (direction == "TowardPositive") != negative else max_finite
+    if q < 1 << fmt.mbits:
+        return sign | q
+    return sign | ((e + fmt.bias) << fmt.mbits) | (q - (1 << fmt.mbits))
+
+
+def quiet(fmt, bits):
+    return bits | fmt.quiet
+
+
+def m_next_up(fmt, bits):
+    if fmt.is_nan(bits):
+        return quiet(fmt, bits)
+    if fmt.cls(bits) in ("PositiveZero", "NegativeZero"):
+        return 1
+    x = Fraction(10) ** 5000 if fmt.cls(bits) == "PositiveInfinity" else -(Fraction(10) ** 5000) if fmt.cls(bits) == "NegativeInfinity" else fmt.value(bits)
+    best = None
+    for c in {(bits - 1) & fmt.mask, (bits + 1) & fmt.mask, 1, fmt.sign | 1, 0, fmt.sign}:
+        if fmt.is_nan(c):
+            continue
+        k = fmt.cls(c)
+        cv = Fraction(10) ** 5000 if k == "PositiveInfinity" else -(Fraction(10) ** 5000) if k == "NegativeInfinity" else fmt.value(c)
+        # IEEE 754-2019 §5.3.1: the successor of the negative number of least magnitude is -0
+        if cv > x and (best is None or cv < best[0] or (cv == best[0] and c == fmt.sign)):
+            best = (cv, c)
+    return bits if best is None else best[1]
+
+
+def m_next_down(fmt, bits):
+    return m_next_up(fmt, bits ^ fmt.sign) ^ fmt.sign
+
+
+def m_remainder(fmt, xb, yb):
+    if fmt.is_nan(xb):
+        return quiet(fmt, xb)
+    if fmt.is_nan(yb):
+        return quiet(fmt, yb)
+    cx, cy = fmt.cls(xb), fmt.cls(yb)
+    if cx.endswith("Infinity") or cy.endswith("Zero"):
+        return fmt.canonical_nan
+    if cy.endswith("Infinity") or cx.endswith("Zero"):
+        return xb
+    x, y = fmt.value(xb), fmt.value(yb)
+    n = round_fraction(x / y, "TiesToEven")
+    r = x - y * n
+    if r == 0:
+        return xb & fmt.sign
+    return fmt.encode_exact(r)
+
+
+def m_scaleb(fmt, bits, n, direction):
+    if fmt.is_nan(bits):
+        return quiet(fmt, bits)
+    c = fmt.cls(bits)
+    if c.endswith("Infinity") or c.endswith("Zero") or n == 0:
+        return bits
+    n = max(-6000, min(6000, n))  # beyond this every result is an overflow or an underflow of the same kind
+    return encode_directed(fmt, fmt.value(bits) * Fraction(2) ** n, direction)
+
+
+def m_logb(fmt, bits):
+    c = fmt.cls(bits)
+    if fmt.is_nan(bits) or c.endswith("Infinity") or c.endswith("Zero"):
+        return None
+    return flog2(abs(fmt.value(bits)))
+
+
 # ----------------------------------------------------------------- tables
 
 class Tables:
@@ -438,6 +529,19 @@ def build(seed, count):
                   m_magnitude(fmt, b, y, True, True), m_magnitude(fmt, b, y, False, True),
                   int(key(fmt, b & ~fmt.sign & fmt.mask) <= key(fmt, y & ~fmt.sign & fmt.mask)),
                   int(key(fmt, numeric(fmt, b) & ~fmt.sign & fmt.mask) <= key(fmt, numeric(fmt, y) & ~fmt.sign & fmt.mask)))
+            canon = lambda v: fmt.canonical_nan if fmt.is_nan(v) else v
+            t.add(p + "next", b, m_next_up(fmt, b), m_next_down(fmt, b), canon(m_next_up(fmt, b)) if fmt.is_nan(b) else m_next_up(fmt, b),
+                  canon(m_next_down(fmt, b)) if fmt.is_nan(b) else m_next_down(fmt, b))
+            rb = m_remainder(fmt, b, y)
+            t.add(p + "remainder", b, y, rb, canon(rb))
+            sn = rng.choice((0, 1, -1, 2, -2, 7, -7, fmt.mbits, -fmt.mbits, fmt.bias, -fmt.bias, fmt.bias + fmt.mbits + 1,
+                             -(fmt.bias + fmt.mbits + 1), 2 * (fmt.bias + fmt.mbits), -2 * (fmt.bias + fmt.mbits), 2400, -2400,
+                             (1 << 31) - 1, -(1 << 31), rng.randrange(-3000, 3000), rng.randrange(-300, 300)))
+            sres = [m_scaleb(fmt, b, sn, d) for d in DIRECTIONS]
+            t.add(p + "scaleb", b, sn, *sres, *[canon(v) if fmt.is_nan(b) else v for v in sres])
+            lg = m_logb(fmt, b)
+            lgf = fmt.canonical_nan if fmt.is_nan(b) else (fmt.emax_field << fmt.mbits) if fmt.cls(b) == "PositiveInfinity" or fmt.cls(b) == "NegativeInfinity" else (fmt.sign | (fmt.emax_field << fmt.mbits)) if lg is None else fmt.encode_exact(Fraction(lg))
+            t.add(p + "logb", b, 0 if lg is None else 1, 0 if lg is None else lg, lgf)
             rel = m_relation(fmt, b, y)
             snan = fmt.cls(b) == "SignalingNaN" or fmt.cls(y) == "SignalingNaN"
             anan = fmt.is_nan(b) or fmt.is_nan(y)
@@ -655,6 +759,31 @@ def emit(t, seed, count):
             f"if !check(fam, i, \"mul\", {from_bt(f'{M}.to_bits_canonical(x * y)')}, table[r + 4]) {{ bad += 1 }}",
             f"if !check(fam, i, \"div\", {from_bt(f'{M}.to_bits_canonical(x / y)')}, table[r + 5]) {{ bad += 1 }}",
             f"if !check(fam, i, \"sqrt\", {from_bt(f'{M}.to_bits_canonical(x.sqrt())')}, table[r + 6]) {{ bad += 1 }}"])
+        row_fn("next", "next", [
+            f"let fam = \"{p}next\"", f"let x = {fb('table[r]')}",
+            f"if !check(fam, i, \"next_up_bits\", {from_bt(f'{M}.next_up_bits(b)')}, table[r + 1]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"next_down_bits\", {from_bt(f'{M}.next_down_bits(b)')}, table[r + 2]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"next_up\", {from_bt(f'{M}.to_bits_canonical({M}.next_up(x))')}, table[r + 3]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"next_down\", {from_bt(f'{M}.to_bits_canonical({M}.next_down(x))')}, table[r + 4]) {{ bad += 1 }}"])
+        row_fn("remainder", "remainder", [
+            f"let fam = \"{p}remainder\"", f"let y = {to_bt('table[r + 1]')}", f"let x = {fb('table[r]')}", f"let yv = {fb('table[r + 1]')}",
+            f"if !check(fam, i, \"remainder_bits\", {from_bt(f'{M}.remainder_bits(b, y)')}, table[r + 2]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"remainder\", {from_bt(f'{M}.to_bits_canonical({M}.remainder(x, yv))')}, table[r + 3]) {{ bad += 1 }}"])
+        ds0 = ", ".join(f"@float.{d}" for d in DIRECTIONS)
+        row_fn("scaleb", "scaleb", [
+            f"let fam = \"{p}scaleb\"", f"let x = {fb('table[r]')}", "let n = table[r + 1].reinterpret_as_int64().to_int()", f"let dirs = [{ds0}]",
+            "for k in 0..<5 {",
+            f"  if !check(fam, i, \"scaleb_bits_with#\" + k.to_string(), {from_bt(f'{M}.scaleb_bits_with(b, n, dirs[k])')}, table[r + 2 + k]) {{ bad += 1 }}",
+            f"  if !check(fam, i, \"scaleb_with#\" + k.to_string(), {from_bt(f'{M}.to_bits_canonical({M}.scaleb_with(x, n, dirs[k]))')}, table[r + 7 + k]) {{ bad += 1 }}",
+            "}",
+            f"if !check(fam, i, \"scaleb_bits\", {from_bt(f'{M}.scaleb_bits(b, n)')}, table[r + 2]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"scaleb\", {from_bt(f'{M}.to_bits_canonical({M}.scaleb(x, n))')}, table[r + 7]) {{ bad += 1 }}"])
+        row_fn("logb", "logb", [
+            f"let fam = \"{p}logb\"", f"let x = {fb('table[r]')}",
+            f"match {M}.logb_bits(b) {{",
+            "  Some(v) => { if table[r + 1] != 1UL { report(fam, i, \"logb_bits present\"); bad += 1 } else if !check(fam, i, \"logb_bits\", v.to_int64().reinterpret_as_uint64(), table[r + 2]) { bad += 1 } }",
+            "  None => if table[r + 1] != 0UL { report(fam, i, \"logb_bits missing\"); bad += 1 }", "}",
+            f"if !check(fam, i, \"logb\", {from_bt(f'{M}.to_bits_canonical({M}.logb(x))')}, table[r + 3]) {{ bad += 1 }}"])
         ps = ", ".join(f"@float.{n}" for n, _, _ in PREDICATES)
         row_fn("compare", "compare", [
             f"let fam = \"{p}compare\"", f"let preds = [{ps}]", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",

@@ -167,6 +167,26 @@ msgstr ""
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr ""
 
+#: manual/api/float.md:59
+msgid "Remainder, nextUp, nextDown, scaleB and logB"
+msgstr ""
+
+#: manual/api/float.md:61
+msgid "All of these work on the integer fields, with no host arithmetic, so they are identical on every backend. Each has a raw form on encodings (`*_bits`) that keeps NaN payloads and a numeric form that returns the canonical quiet NaN for every NaN."
+msgstr ""
+
+#: manual/api/float.md:63
+msgid "`next_up_bits` and `next_down_bits` (numeric `next_up`, `next_down`) are IEEE 754-2019 §5.3.1 nextUp and nextDown: the neighbouring value in the format, `nextUp(-0)` and `nextUp(+0)` are the smallest positive value, the successor of the negative value of least magnitude is `-0`, and `nextUp(+inf)` is `+inf`. A NaN becomes quiet and keeps its sign and payload in the raw form."
+msgstr ""
+
+#: manual/api/float.md:65
+msgid "`remainder_bits(x, y)` and `remainder(x, y)` are the IEEE remainder `x - y * n` with `n` the integer nearest `x / y`, ties to even. The result is exact for every finite operand, a zero result has the sign of `x`, `remainder(x, inf)` is `x`, and an infinite `x` or a zero `y` gives the canonical quiet NaN. The invalid operation exception is not reported until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29))."
+msgstr ""
+
+#: manual/api/float.md:67
+msgid "`scaleb_bits_with(bits, n, direction)` and `scaleb_with(x, n, direction)` compute `x * 2^n` rounded once to the format by the given `RoundingDirection`, with gradual underflow and the overflow rule of each direction; `scaleb_bits` and `scaleb` use ties to even. Zeros, infinities and `n = 0` return `x`, and `n` may be any `Int`. `logb_bits(bits)` returns the exponent `floor(log2 |x|)` as an `Int?` computed as though the range were unbounded (a subnormal gives its true exponent), and `None` for NaN, infinities and zeros, which the standard calls exceptional. `logb(x)` is the floating-point form: `logB(NaN)` is a NaN, `logB(inf)` is `+inf` and `logB(0)` is `-inf`."
+msgstr ""
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr ""
@@ -236,15 +256,15 @@ msgid "§5.3.1 fusedMultiplyAdd [required] (not implemented)"
 msgstr ""
 
 #: manual/conformance/checklist.md:17
-msgid "§5.3.1 remainder [required] (not implemented)"
+msgid "§5.3.1 remainder [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:18
-msgid "§5.3.1 nextUp, nextDown [required] (not implemented)"
+msgid "§5.3.1 nextUp, nextDown [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:19
-msgid "§5.3.1 scaleB, logB [required] (not implemented)"
+msgid "§5.3.3 scaleB, logB [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:20
@@ -475,6 +495,7 @@ msgid "fixed corpus (`testdata/float_oracles.json`); the randomized audit (`tool
 msgstr ""
 
 #: manual/conformance/float.md:19
+#: manual/conformance/float.md:24
 #: manual/conformance/float.md:31
 #: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
@@ -519,9 +540,6 @@ msgid "§5.3.1 fusedMultiplyAdd"
 msgstr ""
 
 #: manual/conformance/float.md:22
-#: manual/conformance/float.md:23
-#: manual/conformance/float.md:24
-#: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
 #: manual/conformance/float.md:36
@@ -554,17 +572,31 @@ msgid "§5.3.1 remainder"
 msgstr ""
 
 #: manual/conformance/float.md:23
-#: manual/conformance/float.md:24
-#: manual/conformance/float.md:25
-msgid "not implemented; [#46](https://github.com/Luna-Flow/luna-utils/issues/46)"
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family remainder"
+msgstr ""
+
+#: manual/conformance/float.md:23
+msgid "conforming; no invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
 msgstr ""
 
 #: manual/conformance/float.md:24
 msgid "§5.3.1 nextUp, nextDown"
 msgstr ""
 
+#: manual/conformance/float.md:24
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family next"
+msgstr ""
+
 #: manual/conformance/float.md:25
-msgid "§5.3.1 scaleB, logB"
+msgid "§5.3.3 scaleB, logB"
+msgstr ""
+
+#: manual/conformance/float.md:25
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families scaleb, logb"
+msgstr ""
+
+#: manual/conformance/float.md:25
+msgid "conforming; no divideByZero or invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
 msgstr ""
 
 #: manual/conformance/float.md:26

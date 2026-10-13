@@ -52,6 +52,10 @@ pub fn is_zero(Float) -> Bool
 
 pub fn is_zero_bits(UInt) -> Bool
 
+pub fn logb(Float) -> Float
+
+pub fn logb_bits(UInt) -> Int?
+
 pub fn maximum(Float, Float) -> Float
 
 pub fn maximum_magnitude(Float, Float) -> Float
@@ -69,6 +73,14 @@ pub fn minimum_magnitude_number(Float, Float) -> Float
 pub fn minimum_number(Float, Float) -> Float
 
 pub fn negate_bits(UInt) -> UInt
+
+pub fn next_down(Float) -> Float
+
+pub fn next_down_bits(UInt) -> UInt
+
+pub fn next_up(Float) -> Float
+
+pub fn next_up_bits(UInt) -> UInt
 
 pub fn portable_abs(Float) -> Float
 
@@ -94,6 +106,10 @@ pub fn relation(Float, Float) -> @float.Relation
 
 pub fn relation_bits(UInt, UInt) -> @float.Relation
 
+pub fn remainder(Float, Float) -> Float
+
+pub fn remainder_bits(UInt, UInt) -> UInt
+
 pub fn round_ties_away(Float) -> Float
 
 pub fn round_ties_even(Float) -> Float
@@ -105,6 +121,14 @@ pub fn round_toward_negative(Float) -> Float
 pub fn round_toward_positive(Float) -> Float
 
 pub fn round_toward_zero(Float) -> Float
+
+pub fn scaleb(Float, Int) -> Float
+
+pub fn scaleb_bits(UInt, Int) -> UInt
+
+pub fn scaleb_bits_with(UInt, Int, @float.RoundingDirection) -> UInt
+
+pub fn scaleb_with(Float, Int, @float.RoundingDirection) -> Float
 
 pub fn set_payload_bits(UInt, sign_minus? : Bool) -> UInt?
 
