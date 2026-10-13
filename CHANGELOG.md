@@ -18,9 +18,9 @@
   zeros convert to `0`, and out-of-range values never reach a core primitive, so
   results are identical on wasm, wasm-gc, js and native.
 - `@float.int64_to_float` and `@float.uint64_to_float`: `Int64`/`UInt64` to
-  binary32 `Float`, rounded once to nearest-even. They are the direct-rounding
-  replacement for core `Float::from_int64`/`Float::from_uint64`, which on the js
-  backend convert through binary64 and so round twice. They return a binary32
+  binary32 `Float`, rounded once to nearest-even. They are the backend-independent
+  counterpart of core `Float::from_int64`/`Float::from_uint64`, which follow each
+  backend's own conversion (on js through binary64, so they round twice). They return a binary32
   `Float` and live in `@float`; their placement is open for the maintainer.
 - Tests: table-driven offline oracle (exact `fractions`/integer arithmetic) for the
   conversions in both formats, including halfway inputs, the `2^k` sweep and
@@ -32,8 +32,9 @@
 ### Fixed
 
 - The published package no longer includes `ready_to_pr.sh`, and CI now runs `tools/check_package_contents.py`, which builds the package and fails if `src/ci_probe/`, `testdata/`, `tools/` or `ready_to_pr.sh` are in it.
-- The js double rounding of `Int64`/`UInt64` to binary32 (`Float::from_int64`,
-  `Float::from_uint64`) is avoided by `int64_to_float`/`uint64_to_float`.
+- `int64_to_float`/`uint64_to_float` give `Int64`/`UInt64` to binary32 conversions that
+  round once on every backend; core's `Float::from_int64`/`Float::from_uint64` follow
+  each backend, so on js they round twice (by design of core, not a bug).
   Closes [#22](https://github.com/Luna-Flow/luna-utils/issues/22).
 
 ## 0.2.0 — 2026-10-11

@@ -338,8 +338,8 @@ fn uint64_to_float_round_to_odd(magnitude : UInt64) -> Double {
 /// Convert an `Int64` to the nearest binary32 `Float` (ties to even), rounding
 /// the 64-bit integer exactly once.
 ///
-/// This is the direct-rounding replacement for core `Float::from_int64`, which
-/// on the js backend converts through binary64 first and so rounds twice (for
+/// This is the backend-independent counterpart of core `Float::from_int64`, which
+/// follows each backend; on js it converts through binary64 first and so rounds twice (for
 /// example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` and then to the
 /// wrong neighbor `2^53`). It lives in `@float` because it uses the binary64 bit
 /// helpers of this package, and returns a binary32 `Float`; the result is
@@ -360,8 +360,8 @@ pub fn int64_to_float(value : Int64) -> Float {
 /// Convert a `UInt64` to the nearest binary32 `Float` (ties to even), rounding
 /// the 64-bit integer exactly once.
 ///
-/// This is the direct-rounding replacement for core `Float::from_uint64`, which
-/// on the js backend converts through binary64 first and so rounds twice. See
+/// This is the backend-independent counterpart of core `Float::from_uint64`, which
+/// follows each backend; on js it converts through binary64 first and so rounds twice. See
 /// `int64_to_float`; the result is bit-identical on every backend.
 pub fn uint64_to_float(value : UInt64) -> Float {
   Float::from_double(uint64_to_float_round_to_odd(value))
