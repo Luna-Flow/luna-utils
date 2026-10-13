@@ -41,7 +41,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 
 **Planned packages**
 
-- [ ] LIA-1 integer operations and notifications (package `int`) [required] (not implemented)
+- [ ] Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)
 - [ ] IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)
 - [ ] IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`) [required] (not implemented)
 - [ ] IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`) [recommended] (not implemented)

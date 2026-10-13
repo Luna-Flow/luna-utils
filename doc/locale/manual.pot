@@ -312,7 +312,7 @@ msgid "**Planned packages**"
 msgstr ""
 
 #: manual/conformance/checklist.md:44
-msgid "LIA-1 integer operations and notifications (package `int`) [required] (not implemented)"
+msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
 msgstr ""
 
 #: manual/conformance/checklist.md:45
@@ -742,11 +742,11 @@ msgid "Planned packages and their standards"
 msgstr ""
 
 #: manual/conformance/planned.md:3
-msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. Clause numbers for ISO/IEC 10967-1 (LIA-1) are filled in when the standard text is at hand. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
+msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. IEEE 754-2019 is the standard of reference; it defines no integer arithmetic, so the `int` row has no external clause and the package defines its semantics in its design page and checks them against exact integers. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
 msgstr ""
 
 #: manual/conformance/planned.md:9
-msgid "LIA-1 integer operations and notifications (package `int`)"
+msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
 msgstr ""
 
 #: manual/conformance/planned.md:9
