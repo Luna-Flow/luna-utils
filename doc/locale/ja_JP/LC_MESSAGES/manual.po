@@ -312,22 +312,42 @@ msgid "**Planned packages**"
 msgstr "**計画中のパッケージ**"
 
 #: manual/conformance/checklist.md:44
-msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
-msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する） [必須] （未実装）"
+msgid "ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.1 整数の結果関数：オーバーフローは通知され、黙って誤った値を返さない（パッケージ `int`） [必須] （未実装）"
 
 #: manual/conformance/checklist.md:45
+msgid "ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`) [required] (partial)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.1 整数の比較（パッケージ `int`） [必須] （部分準拠）"
+
+#: manual/conformance/checklist.md:46
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 オーバーフロー通知付きの neg、add、sub、mul、abs、signum（パッケージ `int`） [必須] （未実装）"
+
+#: manual/conformance/checklist.md:47
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 quot（切り下げ除算）と mod（パッケージ `int`） [必須] （未実装）"
+
+#: manual/conformance/checklist.md:48
+msgid "ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`) [required] (not implemented)"
+msgstr "ISO/IEC 10967-1:2012 §5.3.1 整数から整数への変換（パッケージ `int`） [必須] （未実装）"
+
+#: manual/conformance/checklist.md:49
+msgid "ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions [required] (partial)"
+msgstr "ISO/IEC 10967-1:2012 §5.3.2、§5.3.3 浮動小数点から整数、整数から浮動小数点への変換 [必須] （部分準拠）"
+
+#: manual/conformance/checklist.md:50
 msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)"
 msgstr "IEEE 754-2019 §5.12 十進・十六進の文字変換（パッケージ `text`） [必須] （未実装）"
 
-#: manual/conformance/checklist.md:46
+#: manual/conformance/checklist.md:51
 msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`) [required] (not implemented)"
 msgstr "IEEE 754-2019 §5.4.1、§7.4 BigInt から二進浮動小数点への正しく丸められた変換（パッケージ `bigint`） [必須] （未実装）"
 
-#: manual/conformance/checklist.md:47
+#: manual/conformance/checklist.md:52
 msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`) [recommended] (not implemented)"
 msgstr "IEEE 754-2019 §9.2 正しく丸められた初等関数（パッケージ `math`） [推奨] （未実装）"
 
-#: manual/conformance/checklist.md:48
+#: manual/conformance/checklist.md:53
 msgid "Stable seeded hash, identical on every backend (package `hash`; no standard clause) [required] (not implemented)"
 msgstr "シード付きの安定ハッシュ、全バックエンドで同一（パッケージ `hash`、規格の条項なし） [必須] （未実装）"
 
@@ -417,7 +437,12 @@ msgstr "§3.4 binary32 と binary64 の交換形式エンコーディング"
 #: manual/conformance/planned.md:9
 #: manual/conformance/planned.md:10
 #: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
 #: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:14
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:18
 msgid "required"
 msgstr "必須"
 
@@ -484,10 +509,13 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 #: manual/conformance/float.md:43
 #: manual/conformance/float.md:44
 #: manual/conformance/planned.md:9
-#: manual/conformance/planned.md:10
 #: manual/conformance/planned.md:11
 #: manual/conformance/planned.md:12
 #: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:17
+#: manual/conformance/planned.md:18
 msgid "none"
 msgstr "なし"
 
@@ -629,7 +657,7 @@ msgstr "§5.12 十進文字変換"
 
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
-#: manual/conformance/planned.md:10
+#: manual/conformance/planned.md:15
 msgid "not implemented; [#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
 msgstr "未実装。[#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
 
@@ -668,7 +696,7 @@ msgstr "§8 代替例外処理"
 #: manual/conformance/float.md:44
 #: manual/conformance/float.md:45
 #: manual/conformance/float.md:46
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "recommended"
 msgstr "推奨"
 
@@ -681,7 +709,7 @@ msgid "§9.2 recommended mathematical functions"
 msgstr "§9.2 推奨される数学関数"
 
 #: manual/conformance/float.md:41
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "not implemented; [#30](https://github.com/Luna-Flow/luna-utils/issues/30)"
 msgstr "未実装。[#30](https://github.com/Luna-Flow/luna-utils/issues/30)"
 
@@ -742,38 +770,93 @@ msgid "Planned packages and their standards"
 msgstr "計画中のパッケージと対応する規格"
 
 #: manual/conformance/planned.md:3
-msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. IEEE 754-2019 is the standard of reference; it defines no integer arithmetic, so the `int` row has no external clause and the package defines its semantics in its design page and checks them against exact integers. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
-msgstr "これらのパッケージはまだ実装されていません。表は各パッケージが照らし合わせる規格を記録し、チェックリストがそれらを不足として数えるようにします。基準とする規格は IEEE 754-2019 で、整数算術を定義していないため、`int` の行には外部の条項がなく、このパッケージは設計ページで自身の意味を定め、厳密な整数で検証します。`Level` は “shall” なら `required`、“should” なら `recommended` です。"
+msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. Floating point is measured against IEEE 754-2019 and integers against ISO/IEC 10967-1:2012 (LIA-1), whose integer clauses are cited below; LIA-1 may be extended to floating point later. The clause numbers come from the standard; its text is not reproduced here. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
+msgstr "これらのパッケージはまだ実装されていません。表は各パッケージが照らし合わせる規格を記録し、チェックリストがそれらを不足として数えるようにします。浮動小数点は IEEE 754-2019、整数は ISO/IEC 10967-1:2012（LIA-1）に照らし、以下ではその整数の条項を引用します。LIA-1 は将来、浮動小数点にも広げるかもしれません。条項番号は規格に基づきますが、本文はここに複製しません。`Level` は “shall” なら `required`、“should” なら `recommended` です。"
 
 #: manual/conformance/planned.md:9
-msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
-msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する）"
+msgid "ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.1 整数の結果関数：オーバーフローは通知され、黙って誤った値を返さない（パッケージ `int`）"
 
 #: manual/conformance/planned.md:9
+#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:13
 msgid "not implemented; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
 msgstr "未実装。[#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
 
 #: manual/conformance/planned.md:10
+msgid "ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.1 整数の比較（パッケージ `int`）"
+
+#: manual/conformance/planned.md:10
+msgid "host `==` and `<` on `Int`, `Int64`, `UInt` and `UInt64`"
+msgstr "ホストの `Int`、`Int64`、`UInt`、`UInt64` に対する `==` と `<`"
+
+#: manual/conformance/planned.md:10
+msgid "compiler matrix (`tools/compiler_matrix.py`)"
+msgstr "コンパイラマトリクス（`tools/compiler_matrix.py`）"
+
+#: manual/conformance/planned.md:10
+msgid "partial: host operators only, no named operations; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
+msgstr "部分準拠：ホストの演算子のみで、名前付きの演算はない。[#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
+
+#: manual/conformance/planned.md:11
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 オーバーフロー通知付きの neg、add、sub、mul、abs、signum（パッケージ `int`）"
+
+#: manual/conformance/planned.md:11
+msgid "none (host operators wrap)"
+msgstr "なし（ホストの演算子はラップアラウンドする）"
+
+#: manual/conformance/planned.md:12
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.1.2.2 quot（切り下げ除算）と mod（パッケージ `int`）"
+
+#: manual/conformance/planned.md:12
+msgid "none (host `/` and `%` truncate)"
+msgstr "なし（ホストの `/` と `%` は 0 方向に切り捨てる）"
+
+#: manual/conformance/planned.md:13
+msgid "ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`)"
+msgstr "ISO/IEC 10967-1:2012 §5.3.1 整数から整数への変換（パッケージ `int`）"
+
+#: manual/conformance/planned.md:14
+msgid "ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions"
+msgstr "ISO/IEC 10967-1:2012 §5.3.2、§5.3.3 浮動小数点から整数、整数から浮動小数点への変換"
+
+#: manual/conformance/planned.md:14
+msgid "the conversions of the `float` packages"
+msgstr "`float` パッケージの変換"
+
+#: manual/conformance/planned.md:14
+msgid "the convertToInteger and convertFromInt rows of [float](./float.md#clause-traceability)"
+msgstr "[float](./float.md#clause-traceability) の convertToInteger と convertFromInt の行"
+
+#: manual/conformance/planned.md:14
+msgid "partial: see those rows"
+msgstr "部分準拠：それらの行を参照"
+
+#: manual/conformance/planned.md:15
 msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`)"
 msgstr "IEEE 754-2019 §5.12 十進・十六進の文字変換（パッケージ `text`）"
 
-#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:16
 msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`)"
 msgstr "IEEE 754-2019 §5.4.1、§7.4 BigInt から二進浮動小数点への正しく丸められた変換（パッケージ `bigint`）"
 
-#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:16
 msgid "not implemented; [#28](https://github.com/Luna-Flow/luna-utils/issues/28)"
 msgstr "未実装。[#28](https://github.com/Luna-Flow/luna-utils/issues/28)"
 
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`)"
 msgstr "IEEE 754-2019 §9.2 正しく丸められた初等関数（パッケージ `math`）"
 
-#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:18
 msgid "Stable seeded hash, identical on every backend (package `hash`; no standard clause)"
 msgstr "シード付きの安定ハッシュ、全バックエンドで同一（パッケージ `hash`、規格の条項なし）"
 
-#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:18
 msgid "not implemented; [#26](https://github.com/Luna-Flow/luna-utils/issues/26)"
 msgstr "未実装。[#26](https://github.com/Luna-Flow/luna-utils/issues/26)"
 
@@ -1229,6 +1312,12 @@ msgstr "整数変換は先に丸め、その後で範囲を検査します。範
 #: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "生のペイロード setter でエンコーディングを構築して `None` を確認し、ペイロードの忠実性が必要な場合は結果を Double や Float に変換しないでください。正規化数値関数は意図的に NaN メタデータを捨てます。[API](../api/float.md)と[適合性の制限](../conformance/float.md)を参照してください。"
+
+#~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
+#~ msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する） [必須] （未実装）"
+
+#~ msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
+#~ msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する）"
 
 #~ msgid "LIA-1 integer operations and notifications (package `int`) [required] (not implemented)"
 #~ msgstr "LIA-1 の整数演算と通知（パッケージ `int`） [必須] （未実装）"

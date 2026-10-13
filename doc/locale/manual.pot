@@ -312,22 +312,42 @@ msgid "**Planned packages**"
 msgstr ""
 
 #: manual/conformance/checklist.md:44
-msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
+msgid "ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`) [required] (not implemented)"
 msgstr ""
 
 #: manual/conformance/checklist.md:45
-msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)"
+msgid "ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`) [required] (partial)"
 msgstr ""
 
 #: manual/conformance/checklist.md:46
-msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`) [required] (not implemented)"
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`) [required] (not implemented)"
 msgstr ""
 
 #: manual/conformance/checklist.md:47
-msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`) [recommended] (not implemented)"
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`) [required] (not implemented)"
 msgstr ""
 
 #: manual/conformance/checklist.md:48
+msgid "ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`) [required] (not implemented)"
+msgstr ""
+
+#: manual/conformance/checklist.md:49
+msgid "ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions [required] (partial)"
+msgstr ""
+
+#: manual/conformance/checklist.md:50
+msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)"
+msgstr ""
+
+#: manual/conformance/checklist.md:51
+msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`) [required] (not implemented)"
+msgstr ""
+
+#: manual/conformance/checklist.md:52
+msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`) [recommended] (not implemented)"
+msgstr ""
+
+#: manual/conformance/checklist.md:53
 msgid "Stable seeded hash, identical on every backend (package `hash`; no standard clause) [required] (not implemented)"
 msgstr ""
 
@@ -417,7 +437,12 @@ msgstr ""
 #: manual/conformance/planned.md:9
 #: manual/conformance/planned.md:10
 #: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
 #: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:14
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:18
 msgid "required"
 msgstr ""
 
@@ -484,10 +509,13 @@ msgstr ""
 #: manual/conformance/float.md:43
 #: manual/conformance/float.md:44
 #: manual/conformance/planned.md:9
-#: manual/conformance/planned.md:10
 #: manual/conformance/planned.md:11
 #: manual/conformance/planned.md:12
 #: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:17
+#: manual/conformance/planned.md:18
 msgid "none"
 msgstr ""
 
@@ -629,7 +657,7 @@ msgstr ""
 
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
-#: manual/conformance/planned.md:10
+#: manual/conformance/planned.md:15
 msgid "not implemented; [#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
 msgstr ""
 
@@ -668,7 +696,7 @@ msgstr ""
 #: manual/conformance/float.md:44
 #: manual/conformance/float.md:45
 #: manual/conformance/float.md:46
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "recommended"
 msgstr ""
 
@@ -681,7 +709,7 @@ msgid "§9.2 recommended mathematical functions"
 msgstr ""
 
 #: manual/conformance/float.md:41
-#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:17
 msgid "not implemented; [#30](https://github.com/Luna-Flow/luna-utils/issues/30)"
 msgstr ""
 
@@ -742,38 +770,93 @@ msgid "Planned packages and their standards"
 msgstr ""
 
 #: manual/conformance/planned.md:3
-msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. IEEE 754-2019 is the standard of reference; it defines no integer arithmetic, so the `int` row has no external clause and the package defines its semantics in its design page and checks them against exact integers. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
+msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. Floating point is measured against IEEE 754-2019 and integers against ISO/IEC 10967-1:2012 (LIA-1), whose integer clauses are cited below; LIA-1 may be extended to floating point later. The clause numbers come from the standard; its text is not reproduced here. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
 msgstr ""
 
 #: manual/conformance/planned.md:9
-msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
+msgid "ISO/IEC 10967-1:2012 §5.1.1 integer result function: overflow is notified, never a silent wrong value (package `int`)"
 msgstr ""
 
 #: manual/conformance/planned.md:9
+#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:13
 msgid "not implemented; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
 msgstr ""
 
 #: manual/conformance/planned.md:10
-msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`)"
+msgid "ISO/IEC 10967-1:2012 §5.1.2.1 integer comparisons (package `int`)"
+msgstr ""
+
+#: manual/conformance/planned.md:10
+msgid "host `==` and `<` on `Int`, `Int64`, `UInt` and `UInt64`"
+msgstr ""
+
+#: manual/conformance/planned.md:10
+msgid "compiler matrix (`tools/compiler_matrix.py`)"
+msgstr ""
+
+#: manual/conformance/planned.md:10
+msgid "partial: host operators only, no named operations; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
 msgstr ""
 
 #: manual/conformance/planned.md:11
-msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`)"
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 neg, add, sub, mul, abs, signum with an overflow notification (package `int`)"
 msgstr ""
 
 #: manual/conformance/planned.md:11
-msgid "not implemented; [#28](https://github.com/Luna-Flow/luna-utils/issues/28)"
+msgid "none (host operators wrap)"
 msgstr ""
 
 #: manual/conformance/planned.md:12
+msgid "ISO/IEC 10967-1:2012 §5.1.2.2 quot (floor division) and mod (package `int`)"
+msgstr ""
+
+#: manual/conformance/planned.md:12
+msgid "none (host `/` and `%` truncate)"
+msgstr ""
+
+#: manual/conformance/planned.md:13
+msgid "ISO/IEC 10967-1:2012 §5.3.1 integer to integer conversions (package `int`)"
+msgstr ""
+
+#: manual/conformance/planned.md:14
+msgid "ISO/IEC 10967-1:2012 §5.3.2, §5.3.3 floating point to integer and integer to floating point conversions"
+msgstr ""
+
+#: manual/conformance/planned.md:14
+msgid "the conversions of the `float` packages"
+msgstr ""
+
+#: manual/conformance/planned.md:14
+msgid "the convertToInteger and convertFromInt rows of [float](./float.md#clause-traceability)"
+msgstr ""
+
+#: manual/conformance/planned.md:14
+msgid "partial: see those rows"
+msgstr ""
+
+#: manual/conformance/planned.md:15
+msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`)"
+msgstr ""
+
+#: manual/conformance/planned.md:16
+msgid "IEEE 754-2019 §5.4.1, §7.4 correctly rounded BigInt to binary conversion (package `bigint`)"
+msgstr ""
+
+#: manual/conformance/planned.md:16
+msgid "not implemented; [#28](https://github.com/Luna-Flow/luna-utils/issues/28)"
+msgstr ""
+
+#: manual/conformance/planned.md:17
 msgid "IEEE 754-2019 §9.2 correctly rounded elementary functions (package `math`)"
 msgstr ""
 
-#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:18
 msgid "Stable seeded hash, identical on every backend (package `hash`; no standard clause)"
 msgstr ""
 
-#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:18
 msgid "not implemented; [#26](https://github.com/Luna-Flow/luna-utils/issues/26)"
 msgstr ""
 
