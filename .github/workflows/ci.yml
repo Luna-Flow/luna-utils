@@ -41,6 +41,7 @@ jobs:
           python3 tools/test_ci_harness.py
           python3 tools/test_audit_models.py
           python3 tools/api_audit.py
+          python3 tools/conformance_checklist.py
           python3 tools/check_package_contents.py
       - name: Select native compiler and FMA-capable host
         if: matrix.backend == 'native'
