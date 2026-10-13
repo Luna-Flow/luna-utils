@@ -1,0 +1,9 @@
+[
+  {
+    "backend": "native",
+    "mode": "release",
+    "family": "b32_payload_set",
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/42",
+    "note": "native release sign-extends a UInt? payload when widened with to_uint64; the library values are correct"
+  }
+]

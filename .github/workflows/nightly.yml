@@ -1,0 +1,116 @@
+name: Nightly audit
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: 'Audit seed (default: today as YYYYMMDD)'
+        required: false
+      count:
+        description: 'Cases per family'
+        required: false
+        default: '20000'
+permissions:
+  contents: read
+jobs:
+  audit:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, backend: wasm, compiler: gcc}
+          - {os: ubuntu-latest, backend: wasm-gc, compiler: gcc}
+          - {os: ubuntu-latest, backend: js, compiler: gcc}
+          - {os: ubuntu-latest, backend: native, compiler: gcc}
+          - {os: macos-latest, backend: native, compiler: clang}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Record toolchain
+        run: moon version --all
+      - name: Resolve package dependencies
+        run: |
+          moon update
+          moon install
+      - name: Verify the exact models and the API coverage
+        run: |
+          python3 tools/test_audit_models.py
+          python3 tools/api_audit.py
+      - name: Select native compiler and FMA-capable host
+        if: matrix.backend == 'native'
+        run: python3 tools/configure_native_ci.py '${{ matrix.compiler }}'
+      - name: Randomized audit
+        env:
+          SEED: ${{ github.event.inputs.seed }}
+          COUNT: ${{ github.event.inputs.count }}
+        run: |
+          python3 tools/run_audit.py '${{ matrix.backend }}' --seed "${SEED:-$(date -u +%Y%m%d)}" --count "${COUNT:-20000}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-${{ matrix.os }}-${{ matrix.backend }}
+          path: _build/audit/
+          if-no-files-found: error
+  mutation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Resolve package dependencies
+        run: |
+          moon update
+          moon install
+      - name: Inject known bugs and expect the audit to notice
+        run: |
+          mkdir -p _build/audit
+          python3 tools/mutation_check.py --backend js --seed 7 --count 600 --json _build/audit/mutation.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-mutation
+          path: _build/audit/
+          if-no-files-found: error
+  report:
+    needs: [audit, mutation]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: audit-*
+          path: results
+      - name: Build the report
+        run: |
+          status=0
+          python3 tools/audit_report.py results > audit-report.md || status=$?
+          cat audit-report.md >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-report
+          path: audit-report.md

@@ -39,6 +39,8 @@ jobs:
         run: |
           python3 tools/generate_oracles.py --check
           python3 tools/test_ci_harness.py
+          python3 tools/test_audit_models.py
+          python3 tools/api_audit.py
           python3 tools/check_package_contents.py
       - name: Select native compiler and FMA-capable host
         if: matrix.backend == 'native'
@@ -52,6 +54,8 @@ jobs:
           else
             python3 tools/run_backend_tests.py '${{ matrix.backend }}'
           fi
+      - name: Randomized audit with a fixed seed
+        run: python3 tools/run_audit.py '${{ matrix.backend }}' --seed 1 --count 400
       - name: Generate coverage report
         if: matrix.backend == 'wasm-gc'
         run: |
@@ -71,6 +75,7 @@ jobs:
           name: results-${{ matrix.os }}-${{ matrix.backend }}
           path: |
             _build/ci/
+            _build/audit/
             coverage_summary.txt
           if-no-files-found: error
   bit-diff:
