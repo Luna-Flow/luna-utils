@@ -48,3 +48,16 @@ assert_eq(
 Integer conversions round first and test the range afterwards. Use the `_checked` forms when out-of-range input is an error and the `_saturating` forms when clamping is the intended policy; NaN maps to `None` or to `0` explicitly in either case. `int64_to_float` and `uint64_to_float` round a 64-bit integer to binary32 exactly once, which JavaScript's `Float::from_int64` does not.
 
 Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md).
+
+Comparison predicates return the value and whether the standard requires the invalid operation exception:
+
+```moonbit
+let quiet_nan = 0x7ff8000000000000UL
+let one = 0x3ff0000000000000UL
+assert_eq(@f64.relation(-0.0, 0.0), @f64.Equal)
+assert_eq(@f64.compare_predicate_bits(@f64.QuietEqual, quiet_nan, one), (false, false))
+assert_eq(@f64.compare_predicate_bits(@f64.SignalingLess, quiet_nan, one), (false, true))
+assert_true(@f64.is_infinite_bits(0xfff0000000000000UL))
+assert_true(@f32.is_normal_bits(0x00800000U))
+```
+

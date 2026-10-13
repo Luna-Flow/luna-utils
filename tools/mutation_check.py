@@ -30,6 +30,12 @@ MUTATIONS = [
     ("signaling payload accepts zero (encodes infinity)", F + "bits.mbt", "payload == 0UL || payload >", "payload >"),
     ("negate_bits sets instead of toggling the sign", F + "bits.mbt", "bits ^ 0x8000000000000000UL", "bits | 0x8000000000000000UL"),
     ("binary32 signaling payload accepts zero", B + "bits.mbt", "payload == 0U || payload >", "payload >"),
+    ("signaling predicates ignore quiet NaN operands", F + "comparison.mbt", "(predicate_is_signaling(predicate) && nan_operand)", "(predicate_is_signaling(predicate) && signaling_nan_operand)"),
+    ("quiet predicates ignore a signaling NaN operand", F + "comparison.mbt", "signaling_nan_operand || (predicate_is_signaling", "(predicate_is_signaling"),
+    ("-0 compares unequal to +0", F + "comparison.mbt", "is_zero_bits(x) && is_zero_bits(y)", "is_zero_bits(x) && is_zero_bits(x)"),
+    ("isNormal accepts infinities", F + "bits.mbt", "e != 0UL && e != 0x7ff0000000000000UL", "e != 0UL"),
+    ("binary32 isInfinite misses negative infinity", B + "bits.mbt", "(bits & 0x7fffffffU) == 0x7f800000U", "bits == 0x7f800000U"),
+    ("binary32 relation treats NaN as equal", B + "comparison.mbt", "@binary64.Unordered\n  } else if", "@binary64.Equal\n  } else if"),
     ("binary32 copy_sign keeps the donor magnitude bit", B + "bits.mbt", "(magnitude & 0x7fffffffU) |", "(magnitude & 0x7ffffffeU) |"),
 ]
 

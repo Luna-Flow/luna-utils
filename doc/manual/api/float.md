@@ -10,6 +10,14 @@ A raw integer encoding preserves NaN sign, signaling state and payload exactly. 
 
 Predicates have raw `*_bits` and portable numeric forms. `is_signaling_bits` inspects the quiet bit; `portable_is_signaling` always returns `false` because signaling state is not portable. Binary interchange encodings are canonical, so both `is_canonical_bits` and `portable_is_canonical` always return `true`. For numeric NaN, sign-sensitive predicates must not infer a host sign. Consult the generated interface and conformance tests for the conservative numeric observations.
 
+`is_infinite_bits` and `is_normal_bits` complete the §5.7.2 predicates on raw encodings; the numeric forms are `is_nan` (`x != x`), `is_infinite` and `is_normal` next to the existing `is_finite`, `is_subnormal` and `is_zero`.
+
+## Comparison predicates
+
+`Relation` has the four mutually exclusive relations of IEEE 754-2019 §5.11: `Less`, `Equal`, `Greater` and `Unordered`. `relation_bits(x, y)` works on raw encodings and `relation(x, y)` on numeric values: every NaN is unordered with everything including itself, `+0` and `-0` are equal, and infinities of the same sign are equal. `ComparisonPredicate` names the 22 predicates of §5.6.1 (Tables 5.1 and 5.2), from `QuietEqual` to `QuietOrdered`. Each is true for the relations its name lists, so `SignalingNotLess` is true for `Equal`, `Greater` and `Unordered`, and is not the logical negation of `SignalingGreaterEqual` when an operand is a NaN.
+
+`compare_predicate_bits(predicate, x, y)` and `compare_predicate(predicate, x, y)` return `(value, invalid)`. `invalid` is true where the standard requires the invalid operation exception: for a signaling NaN operand with any predicate, and for a quiet NaN operand with a `Signaling` predicate. The numeric form cannot see signaling NaNs (the same limit as the rest of the package), so it reports `invalid` only for the `Signaling` predicates and a NaN operand. Until exception flags exist ([issue #29](https://github.com/Luna-Flow/luna-utils/issues/29)) the `Bool` is the only way the exception is reported. `predicate_outcome` is the evaluation step shared by `float` and `float/binary32`; use the two functions above instead. The `binary32` package has the same function names and shares the two enums with `float`.
+
 ## Canonicalization and sign
 
 `canonicalize_nan_bits` maps every raw NaN to positive quiet NaN `0x7ff8000000000000` (binary64) or `0x7fc00000` (binary32), leaving non-NaNs unchanged. `to_bits_canonical(x)` guarantees that exact integer encoding for numeric NaN. `canonicalize_nan(x)` returns a numeric quiet NaN; subsequent host storage may change its representation, so use `to_bits_canonical` at serialization boundaries.
