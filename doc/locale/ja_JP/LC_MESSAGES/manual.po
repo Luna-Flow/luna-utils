@@ -564,6 +564,22 @@ msgstr "`tools/run_audit.py <backend> --seed S --count N` は 1 つのバック�
 msgid "Three further checks keep the audit honest. `tools/test_audit_models.py` checks the exact models against CPython's IEEE conversions. `tools/api_audit.py` fails when a public function in a generated `.mbti` file is not called by the audit. `tools/mutation_check.py` injects known bugs (a wrong tie rule, a range boundary one off, a flipped zero selection) and fails when the audit does not notice one. A mismatch that is understood and tracked can be listed in `tools/known_issues.json` with its issue; the report then shows it separately instead of failing, and prints a reminder when the entry stops reproducing. The nightly job aggregates all results with `tools/audit_report.py` into a Markdown report that is attached to the run and shown in its summary."
 msgstr "監査自体の信頼性を保つ確認がさらに 3 つあります。`tools/test_audit_models.py` は厳密モデルを CPython の IEEE 変換と照合します。`tools/api_audit.py` は、生成された `.mbti` に監査が呼び出さない公開関数があると失敗します。`tools/mutation_check.py` は既知のバグ（誤った同値規則、1 つずれた範囲境界、反転したゼロ選択）を注入し、監査が気づかないと失敗します。理解済みで issue が追跡している不一致は `tools/known_issues.json` に登録でき、レポートでは失敗にせず別枠で表示し、再現しなくなったら削除を促します。毎日ジョブは `tools/audit_report.py` で全結果を 1 つの Markdown レポートにまとめ、実行に添付してサマリーに表示します。"
 
+#: manual/testing.md:29
+msgid "Compiler matrix"
+msgstr "コンパイラマトリクス"
+
+#: manual/testing.md:31
+msgid "The same optimization that makes release builds fast can change how a value is stored, and a miscompiled operation then shows only for one storage form on one backend and one mode. `tools/compiler_matrix.py` checks the numeric types Luna-Flow actually uses (`Int`, `UInt`, `Int64`, `UInt64`, `UInt16`, `Double`, `Float`, `Bool`, `Char`; `tools/usage_census.py` lists the counts behind that choice) in these storage forms: directly, in an `Option`, as an array element read with `get` or an index, in a `FixedArray`, a tuple, a struct field, an enum payload, a closure capture, a generic call, a mutable local, and as a compile-time constant. Each combination runs about two dozen conversions, shifts, arithmetic, bitwise, comparison and bit-count operations on boundary values (zero, one, the sign bit, the maximum, the minimum, `2^k ± 1`)."
+msgstr "release ビルドを速くする最適化は値の格納形式も変えることがあり、誤ってコンパイルされた演算は、特定のバックエンド・モード・格納形式でだけ現れます。`tools/compiler_matrix.py` は Luna-Flow が実際に使う数値型（`Int`、`UInt`、`Int64`、`UInt64`、`UInt16`、`Double`、`Float`、`Bool`、`Char`。この選択の根拠となる集計は `tools/usage_census.py` が出します）を、直接渡す、`Option` に入れる、`get` や添字で読む配列要素、`FixedArray`、タプル、構造体フィールド、列挙型のペイロード、クロージャのキャプチャ、ジェネリック呼び出し、可変ローカル変数、コンパイル時定数という格納形式で検査します。各組み合わせで、境界値（ゼロ、1、符号ビット、最大値、最小値、`2^k ± 1`）に対し、変換、シフト、算術、ビット演算、比較、ビット数カウントの約 20 余りの演算を実行します。"
+
+#: manual/testing.md:33
+msgid "No expected value is computed. The result must not depend on the storage form, and debug and release builds must print the same cells. For the integer, `Bool` and `Char` types every backend must also agree; `Float` and `Double` follow each backend's own float implementation by design, so they are compared only across storage forms and between debug and release on the same backend. `tools/run_matrix.py <backend>` runs the matrix and the pull request CI and the daily workflow call it; `tools/audit_report.py` compares all backends in the daily report. A finding that is understood and tracked is listed under `matrix` in `tools/known_issues.json`."
+msgstr "期待値は計算しません。結果は格納形式に依存してはならず、debug と release が出力するセルも同じでなければなりません。整数、`Bool`、`Char` の型ではすべてのバックエンドも一致する必要があります。`Float` と `Double` は設計上、各バックエンド自身の浮動小数点実装に従うので、格納形式の間と、同じバックエンドの debug と release の間だけ比較します。`tools/run_matrix.py <backend>` がマトリクスを実行し、プルリクエストの CI と毎日のワークフローが呼び出します。毎日のレポートでは `tools/audit_report.py` が全バックエンドを比較します。理解済みで追跡中の発見は `tools/known_issues.json` の `matrix` に載せられます。"
+
+#: manual/testing.md:35
+msgid "On 2026-10-13 the matrix ran 18,084 cells on each of wasm, wasm-gc, js and native in debug and release (144,672 in total). The only finding was the tracked [native release `UInt?` payload bug](https://github.com/moonbitlang/core/issues/4388), seen in `to_uint64`, `to_double` and shifts of a `UInt` taken from an `Option` or from `Array::get`."
+msgstr "2026-10-13 に、このマトリクスを wasm、wasm-gc、js、native の debug と release でそれぞれ 18,084 セル（合計 144,672）実行しました。唯一の発見は追跡中の [native release での `UInt?` ペイロードの問題](https://github.com/moonbitlang/core/issues/4388) で、`Option` や `Array::get` から取り出した `UInt` の `to_uint64`、`to_double`、シフトで現れました。"
+
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
 msgstr "配列移行チュートリアル"

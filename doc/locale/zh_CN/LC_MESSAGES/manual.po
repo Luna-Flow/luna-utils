@@ -564,6 +564,22 @@ msgstr "`tools/run_audit.py <backend> --seed S --count N` 在一个后端上以 
 msgid "Three further checks keep the audit honest. `tools/test_audit_models.py` checks the exact models against CPython's IEEE conversions. `tools/api_audit.py` fails when a public function in a generated `.mbti` file is not called by the audit. `tools/mutation_check.py` injects known bugs (a wrong tie rule, a range boundary one off, a flipped zero selection) and fails when the audit does not notice one. A mismatch that is understood and tracked can be listed in `tools/known_issues.json` with its issue; the report then shows it separately instead of failing, and prints a reminder when the entry stops reproducing. The nightly job aggregates all results with `tools/audit_report.py` into a Markdown report that is attached to the run and shown in its summary."
 msgstr "另有三项检查保证审计本身可信。`tools/test_audit_models.py` 用 CPython 自带的 IEEE 转换检查精确模型。`tools/api_audit.py` 在生成的 `.mbti` 文件中存在审计未调用的公开函数时失败。`tools/mutation_check.py` 注入已知缺陷（错误的平局规则、差一位的范围边界、反转的零选择），审计没有发现时失败。已理解并有跟踪 issue 的不一致可以列入 `tools/known_issues.json`；报告会单独列出而不是失败，并在该条目不再复现时提示删除。每日任务用 `tools/audit_report.py` 把所有结果汇总为 Markdown 报告，附在运行记录上并显示在其摘要中。"
 
+#: manual/testing.md:29
+msgid "Compiler matrix"
+msgstr "编译器矩阵"
+
+#: manual/testing.md:31
+msgid "The same optimization that makes release builds fast can change how a value is stored, and a miscompiled operation then shows only for one storage form on one backend and one mode. `tools/compiler_matrix.py` checks the numeric types Luna-Flow actually uses (`Int`, `UInt`, `Int64`, `UInt64`, `UInt16`, `Double`, `Float`, `Bool`, `Char`; `tools/usage_census.py` lists the counts behind that choice) in these storage forms: directly, in an `Option`, as an array element read with `get` or an index, in a `FixedArray`, a tuple, a struct field, an enum payload, a closure capture, a generic call, a mutable local, and as a compile-time constant. Each combination runs about two dozen conversions, shifts, arithmetic, bitwise, comparison and bit-count operations on boundary values (zero, one, the sign bit, the maximum, the minimum, `2^k ± 1`)."
+msgstr "使 release 构建变快的优化也可能改变值的存放方式，于是被错误编译的运算只会在某个后端、某个模式、某种存放形式下出现。`tools/compiler_matrix.py` 检查 Luna-Flow 实际用到的数值类型（`Int`、`UInt`、`Int64`、`UInt64`、`UInt16`、`Double`、`Float`、`Bool`、`Char`；选择依据的统计由 `tools/usage_census.py` 给出），覆盖这些存放形式：直接传递、放进 `Option`、用 `get` 或下标读取的数组元素、`FixedArray`、元组、结构体字段、枚举载荷、闭包捕获、泛型调用、可变局部变量，以及编译期常量。每种组合在边界值（零、一、符号位、最大值、最小值、`2^k ± 1`）上运行约二十多个转换、移位、算术、位运算、比较和位计数运算。"
+
+#: manual/testing.md:33
+msgid "No expected value is computed. The result must not depend on the storage form, and debug and release builds must print the same cells. For the integer, `Bool` and `Char` types every backend must also agree; `Float` and `Double` follow each backend's own float implementation by design, so they are compared only across storage forms and between debug and release on the same backend. `tools/run_matrix.py <backend>` runs the matrix and the pull request CI and the daily workflow call it; `tools/audit_report.py` compares all backends in the daily report. A finding that is understood and tracked is listed under `matrix` in `tools/known_issues.json`."
+msgstr "这里不计算任何期望值。结果不得依赖存放形式，debug 与 release 构建打印的单元格也必须相同。对整数、`Bool` 和 `Char` 类型，所有后端还必须一致；`Float` 和 `Double` 按设计跟随各后端自己的浮点实现，所以只比较不同存放形式之间，以及同一后端的 debug 与 release 之间。`tools/run_matrix.py <backend>` 运行该矩阵，拉取请求 CI 和每日工作流都会调用它；每日报告里由 `tools/audit_report.py` 比较所有后端。已理解并在跟踪的发现可以列在 `tools/known_issues.json` 的 `matrix` 下。"
+
+#: manual/testing.md:35
+msgid "On 2026-10-13 the matrix ran 18,084 cells on each of wasm, wasm-gc, js and native in debug and release (144,672 in total). The only finding was the tracked [native release `UInt?` payload bug](https://github.com/moonbitlang/core/issues/4388), seen in `to_uint64`, `to_double` and shifts of a `UInt` taken from an `Option` or from `Array::get`."
+msgstr "2026-10-13，该矩阵在 wasm、wasm-gc、js 和 native 的 debug 与 release 上各运行了 18,084 个单元格（共 144,672 个）。唯一的发现是已在跟踪的 [native release 下 `UInt?` 载荷问题](https://github.com/moonbitlang/core/issues/4388)，表现为从 `Option` 或 `Array::get` 取出的 `UInt` 在 `to_uint64`、`to_double` 和移位上出错。"
+
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
 msgstr "数组迁移教程"

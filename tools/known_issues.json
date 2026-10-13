@@ -5,5 +5,21 @@
     "family": "b32_payload_set",
     "issue": "https://github.com/Luna-Flow/luna-utils/issues/42",
     "note": "native release sign-extends a UInt? payload when widened with to_uint64; the library values are correct"
+  },
+  {
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/42",
+    "upstream": "https://github.com/moonbitlang/core/issues/4388",
+    "matrix": {
+      "backend": "native",
+      "mode": "release",
+      "types": [
+        "UInt"
+      ],
+      "containers": [
+        "option",
+        "array_get"
+      ]
+    },
+    "note": "UInt payload of UInt? / Array::get is treated as signed by to_uint64, to_double and shifts"
   }
 ]
