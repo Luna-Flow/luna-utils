@@ -144,18 +144,26 @@ msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for bin
 msgstr ""
 
 #: manual/api/float.md:47
-msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
+msgid "The remaining §9.6 operations are `minimum_number` and `maximum_number` (the number when exactly one operand is a NaN, the canonical quiet NaN when both are), `minimum_magnitude` and `maximum_magnitude` (the operand of smaller or larger absolute value, otherwise `minimum` or `maximum`) and `minimum_magnitude_number` and `maximum_magnitude_number` (the same with the `Number` rule). A numeric value cannot tell a signaling NaN from a quiet one, so these functions do not report the invalid operation that the standard requires for a signaling NaN operand."
 msgstr ""
 
 #: manual/api/float.md:49
-msgid "Payload encoding adapters"
+msgid "`total_order_mag_bits(x, y)` is §5.10 totalOrderMag on raw encodings, that is totalOrder of the absolute values, and `portable_total_order_mag(x, y)` is the numeric form."
 msgstr ""
 
 #: manual/api/float.md:51
-msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
 msgstr ""
 
 #: manual/api/float.md:53
+msgid "Payload encoding adapters"
+msgstr ""
+
+#: manual/api/float.md:55
+msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
+msgstr ""
+
+#: manual/api/float.md:57
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr ""
 
@@ -276,7 +284,7 @@ msgid "§5.10 totalOrder [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:29
-msgid "§5.10 totalOrderMag [required] (not implemented)"
+msgid "§5.10 totalOrderMag [required]"
 msgstr ""
 
 #: manual/conformance/checklist.md:30
@@ -316,7 +324,7 @@ msgid "§9.5 augmented arithmetic [recommended] (not implemented)"
 msgstr ""
 
 #: manual/conformance/checklist.md:39
-msgid "§9.6 minimum and maximum [recommended] (partial)"
+msgid "§9.6 minimum and maximum [recommended]"
 msgstr ""
 
 #: manual/conformance/checklist.md:40
@@ -470,6 +478,7 @@ msgstr ""
 #: manual/conformance/float.md:31
 #: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
+#: manual/conformance/float.md:35
 msgid "conforming"
 msgstr ""
 
@@ -515,7 +524,6 @@ msgstr ""
 #: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
-#: manual/conformance/float.md:35
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
 #: manual/conformance/float.md:39
@@ -664,7 +672,7 @@ msgid "§5.10 totalOrderMag"
 msgstr ""
 
 #: manual/conformance/float.md:35
-msgid "not implemented; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+msgid "the randomized audit (`tools/random_audit.py`) family extrema"
 msgstr ""
 
 #: manual/conformance/float.md:36
@@ -766,7 +774,7 @@ msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py
 msgstr ""
 
 #: manual/conformance/float.md:45
-msgid "partial: no number and magnitude variants; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+msgid "conforming; a numeric value cannot report invalid operation for a signaling NaN"
 msgstr ""
 
 #: manual/conformance/float.md:46

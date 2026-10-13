@@ -362,6 +362,28 @@ def m_extremum(fmt, xb, yb, want_min):
     return xb
 
 
+def m_number(fmt, xb, yb, want_min):
+    """minimumNumber / maximumNumber: the number when exactly one operand is a NaN."""
+    xn, yn = fmt.is_nan(xb), fmt.is_nan(yb)
+    if xn and yn:
+        return fmt.canonical_nan
+    if xn:
+        return yb
+    if yn:
+        return xb
+    return m_extremum(fmt, xb, yb, want_min)
+
+
+def m_magnitude(fmt, xb, yb, want_min, number):
+    base = m_number if number else m_extremum
+    if fmt.is_nan(xb) or fmt.is_nan(yb):
+        return base(fmt, xb, yb, want_min)
+    ax, ay = abs(host_value(fmt, xb)), abs(host_value(fmt, yb))
+    if want_min:
+        return xb if ax < ay else yb if ay < ax else base(fmt, xb, yb, want_min)
+    return xb if ax > ay else yb if ay > ax else base(fmt, xb, yb, want_min)
+
+
 # ----------------------------------------------------------------- tables
 
 class Tables:
@@ -410,7 +432,12 @@ def build(seed, count):
                   int(sig_ok), sig_bits if sig_ok else 0)
             t.add(p + "total_order", b, y, int(key(fmt, b) <= key(fmt, y)),
                   int(key(fmt, numeric(fmt, b)) <= key(fmt, numeric(fmt, y))))
-            t.add(p + "extrema", b, y, m_extremum(fmt, b, y, True), m_extremum(fmt, b, y, False))
+            t.add(p + "extrema", b, y, m_extremum(fmt, b, y, True), m_extremum(fmt, b, y, False),
+                  m_number(fmt, b, y, True), m_number(fmt, b, y, False),
+                  m_magnitude(fmt, b, y, True, False), m_magnitude(fmt, b, y, False, False),
+                  m_magnitude(fmt, b, y, True, True), m_magnitude(fmt, b, y, False, True),
+                  int(key(fmt, b & ~fmt.sign & fmt.mask) <= key(fmt, y & ~fmt.sign & fmt.mask)),
+                  int(key(fmt, numeric(fmt, b) & ~fmt.sign & fmt.mask) <= key(fmt, numeric(fmt, y) & ~fmt.sign & fmt.mask)))
             rel = m_relation(fmt, b, y)
             snan = fmt.cls(b) == "SignalingNaN" or fmt.cls(y) == "SignalingNaN"
             anan = fmt.is_nan(b) or fmt.is_nan(y)
@@ -612,7 +639,15 @@ def emit(t, seed, count):
         row_fn("extrema", "extrema", [
             f"let fam = \"{p}extrema\"", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
             f"if !check(fam, i, \"minimum\", {from_bt(f'{M}.to_bits_canonical({M}.minimum(x, y))')}, table[r + 2]) {{ bad += 1 }}",
-            f"if !check(fam, i, \"maximum\", {from_bt(f'{M}.to_bits_canonical({M}.maximum(x, y))')}, table[r + 3]) {{ bad += 1 }}"])
+            f"if !check(fam, i, \"maximum\", {from_bt(f'{M}.to_bits_canonical({M}.maximum(x, y))')}, table[r + 3]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"minimum_number\", {from_bt(f'{M}.to_bits_canonical({M}.minimum_number(x, y))')}, table[r + 4]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"maximum_number\", {from_bt(f'{M}.to_bits_canonical({M}.maximum_number(x, y))')}, table[r + 5]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"minimum_magnitude\", {from_bt(f'{M}.to_bits_canonical({M}.minimum_magnitude(x, y))')}, table[r + 6]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"maximum_magnitude\", {from_bt(f'{M}.to_bits_canonical({M}.maximum_magnitude(x, y))')}, table[r + 7]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"minimum_magnitude_number\", {from_bt(f'{M}.to_bits_canonical({M}.minimum_magnitude_number(x, y))')}, table[r + 8]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"maximum_magnitude_number\", {from_bt(f'{M}.to_bits_canonical({M}.maximum_magnitude_number(x, y))')}, table[r + 9]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"total_order_mag_bits\", if {M}.total_order_mag_bits(b, {to_bt('table[r + 1]')}) {{ 1UL }} else {{ 0UL }}, table[r + 10]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"portable_total_order_mag\", if {M}.portable_total_order_mag(x, y) {{ 1UL }} else {{ 0UL }}, table[r + 11]) {{ bad += 1 }}"])
         row_fn("arith", "arith", [
             f"let fam = \"{p}arith\"", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
             f"if !check(fam, i, \"add\", {from_bt(f'{M}.to_bits_canonical(x + y)')}, table[r + 2]) {{ bad += 1 }}",

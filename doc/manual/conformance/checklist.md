@@ -5,7 +5,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 <!-- conformance-checklist-start -->
 | Standard | Rows | Conforming | Partial | Not implemented | Not applicable | Required gaps | Recommended or optional gaps |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| IEEE 754-2019: float | 28 | 6 | 7 | 15 | 0 | 15 | 7 |
+| IEEE 754-2019: float | 28 | 8 | 6 | 14 | 0 | 14 | 6 |
 | Planned packages | 10 | 0 | 2 | 8 | 0 | 9 | 1 |
 
 **IEEE 754-2019: float**
@@ -26,7 +26,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [x] §5.6, §5.11 comparison predicates [required]
 - [x] §5.7 class and sign predicates [required]
 - [x] §5.10 totalOrder [required]
-- [ ] §5.10 totalOrderMag [required] (not implemented)
+- [x] §5.10 totalOrderMag [required]
 - [ ] §5.12 decimal character conversion [required] (not implemented)
 - [ ] §5.12.3 hexadecimal character conversion [required] (not implemented)
 - [ ] §6.1–§6.3 infinities, NaNs and the sign bit [required] (partial)
@@ -36,7 +36,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [ ] §9.3 dynamic mode operations [recommended] (not implemented)
 - [ ] §9.4 reduction operations [recommended] (not implemented)
 - [ ] §9.5 augmented arithmetic [recommended] (not implemented)
-- [ ] §9.6 minimum and maximum [recommended] (partial)
+- [x] §9.6 minimum and maximum [recommended]
 - [ ] §9.7 NaN payload operations [recommended] (partial)
 
 **Planned packages**

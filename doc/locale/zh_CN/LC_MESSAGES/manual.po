@@ -144,18 +144,26 @@ msgid "`minimum(x, y)` and `maximum(x, y)` implement IEEE 754-2019 §9.6 for bin
 msgstr "`minimum(x, y)` 和 `maximum(x, y)` 为 binary64 实现 IEEE 754-2019 §9.6；binary32 包提供相同名称。任一输入为 NaN 时返回正号规范 quiet NaN；NaN 的符号和 payload 不会传播。两个操作数均为零时，minimum 在任一为负零时选择 `-0`，maximum 在任一为正零时选择 `+0`。这些数值函数不报告 sNaN 的 invalid 异常；本包 API 不提供异常标志，信号行为留待 issue [#29](https://github.com/Luna-Flow/luna-utils/issues/29)。"
 
 #: manual/api/float.md:47
+msgid "The remaining §9.6 operations are `minimum_number` and `maximum_number` (the number when exactly one operand is a NaN, the canonical quiet NaN when both are), `minimum_magnitude` and `maximum_magnitude` (the operand of smaller or larger absolute value, otherwise `minimum` or `maximum`) and `minimum_magnitude_number` and `maximum_magnitude_number` (the same with the `Number` rule). A numeric value cannot tell a signaling NaN from a quiet one, so these functions do not report the invalid operation that the standard requires for a signaling NaN operand."
+msgstr "§9.6 其余的运算是：`minimum_number` 与 `maximum_number`（恰有一个操作数是 NaN 时返回那个数，两个都是 NaN 时返回规范安静 NaN）、`minimum_magnitude` 与 `maximum_magnitude`（返回绝对值较小或较大的操作数，相等时取 `minimum` 或 `maximum`）、以及 `minimum_magnitude_number` 与 `maximum_magnitude_number`（同样但采用 `Number` 规则）。数值无法区分信号 NaN 与安静 NaN，所以这些函数不会报告标准对信号 NaN 操作数要求的无效操作。"
+
+#: manual/api/float.md:49
+msgid "`total_order_mag_bits(x, y)` is §5.10 totalOrderMag on raw encodings, that is totalOrder of the absolute values, and `portable_total_order_mag(x, y)` is the numeric form."
+msgstr "`total_order_mag_bits(x, y)` 是原始编码上的 §5.10 totalOrderMag，也就是绝对值的 totalOrder；`portable_total_order_mag(x, y)` 是数值形式。"
+
+#: manual/api/float.md:51
 msgid "`portable_total_order(x, y)` implements §5.10 over portable numeric values. `total_order_bits(x, y)` implements the full encoding order from integer bits, preserving NaN sign, signaling state and payload. This distinction is required because numeric NaN representation is not portable, especially on JavaScript. `sort_total_order(values)` sorts a mutable array, and `sort_total_order_view(view)` sorts a mutable array view, using the portable value order. All normalized NaNs compare after numbers, but core `sort_by` is unstable: equal normalized keys may reorder, original NaN bits are retained, and JavaScript may canonicalize their payloads. Negative NaNs therefore do not acquire raw IEEE totalOrder placement. Exact NaN encoding order is available only through `total_order_bits` on raw integer encodings."
 msgstr "`portable_total_order(x, y)` 对可移植数值实现 §5.10。`total_order_bits(x, y)` 则根据整数位实现完整的编码顺序，保留 NaN 符号、信号状态和 payload。数值 NaN 表示不可移植，尤其是在 JavaScript 上，因此需要区分这两个接口。`sort_total_order(values)` 对可变数组排序，`sort_total_order_view(view)` 对可变数组视图排序，二者都使用可移植数值顺序。所有规范化 NaN 都排在数值之后，但 core 的 `sort_by` 不稳定：相同的规范化 key 可能重新排列，原始 NaN 位会保留，而 JavaScript 可能将 payload 规范化。因此负 NaN 不会获得原始 IEEE totalOrder 的位置。只有对原始整数编码调用 `total_order_bits` 才能精确排列 NaN 编码。"
 
-#: manual/api/float.md:49
+#: manual/api/float.md:53
 msgid "Payload encoding adapters"
 msgstr "Payload 编码适配器"
 
-#: manual/api/float.md:51
+#: manual/api/float.md:55
 msgid "`get_payload_bits(bits)` returns `None` for non-NaN and `Some(payload)` for NaN, excluding the quiet bit. `set_payload_bits(payload, sign_minus?=false)` returns a quiet-NaN encoding or `None` when the payload exceeds 51 bits (binary64) or 22 bits (binary32). `set_payload_signaling_bits` also rejects zero payload, which would encode infinity. These functions accept and return integer encodings; they adapt IEEE 754-2019 §9.7 rather than exposing the standard floating-point getPayload/setPayload functions directly."
 msgstr "`get_payload_bits(bits)` 对非 NaN 返回 `None`，对 NaN 返回不含 quiet 位的 `Some(payload)`。`set_payload_bits(payload, sign_minus?=false)` 返回 quiet NaN 编码；payload 超过 binary64 的 51 位或 binary32 的 22 位时返回 `None`。`set_payload_signaling_bits` 还拒绝零 payload，避免编码为无穷。这些函数接收和返回整数编码，是 IEEE 754-2019 §9.7 的适配器，并非直接公开标准的浮点 getPayload/setPayload 函数。"
 
-#: manual/api/float.md:53
+#: manual/api/float.md:57
 msgid "The `portable_*` names describe this application NaN-normalized view, not IEEE sign/classification operations on the original NaN. Use `classify_bits`, `is_signaling_bits`, `is_sign_minus_bits` and raw sign operations when IEEE encoding semantics are required. `is_canonical_bits` tests IEEE canonical encoding, not equality with the application's fixed NaN pattern."
 msgstr "`portable_*` 名称表示本应用的 NaN 规范化视图，不代表针对原始 NaN 的 IEEE 符号或分类操作。需要 IEEE 编码语义时，应使用 `classify_bits`、`is_signaling_bits`、`is_sign_minus_bits` 和原始符号操作。`is_canonical_bits` 判断 IEEE 规范编码，而非是否等于应用选定的固定 NaN 编码。"
 
@@ -276,8 +284,8 @@ msgid "§5.10 totalOrder [required]"
 msgstr "§5.10 totalOrder [必须]"
 
 #: manual/conformance/checklist.md:29
-msgid "§5.10 totalOrderMag [required] (not implemented)"
-msgstr "§5.10 totalOrderMag [必须] （未实现）"
+msgid "§5.10 totalOrderMag [required]"
+msgstr "§5.10 totalOrderMag [必须]"
 
 #: manual/conformance/checklist.md:30
 msgid "§5.12 decimal character conversion [required] (not implemented)"
@@ -316,8 +324,8 @@ msgid "§9.5 augmented arithmetic [recommended] (not implemented)"
 msgstr "§9.5 增强算术 [推荐] （未实现）"
 
 #: manual/conformance/checklist.md:39
-msgid "§9.6 minimum and maximum [recommended] (partial)"
-msgstr "§9.6 minimum 与 maximum [推荐] （部分符合）"
+msgid "§9.6 minimum and maximum [recommended]"
+msgstr "§9.6 minimum 与 maximum [推荐]"
 
 #: manual/conformance/checklist.md:40
 msgid "§9.7 NaN payload operations [recommended] (partial)"
@@ -470,6 +478,7 @@ msgstr "固定语料（`testdata/float_oracles.json`）；随机审计（`tools/
 #: manual/conformance/float.md:31
 #: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
+#: manual/conformance/float.md:35
 msgid "conforming"
 msgstr "符合"
 
@@ -515,7 +524,6 @@ msgstr "§5.3.1 fusedMultiplyAdd"
 #: manual/conformance/float.md:25
 #: manual/conformance/float.md:27
 #: manual/conformance/float.md:30
-#: manual/conformance/float.md:35
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
 #: manual/conformance/float.md:39
@@ -664,8 +672,8 @@ msgid "§5.10 totalOrderMag"
 msgstr "§5.10 totalOrderMag"
 
 #: manual/conformance/float.md:35
-msgid "not implemented; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
-msgstr "未实现；[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+msgid "the randomized audit (`tools/random_audit.py`) family extrema"
+msgstr "随机审计（`tools/random_audit.py`）的 extrema 族"
 
 #: manual/conformance/float.md:36
 msgid "§5.12 decimal character conversion"
@@ -766,8 +774,8 @@ msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py
 msgstr "`src/float/bits_wbtest.mbt`；随机审计（`tools/random_audit.py`）的 extrema 族"
 
 #: manual/conformance/float.md:45
-msgid "partial: no number and magnitude variants; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
-msgstr "部分符合：没有 number 和 magnitude 变体；[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+msgid "conforming; a numeric value cannot report invalid operation for a signaling NaN"
+msgstr "符合；数值无法对信号 NaN 报告无效操作"
 
 #: manual/conformance/float.md:46
 msgid "§9.7 NaN payload operations"
@@ -1340,6 +1348,12 @@ msgstr "使用原始 payload setter 构造编码，检查 `None`；payload 保�
 #: manual/tutorial/float.md:52
 msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr "比较谓词"
+
+#~ msgid "not implemented; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+#~ msgstr "未实现；[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+
+#~ msgid "partial: no number and magnitude variants; [#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
+#~ msgstr "部分符合：没有 number 和 magnitude 变体；[#23](https://github.com/Luna-Flow/luna-utils/issues/23)"
 
 #~ msgid "contraction probe (`testdata/oracles.json`); no independent corpus for the operations"
 #~ msgstr "收缩（contraction）探针（`testdata/oracles.json`）；这些运算没有独立语料"
