@@ -12,4 +12,4 @@ Existing page paths remain available as migration guidance: array [API](api/arra
 
 See [backend conformance testing](testing.md) for the CI contract, offline oracle corpus and local commands.
 
-Float representation packages are available: [API](api/float.md), [design](design/float.md), [tutorial](tutorial/float.md) and [conformance](conformance/float.md). The root package remains empty; import the float subpackages explicitly.
+Float representation packages are available: [API](api/float.md), [design](design/float.md), [tutorial](tutorial/float.md) and [conformance](conformance/float.md), with a generated [conformance checklist](conformance/checklist.md). The root package remains empty; import the float subpackages explicitly.
