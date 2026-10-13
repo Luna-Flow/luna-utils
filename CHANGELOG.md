@@ -4,6 +4,8 @@
 
 ### Added
 
+- Randomized audit platform: `tools/random_audit.py` (seeded cases with exact `fractions` models for every public `float` and `float/binary32` function), `tools/run_audit.py` (debug and release on one backend), `tools/api_audit.py` (every public function must be exercised), `tools/mutation_check.py` (injected bugs must be noticed), `tools/known_issues.json`, `tools/audit_report.py`, a fixed-seed audit in the pull request CI and a nightly workflow that runs a date-seeded audit on all five configurations and publishes one report. See the manual page on backend conformance testing.
+- The first audit run found [#42](https://github.com/Luna-Flow/luna-utils/issues/42): on the native backend in release mode a `UInt?` payload is sign-extended when widened with `to_uint64`. It is independent of this package and is tracked in the known-issues list.
 - `Luna-Flow/luna-utils/float` and `Luna-Flow/luna-utils/float/binary32`: sixteen
   portable integer conversions per package, `to_{int,int64,uint,uint64}_checked`
   and `to_{int,int64,uint,uint64}_saturating`, each with a `_with` form that takes
