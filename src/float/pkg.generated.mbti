@@ -20,6 +20,8 @@ pub fn compare_predicate_bits(ComparisonPredicate, UInt64, UInt64) -> (Bool, Boo
 
 pub fn copy_sign_bits(UInt64, UInt64) -> UInt64
 
+pub fn fast_two_sum(Double, Double) -> (Double, Double)
+
 pub fn fma(Double, Double, Double) -> Double
 
 pub fn fma_bits(UInt64, UInt64, UInt64) -> UInt64
@@ -197,6 +199,10 @@ pub fn to_uint_saturating_with(Double, RoundingDirection) -> UInt
 pub fn total_order_bits(UInt64, UInt64) -> Bool
 
 pub fn total_order_mag_bits(UInt64, UInt64) -> Bool
+
+pub fn two_prod(Double, Double) -> (Double, Double)
+
+pub fn two_sum(Double, Double) -> (Double, Double)
 
 pub fn uint64_to_float(UInt64) -> Float
 

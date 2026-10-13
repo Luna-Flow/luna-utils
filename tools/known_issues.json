@@ -49,5 +49,53 @@
     "family": "conv_u64_f32",
     "issue": "https://github.com/Luna-Flow/luna-utils/issues/22",
     "note": "by design of core: Float::from_int64 and from_uint64 follow the js backend and round twice (core#4349 was closed for that reason); luna-utils int64_to_float and uint64_to_float round once"
+  },
+  {
+    "backend": "*",
+    "mode": "*",
+    "types": [
+      "Double",
+      "Float"
+    ],
+    "containers": [
+      "direct",
+      "option",
+      "array_get",
+      "array_index",
+      "fixed",
+      "tuple",
+      "struct",
+      "enum",
+      "closure",
+      "generic",
+      "mutvar",
+      "const"
+    ],
+    "relation": "add_zero",
+    "matrix": {
+      "backend": "*",
+      "mode": "*",
+      "types": [
+        "Double",
+        "Float"
+      ],
+      "containers": [
+        "direct",
+        "option",
+        "array_get",
+        "array_index",
+        "fixed",
+        "tuple",
+        "struct",
+        "enum",
+        "closure",
+        "generic",
+        "mutvar",
+        "const"
+      ],
+      "relation": "add_zero"
+    },
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/62",
+    "note": "moonc folds x + 0.0 to x, wrong for x = -0 (IEEE 754-2019 6.3)"
   }
 ]

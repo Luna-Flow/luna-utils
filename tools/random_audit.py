@@ -552,6 +552,26 @@ def m_fma(fmt, xb, yb, zb, direction):
     return encode_directed(fmt, exact, direction)
 
 
+def m_eft(fmt, a, b):
+    """TwoSum, Fast2Sum and TwoProd results as encodings: (s, e_sum, fast_ok, e_fast, p, e_prod)."""
+    def finite(bits):
+        return not fmt.is_nan(bits) and not fmt.cls(bits).endswith("Infinity")
+
+    def err(exact):
+        return encode_directed(fmt, exact, "TiesToEven") if exact != 0 else 0
+
+    s = numeric(fmt, m_arith(fmt, "add", a, b))
+    if finite(s):
+        e_sum = err(fmt.value(a) + fmt.value(b) - fmt.value(s))
+    else:
+        e_sum = fmt.canonical_nan
+    fast_ok = int(finite(a) and finite(b) and abs(fmt.value(a)) >= abs(fmt.value(b)))
+    e_fast = e_sum
+    p = numeric(fmt, m_arith(fmt, "mul", a, b))
+    e_prod = err(fmt.value(a) * fmt.value(b) - fmt.value(p)) if finite(p) else fmt.canonical_nan
+    return s, e_sum, fast_ok, e_fast, p, e_prod
+
+
 def fma_triple(rng, fmt):
     """Operands that exercise cancellation, huge exponent gaps, subnormal products, ties and overflow."""
     kind = rng.randrange(8)
@@ -647,6 +667,10 @@ def build(seed, count):
                   m_magnitude(fmt, b, y, True, True), m_magnitude(fmt, b, y, False, True),
                   int(key(fmt, b & ~fmt.sign & fmt.mask) <= key(fmt, y & ~fmt.sign & fmt.mask)),
                   int(key(fmt, numeric(fmt, b) & ~fmt.sign & fmt.mask) <= key(fmt, numeric(fmt, y) & ~fmt.sign & fmt.mask)))
+            ea, eb = arith_pair(rng, fmt)
+            if rng.randrange(3) == 0:  # |a| >= |b| pairs for Fast2Sum
+                ea, eb = (ea, eb) if (not fmt.is_nan(ea) and not fmt.is_nan(eb) and not fmt.cls(ea).endswith("Infinity") and not fmt.cls(eb).endswith("Infinity") and abs(fmt.value(ea)) >= abs(fmt.value(eb))) else (eb, ea)
+            t.add(p + "eft", ea, eb, *m_eft(fmt, ea, eb))
             fx, fy, fz = fma_triple(rng, fmt)
             fres = [m_fma(fmt, fx, fy, fz, d) for d in DIRECTIONS]
             t.add(p + "fma", fx, fy, fz, *fres, *[fmt.canonical_nan if fmt.is_nan(v) else v for v in fres])
@@ -935,6 +959,19 @@ def emit(t, seed, count):
                 "if !check(fam, i, \"to_binary64\", @float.to_bits_canonical(@binary32.to_binary64(x)), table[r + 2]) { bad += 1 }",
                 "if !check(fam, i, \"core Float::to_double\", @float.to_bits_canonical(x.to_double()), table[r + 2]) { bad += 1 }",
                 "if !check(fam, i, \"round trip\", @float.to_binary32_bits(@binary32.to_binary64_bits(b)).to_uint64(), if @binary32.is_nan_bits(b) { b.to_uint64() | 0x400000UL } else { b.to_uint64() }) { bad += 1 }"])
+        row_fn("eft", "eft", [
+            f"let fam = \"{p}eft\"", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
+            f"let (s, e) = {M}.two_sum(x, y)",
+            f"if !check(fam, i, \"two_sum s\", {from_bt(f'{M}.to_bits_canonical(s)')}, table[r + 2]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"two_sum e\", {from_bt(f'{M}.to_bits_canonical(e)')}, table[r + 3]) {{ bad += 1 }}",
+            "if table[r + 4] == 1UL {",
+            f"  let (s2, e2) = {M}.fast_two_sum(x, y)",
+            f"  if !check(fam, i, \"fast_two_sum s\", {from_bt(f'{M}.to_bits_canonical(s2)')}, table[r + 2]) {{ bad += 1 }}",
+            f"  if !check(fam, i, \"fast_two_sum e\", {from_bt(f'{M}.to_bits_canonical(e2)')}, table[r + 5]) {{ bad += 1 }}",
+            "}",
+            f"let (p, ep) = {M}.two_prod(x, y)",
+            f"if !check(fam, i, \"two_prod p\", {from_bt(f'{M}.to_bits_canonical(p)')}, table[r + 6]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"two_prod e\", {from_bt(f'{M}.to_bits_canonical(ep)')}, table[r + 7]) {{ bad += 1 }}"])
         dsf = ", ".join(f"@float.{d}" for d in DIRECTIONS)
         row_fn("fma", "fma", [
             f"let fam = \"{p}fma\"", f"let y = {to_bt('table[r + 1]')}", f"let z = {to_bt('table[r + 2]')}",
