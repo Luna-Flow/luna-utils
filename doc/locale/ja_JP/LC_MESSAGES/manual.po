@@ -312,8 +312,8 @@ msgid "**Planned packages**"
 msgstr "**計画中のパッケージ**"
 
 #: manual/conformance/checklist.md:44
-msgid "LIA-1 integer operations and notifications (package `int`) [required] (not implemented)"
-msgstr "LIA-1 の整数演算と通知（パッケージ `int`） [必須] （未実装）"
+msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers) [required] (not implemented)"
+msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する） [必須] （未実装）"
 
 #: manual/conformance/checklist.md:45
 msgid "IEEE 754-2019 §5.12 decimal and hexadecimal character conversion (package `text`) [required] (not implemented)"
@@ -742,12 +742,12 @@ msgid "Planned packages and their standards"
 msgstr "計画中のパッケージと対応する規格"
 
 #: manual/conformance/planned.md:3
-msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. Clause numbers for ISO/IEC 10967-1 (LIA-1) are filled in when the standard text is at hand. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
-msgstr "これらのパッケージはまだ実装されていません。表は各パッケージが照らし合わせる規格を記録し、チェックリストがそれらを不足として数えるようにします。ISO/IEC 10967-1（LIA-1）の条項番号は規格の本文が手に入ったら記入します。`Level` は “shall” なら `required`、“should” なら `recommended` です。"
+msgid "These packages are not implemented yet; the table records the standard each one is measured against so the checklist counts them as gaps. IEEE 754-2019 is the standard of reference; it defines no integer arithmetic, so the `int` row has no external clause and the package defines its semantics in its design page and checks them against exact integers. `Level` is `required` for \"shall\" and `recommended` for \"should\"."
+msgstr "これらのパッケージはまだ実装されていません。表は各パッケージが照らし合わせる規格を記録し、チェックリストがそれらを不足として数えるようにします。基準とする規格は IEEE 754-2019 で、整数算術を定義していないため、`int` の行には外部の条項がなく、このパッケージは設計ページで自身の意味を定め、厳密な整数で検証します。`Level` は “shall” なら `required`、“should” なら `recommended` です。"
 
 #: manual/conformance/planned.md:9
-msgid "LIA-1 integer operations and notifications (package `int`)"
-msgstr "LIA-1 の整数演算と通知（パッケージ `int`）"
+msgid "Integer arithmetic with defined overflow and division behavior (package `int`; IEEE 754 has no integer arithmetic, the semantics come from the package design and are checked against exact integers)"
+msgstr "整数算術。オーバーフローと除算の挙動を定義（パッケージ `int`。IEEE 754 には整数算術がなく、意味はパッケージの設計から来ており、厳密な整数で検証する）"
 
 #: manual/conformance/planned.md:9
 msgid "not implemented; [#21](https://github.com/Luna-Flow/luna-utils/issues/21)"
@@ -1229,6 +1229,12 @@ msgstr "整数変換は先に丸め、その後で範囲を検査します。範
 #: manual/tutorial/float.md:50
 msgid "Use the raw payload setters to construct encodings, check `None`, and avoid converting the result through Double or Float when payload fidelity matters. Canonical numeric functions intentionally discard NaN metadata. See the [API](../api/float.md) and [conformance limits](../conformance/float.md)."
 msgstr "生のペイロード setter でエンコーディングを構築して `None` を確認し、ペイロードの忠実性が必要な場合は結果を Double や Float に変換しないでください。正規化数値関数は意図的に NaN メタデータを捨てます。[API](../api/float.md)と[適合性の制限](../conformance/float.md)を参照してください。"
+
+#~ msgid "LIA-1 integer operations and notifications (package `int`) [required] (not implemented)"
+#~ msgstr "LIA-1 の整数演算と通知（パッケージ `int`） [必須] （未実装）"
+
+#~ msgid "LIA-1 integer operations and notifications (package `int`)"
+#~ msgstr "LIA-1 の整数演算と通知（パッケージ `int`）"
 
 #~ msgid "Generic array and comparison helpers for Luna-Flow projects, constrained by luna-generic traits."
 #~ msgstr "luna-generic の trait を制約に用いる、Luna-Flow プロジェクト向けの汎用的な配列・比較ヘルパー。"
