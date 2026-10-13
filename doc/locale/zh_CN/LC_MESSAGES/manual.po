@@ -498,12 +498,12 @@ msgid "host operators and `sqrt` (roundTiesToEven only)"
 msgstr "宿主运算符与 `sqrt`（仅 roundTiesToEven）"
 
 #: manual/conformance/float.md:21
-msgid "contraction probe (`testdata/oracles.json`); no independent corpus for the operations"
-msgstr "收缩（contraction）探针（`testdata/oracles.json`）；这些运算没有独立语料"
+msgid "contraction probe (`testdata/oracles.json`); the randomized audit (`tools/random_audit.py`) family arith"
+msgstr "收缩（contraction）探针（`testdata/oracles.json`）；随机审计（`tools/random_audit.py`）的 arith 族"
 
 #: manual/conformance/float.md:21
-msgid "partial: no directed rounding and no flags ([#29](https://github.com/Luna-Flow/luna-utils/issues/29)), no independent corpus ([#51](https://github.com/Luna-Flow/luna-utils/issues/51))"
-msgstr "部分符合：没有定向舍入也没有标志（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)），没有独立语料（[#51](https://github.com/Luna-Flow/luna-utils/issues/51)）"
+msgid "partial: no directed rounding and no flags ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+msgstr "部分符合：没有定向舍入也没有标志（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
 
 #: manual/conformance/float.md:22
 msgid "§5.3.1 fusedMultiplyAdd"
@@ -600,12 +600,12 @@ msgid "`int64_to_float`, `uint64_to_float` (binary32); host conversions for the 
 msgstr "`int64_to_float`、`uint64_to_float`（binary32）；其他组合使用宿主转换"
 
 #: manual/conformance/float.md:29
-msgid "compiler matrix (`tools/compiler_matrix.py`); the randomized audit (`tools/random_audit.py`) family int_to_f32"
-msgstr "编译器矩阵（`tools/compiler_matrix.py`）；随机审计（`tools/random_audit.py`）的 int_to_f32 族"
+msgid "compiler matrix (`tools/compiler_matrix.py`); the randomized audit (`tools/random_audit.py`) families conv_i32, conv_u32, conv_i64, conv_u64, conv_i64_f32, conv_u64_f32, int_to_f32"
+msgstr "编译器矩阵（`tools/compiler_matrix.py`）；随机审计（`tools/random_audit.py`）的 conv_i32、conv_u32、conv_i64、conv_u64、conv_i64_f32、conv_u64_f32、int_to_f32 族"
 
 #: manual/conformance/float.md:29
-msgid "partial: only the two binary32 conversions are provided by this package; [#51](https://github.com/Luna-Flow/luna-utils/issues/51)"
-msgstr "部分符合：本包只提供两个 binary32 转换；[#51](https://github.com/Luna-Flow/luna-utils/issues/51)"
+msgid "partial: this package provides only the two binary32 conversions; the host conversions match the model on every backend except Int64 and UInt64 to Float on js, where core follows the backend (see the known-issues list)"
+msgstr "部分符合：本包只提供两个 binary32 转换；宿主转换在除 js 上 Int64 与 UInt64 到 Float 之外的所有后端上都与模型一致，那里 core 跟随后端（见已知问题列表）"
 
 #: manual/conformance/float.md:30
 msgid "§5.4.2 convertFormat"
@@ -1293,6 +1293,10 @@ msgstr "这里不计算任何期望值。结果不得依赖存放形式，debug 
 msgid "On 2026-10-13 the matrix ran 18,084 cells on each of wasm, wasm-gc, js and native in debug and release (144,672 in total). The only finding was the tracked [native release `UInt?` payload bug](https://github.com/moonbitlang/core/issues/4388), seen in `to_uint64`, `to_double` and shifts of a `UInt` taken from an `Option` or from `Array::get`."
 msgstr "2026-10-13，该矩阵在 wasm、wasm-gc、js 和 native 的 debug 与 release 上各运行了 18,084 个单元格（共 144,672 个）。唯一的发现是已在跟踪的 [native release 下 `UInt?` 载荷问题](https://github.com/moonbitlang/core/issues/4388)，表现为从 `Option` 或 `Array::get` 取出的 `UInt` 在 `to_uint64`、`to_double` 和移位上出错。"
 
+#: manual/testing.md:37
+msgid "The host operations that every package builds on are audited as well, against exact models and without any luna-utils code under test. The `arith` families check `+`, `-`, `*`, `/` and `sqrt` of `Double` and `Float` (round to nearest even) on random encodings, powers of two that scale results into the subnormal and overflow ranges, cancellation, half-ulp addition ties and the overflow edge. The `conv_*` families check the integer to floating point conversions of core: `Int`, `UInt`, `Int64` and `UInt64` to `Double`, and `Int`, `UInt`, `Int64` and `UInt64` to `Float`. A 5,000-case run on wasm, wasm-gc, js and native in debug and release found no mismatch except the two tracked ones: `Int64` and `UInt64` to `Float` on js round twice because core follows the backend (listed in `tools/known_issues.json`), and the native release `UInt?` bug of [#42](https://github.com/Luna-Flow/luna-utils/issues/42)."
+msgstr "所有包都依赖的宿主运算也经过审计，对照精确模型，被测对象里没有任何 luna-utils 代码。`arith` 族检查 `Double` 和 `Float` 的 `+`、`-`、`*`、`/` 与 `sqrt`（舍入到最近偶数），输入包括随机编码、把结果缩放到次正规和上溢范围的二的幂、抵消、半个 ulp 的加法平局以及上溢边界。`conv_*` 族检查 core 的整数到浮点转换：`Int`、`UInt`、`Int64`、`UInt64` 到 `Double`，以及 `Int`、`UInt`、`Int64`、`UInt64` 到 `Float`。在 wasm、wasm-gc、js、native 的 debug 与 release 上各跑 5,000 个用例，除两个已在跟踪的问题外没有不一致：js 上 `Int64` 与 `UInt64` 到 `Float` 因为 core 跟随后端而舍入两次（列在 `tools/known_issues.json`），以及 native release 的 `UInt?` 问题 [#42](https://github.com/Luna-Flow/luna-utils/issues/42)。"
+
 #: manual/tutorial/array_utils.md:1
 msgid "Array migration tutorial"
 msgstr "数组迁移教程"
@@ -1336,6 +1340,12 @@ msgstr "使用原始 payload setter 构造编码，检查 `None`；payload 保�
 #: manual/tutorial/float.md:52
 msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr "比较谓词"
+
+#~ msgid "contraction probe (`testdata/oracles.json`); no independent corpus for the operations"
+#~ msgstr "收缩（contraction）探针（`testdata/oracles.json`）；这些运算没有独立语料"
+
+#~ msgid "partial: only the two binary32 conversions are provided by this package; [#51](https://github.com/Luna-Flow/luna-utils/issues/51)"
+#~ msgstr "部分符合：本包只提供两个 binary32 转换；[#51](https://github.com/Luna-Flow/luna-utils/issues/51)"
 
 #~ msgid "host `==`, `<` (quiet predicates only)"
 #~ msgstr "宿主的 `==`、`<`（仅安静谓词）"

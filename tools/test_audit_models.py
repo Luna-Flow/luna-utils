@@ -11,7 +11,7 @@ from fractions import Fraction
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from random_audit import Fmt, round_fraction, key, m_extremum, m_round_to_integral  # noqa: E402
+from random_audit import Fmt, round_fraction, key, m_extremum, m_round_to_integral, m_arith, m_sqrt, arith_pair  # noqa: E402
 
 
 def main():
@@ -45,6 +45,42 @@ def main():
     keys = [key(f64, b) for b in order]
     assert keys == sorted(keys) and len(set(keys)) == len(keys)
     assert m_extremum(f64, f64.sign, 0, True) == f64.sign and m_extremum(f64, f64.sign, 0, False) == 0
+    # arithmetic and square root against CPython's IEEE operations on structured and random pairs
+    import math
+    def host(fmt, bits):
+        return struct.unpack(">d", struct.pack(">Q", bits))[0] if fmt.width == 64 else struct.unpack(">f", struct.pack(">I", bits))[0]
+    def back(fmt, r):
+        if fmt.width == 64:
+            return struct.unpack(">Q", struct.pack(">d", r))[0]
+        try:
+            return struct.unpack(">I", struct.pack(">f", r))[0]
+        except OverflowError:  # rounds beyond the largest finite binary32 value
+            return (0xff800000 if r < 0 else 0x7f800000)
+    for fmt in (f64, f32):
+        checked = 0
+        for _ in range(20000):
+            xb, yb = arith_pair(rng, fmt)
+            x, y = host(fmt, xb), host(fmt, yb)
+            if x != x or y != y:
+                continue
+            for op, f in (("add", lambda a, b: a + b), ("sub", lambda a, b: a - b), ("mul", lambda a, b: a * b)):
+                r = f(x, y)
+                want = back(fmt, r) if r == r and not math.isinf(r) else None
+                got = m_arith(fmt, op, xb, yb)
+                if want is not None:
+                    assert got == want, (fmt.width, op, hex(xb), hex(yb), hex(got), hex(want))
+                    checked += 1
+            if y != 0 and not (math.isinf(x) and math.isinf(y)):
+                r = x / y
+                want = back(fmt, r) if r == r and not math.isinf(r) else None
+                if want is not None:
+                    assert m_arith(fmt, "div", xb, yb) == want, (fmt.width, "div", hex(xb), hex(yb))
+                    checked += 1
+            if x >= 0 and not math.isinf(x):
+                want = back(fmt, math.sqrt(x))
+                assert m_sqrt(fmt, xb) == want, (fmt.width, "sqrt", hex(xb))
+                checked += 1
+        assert checked > 20000
     print("audit models: ok")
     return 0
 
