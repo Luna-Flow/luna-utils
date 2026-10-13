@@ -56,6 +56,8 @@ jobs:
           fi
       - name: Randomized audit with a fixed seed
         run: python3 tools/run_audit.py '${{ matrix.backend }}' --seed 1 --count 400
+      - name: Compiler matrix
+        run: python3 tools/run_matrix.py '${{ matrix.backend }}'
       - name: Generate coverage report
         if: matrix.backend == 'wasm-gc'
         run: |
@@ -76,6 +78,7 @@ jobs:
           path: |
             _build/ci/
             _build/audit/
+            _build/matrix/
             coverage_summary.txt
           if-no-files-found: error
   bit-diff:

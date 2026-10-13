@@ -56,11 +56,15 @@ jobs:
           COUNT: ${{ github.event.inputs.count }}
         run: |
           python3 tools/run_audit.py '${{ matrix.backend }}' --seed "${SEED:-$(date -u +%Y%m%d)}" --count "${COUNT:-20000}"
+      - name: Compiler matrix
+        run: python3 tools/run_matrix.py '${{ matrix.backend }}'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: audit-${{ matrix.os }}-${{ matrix.backend }}
-          path: _build/audit/
+          path: |
+            _build/audit/
+            _build/matrix/
           if-no-files-found: error
   mutation:
     runs-on: ubuntu-latest

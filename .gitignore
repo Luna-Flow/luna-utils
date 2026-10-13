@@ -21,3 +21,4 @@ _build/
 
 # Generated randomized audit (tools/random_audit.py)
 src/ci_probe/random_audit_wbtest.mbt
+src/ci_probe/compiler_matrix_wbtest.mbt

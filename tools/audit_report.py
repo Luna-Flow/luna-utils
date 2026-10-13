@@ -10,6 +10,9 @@ import json
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from compiler_matrix import analyze  # noqa: E402
+
 
 def main():
     root = Path(sys.argv[1] if len(sys.argv) > 1 else "_build/audit")
@@ -48,8 +51,20 @@ def main():
         lines += ["", "## Mutation check", "", "| Injected bug | Result |", "| --- | --- |"]
         for m in json.loads(p.read_text()):
             lines.append(f"| {m['mutation']} | {m['status']} |")
+    matrix_files = sorted(str(p) for p in root.rglob("*.txt") if p.parent.name == "matrix")
+    matrix = analyze(matrix_files) if matrix_files else None
+    if matrix:
+        lines += ["", "## Compiler matrix", "",
+                  f"{matrix['cells']} cells from {len(matrix_files)} transcripts "
+                  "(container invariance, debug against release, and across backends for integer, Bool and Char types).", ""]
+        counts = {k: len(v) for k, v in matrix["findings"].items()}
+        lines.append(f"Unexpected findings: {counts or 'none'}.")
+        for issue, n in matrix["known"].items():
+            lines.append(f"\nKnown issue hits (excluded from the verdict): {n} from {issue}")
+        for kind, items in matrix["findings"].items():
+            lines += ["", "```", *[json.dumps(i) for i in items[:20]], "```"]
     survivors = [m for p in mutation_files for m in json.loads(p.read_text()) if m["status"] in ("SURVIVED", "STALE")]
-    ok = runs and not bad_runs and not survivors
+    ok = runs and not bad_runs and not survivors and not (matrix and matrix['findings'])
     lines += ["", f"**Verdict: {'PASS' if ok else 'FAIL'}**"]
     print("\n".join(lines))
     return 0 if ok else 1

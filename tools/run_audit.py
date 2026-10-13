@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def known_issues(backend, mode):
     path = ROOT / "tools/known_issues.json"
     entries = json.loads(path.read_text()) if path.exists() else []
-    return [e for e in entries if e["backend"] == backend and e["mode"] == mode]
+    return [e for e in entries if "family" in e and e["backend"] == backend and e["mode"] == mode]
 
 
 def main():
