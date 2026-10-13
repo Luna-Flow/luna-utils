@@ -26,6 +26,8 @@ pub fn fma(Float, Float, Float) -> Float
 
 pub fn fma_bits(UInt, UInt, UInt) -> UInt
 
+pub fn fma_bits_flags(UInt, UInt, UInt, @float.RoundingDirection) -> (UInt, @float.Flags)
+
 pub fn fma_bits_with(UInt, UInt, UInt, @float.RoundingDirection) -> UInt
 
 pub fn fma_with(Float, Float, Float, @float.RoundingDirection) -> Float
@@ -66,6 +68,10 @@ pub fn logb(Float) -> Float
 
 pub fn logb_bits(UInt) -> Int?
 
+pub fn logb_bits_flags(UInt) -> (Int?, @float.Flags)
+
+pub fn logb_flags(Float) -> (Float, @float.Flags)
+
 pub fn maximum(Float, Float) -> Float
 
 pub fn maximum_magnitude(Float, Float) -> Float
@@ -88,9 +94,13 @@ pub fn next_down(Float) -> Float
 
 pub fn next_down_bits(UInt) -> UInt
 
+pub fn next_down_bits_flags(UInt) -> (UInt, @float.Flags)
+
 pub fn next_up(Float) -> Float
 
 pub fn next_up_bits(UInt) -> UInt
+
+pub fn next_up_bits_flags(UInt) -> (UInt, @float.Flags)
 
 pub fn portable_abs(Float) -> Float
 
@@ -120,11 +130,15 @@ pub fn remainder(Float, Float) -> Float
 
 pub fn remainder_bits(UInt, UInt) -> UInt
 
+pub fn remainder_bits_flags(UInt, UInt) -> (UInt, @float.Flags)
+
 pub fn round_ties_away(Float) -> Float
 
 pub fn round_ties_even(Float) -> Float
 
 pub fn round_to_integral(Float, @float.RoundingDirection) -> Float
+
+pub fn round_to_integral_bits_flags(UInt, @float.RoundingDirection, exact? : Bool) -> (UInt, @float.Flags)
 
 pub fn round_toward_negative(Float) -> Float
 
@@ -135,6 +149,8 @@ pub fn round_toward_zero(Float) -> Float
 pub fn scaleb(Float, Int) -> Float
 
 pub fn scaleb_bits(UInt, Int) -> UInt
+
+pub fn scaleb_bits_flags(UInt, Int, @float.RoundingDirection) -> (UInt, @float.Flags)
 
 pub fn scaleb_bits_with(UInt, Int, @float.RoundingDirection) -> UInt
 
@@ -152,11 +168,15 @@ pub fn to_binary64(Float) -> Double
 
 pub fn to_binary64_bits(UInt) -> UInt64
 
+pub fn to_binary64_bits_flags(UInt) -> (UInt64, @float.Flags)
+
 pub fn to_bits_canonical(Float) -> UInt
 
 pub fn to_int64_checked(Float) -> Int64?
 
 pub fn to_int64_checked_with(Float, @float.RoundingDirection) -> Int64?
+
+pub fn to_int64_flags(Float, @float.RoundingDirection, exact? : Bool) -> (Int64?, @float.Flags)
 
 pub fn to_int64_saturating(Float) -> Int64
 
@@ -166,6 +186,8 @@ pub fn to_int_checked(Float) -> Int?
 
 pub fn to_int_checked_with(Float, @float.RoundingDirection) -> Int?
 
+pub fn to_int_flags(Float, @float.RoundingDirection, exact? : Bool) -> (Int?, @float.Flags)
+
 pub fn to_int_saturating(Float) -> Int
 
 pub fn to_int_saturating_with(Float, @float.RoundingDirection) -> Int
@@ -174,6 +196,8 @@ pub fn to_uint64_checked(Float) -> UInt64?
 
 pub fn to_uint64_checked_with(Float, @float.RoundingDirection) -> UInt64?
 
+pub fn to_uint64_flags(Float, @float.RoundingDirection, exact? : Bool) -> (UInt64?, @float.Flags)
+
 pub fn to_uint64_saturating(Float) -> UInt64
 
 pub fn to_uint64_saturating_with(Float, @float.RoundingDirection) -> UInt64
@@ -181,6 +205,8 @@ pub fn to_uint64_saturating_with(Float, @float.RoundingDirection) -> UInt64
 pub fn to_uint_checked(Float) -> UInt?
 
 pub fn to_uint_checked_with(Float, @float.RoundingDirection) -> UInt?
+
+pub fn to_uint_flags(Float, @float.RoundingDirection, exact? : Bool) -> (UInt?, @float.Flags)
 
 pub fn to_uint_saturating(Float) -> UInt
 

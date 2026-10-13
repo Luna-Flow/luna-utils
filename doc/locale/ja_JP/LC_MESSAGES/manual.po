@@ -219,6 +219,18 @@ msgstr "誤差のない変換"
 msgid "`two_sum(a, b)` (Knuth's TwoSum) returns `(s, e)` with `s = a + b` rounded to nearest even and `e` the rounding error, so that `a + b == s + e` exactly whenever `a`, `b` and `s` are finite; it needs no assumption on the order of the operands. `fast_two_sum(a, b)` (Dekker's Fast2Sum) gives the same result with fewer operations when `|a| >= |b|` or `a == 0`; the result is unspecified otherwise. `two_prod(a, b)` returns `(p, e)` with `p = a * b` rounded to nearest even and `e = fma(a, b, -p)`; `a * b == p + e` exactly when the error is representable, which holds when the exponents of `a` and `b` add up to at least `emin + precision - 1` (`-969` for binary64, `-103` for binary32), and below that the error is rounded once. When `s` or `p` is not finite, because of an infinite or NaN operand or an overflow, `e` is the quiet NaN. A zero error is `+0`. All three exist for `Double` in `float` and for `Float` in `float/binary32`, and they are not IEEE 754 operations: the §9.5 augmented arithmetic is a different, still missing, operation."
 msgstr "`two_sum(a, b)`（Knuth の TwoSum）は `(s, e)` を返します。`s = a + b` は最近接偶数への丸め、`e` はその丸め誤差で、`a`、`b`、`s` が有限なら `a + b == s + e` が厳密に成り立ちます。オペランドの順序は問いません。`fast_two_sum(a, b)`（Dekker の Fast2Sum）は `|a| >= |b|` または `a == 0` のとき、より少ない演算で同じ結果を返し、そうでなければ結果は未定義です。`two_prod(a, b)` は `(p, e)` を返し、`p = a * b` は最近接偶数への丸め、`e = fma(a, b, -p)` です。誤差が表現できるとき `a * b == p + e` が厳密に成り立ち、その条件は `a` と `b` の指数の和が `emin + 精度 - 1`（binary64 は `-969`、binary32 は `-103`）以上であることで、それ未満では誤差は一度だけ丸められます。`s` または `p` が有限でないとき（無限大や NaN のオペランド、またはオーバーフロー）は `e` は quiet NaN です。ゼロの誤差は `+0` です。3 つとも `float` では `Double`、`float/binary32` では `Float` に対して存在し、IEEE 754 の演算ではありません。§9.5 の拡張算術は別の、まだ未実装の演算です。"
 
+#: manual/api/float.md:85
+msgid "Exception flags"
+msgstr "例外フラグ"
+
+#: manual/api/float.md:87
+msgid "`Flags` has the five exception flags of IEEE 754-2019 §7: `invalid`, `divide_by_zero`, `overflow`, `underflow` and `inexact`. The package keeps no global status word: an operation with a `_flags` suffix returns `(value, Flags)` and the caller combines the sets with `Flags::combine`; `Flags::none()` is the empty set, `Flags::is_empty` tests it and `Flags::to_bits` gives the layout of Berkeley TestFloat (inexact 1, underflow 2, overflow 4, divide by zero 8, invalid 16). The flagged operations are `fma_bits_flags`, `remainder_bits_flags`, `next_up_bits_flags` and `next_down_bits_flags`, `scaleb_bits_flags`, `logb_bits_flags` (the integer result, `None` with invalid for NaN, infinities and zeros) and `logb_flags` (the floating-point result, `-inf` with divideByZero for zero), `round_to_integral_bits_flags` (roundToIntegral, or roundToIntegralExact with `exact=true`), the four `to_*_flags` conversions to integers (convertToInteger, or the Exact variants with `exact=true`; `None` with invalid for NaN, infinities and out-of-range values) and `to_binary32_bits_flags` and, in `float/binary32`, `to_binary64_bits_flags`. The value of a `_flags` function is the value of the function without the suffix."
+msgstr "`Flags` は IEEE 754-2019 §7 の 5 つの例外フラグ `invalid`、`divide_by_zero`、`overflow`、`underflow`、`inexact` を持ちます。このパッケージにはグローバルなステータスワードはなく、`_flags` 接尾辞の付いた演算は `(value, Flags)` を返し、呼び出し側が `Flags::combine` で集合を合わせます。`Flags::none()` は空集合、`Flags::is_empty` がその判定、`Flags::to_bits` は Berkeley TestFloat のビット配置（inexact 1、underflow 2、overflow 4、divide by zero 8、invalid 16）を与えます。フラグ付きの演算は、`fma_bits_flags`、`remainder_bits_flags`、`next_up_bits_flags` と `next_down_bits_flags`、`scaleb_bits_flags`、`logb_bits_flags`（整数の結果。NaN、無限大、ゼロは `None` と invalid）と `logb_flags`（浮動小数点の結果。ゼロは `-inf` と divideByZero）、`round_to_integral_bits_flags`（roundToIntegral、`exact=true` なら roundToIntegralExact）、4 つの `to_*_flags` 整数変換（convertToInteger、`exact=true` なら Exact 版。NaN、無限大、範囲外は `None` と invalid）、`to_binary32_bits_flags`、そして `float/binary32` では `to_binary64_bits_flags` です。`_flags` 関数の値は、接尾辞のない同名の関数の値です。"
+
+#: manual/api/float.md:89
+msgid "Overflow also raises inexact. Underflow is raised when the result is tiny and inexact, and tininess is detected after rounding: a result is tiny when the value rounded to the full precision with an unbounded exponent is below the smallest normal, so a value just below it that rounds up to the smallest normal is not tiny. Invalid is raised for a signaling NaN operand (only the raw forms can see one), for `inf * 0` and `inf - inf` in fma, for an infinite dividend or a zero divisor in remainder, and for a conversion to integer that has no result. A quiet NaN with `inf * 0` in fma raises nothing. The host operators `+ - * /` and `sqrt` and the numeric forms of the operations cannot report flags that the host did not record; the first have none until [issue #64](https://github.com/Luna-Flow/luna-utils/issues/64)."
+msgstr "オーバーフローは inexact も立てます。アンダーフローは結果が tiny かつ不正確のとき立ち、tininess は丸めの後で検出します。完全な精度で指数無制限に丸めた値が最小の正規数より小さければ tiny で、それより少し小さく丸めて最小の正規数になる値は tiny ではありません。invalid は、シグナリング NaN のオペランド（生の形式だけが見分けられます）、fma の `inf * 0` と `inf - inf`、remainder の無限大の被除数やゼロの除数、結果のない整数変換で立ちます。fma で quiet NaN と `inf * 0` のときは何も立てません。ホストの `+ - * /` と `sqrt`、および各演算の数値形式は、ホストが記録していないフラグを報告できません。前者は [issue #64](https://github.com/Luna-Flow/luna-utils/issues/64) までフラグがありません。"
+
 #: manual/conformance/checklist.md:1
 msgid "Conformance checklist"
 msgstr "適合性チェックリスト"
@@ -304,12 +316,12 @@ msgid "§5.9 roundToIntegral (five directions) [required]"
 msgstr "§5.9 roundToIntegral（5 方向） [必須]"
 
 #: manual/conformance/checklist.md:21
-msgid "§5.9 roundToIntegralExact [required] (not implemented)"
-msgstr "§5.9 roundToIntegralExact [必須] （未実装）"
+msgid "§5.9 roundToIntegralExact [required]"
+msgstr "§5.9 roundToIntegralExact [必須]"
 
 #: manual/conformance/checklist.md:22
-msgid "§5.4.1, §5.8 convertToInteger [required] (partial)"
-msgstr "§5.4.1、§5.8 convertToInteger [必須] （部分準拠）"
+msgid "§5.4.1, §5.8 convertToInteger [required]"
+msgstr "§5.4.1、§5.8 convertToInteger [必須]"
 
 #: manual/conformance/checklist.md:23
 msgid "§5.4.1 convertFromInt [required] (partial)"
@@ -352,8 +364,8 @@ msgid "§6.1–§6.3 infinities, NaNs and the sign bit [required] (partial)"
 msgstr "§6.1–§6.3 無限大、NaN、符号ビット [必須] （部分準拠）"
 
 #: manual/conformance/checklist.md:33
-msgid "§7.2–§7.6 exceptions and flags [required] (not implemented)"
-msgstr "§7.2–§7.6 例外とフラグ [必須] （未実装）"
+msgid "§7.2–§7.6 exceptions and flags [required] (partial)"
+msgstr "§7.2–§7.6 例外とフラグ [必須] （部分準拠）"
 
 #: manual/conformance/checklist.md:34
 msgid "§8 alternate exception handling [recommended] (not implemented)"
@@ -448,8 +460,8 @@ msgid "Four-backend debug/release checks and exact transcript comparison follow 
 msgstr "四つのバックエンドの debug/release 検査と正確な記録比較は [CI 契約](../testing.md)に従います。ローカル結果だけでは Linux GCC の動作を確認できず、CI で確認する必要があります。テストは回帰の証拠であり、IEEE 754 の全動作の証明ではありません。Lean/mathlib による形式証明は提供しません。"
 
 #: manual/conformance/float.md:11
-msgid "Exception flags, FMA, conversions, IEEE magnitude extrema, stable hashing, formatting, bigint and libm remain separate issues. Exact inexact-flag reporting for rounding waits for [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
-msgstr "例外フラグ、FMA、変換、IEEE magnitude 極値、安定ハッシュ、書式化、bigint、libm は別の issue です。丸めの正確な inexact フラグ報告は [issue #29](https://github.com/Luna-Flow/luna-utils/issues/29) を待ちます。正規化はアプリケーションの表現方針であり、ホスト浮動小数点値の往復でペイロードを保持する保証ではありません。"
+msgid "Stable hashing, formatting, bigint and libm remain separate issues; the exception flags of the operations of this package are described under \"Exception flags\" in the API page, and the host arithmetic operators have none until [issue #64](https://github.com/Luna-Flow/luna-utils/issues/64). Canonicalization is an application representation policy; it is not a promise to preserve floating-point payloads across a host round trip."
+msgstr "安定ハッシュ、フォーマット、bigint、libm は別の issue のままです。このパッケージの各演算の例外フラグは API ページの「例外フラグ」にあり、ホストの算術演算子には [issue #64](https://github.com/Luna-Flow/luna-utils/issues/64) まで何もありません。正準化はアプリケーションの表現上の方針であり、ホスト往復でも浮動小数点のペイロードを保つという約束ではありません。"
 
 #: manual/conformance/float.md:13
 #: manual/conformance/planned.md:5
@@ -527,7 +539,12 @@ msgid "fixed corpus (`testdata/float_oracles.json`); the randomized audit (`tool
 msgstr "固定コーパス（`testdata/float_oracles.json`）、ランダム監査（`tools/random_audit.py`）の classify、canon ファミリー"
 
 #: manual/conformance/float.md:19
+#: manual/conformance/float.md:22
+#: manual/conformance/float.md:23
 #: manual/conformance/float.md:24
+#: manual/conformance/float.md:25
+#: manual/conformance/float.md:27
+#: manual/conformance/float.md:28
 #: manual/conformance/float.md:31
 #: manual/conformance/float.md:33
 #: manual/conformance/float.md:34
@@ -540,16 +557,16 @@ msgid "§4.3 rounding-direction attributes"
 msgstr "§4.3 丸め方向属性"
 
 #: manual/conformance/float.md:20
-msgid "`RoundingDirection` (five directions) as an explicit argument of `round_to_integral` and the `*_with` conversions"
-msgstr "`RoundingDirection`（5 方向）を `round_to_integral` と `*_with` 変換の明示引数として提供"
+msgid "`RoundingDirection` (five directions) as an explicit argument of every operation of this package that rounds"
+msgstr "`RoundingDirection`（5 方向）をこのパッケージで丸めを行うすべての演算の明示引数として提供"
 
 #: manual/conformance/float.md:20
-msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families round, convert"
-msgstr "`src/float/bits_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の round、convert ファミリー"
+msgid "`src/float/bits_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families round, convert, fma, scaleb, narrow"
+msgstr "`src/float/bits_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の round, convert, fma, scaleb, narrow ファミリー"
 
 #: manual/conformance/float.md:20
-msgid "partial: no attribute for arithmetic; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
-msgstr "部分準拠：算術に属性がない。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgid "partial: the host operators `+ - * /` and `sqrt` have only ties to even; [#64](https://github.com/Luna-Flow/luna-utils/issues/64)"
+msgstr "部分準拠：ホストの `+ - * /` と `sqrt` は最近接偶数のみ。[#64](https://github.com/Luna-Flow/luna-utils/issues/64)"
 
 #: manual/conformance/float.md:21
 msgid "§5.3.1 addition, subtraction, multiplication, division, squareRoot"
@@ -564,56 +581,44 @@ msgid "contraction probe (`testdata/oracles.json`); the randomized audit (`tools
 msgstr "contraction プローブ（`testdata/oracles.json`）、ランダム監査（`tools/random_audit.py`）の arith ファミリー"
 
 #: manual/conformance/float.md:21
-msgid "partial: no directed rounding and no flags ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
-msgstr "部分準拠：方向丸めもフラグもない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+msgid "partial: no directed rounding and no flags; [#64](https://github.com/Luna-Flow/luna-utils/issues/64)"
+msgstr "部分準拠：方向丸めもフラグもない。[#64](https://github.com/Luna-Flow/luna-utils/issues/64)"
 
 #: manual/conformance/float.md:22
 msgid "§5.3.1 fusedMultiplyAdd"
 msgstr "§5.3.1 fusedMultiplyAdd"
 
 #: manual/conformance/float.md:22
-msgid "`fma_bits_with`, `fma_bits`, `fma_with`, `fma` (and the `float/binary32` versions)"
-msgstr "`fma_bits_with`、`fma_bits`、`fma_with`、`fma`（および `float/binary32` の版）"
+msgid "`fma_bits_flags`, `fma_bits_with`, `fma_bits`, `fma_with`, `fma` (and the `float/binary32` versions)"
+msgstr "`fma_bits_flags`、`fma_bits_with`、`fma_bits`、`fma_with`、`fma`（および `float/binary32` の版）"
 
 #: manual/conformance/float.md:22
-msgid "`src/float/fma_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family fma"
-msgstr "`src/float/fma_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の fma ファミリー"
-
-#: manual/conformance/float.md:22
-msgid "conforming; no flags yet ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
-msgstr "準拠。フラグはまだない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+msgid "`src/float/fma_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families fma, fma_flags"
+msgstr "`src/float/fma_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の fma, fma_flags ファミリー"
 
 #: manual/conformance/float.md:23
 msgid "§5.3.1 remainder"
 msgstr "§5.3.1 remainder"
 
 #: manual/conformance/float.md:23
-msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family remainder"
-msgstr "`src/float/operations_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の remainder ファミリー"
-
-#: manual/conformance/float.md:23
-msgid "conforming; no invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
-msgstr "準拠。無効演算は報告しない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families remainder, remainder_flags"
+msgstr "`src/float/operations_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の remainder, remainder_flags ファミリー"
 
 #: manual/conformance/float.md:24
 msgid "§5.3.1 nextUp, nextDown"
 msgstr "§5.3.1 nextUp、nextDown"
 
 #: manual/conformance/float.md:24
-msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) family next"
-msgstr "`src/float/operations_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の next ファミリー"
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families next, next_flags"
+msgstr "`src/float/operations_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の next, next_flags ファミリー"
 
 #: manual/conformance/float.md:25
 msgid "§5.3.3 scaleB, logB"
 msgstr "§5.3.3 scaleB、logB"
 
 #: manual/conformance/float.md:25
-msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families scaleb, logb"
-msgstr "`src/float/operations_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の scaleb、logb ファミリー"
-
-#: manual/conformance/float.md:25
-msgid "conforming; no divideByZero or invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
-msgstr "準拠。divideByZero と無効演算は報告しない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+msgid "`src/float/operations_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families scaleb, logb, scaleb_flags, logb_flags"
+msgstr "`src/float/operations_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の scaleb, logb, scaleb_flags, logb_flags ファミリー"
 
 #: manual/conformance/float.md:26
 msgid "§5.9 roundToIntegral (five directions)"
@@ -632,45 +637,24 @@ msgid "§5.9 roundToIntegralExact"
 msgstr "§5.9 roundToIntegralExact"
 
 #: manual/conformance/float.md:27
-#: manual/conformance/float.md:36
-#: manual/conformance/float.md:37
-#: manual/conformance/float.md:39
-#: manual/conformance/float.md:40
-#: manual/conformance/float.md:41
-#: manual/conformance/float.md:42
-#: manual/conformance/float.md:43
-#: manual/conformance/float.md:44
-#: manual/conformance/planned.md:9
-#: manual/conformance/planned.md:11
-#: manual/conformance/planned.md:12
-#: manual/conformance/planned.md:13
-#: manual/conformance/planned.md:15
-#: manual/conformance/planned.md:16
-#: manual/conformance/planned.md:17
-#: manual/conformance/planned.md:18
-msgid "none"
-msgstr "なし"
+msgid "`round_to_integral_bits_flags` (with `exact=true`)"
+msgstr "`round_to_integral_bits_flags`（`exact=true` 付き）"
 
 #: manual/conformance/float.md:27
-#: manual/conformance/float.md:39
-msgid "not implemented; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
-msgstr "未実装。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgid "the randomized audit (`tools/random_audit.py`) family round_flags"
+msgstr "ランダム監査（`tools/random_audit.py`）の round_flags ファミリー"
 
 #: manual/conformance/float.md:28
 msgid "§5.4.1, §5.8 convertToInteger"
 msgstr "§5.4.1、§5.8 convertToInteger"
 
 #: manual/conformance/float.md:28
-msgid "`to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked` and the `*_saturating` and `*_with` forms"
-msgstr "`to_int_checked`、`to_int64_checked`、`to_uint_checked`、`to_uint64_checked` と `*_saturating`、`*_with` 形式"
+msgid "`to_int_checked`, `to_int64_checked`, `to_uint_checked`, `to_uint64_checked`, the `*_saturating` and `*_with` forms, and `to_int_flags`, `to_int64_flags`, `to_uint_flags`, `to_uint64_flags` (with `exact=true` for the Exact variants)"
+msgstr "`to_int_checked`、`to_int64_checked`、`to_uint_checked`、`to_uint64_checked`、`*_saturating` と `*_with` 形式、および `to_int_flags`、`to_int64_flags`、`to_uint_flags`、`to_uint64_flags`（Exact 版は `exact=true`）"
 
 #: manual/conformance/float.md:28
-msgid "fixed tables (`testdata/float_oracles.json`); the randomized audit (`tools/random_audit.py`) family convert"
-msgstr "固定表（`testdata/float_oracles.json`）、ランダム監査（`tools/random_audit.py`）の convert ファミリー"
-
-#: manual/conformance/float.md:28
-msgid "partial: no exact variant that reports inexact; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
-msgstr "部分準拠：inexact を報告する exact 版がない。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+msgid "fixed tables (`testdata/float_oracles.json`); the randomized audit (`tools/random_audit.py`) families convert, convert_flags"
+msgstr "固定表（`testdata/float_oracles.json`）、ランダム監査（`tools/random_audit.py`）の convert, convert_flags ファミリー"
 
 #: manual/conformance/float.md:29
 msgid "§5.4.1 convertFromInt"
@@ -693,12 +677,12 @@ msgid "§5.4.2 convertFormat"
 msgstr "§5.4.2 convertFormat"
 
 #: manual/conformance/float.md:30
-msgid "`src/float/convert_format_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families narrow, widen"
-msgstr "`src/float/convert_format_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の narrow、widen ファミリー"
+msgid "`src/float/convert_format_wbtest.mbt`; the randomized audit (`tools/random_audit.py`) families narrow, widen, narrow_flags, widen_flags"
+msgstr "`src/float/convert_format_wbtest.mbt`、ランダム監査（`tools/random_audit.py`）の narrow, widen, narrow_flags, widen_flags ファミリー"
 
 #: manual/conformance/float.md:30
-msgid "conforming; no invalid report for signaling NaN ([#29](https://github.com/Luna-Flow/luna-utils/issues/29)); the host `Float::from_double` and `Float::to_double` also match the model on every backend"
-msgstr "準拠。シグナリング NaN の無効演算は報告しない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）。ホストの `Float::from_double` と `Float::to_double` も全バックエンドでモデルと一致"
+msgid "conforming; the host `Float::from_double` and `Float::to_double` also match the model on every backend"
+msgstr "準拠。ホストの `Float::from_double` と `Float::to_double` も全バックエンドでモデルと一致"
 
 #: manual/conformance/float.md:31
 msgid "§5.5 copy, negate, abs, copySign"
@@ -754,6 +738,24 @@ msgstr "§5.12 十進文字変換"
 
 #: manual/conformance/float.md:36
 #: manual/conformance/float.md:37
+#: manual/conformance/float.md:40
+#: manual/conformance/float.md:41
+#: manual/conformance/float.md:42
+#: manual/conformance/float.md:43
+#: manual/conformance/float.md:44
+#: manual/conformance/planned.md:9
+#: manual/conformance/planned.md:11
+#: manual/conformance/planned.md:12
+#: manual/conformance/planned.md:13
+#: manual/conformance/planned.md:15
+#: manual/conformance/planned.md:16
+#: manual/conformance/planned.md:17
+#: manual/conformance/planned.md:18
+msgid "none"
+msgstr "なし"
+
+#: manual/conformance/float.md:36
+#: manual/conformance/float.md:37
 #: manual/conformance/planned.md:15
 msgid "not implemented; [#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
 msgstr "未実装。[#27](https://github.com/Luna-Flow/luna-utils/issues/27)"
@@ -781,6 +783,18 @@ msgstr "部分準拠：数値の NaN はすべてのバックエンドでペイ�
 #: manual/conformance/float.md:39
 msgid "§7.2–§7.6 exceptions and flags"
 msgstr "§7.2–§7.6 例外とフラグ"
+
+#: manual/conformance/float.md:39
+msgid "`Flags` (invalid, divideByZero, overflow, underflow, inexact; tininess is detected after rounding) returned by the `*_flags` forms of fma, remainder, nextUp, nextDown, scaleB, logB, roundToIntegral(Exact), convertToInteger and convertFormat, and `(value, invalid)` of the comparison predicates"
+msgstr "`Flags`（invalid、divideByZero、overflow、underflow、inexact。tininess は丸めの後で検出）。fma、remainder、nextUp、nextDown、scaleB、logB、roundToIntegral(Exact)、convertToInteger、convertFormat の `*_flags` 形式が返し、比較述語は `(value, invalid)` を返す"
+
+#: manual/conformance/float.md:39
+msgid "the randomized audit (`tools/random_audit.py`) flags families"
+msgstr "ランダム監査（`tools/random_audit.py`）の各フラグファミリー"
+
+#: manual/conformance/float.md:39
+msgid "partial: the host operators `+ - * /` and `sqrt` raise no flags; [#64](https://github.com/Luna-Flow/luna-utils/issues/64)"
+msgstr "部分準拠：ホストの `+ - * /` と `sqrt` はフラグを立てない。[#64](https://github.com/Luna-Flow/luna-utils/issues/64)"
 
 #: manual/conformance/float.md:40
 msgid "§8 alternate exception handling"
@@ -1425,6 +1439,27 @@ msgstr "生のペイロード setter でエンコーディングを構築して 
 #: manual/tutorial/float.md:52
 msgid "Comparison predicates return the value and whether the standard requires the invalid operation exception:"
 msgstr "比較述語"
+
+#~ msgid "`RoundingDirection` (five directions) as an explicit argument of `round_to_integral` and the `*_with` conversions"
+#~ msgstr "`RoundingDirection`（5 方向）を `round_to_integral` と `*_with` 変換の明示引数として提供"
+
+#~ msgid "partial: no attribute for arithmetic; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+#~ msgstr "部分準拠：算術に属性がない。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+
+#~ msgid "conforming; no flags yet ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+#~ msgstr "準拠。フラグはまだない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+
+#~ msgid "conforming; no invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+#~ msgstr "準拠。無効演算は報告しない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+
+#~ msgid "conforming; no divideByZero or invalid report ([#29](https://github.com/Luna-Flow/luna-utils/issues/29))"
+#~ msgstr "準拠。divideByZero と無効演算は報告しない（[#29](https://github.com/Luna-Flow/luna-utils/issues/29)）"
+
+#~ msgid "not implemented; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+#~ msgstr "未実装。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+
+#~ msgid "partial: no exact variant that reports inexact; [#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
+#~ msgstr "部分準拠：inexact を報告する exact 版がない。[#29](https://github.com/Luna-Flow/luna-utils/issues/29)"
 
 #~ msgid "none (host `Float::from_double` and `Double::to_float` are not audited)"
 #~ msgstr "なし（ホストの `Float::from_double` と `Double::to_float` は監査していない）"

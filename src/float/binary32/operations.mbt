@@ -182,66 +182,43 @@ pub fn logb(x : Float) -> Float {
 }
 
 ///|
-fn scaleb_overflow(
-  sign : UInt32,
+/// IEEE 754-2019 §5.3.3 scaleB on a raw binary32 encoding: `x * 2^n` rounded once by `direction`,
+/// with the flags of §7 (invalid for a signaling NaN; overflow, underflow and inexact from the
+/// rounding). A NaN becomes quiet, infinities, zeros and `n = 0` return `x`.
+pub fn scaleb_bits_flags(
+  bits : UInt32,
+  n : Int32,
   direction : @binary64.RoundingDirection,
-) -> UInt32 {
-  let inf = sign | 0x7f800000U
-  let max_finite = sign | ((254UL << 23) | 0x7fffffU.to_uint64()).to_uint()
-  match direction {
-    TiesToEven | TiesToAway => inf
-    TowardZero => max_finite
-    TowardPositive => if sign == 0U { inf } else { max_finite }
-    TowardNegative => if sign == 0U { max_finite } else { inf }
+) -> (UInt32, @binary64.Flags) {
+  if is_nan_bits(bits) {
+    (
+      nanq_bits(bits),
+      { ..@binary64.Flags::none(), invalid: is_signaling_bits(bits), },
+    )
+  } else if is_infinite_bits(bits) || is_zero_bits(bits) || n == 0 {
+    (bits, @binary64.Flags::none())
+  } else {
+    let (m, e0) = decode_normalized(bits)
+    let nn = if n > 2400 { 2400 } else if n < -2400 { -2400 } else { n }
+    let (r, flags) = @binary64.round_exact_flags(
+      (bits & 0x80000000U) != 0U,
+      m,
+      e0 + nn,
+      23,
+      direction,
+    )
+    (r.to_uint(), flags)
   }
 }
 
 ///|
-/// IEEE 754-2019 §5.3.3 scaleB on a raw encoding: `x * 2^n` rounded once to the format by
-/// `direction`. A NaN becomes quiet, infinities, zeros and `n = 0` return `x`.
+/// scaleB on a raw binary32 encoding rounded by `direction`, without the flags.
 pub fn scaleb_bits_with(
   bits : UInt32,
   n : Int32,
   direction : @binary64.RoundingDirection,
 ) -> UInt32 {
-  if is_nan_bits(bits) {
-    nanq_bits(bits)
-  } else if is_infinite_bits(bits) || is_zero_bits(bits) || n == 0 {
-    bits
-  } else {
-    let (m, e0) = decode_normalized(bits)
-    let nn = if n > 2400 { 2400 } else if n < -2400 { -2400 } else { n }
-    let e = e0 + nn
-    let unbiased = e + 23
-    let sign = bits & 0x80000000U
-    if unbiased > 127 {
-      scaleb_overflow(sign, direction)
-    } else if unbiased >= -126 {
-      sign |
-      (((unbiased + 127).to_uint64() << 23) | (m & 0x7fffffU.to_uint64())).to_uint()
-    } else {
-      let s = -149 - e
-      let mut kept = 0UL
-      let mut cmp = -1
-      let mut inexact = true
-      if s < 64 {
-        kept = m >> s
-        let rem = m & ((1UL << s) - 1UL)
-        let half = 1UL << (s - 1)
-        cmp = if rem < half { -1 } else if rem == half { 0 } else { 1 }
-        inexact = rem != 0UL
-      }
-      let negative = sign != 0U
-      let increment = match direction {
-        TiesToEven => cmp > 0 || (cmp == 0 && (kept & 1UL) == 1UL)
-        TiesToAway => cmp >= 0
-        TowardZero => false
-        TowardPositive => !negative && inexact
-        TowardNegative => negative && inexact
-      }
-      sign | (kept + (if increment { 1UL } else { 0UL })).to_uint()
-    }
-  }
+  scaleb_bits_flags(bits, n, direction).0
 }
 
 ///|

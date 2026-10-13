@@ -140,16 +140,38 @@ fn overflow_bits(
 }
 
 ///|
+/// Whether a directed rounding increments the kept significand: `cmp` compares the discarded
+/// part with half (-1, 0, 1) and `inexact` says it is not zero.
+fn rounding_increment(
+  negative : Bool,
+  kept : UInt64,
+  cmp : Int32,
+  inexact : Bool,
+  direction : RoundingDirection,
+) -> Bool {
+  match direction {
+    TiesToEven => cmp > 0 || (cmp == 0 && inexact && (kept & 1UL) == 1UL)
+    TiesToAway => inexact && cmp >= 0
+    TowardZero => false
+    TowardPositive => !negative && inexact
+    TowardNegative => negative && inexact
+  }
+}
+
+///|
 /// Round the exact value `s * 2^e` (with `s` nonzero) to a format with `mbits` fraction bits
-/// by `direction`, with gradual underflow. A sticky bit in the lowest bit of `s` stands for
-/// any nonzero amount below it.
-fn round_pack_u128(
+/// by `direction`, with gradual underflow, and report the flags of IEEE 754-2019 §7.3 to §7.6:
+/// inexact when the result differs from the exact value, overflow (also inexact) when the
+/// rounded value with an unbounded exponent exceeds the largest finite value, and underflow when
+/// that value is tiny (below the smallest normal, tininess detected after rounding) and inexact.
+/// A sticky bit in the lowest bit of `s` stands for any nonzero amount below it.
+fn round_pack_flags(
   negative : Bool,
   s : U128,
   e : Int32,
   mbits : Int32,
   direction : RoundingDirection,
-) -> UInt64 {
+) -> (UInt64, Flags) {
   let bias = if mbits == 52 { 1023 } else { 127 }
   let exp_field_max = if mbits == 52 { 2047 } else { 255 }
   let sign = if negative {
@@ -164,6 +186,27 @@ fn round_pack_u128(
   let msb = 127 - u128_clz(s)
   let t = e + msb
   let emin = 1 - bias
+  // tininess after rounding: round to the full precision with an unbounded exponent
+  let mut tiny = false
+  if t < emin {
+    let unbounded_shift = msb - mbits
+    if unbounded_shift <= 0 {
+      tiny = true
+    } else {
+      let k = u128_shr(s, unbounded_shift)
+      let rem = u128_sub(s, u128_shl(k, unbounded_shift))
+      let half = u128_shl({ hi: 0UL, lo: 1UL, }, unbounded_shift - 1)
+      let rounded_up = rounding_increment(
+        negative,
+        k.lo,
+        u128_cmp(rem, half),
+        !u128_is_zero(rem),
+        direction,
+      )
+      let carried = rounded_up && k.lo + 1UL == 1UL << (mbits + 1)
+      tiny = !(carried && t + 1 >= emin)
+    }
+  }
   let mut shift = msb - mbits
   if t < emin {
     shift = shift + (emin - t)
@@ -183,13 +226,7 @@ fn round_pack_u128(
     cmp = u128_cmp(rem, half)
     inexact = !u128_is_zero(rem)
   }
-  let increment = match direction {
-    TiesToEven => cmp > 0 || (cmp == 0 && inexact && (kept & 1UL) == 1UL)
-    TiesToAway => inexact && cmp >= 0
-    TowardZero => false
-    TowardPositive => !negative && inexact
-    TowardNegative => negative && inexact
-  }
+  let increment = rounding_increment(negative, kept, cmp, inexact, direction)
   let rounded = kept + (if increment { 1UL } else { 0UL })
   if t >= emin {
     let mut field = t + bias
@@ -199,12 +236,18 @@ fn round_pack_u128(
       field = field + 1
     }
     if field >= exp_field_max {
-      overflow_bits(negative, mbits, direction)
+      (
+        overflow_bits(negative, mbits, direction),
+        { ..Flags::none(), overflow: true, inexact: true, },
+      )
     } else {
-      sign | (field.to_uint64() << mbits) | (sig & ((1UL << mbits) - 1UL))
+      (
+        sign | (field.to_uint64() << mbits) | (sig & ((1UL << mbits) - 1UL)),
+        { ..Flags::none(), inexact, },
+      )
     }
   } else {
-    sign | rounded
+    (sign | rounded, { ..Flags::none(), inexact, underflow: tiny && inexact, })
   }
 }
 
@@ -226,36 +269,39 @@ fn zero_bits_for(negative : Bool, mbits : Int32) -> UInt64 {
 /// operand is widened exactly first): the exact value `x * y + z` rounded once by `direction` to
 /// the format with `mbits` (52 or 23) fraction bits, returned as an encoding of that format.
 /// Use `fma_bits_with` and `fma_with` (and the `float/binary32` versions) instead of calling this.
-pub fn fma_finite_bits(
+pub fn fma_finite_flags(
   x : UInt64,
   y : UInt64,
   z : UInt64,
   mbits : Int32,
   direction : RoundingDirection,
-) -> UInt64 {
+) -> (UInt64, Flags) {
   let negative_product = ((x ^ y) & 0x8000000000000000UL) != 0UL
   let negative_z = (z & 0x8000000000000000UL) != 0UL
   let product_zero = is_zero_bits(x) || is_zero_bits(y)
   let z_zero = is_zero_bits(z)
   if product_zero && z_zero {
-    zero_bits_for(
-      if negative_product == negative_z {
-        negative_product
-      } else {
-        direction == TowardNegative
-      },
-      mbits,
+    (
+      zero_bits_for(
+        if negative_product == negative_z {
+          negative_product
+        } else {
+          direction == TowardNegative
+        },
+        mbits,
+      ),
+      Flags::none(),
     )
   } else if product_zero {
     let (mz, ez) = decode_normalized(z)
-    round_pack_u128(negative_z, { hi: 0UL, lo: mz, }, ez, mbits, direction)
+    round_pack_flags(negative_z, { hi: 0UL, lo: mz, }, ez, mbits, direction)
   } else {
     let (mx, ex) = decode_normalized(x)
     let (my, ey) = decode_normalized(y)
     let p = mul_wide(mx, my)
     let ep = ex + ey
     if z_zero {
-      round_pack_u128(negative_product, p, ep, mbits, direction)
+      round_pack_flags(negative_product, p, ep, mbits, direction)
     } else {
       let (mz, ez) = decode_normalized(z)
       let a = u128_shl(p, 125 - (127 - u128_clz(p)))
@@ -271,15 +317,15 @@ pub fn fma_finite_bits(
         (b, u128_shr_jam(a, eb - ea), eb, negative_z, negative_product)
       }
       if neg_big == neg_small {
-        round_pack_u128(neg_big, u128_add(big, small), e, mbits, direction)
+        round_pack_flags(neg_big, u128_add(big, small), e, mbits, direction)
       } else {
         let c = u128_cmp(big, small)
         if c == 0 {
-          zero_bits_for(direction == TowardNegative, mbits)
+          (zero_bits_for(direction == TowardNegative, mbits), Flags::none())
         } else if c > 0 {
-          round_pack_u128(neg_big, u128_sub(big, small), e, mbits, direction)
+          round_pack_flags(neg_big, u128_sub(big, small), e, mbits, direction)
         } else {
-          round_pack_u128(neg_small, u128_sub(small, big), e, mbits, direction)
+          round_pack_flags(neg_small, u128_sub(small, big), e, mbits, direction)
         }
       }
     }
@@ -287,40 +333,66 @@ pub fn fma_finite_bits(
 }
 
 ///|
+/// `fma_finite_flags` without the flags.
+pub fn fma_finite_bits(
+  x : UInt64,
+  y : UInt64,
+  z : UInt64,
+  mbits : Int32,
+  direction : RoundingDirection,
+) -> UInt64 {
+  fma_finite_flags(x, y, z, mbits, direction).0
+}
+
+///|
 /// IEEE 754-2019 §5.3.1 fusedMultiplyAdd on raw encodings: `x * y + z` rounded once by
 /// `direction`. A NaN operand gives a quiet NaN that keeps its sign and payload (the first
 /// of `x`, `y`, `z`); `inf * 0` and `inf - inf` give the canonical quiet NaN; an infinite
 /// product or addend gives the infinity; the sign of an exact zero result follows §6.3.
+pub fn fma_bits_flags(
+  x : UInt64,
+  y : UInt64,
+  z : UInt64,
+  direction : RoundingDirection,
+) -> (UInt64, Flags) {
+  let invalid_nan = is_signaling_bits(x) ||
+    is_signaling_bits(y) ||
+    is_signaling_bits(z)
+  if is_nan_bits(x) {
+    (nanq_bits(x), { ..Flags::none(), invalid: invalid_nan, })
+  } else if is_nan_bits(y) {
+    (nanq_bits(y), { ..Flags::none(), invalid: invalid_nan, })
+  } else if is_nan_bits(z) {
+    (nanq_bits(z), { ..Flags::none(), invalid: invalid_nan, })
+  } else if (is_infinite_bits(x) && is_zero_bits(y)) ||
+    (is_zero_bits(x) && is_infinite_bits(y)) {
+    (0x7ff8000000000000UL, Flags::invalid_only())
+  } else if is_infinite_bits(x) || is_infinite_bits(y) {
+    let negative_product = ((x ^ y) & 0x8000000000000000UL) != 0UL
+    if is_infinite_bits(z) &&
+      ((z & 0x8000000000000000UL) != 0UL) != negative_product {
+      (0x7ff8000000000000UL, Flags::invalid_only())
+    } else if negative_product {
+      (0xfff0000000000000UL, Flags::none())
+    } else {
+      (0x7ff0000000000000UL, Flags::none())
+    }
+  } else if is_infinite_bits(z) {
+    (z, Flags::none())
+  } else {
+    fma_finite_flags(x, y, z, 52, direction)
+  }
+}
+
+///|
+/// fusedMultiplyAdd on raw encodings rounded by `direction`, without the flags.
 pub fn fma_bits_with(
   x : UInt64,
   y : UInt64,
   z : UInt64,
   direction : RoundingDirection,
 ) -> UInt64 {
-  if is_nan_bits(x) {
-    nanq_bits(x)
-  } else if is_nan_bits(y) {
-    nanq_bits(y)
-  } else if is_nan_bits(z) {
-    nanq_bits(z)
-  } else if (is_infinite_bits(x) && is_zero_bits(y)) ||
-    (is_zero_bits(x) && is_infinite_bits(y)) {
-    0x7ff8000000000000UL
-  } else if is_infinite_bits(x) || is_infinite_bits(y) {
-    let negative_product = ((x ^ y) & 0x8000000000000000UL) != 0UL
-    if is_infinite_bits(z) &&
-      ((z & 0x8000000000000000UL) != 0UL) != negative_product {
-      0x7ff8000000000000UL
-    } else if negative_product {
-      0xfff0000000000000UL
-    } else {
-      0x7ff0000000000000UL
-    }
-  } else if is_infinite_bits(z) {
-    z
-  } else {
-    fma_finite_bits(x, y, z, 52, direction)
-  }
+  fma_bits_flags(x, y, z, direction).0
 }
 
 ///|

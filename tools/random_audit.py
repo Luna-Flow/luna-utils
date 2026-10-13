@@ -525,6 +525,82 @@ def remainder_tie_case(rng, fmt):
     return fmt.encode_exact(x), fmt.encode_exact(y)
 
 
+F_INEXACT, F_UNDERFLOW, F_OVERFLOW, F_DIVZERO, F_INVALID = 1, 2, 4, 8, 16
+
+
+def m_round_flags(fmt, exact, direction):
+    """Flags of rounding a nonzero exact value: inexact, overflow, and underflow (tiny after rounding and inexact)."""
+    a = abs(exact)
+    t = flog2(a)
+    scaled = a / Fraction(2) ** (t - fmt.mbits)
+    q = scaled.numerator // scaled.denominator
+    frac = scaled - q
+    negative = exact < 0
+    up = {"TiesToEven": frac > Fraction(1, 2) or (frac == Fraction(1, 2) and q & 1),
+          "TiesToAway": frac >= Fraction(1, 2), "TowardZero": False,
+          "TowardPositive": (not negative) and frac > 0, "TowardNegative": negative and frac > 0}[direction]
+    t_rounded = t + (1 if up and q + 1 == 1 << (fmt.mbits + 1) else 0)
+    overflow = t_rounded > fmt.bias
+    tiny = t_rounded < 1 - fmt.bias
+    result = encode_directed(fmt, exact, direction)
+    inexact = True if overflow else fmt.value(result) != exact
+    return (F_INEXACT if inexact else 0) | (F_OVERFLOW if overflow else 0) | (F_UNDERFLOW if tiny and inexact else 0)
+
+
+def is_snan(fmt, bits):
+    return fmt.cls(bits) == "SignalingNaN"
+
+
+def m_fma_flags(fmt, xb, yb, zb, direction):
+    if any(fmt.is_nan(b) for b in (xb, yb, zb)):
+        return F_INVALID if any(is_snan(fmt, b) for b in (xb, yb, zb)) else 0
+    cx, cy, cz = fmt.cls(xb), fmt.cls(yb), fmt.cls(zb)
+    xinf, yinf, zinf = cx.endswith("Infinity"), cy.endswith("Infinity"), cz.endswith("Infinity")
+    if (xinf and cy.endswith("Zero")) or (cx.endswith("Zero") and yinf):
+        return F_INVALID
+    sp = (xb ^ yb) & fmt.sign
+    if xinf or yinf:
+        return F_INVALID if zinf and (zb & fmt.sign) != sp else 0
+    if zinf:
+        return 0
+    exact = fmt.value(xb) * fmt.value(yb) + fmt.value(zb)
+    return 0 if exact == 0 else m_round_flags(fmt, exact, direction)
+
+
+def m_scaleb_flags(fmt, bits, n, direction):
+    if fmt.is_nan(bits):
+        return F_INVALID if is_snan(fmt, bits) else 0
+    c = fmt.cls(bits)
+    if c.endswith("Infinity") or c.endswith("Zero") or n == 0:
+        return 0
+    return m_round_flags(fmt, fmt.value(bits) * Fraction(2) ** max(-6000, min(6000, n)), direction)
+
+
+def m_narrow_flags(f64, f32, bits, direction):
+    if f64.is_nan(bits):
+        return F_INVALID if is_snan(f64, bits) else 0
+    c = f64.cls(bits)
+    if c.endswith("Infinity") or c.endswith("Zero"):
+        return 0
+    return m_round_flags(f32, f64.value(bits), direction)
+
+
+def m_remainder_flags(fmt, xb, yb):
+    if is_snan(fmt, xb) or is_snan(fmt, yb):
+        return F_INVALID
+    if fmt.is_nan(xb) or fmt.is_nan(yb):
+        return 0
+    return F_INVALID if fmt.cls(xb).endswith("Infinity") or fmt.cls(yb).endswith("Zero") else 0
+
+
+def m_round_exact(fmt, bits, direction, exact):
+    """roundToIntegral(Exact) on an encoding: (result bits, flags)."""
+    if fmt.is_nan(bits):
+        return quiet(fmt, bits), (F_INVALID if is_snan(fmt, bits) else 0)
+    r = m_round_to_integral(fmt, bits, direction)
+    return r, (F_INEXACT if exact and r != bits else 0)
+
+
 def m_fma(fmt, xb, yb, zb, direction):
     """fusedMultiplyAdd: x * y + z rounded once by the direction, IEEE 754-2019 5.3.1, 6.2.3 and 6.3."""
     for b in (xb, yb, zb):
@@ -602,6 +678,9 @@ def fma_triple(rng, fmt):
 
 def narrow_input(rng, f64, f32):
     """Binary64 values on and around the binary32 grid: ties, overflow and underflow edges."""
+    if rng.randrange(8) == 0:  # just below the smallest binary32 normal: rounding to 24 bits carries into it
+        v = Fraction(2) ** -126 - rng.choice((1, 2, 3, 4, 5, 6, 7)) * Fraction(2) ** -152
+        return f64.encode_exact(v if rng.randrange(2) else -v)
     if rng.randrange(2):
         return random_bits(rng, f64)
     g = random_bits(rng, f32)
@@ -678,8 +757,10 @@ def build(seed, count):
                 nb = narrow_input(rng, fmt, Fmt(32))
                 nres = [m_narrow(fmt, Fmt(32), nb, d) for d in DIRECTIONS]
                 t.add(p + "narrow", nb, *nres, *[(0x7fc00000 if Fmt(32).is_nan(v) else v) for v in nres])
+                t.add(p + "narrow_flags", nb, *nres, *[m_narrow_flags(fmt, Fmt(32), nb, d) for d in DIRECTIONS])
             else:
                 t.add(p + "widen", b, m_widen(fmt, Fmt(64), b), 0x7ff8000000000000 if fmt.is_nan(b) else m_widen(fmt, Fmt(64), b))
+                t.add(p + "widen_flags", b, m_widen(fmt, Fmt(64), b), F_INVALID if is_snan(fmt, b) else 0)
             canon = lambda v: fmt.canonical_nan if fmt.is_nan(v) else v
             t.add(p + "next", b, m_next_up(fmt, b), m_next_down(fmt, b), canon(m_next_up(fmt, b)) if fmt.is_nan(b) else m_next_up(fmt, b),
                   canon(m_next_down(fmt, b)) if fmt.is_nan(b) else m_next_down(fmt, b))
@@ -699,6 +780,22 @@ def build(seed, count):
             lg = m_logb(fmt, b)
             lgf = fmt.canonical_nan if fmt.is_nan(b) else (fmt.emax_field << fmt.mbits) if fmt.cls(b) == "PositiveInfinity" or fmt.cls(b) == "NegativeInfinity" else (fmt.sign | (fmt.emax_field << fmt.mbits)) if lg is None else fmt.encode_exact(Fraction(lg))
             t.add(p + "logb", b, 0 if lg is None else 1, 0 if lg is None else lg, lgf)
+            t.add(p + "fma_flags", fx, fy, fz, *fres, *[m_fma_flags(fmt, fx, fy, fz, d) for d in DIRECTIONS])
+            t.add(p + "scaleb_flags", sb, sn, *sres, *[m_scaleb_flags(fmt, sb, sn, d) for d in DIRECTIONS])
+            t.add(p + "remainder_flags", rx, ry, rb, m_remainder_flags(fmt, rx, ry))
+            t.add(p + "next_flags", b, m_next_up(fmt, b), m_next_down(fmt, b), F_INVALID if is_snan(fmt, b) else 0)
+            lgf_flags = F_DIVZERO if fmt.cls(b).endswith("Zero") else 0
+            t.add(p + "logb_flags", b, 0 if lg is None else 1, 0 if lg is None else lg, F_INVALID if lg is None else 0, lgf, lgf_flags)
+            re = [m_round_exact(fmt, b, d, True) for d in DIRECTIONS]
+            rn = [m_round_exact(fmt, b, d, False) for d in DIRECTIONS]
+            t.add(p + "round_flags", b, *[v for v, _ in re], *[f for _, f in re], *[f for _, f in rn])
+            cvt = [b]
+            for tname, (lo, hi) in TARGETS.items():
+                for d in DIRECTIONS:
+                    n_, c_ = m_convert(fmt, b, d)
+                    bad = n_ is None or not (lo <= n_ <= hi)
+                    cvt += [F_INVALID if bad else 0, F_INVALID if bad else (F_INEXACT if fmt.value(b) != n_ else 0)]
+            t.add(p + "convert_flags", *cvt)
             rel = m_relation(fmt, b, y)
             snan = fmt.cls(b) == "SignalingNaN" or fmt.cls(y) == "SignalingNaN"
             anan = fmt.is_nan(b) or fmt.is_nan(y)
@@ -820,6 +917,7 @@ def emit(t, seed, count):
            "      if c == 44 {", "        out.push(cur)", "        cur = 0UL", "      } else {",
            "        let d = if c >= 97 { c - 87 } else { c - 48 }",
            "        cur = (cur << 4) | d.to_uint64()", "      }", "    }", "  }", "  out", "}", "",
+           "///|", "fn flag_word(f : @float.Flags) -> UInt64 { f.to_bits().to_uint64() }", "",
            "///|", "fn hex(v : UInt64) -> String { \"0x\" + v.to_string(radix=16) }", "",
            "///|", "fn check(family : String, index : Int, what : String, got : UInt64, want : UInt64) -> Bool {",
            "  if got != want {",
@@ -972,6 +1070,91 @@ def emit(t, seed, count):
             f"let (p, ep) = {M}.two_prod(x, y)",
             f"if !check(fam, i, \"two_prod p\", {from_bt(f'{M}.to_bits_canonical(p)')}, table[r + 6]) {{ bad += 1 }}",
             f"if !check(fam, i, \"two_prod e\", {from_bt(f'{M}.to_bits_canonical(ep)')}, table[r + 7]) {{ bad += 1 }}"])
+        dsx = ", ".join(f"@float.{d}" for d in DIRECTIONS)
+        row_fn("fma_flags", "fma_flags", [
+            f"let fam = \"{p}fma_flags\"", f"let y = {to_bt('table[r + 1]')}", f"let z = {to_bt('table[r + 2]')}", f"let dirs = [{dsx}]",
+            "for k in 0..<5 {",
+            f"  let (v, f) = {M}.fma_bits_flags(b, y, z, dirs[k])",
+            f"  if !check(fam, i, \"fma_bits_flags value#\" + k.to_string(), {from_bt('v')}, table[r + 3 + k]) {{ bad += 1 }}",
+            "  if !check(fam, i, \"fma_bits_flags flags#\" + k.to_string(), flag_word(f), table[r + 8 + k]) { bad += 1 }",
+            "}",
+            *([f"if {M}.is_finite_bits(b) && {M}.is_finite_bits(y) && {M}.is_finite_bits(z) {{",
+               "  for k in 0..<5 {",
+               f"    let (v2, f2) = @float.fma_finite_flags({'b, y, z' if width == 64 else '@binary32.to_binary64_bits(b), @binary32.to_binary64_bits(y), @binary32.to_binary64_bits(z)'}, {52 if width == 64 else 23}, dirs[k])",
+               "    if !check(fam, i, \"fma_finite_flags value#\" + k.to_string(), v2, table[r + 3 + k]) { bad += 1 }",
+               "    if !check(fam, i, \"fma_finite_flags flags#\" + k.to_string(), flag_word(f2), table[r + 8 + k]) { bad += 1 }",
+               "  }", "}"])])
+        row_fn("scaleb_flags", "scaleb_flags", [
+            f"let fam = \"{p}scaleb_flags\"", "let n = table[r + 1].reinterpret_as_int64().to_int()", f"let dirs = [{dsx}]",
+            "for k in 0..<5 {",
+            f"  let (v, f) = {M}.scaleb_bits_flags(b, n, dirs[k])",
+            f"  if !check(fam, i, \"scaleb_bits_flags value#\" + k.to_string(), {from_bt('v')}, table[r + 2 + k]) {{ bad += 1 }}",
+            "  if !check(fam, i, \"scaleb_bits_flags flags#\" + k.to_string(), flag_word(f), table[r + 7 + k]) { bad += 1 }",
+            "}",
+            *([("let field = ((b >> 52) & 0x7ffUL).to_int()" if width == 64 else "let field = ((b >> 23) & 0xffU).reinterpret_as_int()"),
+               f"if field != 0 && field != {2047 if width == 64 else 255} && n > -2400 && n < 2400 {{",
+               "  for k in 0..<5 {",
+               f"    let m = {'(b & 0xfffffffffffffUL) | 0x10000000000000UL' if width == 64 else '((b & 0x7fffffU) | 0x800000U).to_uint64()'}",
+               f"    let (v3, f3) = @float.round_exact_flags({'(b >> 63) != 0UL' if width == 64 else '(b >> 31) != 0U'}, m, field - {1075 if width == 64 else 150} + n, {52 if width == 64 else 23}, dirs[k])",
+               f"    if !check(fam, i, \"round_exact_flags value#\" + k.to_string(), v3, table[r + 2 + k]) {{ bad += 1 }}",
+               "    if !check(fam, i, \"round_exact_flags flags#\" + k.to_string(), flag_word(f3), table[r + 7 + k]) { bad += 1 }",
+               "  }", "}"])])
+        row_fn("remainder_flags", "remainder_flags", [
+            f"let fam = \"{p}remainder_flags\"", f"let y = {to_bt('table[r + 1]')}",
+            f"let (v, f) = {M}.remainder_bits_flags(b, y)",
+            f"if !check(fam, i, \"remainder_bits_flags value\", {from_bt('v')}, table[r + 2]) {{ bad += 1 }}",
+            "if !check(fam, i, \"remainder_bits_flags flags\", flag_word(f), table[r + 3]) { bad += 1 }"])
+        row_fn("next_flags", "next_flags", [
+            f"let fam = \"{p}next_flags\"",
+            f"let (u, fu) = {M}.next_up_bits_flags(b)", f"let (d, fd) = {M}.next_down_bits_flags(b)",
+            f"if !check(fam, i, \"next_up_bits_flags value\", {from_bt('u')}, table[r + 1]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"next_down_bits_flags value\", {from_bt('d')}, table[r + 2]) {{ bad += 1 }}",
+            "if !check(fam, i, \"next_up_bits_flags flags\", flag_word(fu), table[r + 3]) { bad += 1 }",
+            "if !check(fam, i, \"next_down_bits_flags flags\", flag_word(fd), table[r + 3]) { bad += 1 }"])
+        row_fn("logb_flags", "logb_flags", [
+            f"let fam = \"{p}logb_flags\"", f"let x = {fb('table[r]')}",
+            f"let (o, fo) = {M}.logb_bits_flags(b)",
+            "match o {",
+            "  Some(v) => { if table[r + 1] != 1UL { report(fam, i, \"logb_bits_flags present\"); bad += 1 } else if !check(fam, i, \"logb_bits_flags value\", v.to_int64().reinterpret_as_uint64(), table[r + 2]) { bad += 1 } }",
+            "  None => if table[r + 1] != 0UL { report(fam, i, \"logb_bits_flags missing\"); bad += 1 }", "}",
+            "if !check(fam, i, \"logb_bits_flags flags\", flag_word(fo), table[r + 3]) { bad += 1 }",
+            f"let (fv, ff) = {M}.logb_flags(x)",
+            f"if !check(fam, i, \"logb_flags value\", {from_bt(f'{M}.to_bits_canonical(fv)')}, table[r + 4]) {{ bad += 1 }}",
+            "if !check(fam, i, \"logb_flags flags\", flag_word(ff), table[r + 5]) { bad += 1 }"])
+        row_fn("round_flags", "round_flags", [
+            f"let fam = \"{p}round_flags\"", f"let dirs = [{dsx}]",
+            "for k in 0..<5 {",
+            f"  let (v, f) = {M}.round_to_integral_bits_flags(b, dirs[k], exact=true)",
+            f"  if !check(fam, i, \"round_to_integral_bits_flags value#\" + k.to_string(), {from_bt('v')}, table[r + 1 + k]) {{ bad += 1 }}",
+            "  if !check(fam, i, \"round_to_integral_bits_flags exact flags#\" + k.to_string(), flag_word(f), table[r + 6 + k]) { bad += 1 }",
+            f"  let (_, f2) = {M}.round_to_integral_bits_flags(b, dirs[k])",
+            "  if !check(fam, i, \"round_to_integral_bits_flags flags#\" + k.to_string(), flag_word(f2), table[r + 11 + k]) { bad += 1 }",
+            "}"])
+        cv = ["let fam = \"%sconvert_flags\"" % p, f"let x = {fb('table[r]')}", f"let dirs = [{dsx}]"]
+        for ti, tname in enumerate(TARGETS):
+            fn = {"int": "to_int_flags", "int64": "to_int64_flags", "uint": "to_uint_flags", "uint64": "to_uint64_flags"}[tname]
+            cv += ["for k in 0..<5 {", f"  let base = r + 1 + ({ti} * 5 + k) * 2",
+                   f"  let (o1, f1) = {M}.{fn}(x, dirs[k])",
+                   f"  if !check(fam, i, \"{fn}#\" + k.to_string(), flag_word(f1), table[base]) {{ bad += 1 }}",
+                   f"  let (o2, f2) = {M}.{fn}(x, dirs[k], exact=true)",
+                   f"  if !check(fam, i, \"{fn} exact#\" + k.to_string(), flag_word(f2), table[base + 1]) {{ bad += 1 }}",
+                   "  match (o1, o2) {", "    (None, None) => ()", "    (Some(a), Some(c)) => if a != c { report(fam, i, \"values differ\"); bad += 1 }",
+                   "    _ => { report(fam, i, \"presence differs\"); bad += 1 }", "  }", "}"]
+        row_fn("convert_flags", "convert_flags", cv)
+        if width == 64:
+            row_fn("narrow_flags", "narrow_flags", [
+                f"let fam = \"{p}narrow_flags\"", f"let dirs = [{dsx}]",
+                "for k in 0..<5 {",
+                "  let (v, f) = @float.to_binary32_bits_flags(b, dirs[k])",
+                "  if !check(fam, i, \"to_binary32_bits_flags value#\" + k.to_string(), v.to_uint64(), table[r + 1 + k]) { bad += 1 }",
+                "  if !check(fam, i, \"to_binary32_bits_flags flags#\" + k.to_string(), flag_word(f), table[r + 6 + k]) { bad += 1 }",
+                "}"])
+        else:
+            row_fn("widen_flags", "widen_flags", [
+                f"let fam = \"{p}widen_flags\"",
+                "let (v, f) = @binary32.to_binary64_bits_flags(b)",
+                "if !check(fam, i, \"to_binary64_bits_flags value\", v, table[r + 1]) { bad += 1 }",
+                "if !check(fam, i, \"to_binary64_bits_flags flags\", flag_word(f), table[r + 2]) { bad += 1 }"])
         dsf = ", ".join(f"@float.{d}" for d in DIRECTIONS)
         row_fn("fma", "fma", [
             f"let fam = \"{p}fma\"", f"let y = {to_bt('table[r + 1]')}", f"let z = {to_bt('table[r + 2]')}",
