@@ -179,6 +179,26 @@ def related_bits(rng, fmt, b):
     return random_bits(rng, fmt)
 
 
+def arith_pair(rng, fmt):
+    kind = rng.randrange(8)
+    if kind <= 2:
+        return random_bits(rng, fmt), random_bits(rng, fmt)
+    x = random_bits(rng, fmt)
+    if kind == 3:  # a power of two: scales into the subnormal and overflow ranges, ties for division and multiplication
+        e = rng.randrange(1, fmt.emax_field)
+        return x, (rng.randrange(2) << (fmt.width - 1)) | (e << fmt.mbits)
+    if kind == 4:  # cancellation: y is -x or its neighbour
+        return x, (x ^ fmt.sign) + rng.choice((-2, -1, 0, 0, 1, 2)) & fmt.mask
+    if kind == 5:  # addition ties: y is half an ulp of x
+        _, e, _ = fmt.fields(x)
+        k = max(1, min(fmt.emax_field - 1, e - fmt.mbits - 1 + rng.choice((0, 0, -1, 1))))
+        return x, (rng.randrange(2) << (fmt.width - 1)) | (k << fmt.mbits)
+    if kind == 6:  # overflow edge
+        top = ((fmt.emax_field - 1) << fmt.mbits) | fmt.frac_mask
+        return top - rng.choice((0, 0, 1, 2, fmt.frac_mask >> 1)), random_bits(rng, fmt) if rng.randrange(2) else top
+    return x, rng.getrandbits(fmt.width) & ((1 << fmt.mbits) - 1)  # a subnormal or zero second operand
+
+
 def rounding_inputs(rng, fmt, count):
     """Values around integers, halfway points and the integral threshold 2^mbits."""
     out = []
@@ -258,6 +278,73 @@ def m_relation(fmt, xb, yb):
     return "L" if x < y else "G" if x > y else "E"
 
 
+def flog2(v):
+    """Exact floor(log2 v) of a positive Fraction."""
+    n = v.numerator.bit_length() - v.denominator.bit_length()
+    if Fraction(2) ** n > v:
+        n -= 1
+    elif Fraction(2) ** (n + 1) <= v:
+        n += 1
+    return n
+
+
+def round_sqrt(fmt, v):
+    """Correctly rounded (nearest, ties to even) square root of a positive exact rational."""
+    e = flog2(v) // 2
+    ulp = Fraction(2) ** (e - fmt.mbits)
+    x = v / (ulp * ulp)
+    q = int(x.numerator // x.denominator)
+    lo, hi = 0, 1 << (x.numerator.bit_length() // 2 + 2)
+    while lo < hi:  # integer square root of floor(x)
+        mid = (lo + hi + 1) // 2
+        if mid * mid <= q:
+            lo = mid
+        else:
+            hi = mid - 1
+    q = lo
+    mid2 = Fraction(2 * q + 1, 2) ** 2
+    if x > mid2 or (x == mid2 and q & 1):
+        q += 1
+    return fmt.encode_exact(Fraction(q) * ulp)
+
+
+def m_arith(fmt, op, xb, yb):
+    """Correctly rounded +, -, *, / of two encodings (RoundTiesToEven), as encoding bits."""
+    import math
+    if fmt.is_nan(xb) or fmt.is_nan(yb):
+        return fmt.canonical_nan
+    xf, yf = host_value(fmt, xb), host_value(fmt, yb)
+    finite = not (math.isinf(xf) or math.isinf(yf))
+    if op == "div" and yf == 0:
+        if xf == 0:
+            return fmt.canonical_nan
+        return (fmt.emax_field << fmt.mbits) | ((xb ^ yb) & fmt.sign)
+    if not finite:
+        r = {"add": lambda: xf + yf, "sub": lambda: xf - yf, "mul": lambda: xf * yf, "div": lambda: xf / yf}[op]()
+        if r != r:
+            return fmt.canonical_nan
+        if math.isinf(r):
+            return (fmt.emax_field << fmt.mbits) | (fmt.sign if r < 0 else 0)
+        return (fmt.sign if math.copysign(1.0, r) < 0 else 0) if r == 0 else fmt.encode_exact(Fraction(r))
+    x, y = fmt.value(xb), fmt.value(yb)
+    exact = {"add": lambda: x + y, "sub": lambda: x - y, "mul": lambda: x * y, "div": lambda: x / y}[op]()
+    if exact == 0:
+        r = {"add": lambda: xf + yf, "sub": lambda: xf - yf, "mul": lambda: xf * yf, "div": lambda: xf / yf}[op]()
+        return fmt.sign if math.copysign(1.0, r) < 0 else 0
+    return fmt.encode_nearest_even(exact)
+
+
+def m_sqrt(fmt, xb):
+    if fmt.is_nan(xb):
+        return fmt.canonical_nan
+    c = fmt.cls(xb)
+    if c in ("PositiveZero", "NegativeZero", "PositiveInfinity"):
+        return xb
+    if c == "NegativeInfinity" or xb & fmt.sign:
+        return fmt.canonical_nan
+    return round_sqrt(fmt, fmt.value(xb))
+
+
 def numeric(fmt, bits):
     return fmt.canonical_nan if fmt.is_nan(bits) else bits
 
@@ -333,6 +420,11 @@ def build(seed, count):
                 imask |= (snan or (sig and anan)) << k
                 pmask |= (sig and anan) << k
             t.add(p + "compare", b, y, RELATIONS.index(rel), vmask, imask, pmask, int(snan), int(anan))
+        for _ in range(count):
+            a, b2 = arith_pair(rng, fmt)
+            if rng.randrange(2):
+                a, b2 = a ^ (rng.randrange(2) << (fmt.width - 1)), b2
+            t.add(p + "arith", a, b2, *[m_arith(fmt, o, a, b2) for o in ("add", "sub", "mul", "div")], m_sqrt(fmt, a))
         for b in rounding_inputs(rng, fmt, count):
             t.add(p + "round", b, *[m_round_to_integral(fmt, b, d) for d in DIRECTIONS])
             row = [b]
@@ -351,6 +443,36 @@ def build(seed, count):
             arrays.append(arr)
             ordered = sorted((numeric(fmt, x) for x in arr), key=lambda x: key(fmt, x))
             t.add(p + "sort", len(arr), *arr, *ordered)
+    f64, f32m = Fmt(64), Fmt(32)
+
+    def integer_value(bits, signed):
+        v = rng.getrandbits(rng.randrange(1, bits + 1))
+        k = rng.randrange(6)
+        if k == 0:
+            m = rng.getrandbits(24) | (1 << 23)
+            sh = rng.randrange(0, max(1, bits - 23))
+            v = (m << sh) + rng.choice((0, 1, -1, (1 << sh) >> 1, ((1 << sh) >> 1) - 1, ((1 << sh) >> 1) + 1))
+        elif k == 1:
+            m = rng.getrandbits(53) | (1 << 52)
+            sh = rng.randrange(0, max(1, bits - 52))
+            v = (m << sh) + rng.choice((0, 1, -1, (1 << sh) >> 1, ((1 << sh) >> 1) - 1, ((1 << sh) >> 1) + 1))
+        elif k == 2:
+            v = (1 << rng.randrange(0, bits)) + rng.choice((-1, 0, 1))
+        v = max(0, min(v, (1 << bits) - 1))
+        if signed:
+            v = v if not rng.randrange(2) else -v
+            v = max(-(1 << (bits - 1)), min(v, (1 << (bits - 1)) - 1))
+        return v
+
+    for _ in range(count):
+        i32, u32 = integer_value(32, True), integer_value(32, False)
+        i64, u64 = integer_value(64, True), integer_value(64, False)
+        t.add("conv_i32", i32, f64.encode_nearest_even(Fraction(i32)), f32m.encode_nearest_even(Fraction(i32)))
+        t.add("conv_u32", u32, f64.encode_nearest_even(Fraction(u32)), f32m.encode_nearest_even(Fraction(u32)))
+        t.add("conv_i64", i64, f64.encode_nearest_even(Fraction(i64)))
+        t.add("conv_u64", u64, f64.encode_nearest_even(Fraction(u64)))
+        t.add("conv_i64_f32", i64, f32m.encode_nearest_even(Fraction(i64)))
+        t.add("conv_u64_f32", u64, f32m.encode_nearest_even(Fraction(u64)))
     for _ in range(count):
         kind = rng.randrange(4)
         if kind == 0:
@@ -491,6 +613,13 @@ def emit(t, seed, count):
             f"let fam = \"{p}extrema\"", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
             f"if !check(fam, i, \"minimum\", {from_bt(f'{M}.to_bits_canonical({M}.minimum(x, y))')}, table[r + 2]) {{ bad += 1 }}",
             f"if !check(fam, i, \"maximum\", {from_bt(f'{M}.to_bits_canonical({M}.maximum(x, y))')}, table[r + 3]) {{ bad += 1 }}"])
+        row_fn("arith", "arith", [
+            f"let fam = \"{p}arith\"", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
+            f"if !check(fam, i, \"add\", {from_bt(f'{M}.to_bits_canonical(x + y)')}, table[r + 2]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"sub\", {from_bt(f'{M}.to_bits_canonical(x - y)')}, table[r + 3]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"mul\", {from_bt(f'{M}.to_bits_canonical(x * y)')}, table[r + 4]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"div\", {from_bt(f'{M}.to_bits_canonical(x / y)')}, table[r + 5]) {{ bad += 1 }}",
+            f"if !check(fam, i, \"sqrt\", {from_bt(f'{M}.to_bits_canonical(x.sqrt())')}, table[r + 6]) {{ bad += 1 }}"])
         ps = ", ".join(f"@float.{n}" for n, _, _ in PREDICATES)
         row_fn("compare", "compare", [
             f"let fam = \"{p}compare\"", f"let preds = [{ps}]", f"let x = {fb('table[r]')}", f"let y = {fb('table[r + 1]')}",
@@ -563,6 +692,20 @@ def emit(t, seed, count):
         out.extend(["    " + ln for ln in arr])
         out.extend(["    r += 1 + 2 * n", "    i += 1", "  }",
                     f'  println("LUNA_AUDIT_SUMMARY {p}sort " + i.to_string() + " " + bad.to_string())', "}", ""])
+    for fam, conv_expr, extra in (
+        ("conv_i32", "table[r].to_uint().reinterpret_as_int()", [("v.to_double()", "reinterpret_as_uint64()", 1), ("Float::from_int(v)", "reinterpret_as_uint().to_uint64()", 2)]),
+        ("conv_u32", "table[r].to_uint()", [("v.to_double()", "reinterpret_as_uint64()", 1), ("Float::from_uint(v)", "reinterpret_as_uint().to_uint64()", 2)]),
+        ("conv_i64", "table[r].reinterpret_as_int64()", [("v.to_double()", "reinterpret_as_uint64()", 1)]),
+        ("conv_u64", "table[r]", [("v.to_double()", "reinterpret_as_uint64()", 1)]),
+        ("conv_i64_f32", "table[r].reinterpret_as_int64()", [("Float::from_int64(v)", "reinterpret_as_uint().to_uint64()", 1)]),
+        ("conv_u64_f32", "table[r]", [("Float::from_uint64(v)", "reinterpret_as_uint().to_uint64()", 1)]),
+    ):
+        crows, cstride = strided(t.rows[fam])
+        checks = [f"    if !check(\"{fam}\", i, \"{m.replace('v.', '').replace('(v)', '')}\", ({m}).{conv}, table[r + {k}]) {{ bad += 1 }}" for m, conv, k in extra]
+        out.extend(["///|", f"let {fam}_table : Array[UInt64] = load([{crows}])", "",
+                    "///|", f'test "audit {fam}" {{', f"  let table = {fam}_table", f"  let n = table.length() / {cstride}",
+                    "  let mut bad = 0", "  for i in 0..<n {", f"    let r = i * {cstride}", f"    let v = {conv_expr}", *checks, "  }",
+                    f'  println("LUNA_AUDIT_SUMMARY {fam} " + n.to_string() + " " + bad.to_string())', "}", ""])
     rows, stride = strided(t.rows["int_to_f32"])
     out.extend(["///|", f"let int_to_f32_table : Array[UInt64] = load([{rows}])", "",
                 "///|", 'test "audit int_to_f32" {', "  let table = int_to_f32_table",

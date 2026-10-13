@@ -21,5 +21,33 @@
       ]
     },
     "note": "UInt payload of UInt? / Array::get is treated as signed by to_uint64, to_double and shifts"
+  },
+  {
+    "backend": "js",
+    "mode": "debug",
+    "family": "conv_i64_f32",
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/22",
+    "note": "by design of core: Float::from_int64 and from_uint64 follow the js backend and round twice (core#4349 was closed for that reason); luna-utils int64_to_float and uint64_to_float round once"
+  },
+  {
+    "backend": "js",
+    "mode": "release",
+    "family": "conv_i64_f32",
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/22",
+    "note": "by design of core: Float::from_int64 and from_uint64 follow the js backend and round twice (core#4349 was closed for that reason); luna-utils int64_to_float and uint64_to_float round once"
+  },
+  {
+    "backend": "js",
+    "mode": "debug",
+    "family": "conv_u64_f32",
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/22",
+    "note": "by design of core: Float::from_int64 and from_uint64 follow the js backend and round twice (core#4349 was closed for that reason); luna-utils int64_to_float and uint64_to_float round once"
+  },
+  {
+    "backend": "js",
+    "mode": "release",
+    "family": "conv_u64_f32",
+    "issue": "https://github.com/Luna-Flow/luna-utils/issues/22",
+    "note": "by design of core: Float::from_int64 and from_uint64 follow the js backend and round twice (core#4349 was closed for that reason); luna-utils int64_to_float and uint64_to_float round once"
   }
 ]
