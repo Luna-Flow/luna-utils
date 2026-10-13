@@ -116,7 +116,7 @@ msgid "`*_checked` returns `None` for NaN, for `+inf` and `-inf`, and when the r
 msgstr ""
 
 #: manual/api/float.md:33
-msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the direct-rounding replacement for core's `Float::from_int64` and `Float::from_uint64`, which on the JavaScript backend convert through binary64 first and therefore round twice; for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
+msgid "`int64_to_float(Int64) -> Float` and `uint64_to_float(UInt64) -> Float` are in `@float` but return a binary32 `Float`: the result is the 64-bit integer rounded once to the nearest binary32 value, ties to even. They are the backend-independent counterpart of core's `Float::from_int64` and `Float::from_uint64`, which follow each backend's own conversion (on the JavaScript backend through binary64 first, so they round twice, by design of core); for example `2^53 + 2^29 + 1` is rounded to the tie `2^53 + 2^29` by the first rounding and then to the wrong binary32 neighbor `2^53`. The implementation rounds to an odd intermediate significand, so the results are bit-identical on every backend. The placement of these two functions (`@float` or `@binary32`) is an open question for the maintainer."
 msgstr ""
 
 #: manual/api/float.md:35
