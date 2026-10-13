@@ -5,7 +5,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 <!-- conformance-checklist-start -->
 | Standard | Rows | Conforming | Partial | Not implemented | Not applicable | Required gaps | Recommended or optional gaps |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| IEEE 754-2019: float | 28 | 13 | 6 | 9 | 0 | 9 | 6 |
+| IEEE 754-2019: float | 28 | 15 | 6 | 7 | 0 | 7 | 6 |
 | Planned packages | 10 | 0 | 2 | 8 | 0 | 9 | 1 |
 
 **IEEE 754-2019: float**
@@ -18,8 +18,8 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [x] §5.3.1 nextUp, nextDown [required]
 - [x] §5.3.3 scaleB, logB [required]
 - [x] §5.9 roundToIntegral (five directions) [required]
-- [ ] §5.9 roundToIntegralExact [required] (not implemented)
-- [ ] §5.4.1, §5.8 convertToInteger [required] (partial)
+- [x] §5.9 roundToIntegralExact [required]
+- [x] §5.4.1, §5.8 convertToInteger [required]
 - [ ] §5.4.1 convertFromInt [required] (partial)
 - [x] §5.4.2 convertFormat [required]
 - [x] §5.5 copy, negate, abs, copySign [required]
@@ -30,7 +30,7 @@ One line per row of the clause traceability tables of the conformance pages ([fl
 - [ ] §5.12 decimal character conversion [required] (not implemented)
 - [ ] §5.12.3 hexadecimal character conversion [required] (not implemented)
 - [ ] §6.1–§6.3 infinities, NaNs and the sign bit [required] (partial)
-- [ ] §7.2–§7.6 exceptions and flags [required] (not implemented)
+- [ ] §7.2–§7.6 exceptions and flags [required] (partial)
 - [ ] §8 alternate exception handling [recommended] (not implemented)
 - [ ] §9.2 recommended mathematical functions [recommended] (not implemented)
 - [ ] §9.3 dynamic mode operations [recommended] (not implemented)
