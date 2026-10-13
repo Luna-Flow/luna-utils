@@ -26,6 +26,7 @@
 
 ### Fixed
 
+- The published package no longer includes `ready_to_pr.sh`, and CI now runs `tools/check_package_contents.py`, which builds the package and fails if `src/ci_probe/`, `testdata/`, `tools/` or `ready_to_pr.sh` are in it.
 - The js double rounding of `Int64`/`UInt64` to binary32 (`Float::from_int64`,
   `Float::from_uint64`) is avoided by `int64_to_float`/`uint64_to_float`.
   Closes [#22](https://github.com/Luna-Flow/luna-utils/issues/22).
