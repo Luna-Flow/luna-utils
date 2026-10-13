@@ -39,6 +39,7 @@ jobs:
         run: |
           python3 tools/generate_oracles.py --check
           python3 tools/test_ci_harness.py
+          python3 tools/check_package_contents.py
       - name: Select native compiler and FMA-capable host
         if: matrix.backend == 'native'
         run: python3 tools/configure_native_ci.py '${{ matrix.compiler }}'
