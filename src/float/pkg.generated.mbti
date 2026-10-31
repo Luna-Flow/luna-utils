@@ -30,9 +30,9 @@ pub fn fma_bits_flags(UInt64, UInt64, UInt64, RoundingDirection) -> (UInt64, Fla
 
 pub fn fma_bits_with(UInt64, UInt64, UInt64, RoundingDirection) -> UInt64
 
-pub fn fma_finite_bits(UInt64, UInt64, UInt64, Int, RoundingDirection) -> UInt64
+pub fn fma_finite_bits(UInt64, UInt64, UInt64, Int32, RoundingDirection) -> UInt64
 
-pub fn fma_finite_flags(UInt64, UInt64, UInt64, Int, RoundingDirection) -> (UInt64, Flags)
+pub fn fma_finite_flags(UInt64, UInt64, UInt64, Int32, RoundingDirection) -> (UInt64, Flags)
 
 pub fn fma_with(Double, Double, Double, RoundingDirection) -> Double
 
@@ -72,9 +72,9 @@ pub fn is_zero_bits(UInt64) -> Bool
 
 pub fn logb(Double) -> Double
 
-pub fn logb_bits(UInt64) -> Int?
+pub fn logb_bits(UInt64) -> Int32?
 
-pub fn logb_bits_flags(UInt64) -> (Int?, Flags)
+pub fn logb_bits_flags(UInt64) -> (Int32?, Flags)
 
 pub fn logb_flags(Double) -> (Double, Flags)
 
@@ -128,7 +128,7 @@ pub fn portable_total_order_mag(Double, Double) -> Bool
 
 pub fn predicate_outcome(ComparisonPredicate, Relation, Bool, Bool) -> (Bool, Bool)
 
-pub fn radix() -> Int
+pub fn radix() -> Int32
 
 pub fn relation(Double, Double) -> Relation
 
@@ -140,7 +140,7 @@ pub fn remainder_bits(UInt64, UInt64) -> UInt64
 
 pub fn remainder_bits_flags(UInt64, UInt64) -> (UInt64, Flags)
 
-pub fn round_exact_flags(Bool, UInt64, Int, Int, RoundingDirection) -> (UInt64, Flags)
+pub fn round_exact_flags(Bool, UInt64, Int32, Int32, RoundingDirection) -> (UInt64, Flags)
 
 pub fn round_ties_away(Double) -> Double
 
@@ -156,15 +156,15 @@ pub fn round_toward_positive(Double) -> Double
 
 pub fn round_toward_zero(Double) -> Double
 
-pub fn scaleb(Double, Int) -> Double
+pub fn scaleb(Double, Int32) -> Double
 
-pub fn scaleb_bits(UInt64, Int) -> UInt64
+pub fn scaleb_bits(UInt64, Int32) -> UInt64
 
-pub fn scaleb_bits_flags(UInt64, Int, RoundingDirection) -> (UInt64, Flags)
+pub fn scaleb_bits_flags(UInt64, Int32, RoundingDirection) -> (UInt64, Flags)
 
-pub fn scaleb_bits_with(UInt64, Int, RoundingDirection) -> UInt64
+pub fn scaleb_bits_with(UInt64, Int32, RoundingDirection) -> UInt64
 
-pub fn scaleb_with(Double, Int, RoundingDirection) -> Double
+pub fn scaleb_with(Double, Int32, RoundingDirection) -> Double
 
 pub fn set_payload_bits(UInt64, sign_minus? : Bool) -> UInt64?
 
@@ -176,11 +176,11 @@ pub fn sort_total_order_view(MutArrayView[Double]) -> Unit
 
 pub fn to_binary32(Double) -> Float
 
-pub fn to_binary32_bits(UInt64) -> UInt
+pub fn to_binary32_bits(UInt64) -> UInt32
 
-pub fn to_binary32_bits_flags(UInt64, RoundingDirection) -> (UInt, Flags)
+pub fn to_binary32_bits_flags(UInt64, RoundingDirection) -> (UInt32, Flags)
 
-pub fn to_binary32_bits_with(UInt64, RoundingDirection) -> UInt
+pub fn to_binary32_bits_with(UInt64, RoundingDirection) -> UInt32
 
 pub fn to_binary32_with(Double, RoundingDirection) -> Float
 
@@ -196,15 +196,15 @@ pub fn to_int64_saturating(Double) -> Int64
 
 pub fn to_int64_saturating_with(Double, RoundingDirection) -> Int64
 
-pub fn to_int_checked(Double) -> Int?
+pub fn to_int_checked(Double) -> Int32?
 
-pub fn to_int_checked_with(Double, RoundingDirection) -> Int?
+pub fn to_int_checked_with(Double, RoundingDirection) -> Int32?
 
-pub fn to_int_flags(Double, RoundingDirection, exact? : Bool) -> (Int?, Flags)
+pub fn to_int_flags(Double, RoundingDirection, exact? : Bool) -> (Int32?, Flags)
 
-pub fn to_int_saturating(Double) -> Int
+pub fn to_int_saturating(Double) -> Int32
 
-pub fn to_int_saturating_with(Double, RoundingDirection) -> Int
+pub fn to_int_saturating_with(Double, RoundingDirection) -> Int32
 
 pub fn to_uint64_checked(Double) -> UInt64?
 
@@ -216,15 +216,15 @@ pub fn to_uint64_saturating(Double) -> UInt64
 
 pub fn to_uint64_saturating_with(Double, RoundingDirection) -> UInt64
 
-pub fn to_uint_checked(Double) -> UInt?
+pub fn to_uint_checked(Double) -> UInt32?
 
-pub fn to_uint_checked_with(Double, RoundingDirection) -> UInt?
+pub fn to_uint_checked_with(Double, RoundingDirection) -> UInt32?
 
-pub fn to_uint_flags(Double, RoundingDirection, exact? : Bool) -> (UInt?, Flags)
+pub fn to_uint_flags(Double, RoundingDirection, exact? : Bool) -> (UInt32?, Flags)
 
-pub fn to_uint_saturating(Double) -> UInt
+pub fn to_uint_saturating(Double) -> UInt32
 
-pub fn to_uint_saturating_with(Double, RoundingDirection) -> UInt
+pub fn to_uint_saturating_with(Double, RoundingDirection) -> UInt32
 
 pub fn total_order_bits(UInt64, UInt64) -> Bool
 
@@ -296,7 +296,7 @@ pub fn Flags::invalid_only() -> Self
 pub fn Flags::is_empty(Self) -> Bool
 pub fn Flags::none() -> Self
 pub fn Flags::not_equal(Self, Self) -> Bool
-pub fn Flags::to_bits(Self) -> Int
+pub fn Flags::to_bits(Self) -> Int32
 pub fn Flags::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Relation {
