@@ -34,7 +34,6 @@ jobs:
       - name: Resolve package dependencies
         run: |
           moon update
-          moon install
       - name: Verify committed oracle fixtures and gate
         run: |
           python3 tools/generate_oracles.py --check
