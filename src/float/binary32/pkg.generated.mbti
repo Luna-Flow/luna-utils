@@ -6,69 +6,69 @@ import {
 }
 
 // Values
-pub fn abs_bits(UInt) -> UInt
+pub fn abs_bits(UInt32) -> UInt32
 
 pub fn canonicalize_nan(Float) -> Float
 
-pub fn canonicalize_nan_bits(UInt) -> UInt
+pub fn canonicalize_nan_bits(UInt32) -> UInt32
 
-pub fn classify_bits(UInt) -> @float.Classification
+pub fn classify_bits(UInt32) -> @float.Classification
 
 pub fn compare_predicate(@float.ComparisonPredicate, Float, Float) -> (Bool, Bool)
 
-pub fn compare_predicate_bits(@float.ComparisonPredicate, UInt, UInt) -> (Bool, Bool)
+pub fn compare_predicate_bits(@float.ComparisonPredicate, UInt32, UInt32) -> (Bool, Bool)
 
-pub fn copy_sign_bits(UInt, UInt) -> UInt
+pub fn copy_sign_bits(UInt32, UInt32) -> UInt32
 
 pub fn fast_two_sum(Float, Float) -> (Float, Float)
 
 pub fn fma(Float, Float, Float) -> Float
 
-pub fn fma_bits(UInt, UInt, UInt) -> UInt
+pub fn fma_bits(UInt32, UInt32, UInt32) -> UInt32
 
-pub fn fma_bits_flags(UInt, UInt, UInt, @float.RoundingDirection) -> (UInt, @float.Flags)
+pub fn fma_bits_flags(UInt32, UInt32, UInt32, @float.RoundingDirection) -> (UInt32, @float.Flags)
 
-pub fn fma_bits_with(UInt, UInt, UInt, @float.RoundingDirection) -> UInt
+pub fn fma_bits_with(UInt32, UInt32, UInt32, @float.RoundingDirection) -> UInt32
 
 pub fn fma_with(Float, Float, Float, @float.RoundingDirection) -> Float
 
-pub fn get_payload_bits(UInt) -> UInt?
+pub fn get_payload_bits(UInt32) -> UInt32?
 
-pub fn is_canonical_bits(UInt) -> Bool
+pub fn is_canonical_bits(UInt32) -> Bool
 
 pub fn is_finite(Float) -> Bool
 
-pub fn is_finite_bits(UInt) -> Bool
+pub fn is_finite_bits(UInt32) -> Bool
 
 pub fn is_infinite(Float) -> Bool
 
-pub fn is_infinite_bits(UInt) -> Bool
+pub fn is_infinite_bits(UInt32) -> Bool
 
 pub fn is_nan(Float) -> Bool
 
-pub fn is_nan_bits(UInt) -> Bool
+pub fn is_nan_bits(UInt32) -> Bool
 
 pub fn is_normal(Float) -> Bool
 
-pub fn is_normal_bits(UInt) -> Bool
+pub fn is_normal_bits(UInt32) -> Bool
 
-pub fn is_sign_minus_bits(UInt) -> Bool
+pub fn is_sign_minus_bits(UInt32) -> Bool
 
-pub fn is_signaling_bits(UInt) -> Bool
+pub fn is_signaling_bits(UInt32) -> Bool
 
 pub fn is_subnormal(Float) -> Bool
 
-pub fn is_subnormal_bits(UInt) -> Bool
+pub fn is_subnormal_bits(UInt32) -> Bool
 
 pub fn is_zero(Float) -> Bool
 
-pub fn is_zero_bits(UInt) -> Bool
+pub fn is_zero_bits(UInt32) -> Bool
 
 pub fn logb(Float) -> Float
 
-pub fn logb_bits(UInt) -> Int?
+pub fn logb_bits(UInt32) -> Int32?
 
-pub fn logb_bits_flags(UInt) -> (Int?, @float.Flags)
+pub fn logb_bits_flags(UInt32) -> (Int32?, @float.Flags)
 
 pub fn logb_flags(Float) -> (Float, @float.Flags)
 
@@ -88,19 +88,19 @@ pub fn minimum_magnitude_number(Float, Float) -> Float
 
 pub fn minimum_number(Float, Float) -> Float
 
-pub fn negate_bits(UInt) -> UInt
+pub fn negate_bits(UInt32) -> UInt32
 
 pub fn next_down(Float) -> Float
 
-pub fn next_down_bits(UInt) -> UInt
+pub fn next_down_bits(UInt32) -> UInt32
 
-pub fn next_down_bits_flags(UInt) -> (UInt, @float.Flags)
+pub fn next_down_bits_flags(UInt32) -> (UInt32, @float.Flags)
 
 pub fn next_up(Float) -> Float
 
-pub fn next_up_bits(UInt) -> UInt
+pub fn next_up_bits(UInt32) -> UInt32
 
-pub fn next_up_bits_flags(UInt) -> (UInt, @float.Flags)
+pub fn next_up_bits_flags(UInt32) -> (UInt32, @float.Flags)
 
 pub fn portable_abs(Float) -> Float
 
@@ -120,17 +120,17 @@ pub fn portable_total_order(Float, Float) -> Bool
 
 pub fn portable_total_order_mag(Float, Float) -> Bool
 
-pub fn radix() -> Int
+pub fn radix() -> Int32
 
 pub fn relation(Float, Float) -> @float.Relation
 
-pub fn relation_bits(UInt, UInt) -> @float.Relation
+pub fn relation_bits(UInt32, UInt32) -> @float.Relation
 
 pub fn remainder(Float, Float) -> Float
 
-pub fn remainder_bits(UInt, UInt) -> UInt
+pub fn remainder_bits(UInt32, UInt32) -> UInt32
 
-pub fn remainder_bits_flags(UInt, UInt) -> (UInt, @float.Flags)
+pub fn remainder_bits_flags(UInt32, UInt32) -> (UInt32, @float.Flags)
 
 pub fn round_ties_away(Float) -> Float
 
@@ -138,7 +138,7 @@ pub fn round_ties_even(Float) -> Float
 
 pub fn round_to_integral(Float, @float.RoundingDirection) -> Float
 
-pub fn round_to_integral_bits_flags(UInt, @float.RoundingDirection, exact? : Bool) -> (UInt, @float.Flags)
+pub fn round_to_integral_bits_flags(UInt32, @float.RoundingDirection, exact? : Bool) -> (UInt32, @float.Flags)
 
 pub fn round_toward_negative(Float) -> Float
 
@@ -146,19 +146,19 @@ pub fn round_toward_positive(Float) -> Float
 
 pub fn round_toward_zero(Float) -> Float
 
-pub fn scaleb(Float, Int) -> Float
+pub fn scaleb(Float, Int32) -> Float
 
-pub fn scaleb_bits(UInt, Int) -> UInt
+pub fn scaleb_bits(UInt32, Int32) -> UInt32
 
-pub fn scaleb_bits_flags(UInt, Int, @float.RoundingDirection) -> (UInt, @float.Flags)
+pub fn scaleb_bits_flags(UInt32, Int32, @float.RoundingDirection) -> (UInt32, @float.Flags)
 
-pub fn scaleb_bits_with(UInt, Int, @float.RoundingDirection) -> UInt
+pub fn scaleb_bits_with(UInt32, Int32, @float.RoundingDirection) -> UInt32
 
-pub fn scaleb_with(Float, Int, @float.RoundingDirection) -> Float
+pub fn scaleb_with(Float, Int32, @float.RoundingDirection) -> Float
 
-pub fn set_payload_bits(UInt, sign_minus? : Bool) -> UInt?
+pub fn set_payload_bits(UInt32, sign_minus? : Bool) -> UInt32?
 
-pub fn set_payload_signaling_bits(UInt, sign_minus? : Bool) -> UInt?
+pub fn set_payload_signaling_bits(UInt32, sign_minus? : Bool) -> UInt32?
 
 pub fn sort_total_order(Array[Float]) -> Unit
 
@@ -166,11 +166,11 @@ pub fn sort_total_order_view(MutArrayView[Float]) -> Unit
 
 pub fn to_binary64(Float) -> Double
 
-pub fn to_binary64_bits(UInt) -> UInt64
+pub fn to_binary64_bits(UInt32) -> UInt64
 
-pub fn to_binary64_bits_flags(UInt) -> (UInt64, @float.Flags)
+pub fn to_binary64_bits_flags(UInt32) -> (UInt64, @float.Flags)
 
-pub fn to_bits_canonical(Float) -> UInt
+pub fn to_bits_canonical(Float) -> UInt32
 
 pub fn to_int64_checked(Float) -> Int64?
 
@@ -182,15 +182,15 @@ pub fn to_int64_saturating(Float) -> Int64
 
 pub fn to_int64_saturating_with(Float, @float.RoundingDirection) -> Int64
 
-pub fn to_int_checked(Float) -> Int?
+pub fn to_int_checked(Float) -> Int32?
 
-pub fn to_int_checked_with(Float, @float.RoundingDirection) -> Int?
+pub fn to_int_checked_with(Float, @float.RoundingDirection) -> Int32?
 
-pub fn to_int_flags(Float, @float.RoundingDirection, exact? : Bool) -> (Int?, @float.Flags)
+pub fn to_int_flags(Float, @float.RoundingDirection, exact? : Bool) -> (Int32?, @float.Flags)
 
-pub fn to_int_saturating(Float) -> Int
+pub fn to_int_saturating(Float) -> Int32
 
-pub fn to_int_saturating_with(Float, @float.RoundingDirection) -> Int
+pub fn to_int_saturating_with(Float, @float.RoundingDirection) -> Int32
 
 pub fn to_uint64_checked(Float) -> UInt64?
 
@@ -202,19 +202,19 @@ pub fn to_uint64_saturating(Float) -> UInt64
 
 pub fn to_uint64_saturating_with(Float, @float.RoundingDirection) -> UInt64
 
-pub fn to_uint_checked(Float) -> UInt?
+pub fn to_uint_checked(Float) -> UInt32?
 
-pub fn to_uint_checked_with(Float, @float.RoundingDirection) -> UInt?
+pub fn to_uint_checked_with(Float, @float.RoundingDirection) -> UInt32?
 
-pub fn to_uint_flags(Float, @float.RoundingDirection, exact? : Bool) -> (UInt?, @float.Flags)
+pub fn to_uint_flags(Float, @float.RoundingDirection, exact? : Bool) -> (UInt32?, @float.Flags)
 
-pub fn to_uint_saturating(Float) -> UInt
+pub fn to_uint_saturating(Float) -> UInt32
 
-pub fn to_uint_saturating_with(Float, @float.RoundingDirection) -> UInt
+pub fn to_uint_saturating_with(Float, @float.RoundingDirection) -> UInt32
 
-pub fn total_order_bits(UInt, UInt) -> Bool
+pub fn total_order_bits(UInt32, UInt32) -> Bool
 
-pub fn total_order_mag_bits(UInt, UInt) -> Bool
+pub fn total_order_mag_bits(UInt32, UInt32) -> Bool
 
 pub fn two_prod(Float, Float) -> (Float, Float)
 
