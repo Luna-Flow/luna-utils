@@ -4,6 +4,10 @@
 
 ### Fixed
 
+- `two_sum` (binary64 and binary32) returned a NaN error when the intermediate `s - a` rounded past the largest finite value although `s` was finite; it now falls back to `fast_two_sum` on the operands ordered by magnitude, which gives the exact error ([#71](https://github.com/Luna-Flow/luna-utils/issues/71)).
+
+### Fixed
+
 - The nightly mutation check applies every rule again: 12 rules were stale after the formatter change and the move of scaleB and binary64-to-binary32 rounding into the shared `round_pack_flags`; they now target the current code ([#69](https://github.com/Luna-Flow/luna-utils/issues/69)).
 - The known-issue entries for the native release `UInt?` payload bug ([#42](https://github.com/Luna-Flow/luna-utils/issues/42)) and the `x + 0.0` fold ([#62](https://github.com/Luna-Flow/luna-utils/issues/62)) are removed: neither reproduces with `moonc` 0.10.20, so the audit and the compiler matrix now require the correct results.
 
