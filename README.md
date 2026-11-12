@@ -12,6 +12,11 @@ The current float APIs cover representation and selected IEEE 754 operations;
 remaining extrema variants, comparison predicates, integer arithmetic and
 exception-status behavior are still tracked in the linked issues.
 
+## Toolchain
+
+MoonBit with `moonc` 0.10.20 or later (verified with `moon 0.1.20261104` and
+`moonc v0.10.20`; older 0.10 compilers ignore `#derive`).
+
 ## Migration and documentation
 
 See [CHANGELOG](./CHANGELOG.md), the [manual](./doc/manual/index.md),
