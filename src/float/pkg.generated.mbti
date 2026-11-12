@@ -239,6 +239,7 @@ pub fn uint64_to_float(UInt64) -> Float
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) enum Classification {
   SignalingNaN
   QuietNaN
@@ -250,11 +251,12 @@ pub(all) enum Classification {
   NegativeSubnormal
   PositiveZero
   NegativeZero
-} derive(Eq, @debug.Debug)
+}
 pub fn Classification::equal(Self, Self) -> Bool
 pub fn Classification::not_equal(Self, Self) -> Bool
 pub fn Classification::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum ComparisonPredicate {
   QuietEqual
   QuietNotEqual
@@ -278,18 +280,19 @@ pub(all) enum ComparisonPredicate {
   QuietGreaterUnordered
   QuietUnordered
   QuietOrdered
-} derive(Eq, @debug.Debug)
+}
 pub fn ComparisonPredicate::equal(Self, Self) -> Bool
 pub fn ComparisonPredicate::not_equal(Self, Self) -> Bool
 pub fn ComparisonPredicate::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Flags {
   invalid : Bool
   divide_by_zero : Bool
   overflow : Bool
   underflow : Bool
   inexact : Bool
-} derive(Eq, @debug.Debug)
+}
 pub fn Flags::combine(Self, Self) -> Self
 pub fn Flags::equal(Self, Self) -> Bool
 pub fn Flags::invalid_only() -> Self
@@ -299,23 +302,25 @@ pub fn Flags::not_equal(Self, Self) -> Bool
 pub fn Flags::to_bits(Self) -> Int32
 pub fn Flags::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Relation {
   Less
   Equal
   Greater
   Unordered
-} derive(Eq, @debug.Debug)
+}
 pub fn Relation::equal(Self, Self) -> Bool
 pub fn Relation::not_equal(Self, Self) -> Bool
 pub fn Relation::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum RoundingDirection {
   TiesToEven
   TiesToAway
   TowardZero
   TowardPositive
   TowardNegative
-} derive(Eq, @debug.Debug)
+}
 pub fn RoundingDirection::equal(Self, Self) -> Bool
 pub fn RoundingDirection::not_equal(Self, Self) -> Bool
 pub fn RoundingDirection::to_repr(Self) -> @debug.Repr

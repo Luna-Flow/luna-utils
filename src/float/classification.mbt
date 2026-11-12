@@ -1,5 +1,6 @@
 ///|
 /// IEEE binary interchange classes. Use raw bits to observe signaling NaNs.
+#derive(Eq, Debug)
 pub(all) enum Classification {
   SignalingNaN
   QuietNaN
@@ -11,7 +12,7 @@ pub(all) enum Classification {
   NegativeSubnormal
   PositiveZero
   NegativeZero
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend Classification with Eq::{equal, not_equal}

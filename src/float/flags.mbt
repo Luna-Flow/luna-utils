@@ -2,13 +2,14 @@
 /// The five exception flags of IEEE 754-2019 §7. Operations with a `_flags` suffix return their
 /// value together with the flags it raises; the package has no global status word, so flags
 /// are plain values that the caller combines.
+#derive(Eq, Debug)
 pub(all) struct Flags {
   invalid : Bool
   divide_by_zero : Bool
   overflow : Bool
   underflow : Bool
   inexact : Bool
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend Flags with Eq::{equal, not_equal}

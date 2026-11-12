@@ -1,12 +1,13 @@
 ///|
 /// The four mutually exclusive relations of IEEE 754-2019 §5.11. `Unordered`
 /// arises when at least one operand is a NaN.
+#derive(Eq, Debug)
 pub(all) enum Relation {
   Less
   Equal
   Greater
   Unordered
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend Relation with Eq::{equal, not_equal}
@@ -18,6 +19,7 @@ pub extend Relation with @debug.Debug::{to_repr}
 /// The 22 comparison predicates of IEEE 754-2019 §5.6.1 (Tables 5.1 and 5.2).
 /// Each is true exactly for the relations it names; the `Signaling` forms also
 /// signal invalid operation for quiet NaN operands.
+#derive(Eq, Debug)
 pub(all) enum ComparisonPredicate {
   QuietEqual
   QuietNotEqual
@@ -41,7 +43,7 @@ pub(all) enum ComparisonPredicate {
   QuietGreaterUnordered
   QuietUnordered
   QuietOrdered
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend ComparisonPredicate with Eq::{equal, not_equal}
