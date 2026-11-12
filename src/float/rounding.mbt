@@ -1,12 +1,13 @@
 ///|
 /// IEEE 754-2019 §5.9 directions for roundToIntegral.
+#derive(Eq, Debug)
 pub(all) enum RoundingDirection {
   TiesToEven
   TiesToAway
   TowardZero
   TowardPositive
   TowardNegative
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend RoundingDirection with Eq::{equal, not_equal}
