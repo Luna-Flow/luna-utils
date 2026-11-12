@@ -2,14 +2,23 @@
 /// Error-free sum (Knuth's TwoSum): returns `(s, e)` with `s` the sum rounded to nearest even
 /// and `e` the rounding error, so that `a + b == s + e` exactly when `a`, `b` and `s` are
 /// finite. If `s` is not finite (an infinite or NaN operand, or overflow) `e` is the quiet NaN.
-/// It needs no assumption on the order of `a` and `b`.
+/// It needs no assumption on the order of `a` and `b`; when the intermediate `s - a` overflows
+/// although `s` is finite, it falls back to `fast_two_sum` on the operands ordered by magnitude.
 pub fn two_sum(a : Double, b : Double) -> (Double, Double) {
   let s = a + b
   if !is_finite(s) {
     (s, 0x7ff8000000000000UL.reinterpret_as_double())
   } else {
     let bb = s - a
-    (s, a - (s - bb) + (b - bb))
+    if is_finite(bb) {
+      (s, a - (s - bb) + (b - bb))
+      // `s - a` can round past the largest finite value although `s` is finite (#71);
+      // Fast2Sum with the operands ordered by magnitude then gives the exact error.
+    } else if a.abs() >= b.abs() {
+      fast_two_sum(a, b)
+    } else {
+      fast_two_sum(b, a)
+    }
   }
 }
 
