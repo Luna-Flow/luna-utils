@@ -1,28 +1,5 @@
 [
   {
-    "backend": "native",
-    "mode": "release",
-    "family": "b32_payload_set",
-    "issue": "https://github.com/Luna-Flow/luna-utils/issues/42",
-    "note": "native release sign-extends a UInt? payload when widened with to_uint64; the library values are correct"
-  },
-  {
-    "issue": "https://github.com/Luna-Flow/luna-utils/issues/42",
-    "upstream": "https://github.com/moonbitlang/core/issues/4388",
-    "matrix": {
-      "backend": "native",
-      "mode": "release",
-      "types": [
-        "UInt"
-      ],
-      "containers": [
-        "option",
-        "array_get"
-      ]
-    },
-    "note": "UInt payload of UInt? / Array::get is treated as signed by to_uint64, to_double and shifts"
-  },
-  {
     "backend": "js",
     "mode": "debug",
     "family": "conv_i64_f32",
@@ -49,53 +26,5 @@
     "family": "conv_u64_f32",
     "issue": "https://github.com/Luna-Flow/luna-utils/issues/22",
     "note": "by design of core: Float::from_int64 and from_uint64 follow the js backend and round twice (core#4349 was closed for that reason); luna-utils int64_to_float and uint64_to_float round once"
-  },
-  {
-    "backend": "*",
-    "mode": "*",
-    "types": [
-      "Double",
-      "Float"
-    ],
-    "containers": [
-      "direct",
-      "option",
-      "array_get",
-      "array_index",
-      "fixed",
-      "tuple",
-      "struct",
-      "enum",
-      "closure",
-      "generic",
-      "mutvar",
-      "const"
-    ],
-    "relation": "add_zero",
-    "matrix": {
-      "backend": "*",
-      "mode": "*",
-      "types": [
-        "Double",
-        "Float"
-      ],
-      "containers": [
-        "direct",
-        "option",
-        "array_get",
-        "array_index",
-        "fixed",
-        "tuple",
-        "struct",
-        "enum",
-        "closure",
-        "generic",
-        "mutvar",
-        "const"
-      ],
-      "relation": "add_zero"
-    },
-    "issue": "https://github.com/Luna-Flow/luna-utils/issues/62",
-    "note": "moonc folds x + 0.0 to x, wrong for x = -0 (IEEE 754-2019 6.3)"
   }
 ]
