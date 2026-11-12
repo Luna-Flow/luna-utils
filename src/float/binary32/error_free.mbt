@@ -15,7 +15,7 @@ pub fn two_sum(a : Float, b : Float) -> (Float, Float) {
 
 ///|
 /// Error-free sum for `|a| >= |b|` (or `a == 0`), Dekker's Fast2Sum: the same result as
-/// `two_sum` with a few operations (a zero error is `+0`, as in `two_sum`; adding `0.0` to normalize it does not work because the compiler folds `x + 0.0` to `x`, which is wrong for `-0`). The result is unspecified
+/// `two_sum` with a few operations (a zero error is `+0`, as in `two_sum`; it is normalized by a comparison because `moonc` 0.10.18 and earlier fold `x + 0.0` to `x`, which is wrong for `-0`). The result is unspecified
 /// when the precondition does not hold.
 pub fn fast_two_sum(a : Float, b : Float) -> (Float, Float) {
   let s = a + b
